@@ -1,6 +1,6 @@
 ---
-title       : Insert the chapter title here
-description : Insert the chapter description here
+title       : Assignment 1
+description : The assignment covers basic statistical modelling for industrial engineering problem solving.
 attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
 
