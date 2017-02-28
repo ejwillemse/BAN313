@@ -5,7 +5,7 @@ description : Test the assignment capabilities
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
 ## A really bad movie
 
-The mean drill size is?
+The mean drill size is `r meanSize`?
 
 *** =instructions
 - `r median(drillHoles)`
@@ -19,6 +19,7 @@ The mean drill size is?
 # You can use it to load packages, initialize datasets and draw a plot in the viewer
 
 drillHoles = rnorm(100, 100, 10)
+meanSize = mean(drillHoles)
 ```
 
 *** =hint
