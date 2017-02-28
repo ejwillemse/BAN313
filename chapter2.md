@@ -8,7 +8,7 @@ description : Test the assignment capabilities
 --- type:NormalExercise lang:r xp:100 skills:1 key:04e920022f
 ## More movies
 
-Have a look at the component price data, which has been loaded as the `productComparisontest` dataframe. 
+Have a look at the component price data, which has been loaded as the `productComparison` dataframe. 
 
 *** =instructions
 - How many products did we compare?
