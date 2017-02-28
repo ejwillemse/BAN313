@@ -54,13 +54,16 @@ n_products
 
 *** =solution
 ```{r}
-# The productComparison dataframe is available in your workspace
+# The product_comparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
+
 n_products <- nrow(product_comparison)
 
 # Print the results to the console:
+
 n_products
+
 ```
 
 *** =sct
