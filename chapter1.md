@@ -1,8 +1,9 @@
 ---
-title       : Assignment 1
-description : The assignment covers basic statistical modelling for industrial engineering problem solving.
-attachments :
-  slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
+title_meta  : Case study 4
+title       : Case Study 4: Choosing the best vendor
+description : "In this case study we will compare vendors, with the objective to choose the best one, which in this case means cheapest, to partner with. To do so we will rely on a sample of products and compare the prices of the vendors for the products. Thereafter we will use inference on decide on the best vendor."
+
+
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
 ## A really bad movie
