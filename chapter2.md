@@ -5,7 +5,7 @@ description : Test the assignment capabilities
 
 
 
---- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
+--- type:NormalExercise lang:r xp:100 skills:1 key:04e920022f
 ## More movies
 
 Have a look at the component price data, which has been loaded as the `productComparison` dataframe. 
@@ -19,6 +19,7 @@ Have a look at the component price data, which has been loaded as the `productCo
 *** =pre_exercise_code
 ```{r}
 # no pec
+a = 1000
 ```
 
 *** =sample_code
@@ -40,7 +41,7 @@ x
 # The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-x <- 1000
+x <- a
 
 # Print the results to the console:
 x
