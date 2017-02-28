@@ -26,11 +26,11 @@ a <- 1000
 
 # Find the number of products and safe your answer to: n_products
 
-n_products <-
+x <-
 
 # Print the results to the console:
 
-n_products
+x
 
 ```
 
@@ -39,17 +39,17 @@ n_products
 # The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-n_products <- a
+x <- a
 
 # Print the results to the console:
-n_products
+x
 ```
 
 *** =sct
 ```{r}
 # SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
 
-test_object("n_products")
-test_output_contains("n_products", "You forgot to print your answer to the console...")
+test_object("x")
+test_output_contains("x", "You forgot to print your answer to the console...")
 success_msg("Good work!")
 ```
