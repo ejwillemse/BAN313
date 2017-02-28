@@ -5,7 +5,7 @@ description : Test the assignment capabilities
 --- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
 ## More movies
 
-Have a look at the component price data, which has been loaded as the `product_comparision` dataframe. 
+Have a look at the component price data, which has been loaded as the `productComparisontest` dataframe. 
 
 *** =instructions
 - How many products did we compare?
@@ -40,7 +40,7 @@ a <- 1000
 
 *** =sample_code
 ```{r}
-# The product_comparison dataframe is available in your workspace
+# The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
 
@@ -50,7 +50,7 @@ a <- 1000
 
 *** =solution
 ```{r}
-# The product_comparison dataframe is available in your workspace
+# The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
 n_products <- a
