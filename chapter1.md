@@ -79,7 +79,7 @@ test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_b
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:cd4c8c8aa5
 ## R functions to apply
 
-Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions by using the `?function` command.
+Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
 
 *** =instructions
 - `mean()`
@@ -87,7 +87,7 @@ Which built in R function can we use to apply the correct statistical method? Us
 - `nrow()`
 - `prop.test()`
 - `t.test()`
-- None of the above, we will have to write our own `R` code to apply the method.
+- None of the above, we will have to write our own R code to apply the method.
 
 *** =hint
 
@@ -101,81 +101,113 @@ Use the `?function` to find out more about each command.
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! By setting `paired = TRUE` inside the function call we can perform a t-test for paired numerical data. In the next exercise we will first manually peform the test and thereafter compare our results against that of the function."
-test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, msg_bad, msg_bad))
+msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercise we will first manually peform the test and thereafter compare our results against that of the function."
+test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
---- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
-## More movies
 
-In the previous exercise, you saw a dataset about movies. In this exercise, we'll have a look at yet another dataset about movies!
-
-A dataset with a selection of movies, `movie_selection`, is available in the workspace.
+--- type:NormalExercise lang:r xp:100 skills:1 key:25c0c61261
+The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The component number, the quoted unit-price for the component from Company A and the quoted unit-price for the component from Company B.
 
 *** =instructions
-- Check out the structure of `movie_selection`.
-- Select movies with a rating of 5 or higher. Assign the result to `good_movies`.
-- Use `plot()` to  plot `good_movies$Run` on the x-axis, `good_movies$Rating` on the y-axis and set `col` to `good_movies$Genre`.
+- How many products did we compare?
+- What is the mean product price from Company A?
+- What is the mean product price from Company B?
+- What is the absolute mean difference in product prices? 
 
 *** =hint
-- Use `str()` for the first instruction.
-- For the second instruction, you should use `...[movie_selection$Rating >= 5, ]`.
-- For the plot, use `plot(x = ..., y = ..., col = ...)`.
+- Use `nrow()` for the first instruction.
 
 *** =pre_exercise_code
 ```{r}
-# You can also prepare your dataset in a specific way in the pre exercise code
+# no pec
+nProducts <- c(100, 200)
+price <- c(100, 10000)
+priceFracB <- c(1, 0.05)
+n <- runif(1, nProducts[1], nProducts[2])
+priceCompA <- runif(n, price[1], price[2])
+priceCompB <- abs(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]))
+product <- c(1:n)
 
-library(MindOnStats)
-data(Movies)
-movie_selection <- Movies[Movies$Genre %in% c("action", "animated", "comedy"),c("Genre", "Rating", "Run")]
+product_comparison <- data.frame(product, priceCompA, priceCompB)
 
-# Clean up the environment
-rm(Movies)
+rm(nProducts)
+rm(price)
+rm(priceFracB)
+rm(n)
+rm(product)
+rm(priceCompA)
+rm(priceCompB)
 ```
 
 *** =sample_code
 ```{r}
-# movie_selection is available in your workspace
+# The product_comparison dataframe is available in your workspace
 
-# Check out the structure of movie_selection
+# 1) Find the number of products and safe your answer to: n_products
 
+n_products <-
 
-# Select movies that have a rating of 5 or higher: good_movies
+# 2) Find the mean of product price of Company A and safe your answer to: mean_price_A
 
+mean_price_A <-
 
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
+# 3) Find the mean of product price of Company B and safe your answer to: mean_price_B
+
+mean_price_B <-
+
+# 4) Find the absolute mean difference in product prices and safe your answer to: mean_diff
+
+mean_diff <-
+
+# 5) Print the results to the console:
+
+n_products
+
+mean_price_A
+
+mean_price_B
+
+mean_diff
 
 ```
 
 *** =solution
 ```{r}
-# movie_selection is available in your workspace
+# The product_comparison dataframe is available in your workspace
 
-# Check out the structure of movie_selection
-str(movie_selection)
+# 1) Find the number of products and save your answer to: n_products
 
-# Select movies that have a rating of 5 or higher: good_movies
-good_movies <- movie_selection[movie_selection$Rating >= 5, ]
+n_products <- nrow(product_comparison)
 
-# Plot Run (i.e. run time) on the x axis, Rating on the y axis, and set the color using Genre
-plot(good_movies$Run, good_movies$Rating, col = good_movies$Genre)
+# 2) Find the mean of product price of Company A and save your answer to: mean_price_A
+
+mean_price_A <- mean(product_comparison$priceCompA)
+
+# 3) Find the mean of product price of Company B and save your answer to: mean_price_B
+
+mean_price_B <- mean(product_comparison$priceCompB)
+
+# 4) Find the absolute mean difference in product prices and save your answer to: mean_diff
+
+mean_diff <- abs(mean(product_comparison$priceCompA - product_comparison$priceCompB))
+
+# 5) Print the results to the console:
+
+n_products
+
+mean_price_A
+
+mean_price_B
+
+mean_diff
+
 ```
 
 *** =sct
 ```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
-
-test_function("str", args = "object",
-              not_called_msg = "You didn't call `str()`!",
-              incorrect_msg = "You didn't call `str(object = ...)` with the correct argument, `object`.")
-
-test_object("good_movies")
-
-test_function("plot", args = "x")
-test_function("plot", args = "y")
-test_function("plot", args = "col")
-
-test_error()
-
-success_msg("Good work!")
+test_object("n_products") 
+test_object("mean_price_A")
+test_object("mean_price_B")
+test_object("mean_diff")
+success_msg("Good job!")
 ```
