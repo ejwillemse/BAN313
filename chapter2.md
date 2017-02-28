@@ -44,7 +44,11 @@ a <- 1000
 
 # Find the number of products and safe your answer to: n_products
 
+n_products <-
+
 # Print the results to the console:
+
+n_products
 
 ```
 
