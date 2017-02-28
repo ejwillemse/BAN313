@@ -48,10 +48,7 @@ x
 
 *** =sct
 ```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
-
 test_object("x", undefined_msg = "Make sure to define a variable `x`.",
             incorrect_msg = "Make sure that you assign the correct value to `x`.") 
-test_output_contains("x", "You forgot to print your answer to the console...")
-success_msg("Good work!")
+success_msg("Good job! Have you noticed that R does not print the value of a variable to the console when you did the assignment? `x <- 42` did not generate any output, because R assumes that you will be needing this variable in the future. Otherwise you wouldn't have stored the value in a variable in the first place, right? Proceed to the next exercise!")
 ```
