@@ -1,6 +1,6 @@
 --- 
 title_meta  : Case study 4
-title       : Case Study 4: Choosing the best vendor
+title       : Choosing the best vendor
 description : "In this case study we will compare vendors, with the objective to choose the best one, which in this case means cheapest, to partner with. To do so we will rely on a sample of products and compare the prices of the vendors for the products. Thereafter we will use inference on decide on the best vendor."
 
 --- type:NormalExercise lang:r xp:0 skills:1 key:1c5a628f8f
