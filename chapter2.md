@@ -17,24 +17,6 @@ Have a look at the component price data, which has been loaded as the `productCo
 ```{r}
 # You can also prepare your dataset in a specific way in the pre exercise code
 
-nProducts <- c(100, 200)
-price <- c(100, 10000)
-priceFracB <- c(1, 0.05)
-n <- runif(1, nProducts[1], nProducts[2])
-priceCompA <- runif(n, price[1], price[2])
-priceCompB <- abs(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]))
-product <- c(1:n)
-
-productComparison <- data.frame(product, priceCompA, priceCompB)
-
-rm(nProducts)
-rm(price)
-rm(priceFracB)
-rm(n)
-rm(product)
-rm(priceCompA)
-rm(priceCompB)
-
 a <- 1000
 ```
 
