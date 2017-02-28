@@ -1,16 +1,17 @@
 --- 
 title_meta  : Case study 4
 title       : Choosing the best vendor
-description : "In this case study we will compare vendors, with the objective to choose the best one, which in this case means cheapest, to partner with. To do so we will rely on a sample of products and compare the prices of the vendors for the products. Thereafter we will use inference on decide on the best vendor."
+description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. 
+For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other."
 
 --- type:NormalExercise lang:r xp:0 skills:1 key:1c5a628f8f
 ## Background
 
 A critical component of supply chain management is building and maintaining an effective relationship with the companies within your supply chain. Choosing which companies to do business with is also an important component.
 
-For this Case Study we have been approached by a manufacturing company to assist them on deciding on which supplier to use for supplying materials for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires different parts. We therefore need to choose a supplier that has a very broad range of products available, and with the ability to provide products upon request that are currently not in their catalogue. We also do not know how much the company may charge for future products.
+For this Case Study we are employed by a manufacturing company we have to decide which supplier to partner with to supplying materials for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires different parts. We therefore need to choose a supplier that has a very broad range of products available, and with the ability to provide products upon request that are currently not in their catalogue. We do not know how much the company may charge for future products.
 
-Currently there are only two suppliers, referred to as Company A and B, to choose between. To compare the companies we have taken a random sample of our current input products, and asked both companies to provide a unit-price for each of the products. We will use this data to infer if there is one company is better than the other.
+Currently there are only two suppliers, referred to as Company A and B, to choose from. To compare the companies we have taken a random sample of our current input products, and asked both companies to provide a unit-price for each of the products. We will use this data to infer if one company is better than the other.
 
 Please take note that the data used for this chapter is randomly generated and will change:
 
@@ -34,7 +35,7 @@ Just hit the 'Submit Answer'.
 
 *** =sample_code
 ```{r}
-
+#none
 ```
 
 *** =solution
@@ -44,7 +45,7 @@ Just hit the 'Submit Answer'.
 
 *** =sct
 ```{r}
-success_msg("Let's try and use our knowledge on statistical inference to assist the company.")
+success_msg("Let's try and use our knowledge on statistical inference to assist our company.")
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:a9ac72e6f7
@@ -71,8 +72,9 @@ Have a look at the chapters on inference in the [Introductory Statistics with Ra
 
 *** =sct
 ```{r}
-msg_bad <- "That is not correct."
-msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Because each case involves the same product. The reason for setting up the study like this is that the companies may not be willing to give us a quotation for ALL their products, and to make the comparison fair we ask the companies to provide quotations for the same products. We do not know what the company may charge us for future products, so we are trying to infer average future prices using a sample of their current prices."
+msg_bad <- "That is not correct. Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
+
+msg_success <- "Correct! We want to compare the average unit-price for the two companies, so we are dealing with inference for numerical data. Both companies provided quotes for the same randomly sampled products, therefore we are dealing with paired-data. Why? Because each case involves the same product and consists of two prices, one from Company A and one from Company B. The reason for this design is that the companies may not be willing to give us a quotation for ALL their products, hence we randomly took a sample of products. To make the comparison fair we asked the companies to provide quotations for the same products. If we randomly sampled products for Company A and then randomly sampled products for Company B, one company may seem cheaper by virtue of the products for which they were required to provide a quote being low-cost products. Further, we do not know what the companies may charge for future products. We are therefore trying to infer average future prices using a sample of their current prices."
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
@@ -100,7 +102,7 @@ Use the `?function` to find out more about each command.
 
 *** =sct
 ```{r}
-msg_bad <- "That is not correct."
+msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
 msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercise we will first manually perform the test and thereafter compare our results against that of the function."
 test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
