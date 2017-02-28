@@ -238,3 +238,33 @@ test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_pr
             
 success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
+
+--- type:NormalExercise lang:r xp:25 skills:1 key:1c5a628f8f
+## Requirements for working with paired data
+
+For the case study we wish to analyse paired numerical data.
+If we are to do the analyse manually, we will need to perform some calculations on the original data set.
+Which of the following calculations do we need to perform?
+
+*** =instructions
+
+- Subtract the price from Company A from the price from Company B for each product.
+- Calculate the mean price for Company A and the mean price for Company B and then calculate the difference between the two.
+- Determine which products from Company A are cheaper than those from Company B and calculate the proportion of cheaper products.
+- Draw a side-by-side boxplot for the product prices from the companies to see which Company is cheaper.
+
+*** =hint
+Have a look at Chapter 4 of the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
+
+*** =pre_exercise_code
+```{r}
+#none
+```
+
+*** =sct
+```{r}
+msg_bad <- "That is not correct. Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
+
+msg_success <- "Correct! To perform inference for paired data we will analyse the difference in prices for each product. The first step is therefore to calculate this difference in R, as we will do in the next question."
+test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
+```
