@@ -15,14 +15,25 @@ The mean drill size is `r meanSize`?
 
 *** =pre_exercise_code
 ```{r}
-# Initialise the 
+# Randomly generate a dataframe for Company A and Company B prices for products
 
-nProducts = c(100, 200)
-price = c(100, 10000)
-priceFracB = c(1, 0.05)
-n = runif(1, nProducts[1], nProducts[2])
-companyA = runif(n, price[1], price[2])
-companyB = abs(companyA*rnorm(n, priceFracB[1], priceFracB[2]))
+nProducts <- c(100, 200)
+price <- c(100, 10000)
+priceFracB <- c(1, 0.05)
+n <- runif(1, nProducts[1], nProducts[2])
+priceCompA <- runif(n, price[1], price[2])
+priceCompB <- abs(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]))
+product <- c(1:n)
+
+productComparision <- data.frame(product, priceCompA, priceCompB)
+
+rm(nProducts)
+rm(price)
+rm(priceFracB)
+rm(n)
+rm(product)
+rm(priceCompA)
+rm(priceCompB)
 ```
 
 *** =hint
@@ -58,12 +69,7 @@ A dataset with a selection of movies, `drillHoles`, is available in the workspac
 ```{r}
 # You can also prepare your dataset in a specific way in the pre exercise code
 
-library(MindOnStats)
-data(Movies)
-movie_selection <- Movies[Movies$Genre %in% c("action", "animated", "comedy"),c("Genre", "Rating", "Run")]
-
-# Clean up the environment
-rm(Movies)
+n = nrow(productComparision)
 ```
 
 *** =sample_code
