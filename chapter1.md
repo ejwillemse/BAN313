@@ -106,6 +106,8 @@ test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_s
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:25c0c61261
+## Analysing the data
+
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The component number, the quoted unit-price for the component from Company A and the quoted unit-price for the component from Company B.
 
 *** =instructions
