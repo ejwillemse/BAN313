@@ -38,7 +38,7 @@ x
 *** =solution
 ```{r}
 # Assign the value 42 to x
-x <- 42
+x <- 1000
 
 # Print out the value of the variable x
 x
