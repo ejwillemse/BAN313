@@ -34,11 +34,13 @@ rm(n)
 rm(product)
 rm(priceCompA)
 rm(priceCompB)
+
+a = 1000
 ```
 
 *** =sample_code
 ```{r}
-# The product_comparision dataframe is available in your workspace
+# The product_comparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
 
@@ -51,7 +53,7 @@ rm(priceCompB)
 # The product_comparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-n_products <- nrow(productComparison)
+n_products <- a
 
 # Print the results to the console:
 n_products
