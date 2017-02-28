@@ -39,7 +39,7 @@ n_products
 # The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-n_products <- a
+n_products <- 1000
 
 # Print the results to the console:
 n_products
