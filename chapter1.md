@@ -203,7 +203,7 @@ mean_price_B <- mean(product_comparison$priceCompB)
 
 sd_price_B <- sd(product_comparison$priceCompB)
 
-# 5) The following code will print your answers to the console
+# The following code will print your answers to the console
 
 n_products
 mean_price_A
