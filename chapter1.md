@@ -40,42 +40,36 @@ Just hit the 'Submit Answer'.
 
 *** =sct
 ```{r}
-#none
+success_msg("Let's try and use our knowledge on statistical inference to assist the company.")
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
-## A really bad movie
+## Statistical methods to apply
 
-Have a look at the plot that showed up in the viewer to the right. Which type of movie has the worst rating assigned to it?
+Based on the case study description, which do you think is the correct statistical method to apply?
 
 *** =instructions
-- Adventure
-- Action
-- Animation
-- Comedy
+- Inference for a single proportion.
+- Inference for the difference between two proportions.
+- Goodness-of-fit test.
+- Test for independence.
+- Inference for a single mean.
+- Inference for paired numerical data.
+- Inference for the difference between two means.
 
 *** =hint
-Have a look at the plot. Which color does the point with the lowest rating have?
+Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
 *** =pre_exercise_code
 ```{r}
-# The pre exercise code runs code to initialize the user's workspace.
-# You can use it to load packages, initialize datasets and draw a plot in the viewer
-
-movies <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/course/introduction_to_r/movies.csv")
-
-library(ggplot2)
-
-ggplot(movies, aes(x = runtime, y = rating, col = genre)) + geom_point()
+#none
 ```
 
 *** =sct
 ```{r}
-# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
-
-msg_bad <- "That is not correct!"
-msg_success <- "Exactly! There seems to be a very bad action movie in the dataset."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
+msg_bad <- "That is not correct."
+msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data since each case deals with the same product."
+test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
