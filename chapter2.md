@@ -95,7 +95,7 @@ n_products <-
 
 *** =solution
 ```{r}
-# product_comparision is available in your workspace
+# The product_comparision dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
 n_products <- nrow(movie_selection)
