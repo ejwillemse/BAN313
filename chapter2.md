@@ -87,7 +87,6 @@ rm(priceCompB)
 # The product_comparision dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-n_products <- 
 
 # Print the results to the console:
 
