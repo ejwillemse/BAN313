@@ -15,9 +15,7 @@ Have a look at the component price data, which has been loaded as the `productCo
 
 *** =pre_exercise_code
 ```{r}
-# You can also prepare your dataset in a specific way in the pre exercise code
-
-a <- 1000
+# no pec
 ```
 
 *** =sample_code
@@ -39,7 +37,7 @@ x
 # The productComparison dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-x <- a
+x <- 1000
 
 # Print the results to the console:
 x
@@ -49,7 +47,8 @@ x
 ```{r}
 # SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
 
-test_object("x")
+test_object("x", undefined_msg = "Make sure to define a variable `x`.",
+            incorrect_msg = "Make sure that you assign the correct value to `x`.") 
 test_output_contains("x", "You forgot to print your answer to the console...")
 success_msg("Good work!")
 ```
