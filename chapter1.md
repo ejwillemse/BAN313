@@ -47,7 +47,7 @@ Just hit the 'Submit Answer'.
 success_msg("Let's try and use our knowledge on statistical inference to assist the company.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
+--- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:a9ac72e6f7
 ## Statistical methods to apply
 
 Based on the case study description, which do you think is the correct statistical method to apply?
@@ -76,7 +76,7 @@ msg_success <- "Correct! We want to compare the average unit-price for the two c
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:cd4c8c8aa5
+--- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:cd4c8c8aa5
 ## R functions to apply
 
 Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
@@ -108,69 +108,75 @@ test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_s
 --- type:NormalExercise lang:r xp:100 skills:1 key:25c0c61261
 ## Analysing the data
 
-The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The component number, the quoted unit-price for the component from Company A and the quoted unit-price for the component from Company B.
+The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`).
+
+Using the data, answer the following:
 
 *** =instructions
-- How many products did we compare?
-- What is the mean product price from Company A?
-- What is the mean product price from Company B?
-- What is the absolute mean difference in product prices? 
+- How many products did we sample to get quotations from?
+- What is the sample mean for product prices from Company A?
+- What is the sample standard deviation for products price from Company A?
+- What is the sample mean for product prices from Company B?
+- What is the sample standard deviation for products price from Company B?
 
 *** =hint
 - Use `nrow()` for the first instruction.
 
 *** =pre_exercise_code
 ```{r}
-# no pec
 nProducts <- c(100, 200)
 price <- c(100, 10000)
 priceFracB <- c(1, 0.05)
 n <- runif(1, nProducts[1], nProducts[2])
-priceCompA <- runif(n, price[1], price[2])
-priceCompB <- abs(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]))
-product <- c(1:n)
+priceCompA <- round(runif(n, price[1], price[2]), 2)
+priceCompB <- round(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]), 2)
+productCode <- paste('#', round(runif(n, 10000, 99999),0), sep= "")
 
-product_comparison <- data.frame(product, priceCompA, priceCompB)
+product_comparison <- data.frame(productCode, priceCompA, priceCompB)
 
 rm(nProducts)
 rm(price)
 rm(priceFracB)
 rm(n)
-rm(product)
+rm(productCode)
 rm(priceCompA)
 rm(priceCompB)
 ```
 
 *** =sample_code
 ```{r}
-# The product_comparison dataframe is available in your workspace
+# The product_comparison dataframe is available in your workspace. 
+# Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
 # 1) Find the number of products and safe your answer to: n_products
 
 n_products <-
 
-# 2) Find the mean of product price of Company A and safe your answer to: mean_price_A
+# 2) Calculate the sample mean for product prices from Company A and safe your answer to: mean_price_A
 
 mean_price_A <-
 
-# 3) Find the mean of product price of Company B and safe your answer to: mean_price_B
+# 3) Calculate the sample standard deviation for product prices from Company A and safe your answer to: mean_price_A
+
+sd_price_A <-
+
+# 4) Calculate the sample mean for product prices from Company B and safe your answer to: mean_price_B
 
 mean_price_B <-
 
-# 4) Find the absolute mean difference in product prices and safe your answer to: mean_diff
+# 4) Calculate the sample standard deviation for product prices from Company B and safe your answer to: mean_price_B
 
-mean_diff <-
+sd_price_B <-
 
-# 5) Print the results to the console:
+# 5) The following code will print your answers to the console
 
 n_products
-
 mean_price_A
+sd_price_A
 
 mean_price_B
-
-mean_diff
-
+sd_price_B
+sd_price_B
 ```
 
 *** =solution
