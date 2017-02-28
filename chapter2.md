@@ -2,7 +2,10 @@
 title       : Assignment test
 description : Test the assignment capabilities
 
---- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:04e920022f
 ## More movies
 
 Have a look at the component price data, which has been loaded as the `productComparisontest` dataframe. 
