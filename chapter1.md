@@ -234,5 +234,5 @@ test_object("mean_price_B", undefined_msg = "Make sure to define a variable `mea
 test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_price_B`.",
             incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company B correctly and assigned your answer to `sd_price_B`.")
             
-success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data, although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
+success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
