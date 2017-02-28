@@ -15,11 +15,14 @@ The mean drill size is `r meanSize`?
 
 *** =pre_exercise_code
 ```{r}
-# The pre exercise code runs code to initialize the user's workspace.
-# You can use it to load packages, initialize datasets and draw a plot in the viewer
+# Initialise the 
 
-drillHoles = rnorm(100, 100, 10)
-meanSize = mean(drillHoles)
+nProducts = c(100, 200)
+price = c(100, 10000)
+priceFracB = c(1, 0.05)
+n = runif(1, nProducts[1], nProducts[2])
+companyA = runif(n, price[1], price[2])
+companyB = abs(companyA*rnorm(n, priceFracB[1], priceFracB[2]))
 ```
 
 *** =hint
