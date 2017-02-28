@@ -12,8 +12,12 @@ For this Case Study we have been approached by a manufacturing company to assist
 
 Currently there are only two suppliers, referred to as Company A and B, to choose between. To compare the companies we have taken a random sample of our current input products, and asked both companies to provide a unit-price for each of the products. We will use this data to infer if there is one company is better than the other.
 
-To continue with this chapter, hit the 'Submit Answer' button.
+Please take note that the data used for this chapter is randomly generated and will change:
 
+- each time the chapter is attempted; and
+- when moving from one exercise to the next.
+
+To continue with this chapter, hit the 'Submit Answer' button.
 
 *** =instructions
 
@@ -68,10 +72,38 @@ Have a look at the chapters on inference in the [Introductory Statistics with Ra
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data since each case deals with the same product."
+msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Becayse each case involves the same product."
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:cd4c8c8aa5
+## R functions to apply
+
+Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions by using the `?function` command.
+
+*** =instructions
+- `mean()`
+- `sd()`
+- `nrow()`
+- `prop.test()`
+- `t.test()`
+- None of the above, we will have to write our own `R` code to apply the method.
+
+*** =hint
+
+Use the `?function` to find out more about each command.
+
+*** =pre_exercise_code
+```{r}
+#none
+```
+
+*** =sct
+```{r}
+msg_bad <- "That is not correct."
+msg_success <- "Correct! By setting `paired = TRUE` inside the function call we can perform a t-test for paired numerical data. In the next exercise we will first manually peform the test and thereafter compare our results against that of the function."
+test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, msg_bad, msg_bad))
+```
 --- type:NormalExercise lang:r xp:100 skills:1 key:03c9a0637d
 ## More movies
 
