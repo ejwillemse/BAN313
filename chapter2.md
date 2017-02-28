@@ -84,10 +84,7 @@ rm(priceCompB)
 
 *** =sample_code
 ```{r}
-# product_comparision is available in your workspace
-
-# Check out the structure of movie_selection
-str(movie_selection)
+# The product_comparision dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
 n_products <- 
