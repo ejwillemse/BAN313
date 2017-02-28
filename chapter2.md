@@ -12,6 +12,9 @@ Have a look at the component price data, which has been loaded as the `product_c
 
 *** =instructions
 - How many products did we compare?
+- What is the mean product price from Company A?
+- What is the mean product price from Company B?
+- What is the absolute mean difference in product prices? 
 
 *** =hint
 - Use `nrow()` for the first instruction.
@@ -42,13 +45,31 @@ rm(priceCompB)
 ```{r}
 # The product_comparison dataframe is available in your workspace
 
-# Find the number of products and safe your answer to: n_products
+# 1) Find the number of products and safe your answer to: n_products
 
 n_products <-
 
-# Print the results to the console:
+# 2) Find the mean of product price of Company A and safe your answer to: mean_price_A
+
+mean_price_A <-
+
+# 3) Find the mean of product price of Company B and safe your answer to: mean_price_B
+
+mean_price_B <-
+
+# 4) Find the absolute mean difference in product prices and safe your answer to: mean_diff
+
+mean_diff <-
+
+# 5) Print the results to the console:
 
 n_products
+
+mean_price_A
+
+mean_price_B
+
+mean_diff
 
 ```
 
@@ -56,19 +77,39 @@ n_products
 ```{r}
 # The product_comparison dataframe is available in your workspace
 
-# Find the number of products and safe your answer to: n_products
+# 1) Find the number of products and save your answer to: n_products
 
 n_products <- nrow(product_comparison)
 
-# Print the results to the console:
+# 2) Find the mean of product price of Company A and save your answer to: mean_price_A
+
+mean_price_A <- mean(product_comparison$priceCompA)
+
+# 3) Find the mean of product price of Company B and save your answer to: mean_price_B
+
+mean_price_B <- mean(product_comparison$priceCompB)
+
+# 4) Find the absolute mean difference in product prices and save your answer to: mean_diff
+
+mean_diff <- abs(mean(product_comparison$priceCompA - product_comparison$priceCompB))
+
+# 5) Print the results to the console:
 
 n_products
+
+mean_price_A
+
+mean_price_B
+
+mean_diff
 
 ```
 
 *** =sct
 ```{r}
-test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
-            incorrect_msg = "Make sure that you assign the correct value to `n_products`.") 
-success_msg("Good job! Have you noticed that R does not print the value of a variable to the console when you did the assignment? `x <- 42` did not generate any output, because R assumes that you will be needing this variable in the future. Otherwise you wouldn't have stored the value in a variable in the first place, right? Proceed to the next exercise!")
+test_object("n_products") 
+test_object("mean_price_A")
+test_object("mean_price_B")
+test_object("mean_diff")
+success_msg("Good job!")
 ```
