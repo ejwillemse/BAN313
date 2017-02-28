@@ -217,7 +217,7 @@ sd_price_B
 
 *** =sct
 ```{r}
-test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Have a look at the `?nrow` function if you are unsure how it works.",)
+test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
 
 test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
             incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.") 
@@ -234,5 +234,5 @@ test_object("mean_price_B", undefined_msg = "Make sure to define a variable `mea
 test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_price_B`.",
             incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company B correctly and assigned your answer to `sd_price_B`.")
             
-success_msg("Good job!", undefined_msg = "Make sure to define a variable `Good job!`.")
+success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data.")
 ```
