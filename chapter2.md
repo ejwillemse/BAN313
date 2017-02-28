@@ -92,7 +92,7 @@ str(movie_selection)
 # Find the number of products and safe your answer to: n_products
 n_products <- 
 
-# Print the reults to the console:
+# Print the results to the console:
 
 ```
 
@@ -103,7 +103,7 @@ n_products <-
 # Find the number of products and safe your answer to: n_products
 n_products <- nrow(movie_selection)
 
-# Print the reults to the console:
+# Print the results to the console:
 n_products
 ```
 
@@ -118,7 +118,7 @@ test_correct({
               not_called_msg = "It seems that you didn't use a built in function to calculate the number of products. Hint: see `?nrow`")
 })
 
-test_output_contains("n_products", "You forgot to print your answer to the console")
+test_output_contains("n_products", "You forgot to print your answer to the console...")
 test_error()
 success_msg("Good work!")
 ```
