@@ -72,7 +72,7 @@ Have a look at the chapters on inference in the [Introductory Statistics with Ra
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Because each case involves the same product."
+msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Because each case involves the same product. The reason for setting up the study like this is that the companies may not be willing to give us a quotation for ALL their products, and to make the comparison fair we ask the companies to provide quotations for the same products. We do not know what the company may charge us for future products, so we are trying to infer average future prices using a sample of their current prices."
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
@@ -111,7 +111,7 @@ test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_s
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`). First have a look at the data in the console using the `head(product_comparison)` command, thereafter answer the following:
 
 *** =instructions
-- How many products did we sample to get quotations from?
+- How many products did we sample to get quotations for?
 - What is the sample mean for product prices from Company A?
 - What is the sample standard deviation for products price from Company A?
 - What is the sample mean for product prices from Company B?
