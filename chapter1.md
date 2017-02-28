@@ -72,7 +72,7 @@ Have a look at the chapters on inference in the [Introductory Statistics with Ra
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Becayse each case involves the same product."
+msg_success <- "Correct! We want to compare the average unit-price for the two companies, meaning we are dealing with inference for numerical data. We further asked both companies to provide a quote for the same randomly sampled products, therefore we are dealing with paired-data. Why? Because each case involves the same product."
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
@@ -101,16 +101,14 @@ Use the `?function` to find out more about each command.
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercise we will first manually peform the test and thereafter compare our results against that of the function."
+msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercise we will first manually perform the test and thereafter compare our results against that of the function."
 test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:25c0c61261
 ## Analysing the data
 
-The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`).
-
-Using the data, answer the following:
+The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`). First have a look at the data in the console using the `head(product_comparison)` command, thereafter answer the following:
 
 *** =instructions
 - How many products did we sample to get quotations from?
@@ -120,7 +118,8 @@ Using the data, answer the following:
 - What is the sample standard deviation for products price from Company B?
 
 *** =hint
-- Use `nrow()` for the first instruction.
+- Use `?nrow`, `?mean` and `?sd` to find out more about the functions that you can apply to answer the question.
+- To isolate and analyse a specific variable, make use of the `data.frame$variableName` command.
 
 *** =pre_exercise_code
 ```{r}
@@ -148,7 +147,7 @@ rm(priceCompB)
 # The product_comparison dataframe is available in your workspace. 
 # Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
-# 1) Find the number of products and safe your answer to: n_products
+# 1) Find the number of products that we sampled and safe your answer to: n_products
 
 n_products <-
 
@@ -181,41 +180,59 @@ sd_price_B
 
 *** =solution
 ```{r}
-# The product_comparison dataframe is available in your workspace
+# The product_comparison dataframe is available in your workspace. 
+# Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
-# 1) Find the number of products and save your answer to: n_products
+# 1) Find the number of products and safe your answer to: n_products
 
 n_products <- nrow(product_comparison)
 
-# 2) Find the mean of product price of Company A and save your answer to: mean_price_A
+# 2) Calculate the sample mean for product prices from Company A and safe your answer to: mean_price_A
 
 mean_price_A <- mean(product_comparison$priceCompA)
 
-# 3) Find the mean of product price of Company B and save your answer to: mean_price_B
+# 3) Calculate the sample standard deviation for product prices from Company A and safe your answer to: mean_price_A
+
+sd_price_A <- sd(product_comparison$priceCompA)
+
+# 4) Calculate the sample mean for product prices from Company B and safe your answer to: mean_price_B
 
 mean_price_B <- mean(product_comparison$priceCompB)
 
-# 4) Find the absolute mean difference in product prices and save your answer to: mean_diff
+# 4) Calculate the sample standard deviation for product prices from Company B and safe your answer to: mean_price_B
 
-mean_diff <- abs(mean(product_comparison$priceCompA - product_comparison$priceCompB))
+sd_price_B <- sd(product_comparison$priceCompB)
 
-# 5) Print the results to the console:
+# 5) The following code will print your answers to the console
 
 n_products
-
 mean_price_A
+sd_price_A
 
 mean_price_B
-
-mean_diff
+sd_price_B
+sd_price_B
 
 ```
 
 *** =sct
 ```{r}
-test_object("n_products") 
-test_object("mean_price_A")
-test_object("mean_price_B")
-test_object("mean_diff")
-success_msg("Good job!")
+test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Have a look at the `?nrow` function if you are unsure how it works.",)
+
+test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.") 
+            
+test_object("mean_price_A", undefined_msg = "Make sure to define a variable `mean_price_A`.",
+            incorrect_msg = "Make sure that you calculated the sample mean for product prices from Company A correctly and assigned your answer to `mean_price_A`.")
+            
+test_object("sd_price_A", undefined_msg = "Make sure to define a variable `sd_price_A`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company A correctly and assigned your answer to `sd_price_A`.")
+            
+test_object("mean_price_B", undefined_msg = "Make sure to define a variable `mean_price_B`.",
+            incorrect_msg = "Make sure that you calculated the sample mean for product prices from Company B correctly and assigned your answer to `mean_price_B`.")
+            
+test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_price_B`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company B correctly and assigned your answer to `sd_price_B`.")
+            
+success_msg("Good job!", undefined_msg = "Make sure to define a variable `Good job!`.")
 ```
