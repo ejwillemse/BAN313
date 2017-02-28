@@ -67,7 +67,7 @@ Have a look at the chapters on inference in the [Introductory Statistics with Ra
 
 *** =pre_exercise_code
 ```{r}
-
+#none
 ```
 
 *** =sct
