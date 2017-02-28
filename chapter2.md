@@ -98,7 +98,7 @@ n_products <-
 # The product_comparision dataframe is available in your workspace
 
 # Find the number of products and safe your answer to: n_products
-n_products <- nrow(movie_selection)
+n_products <- nrow(product_comparision)
 
 # Print the results to the console:
 n_products
