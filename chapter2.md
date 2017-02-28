@@ -51,6 +51,5 @@ n_products
 
 test_object("n_products")
 test_output_contains("n_products", "You forgot to print your answer to the console...")
-test_error()
 success_msg("Good work!")
 ```
