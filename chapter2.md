@@ -35,7 +35,7 @@ rm(product)
 rm(priceCompA)
 rm(priceCompB)
 
-a = 1000
+a <- 1000
 ```
 
 *** =sample_code
@@ -64,9 +64,6 @@ n_products
 # SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
 
 test_object("n_products")
-test_function("nrow", args = "x",
-              not_called_msg = "It seems that you didn't use a built in function to calculate the number of products. Hint: see `?nrow`")
-              
 test_output_contains("n_products", "You forgot to print your answer to the console...")
 test_error()
 success_msg("Good work!")
