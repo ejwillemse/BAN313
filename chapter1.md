@@ -477,9 +477,9 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 
 
 --- type:NormalExercise lang:r xp:400 skills:1 key:803d9a69c1
-## Calculations for the hypothesis
+## Conducting the hypothesis test
 
-Our hypothesis are as follows:
+Our hypotheses are as follow:
 
 - H0: the mean price difference between Company A and Company B is zero,
 - HA: the mean price difference between Company A and Company B is not zero,
@@ -547,7 +547,7 @@ rm(priceCompB)
 
 *** =sample_code
 ```{r}
-# The product_comparison dataframe is available in your workspace. Remember to create and assign your answers to the correct variables as specified in the instructions. Where necessary, view the outcome of your calculation by printing them to the console. You also view the values of your variables by typing them in the console and pressing enter.
+# The product_comparison dataframe is available in your workspace. Remember to create and assign your answers to the correct variables as specified in the instructions. Where necessary, view the outcome of your calculation by printing them to the console. You can also view the values of your variables by typing them in the console and pressing enter.
 
 # 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. 
 
@@ -623,10 +623,12 @@ test_object("df", undefined_msg = "Make sure to define a variable `df`.",
 test_object("p_value", undefined_msg = "Make sure to define a variable `p_value`.",
             incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the prescribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
 
-
+test_output_contains("p_value", incorrect_msg = "It's probably a good idea to actually view the `p_value` to see what it is, so update your code to print its value to the console. Knowing the `p_value` is important for decision support. For instance, what would happen if the `p_value = 0.50001`? Would we still want to not reject H0?.")
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the prescribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
+            
+test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to actually view the `rejectH0` to see what the outcome of the test was, so update your code to print its value to the console. We need to know the outcome of the test to determine if there is a difference between the suppliers.")
 
-success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. You will do this in the last exercise with minimal instructions, hints and error messages.")
+success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the next and last question we will again use a new sample and compute a confidence interval for the true mean difference and make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
 ```
