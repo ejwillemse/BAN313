@@ -703,6 +703,9 @@ ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sd(pd
 CI_low <- mean(pd) - ME
 CI_high <- mean(pd) + ME
 
+CI_low
+CI_high
+
 CI <- c(mean(pd) - ME, mean(pd) + ME)
 
 if (CI[2] < 0)
