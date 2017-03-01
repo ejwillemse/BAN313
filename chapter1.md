@@ -404,7 +404,9 @@ test_function('nrow', args = "x", not_called_msg = "There are different ways to 
 
 test_object("n", undefined_msg = "Make sure to define a variable `n`.",
             incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
-            
+
+test_output_contains("n", incorrect_msg = "You did not view the actual value `n`. You need to check the sample size to determine if the normal condition is met.")
+
 test_object("normalConditionMet", undefined_msg = "Make sure to define a variable `normalConditionMet`.",
             incorrect_msg = "You should base your answer on histogram and number samples and assign it as either `TRUE` or `FALSE` to `normalConditionMet`.")
             
