@@ -695,8 +695,9 @@ rm(priceCompB)
 # Fine, if you want to know the final answer, here it is. Just remember that part of learning and understanding something is to figure how it works for yourself. And of course, you won't have this option in tests, exams and in industry. And just to nasty we have changed the answer up and calculated most of the stuff in a different way...
 
 CI_level <- 0.98
+sd()
 pd <- product_comparison$priceCompA - product_comparison$priceCompB
-ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sqrt(var(pd)/nrow(product_comparison))
+ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sqrt(sd(pd)^2/nrow(product_comparison))
 CI_low <- mean(pd) - ME
 CI_high <- mean(pd) + ME
 
@@ -719,9 +720,9 @@ t.test(x = product_comparison$priceCompA, y = product_comparison$priceCompB, alt
 
 *** =sct
 ```{r}
-test_function('nrow', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
-test_function('mean', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
-test_function('sd', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
+test_function('nrow', args = "x", not_called_msg = "You have to semi-manually do the calculations. You are missing some function calls to do so.")
+test_function('mean', args = "x", not_called_msg = "You have to semi-manually do the calculations. You are missing some function calls to do so.")
+test_function('sd', args = "x", not_called_msg = "You have to semi-manually do the calculations. You are missing some function calls to do so.")
 
 test_object("CI_low", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
 test_object("CI_high", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
