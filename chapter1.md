@@ -450,7 +450,9 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, m
 
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:71bd4684d4
-## Which is the correct null and alternative hypothesis for the case study problem:
+## Setting up the hypotheses
+
+Which is the correct null and alternative hypothesis for the case study problem:
 
 *** =instructions
 
@@ -572,11 +574,11 @@ rm(priceCompB)
 price_diff <- product_comparison$priceCompA - product_comparison$priceCompB
 n <- nrow(product_comparison)
 mean_diff <- mean(price_diff)
-s_diff <- sd(price_diff)
+sd_diff <- sd(price_diff)
 
 # 2) Calculate the Standard Error of the sample mean. 
 
-SE <- s_diff/sqrt(n)
+SE <- sd_diff/sqrt(n)
 
 # 3) Calculate the T-score of the sample mean.
 
@@ -608,7 +610,7 @@ test_object("n", undefined_msg = "Make sure to define a variable `n`.",
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
             incorrect_msg = "Make sure that you calculated the mean price difference correctly and assigned your answer to `mean_diff`.")
             
-test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
+test_object("sd_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
             
 test_object("SE", undefined_msg = "Make sure to define a variable `SE`.",
