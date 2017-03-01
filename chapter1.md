@@ -103,7 +103,7 @@ Use the `?function` to find out more about each command.
 *** =sct
 ```{r}
 msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
-msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercise we will first manually perform the test and thereafter compare our results against that of the function."
+msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercises we will first semi-manually perform the test, and in the last exercise we use the `t.test` function."
 test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
