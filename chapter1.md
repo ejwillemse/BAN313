@@ -119,6 +119,8 @@ The component price data has been loaded in the workspace as the `product_compar
 - What is the sample mean for product prices from Company B?
 - What is the sample standard deviation for products price from Company B?
 
+Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
+
 *** =hint
 - Use `?nrow`, `?mean` and `?sd` to find out more about the functions that you can apply to answer the question.
 - To isolate and analyse a specific variable, make use of the `data.frame$variableName` command.
@@ -147,7 +149,6 @@ rm(priceCompB)
 *** =sample_code
 ```{r}
 # The product_comparison dataframe is available in your workspace. 
-# Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
 # 1) Find the number of products that we sampled and safe your answer to: n_products
 
@@ -169,7 +170,7 @@ mean_price_B <-
 
 sd_price_B <-
 
-# 5) The following code will print your answers to the console
+# The following code will print your answers to the console
 
 n_products
 mean_price_A
@@ -263,8 +264,155 @@ Have a look at Chapter 4 of the [Introductory Statistics with Randomization and 
 
 *** =sct
 ```{r}
-msg_bad <- "That is not correct. Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
+msg_bad <- "That is not correct. Have a look at Chapter 4 on inference for numerical data in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
 
-msg_success <- "Correct! To perform inference for paired data we will analyse the difference in prices for each product. The first step is therefore to calculate this difference in R, as we will do in the next question."
+msg_success <- "Correct! To perform inference for paired data we will analyse the difference in prices for each product. The first step is therefore to calculate this difference in R, which is what we will do in the next question."
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
+```
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:19491ec2a5
+## Analysing the difference between product prices
+
+The component price data has been loaded in the workspace as the `product_comparison` dataframe. Note that sample is different from the previous chapters. 
+
+Before we can apply inference for paired data, we need to calculate the difference in price from Company A and Company B per product. Thereafter we need to check the conditions for numerical inference. These are that:
+
+- samples should be independent; and
+- the distribution of the variable should be near normal.
+
+We can assume the first condition holds since we took a random sample of product. For the second condition we need to analyse the distribution of the sample and specifically check for skewness, and then look at the number of samples that we have. If we less than 30 samples, then the sample distribution has to be nearly symmetrical. If we have more than 30 but less than 60 samples then moderate skewness can be tollerated, and if we have more then 60 samples then heady skewness can be tollorated.
+
+After checking the conditions we need calculate the necessary sample statistics on the difference in product prices. We will reuse our code for doing so in the following exercises.
+
+*** =instructions
+
+- Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
+- Draw a histogram of the price difference to analyse the sample distribution.
+- Determine the number of samples and assign the answer to the variable `n`. 
+- Use the number of samples in conjunction with the histogram to check if the distribution of the variable is near normal: assing your answer, which can either be `TRUE` or `FALSE` to the `normalConditionMet` variable.
+- Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
+
+Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+nProducts <- c(100, 200)
+price <- c(100, 10000)
+priceFracB <- c(1, 0.05)
+n <- runif(1, nProducts[1], nProducts[2])
+priceCompA <- round(runif(n, price[1], price[2]), 2)
+priceCompB <- round(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]), 2)
+productCode <- paste('#', round(runif(n, 10000, 99999),0), sep= "")
+
+product_comparison <- data.frame(productCode, priceCompA, priceCompB)
+
+rm(nProducts)
+rm(price)
+rm(priceFracB)
+rm(n)
+rm(productCode)
+rm(priceCompA)
+rm(priceCompB)
+```
+
+*** =sample_code
+```{r}
+# The product_comparison dataframe is available in your workspace. 
+
+# 1) Calculate the difference between Company A's price and that of Company B for each product, and assign the answer to the vector: price_diff
+
+price_diff <- 
+
+# 2) Draw a histogram of the price difference to analyse the sample distribution (use control-enter to execute your code and view the results).
+
+
+
+# 3) Determine the number samples and, assign the answer to n, and print the answer to the console (use control-enter to execute your code and view the results).
+
+n <- 
+n
+
+# 4) Use the sample distribution and number of samples to determine if the noraml condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
+
+
+
+# 5) Calculate the sample mean for the difference in prices and assign your answer to: mean_diff
+
+
+
+# 5) Calculate the standard deviation for the difference in prices and assign your answer to: s_diff
+
+
+
+# The following code will print your answers to the console
+
+n
+normalConditionMet
+mean_diff
+s_diff
+
+
+```
+
+*** =solution
+```{r}
+# The product_comparison dataframe is available in your workspace. 
+
+# 1) Calculate the difference between Company A's price and that of Company B for each product, and assign the answer to the vector: price_diff
+
+price_diff <- product_comparison$priceCompA - product_comparison$priceCompB
+
+# 2) Draw a histogram of the price difference to analyse the sample distribution (use control-enter to execute your code and view the results).
+
+hist(price_diff)
+
+# 3) Determine the number samples, assign the answer to n, and print the answer to the console (use control-enter to execute your code and view the results).
+
+n <- nrow(product_comparison$priceCompA)
+n
+
+# 4) Use the sample distribution and number of samples to determine if the noraml condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
+
+normalConditionMet <- TRUE
+
+# 5) Calculate the sample mean for the difference in prices and assign your answer to: mean_diff
+
+mean_diff <- mean(price_diff)
+
+# 5) Calculate the standard deviation for the difference in prices and assign your answer to: s_diff
+
+s_diff <- sd(price_diff)
+
+# The following code will print your answers to the console
+
+n
+normalConditionMet
+mean_diff
+s_diff
+```
+
+*** =sct
+```{r}
+test_object("price_diff", undefined_msg = "Make sure to calculate the price difference per product and assigned your answer to `price_diff`. Also make sure that you calculated it as the price from Company A minues the price from Company B, and that you calculated it per product..")
+
+test_function('hist', args = "x", not_called_msg = "You did not draw a histogram of the price differences.",)
+
+test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
+
+test_object("n", undefined_msg = "Make sure to define a variable `n`.",
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
+            
+test_object("normalConditionMet", undefined_msg = "Make sure to define a variable `normalConditionMet`.",
+            incorrect_msg = "You should base your answer on histogram and number samples and assign it as either `TRUE` or `FALSE` to `normalConditionMet`.")
+            
+test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
+            incorrect_msg = "Make sure that you calculated the mean price differencse correctly and assigned your answer to `mean_diff`.")
+            
+test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
+            
+success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
