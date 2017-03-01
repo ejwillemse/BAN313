@@ -517,14 +517,16 @@ To successfully complete this lab, do the following, and note that you have to d
 Go through the previous exercises and carefully look at your calculations. The R formulas for the Standard Error, T-score and Degrees of Freedom are:
 
 ```
-SE = sd_diff/sqrt(price_diff)
+SE = sd_diff/sqrt(n)
 T_score = mean_diff/SE
 df = n - 1
 ```
 
-Calculating the p-value is tricky. Start by carefully going through `?pt`. The actual p-value depends on the actual value of `mean_diff`. We know that `pt(T_score, df)` will give the area to the left of `mean_diff` for a t-distribution with degrees of freedom of `df`. If `mean_diff < 0` then the correct area is given by the function and we simply need to multiply it by two since we want to also include the same area under the right side of the tail. Remember that we are dealing with a double-sided hypothesis test, so we don't care whether the mean difference is positive or negative. We are only really interested in the absolute difference. 
+Calculating the p-value is tricky. Start by carefully going through the documentation by typing `?pt` in the console. 
 
-If `mean_diff > 0` we know that the incorrect area is given, since we need the area to the right of `mean_diff` in the tail (not the left). To fix this we can either call `pt(T_score, df,  lower.tail = FALSE)` which will then give the upper tail, or we can use `1 - pt(T_score, df)`. After that we still have to multiply the value by two.
+The actual p-value depends on the actual value of `T_score`. We know that `pt(T_score, df)` will give the area to the left of `T_score` for a t-distribution with degrees of freedom of `df`. If `T_score < 0` then the correct area is given by the function and we simply need to multiply it by two since we want to also include the same area under the right side of the tail. Remember that we are dealing with a double-sided hypothesis test, so we don't care whether the mean difference is positive or negative. We are only really interested in the absolute difference. 
+
+If `T_score > 0` we know that the incorrect area is given, since we need the area to the right of `T_score` in the tail (not the left). To fix this we can either call `pt(T_score, df,  lower.tail = FALSE)` which will then give the upper tail, or we can use `1 - pt(T_score, df)`. After that we still have to multiply the value by two.
 
 *** =pre_exercise_code
 ```{r}
@@ -625,12 +627,12 @@ test_object("df", undefined_msg = "Make sure to define a variable `df`.",
 test_object("p_value", undefined_msg = "Make sure to define a variable `p_value`.",
             incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the prescribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
 
-test_output_contains("p_value", incorrect_msg = "It's probably a good idea to actually view the `p_value` to see what it is, so update your code to print its value to the console. Knowing the `p_value` is important for decision support. For instance, what would happen if the `p_value = 0.50001`? Would we still want to not reject H0?.")
+test_output_contains("p_value", incorrect_msg = "We have to view the `p_value` to see what it is, so update your code to print its value to the console. Knowing the `p_value` is important for decision support. For instance, what would happen if `p_value = 0.50001`? Would we still want to not reject H0?.")
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the prescribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
             
 test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to actually view the `rejectH0` to see what the outcome of the test was, so update your code to print its value to the console. We need to know the outcome of the test to determine if there is a difference between the suppliers.")
 
-success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the next and last question we will again use a new sample and compute a confidence interval for the true mean difference and make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
+success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
 ```
