@@ -416,5 +416,31 @@ test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_d
 test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
             
-success_msg("Well done! By calculating the price difference per product we can now treat the differences as a single numerical variable, and apply the apporpriate statistical techniques. by using the `mean()`, `sd()` and `nrow()` functions, you were able to extract the sample statistics from the data necessary to manauly apply the methods for numerical inference. Before we perform more calculations, let's take a step back and see what is were are trying answer, and how we should answer it.")
+success_msg("Well done! By calculating the price difference per product we can now treat the differences as a single numerical variable, and apply the apporpriate statistical techniques. by using the `mean()`, `sd()` and `nrow()` functions, we were able to extract the sample statistics from the data necessary to manauly apply the methods for numerical inference. Before we perform more calculations, let's take a step back and see what is were are trying to achieve by performing inference on paired data.")
+```
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:638c133d39
+## How do we determine which company is better
+
+Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To copmare the companies we took a random sample of products and asked each company to provide a unit price quaote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
+
+*** =instructions
+
+- Take the mean of the product price differences. If the mean is less than 0 we know that Company A is cheaper. If the mean is more than 0 we know that Company B is cheaper. If the mean is zero we know the Companies are the same.
+- Draw a side-by-side boxplot of the prices of Copmany A and B and analyse the mediun price and variance. The company with the lowest medium price and lowest variance is the better company.
+- Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25st and 75th percentile values is the better company.
+- Conduct a hypothesis test using the price differences to determin if there is a significant price difference between the prices of Company A and B.
+- Conduct a hypothesis test using the prices from Copmany A and B to determin if there is a significant difference in mean price of Company A the mean price of Company B.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+
 ```
