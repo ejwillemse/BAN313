@@ -430,10 +430,11 @@ Recall from the problem description that we have to decide on which company to u
 - Take the mean of the product price differences. If the mean is less than 0 we know that Company A is cheaper. If the mean is more than 0 we know that Company B is cheaper. If the mean is zero we know the Companies are the same.
 - Draw a side-by-side boxplot of the prices of Copmany A and B and analyse the mediun price and variance. The company with the lowest medium price and lowest variance is the better company.
 - Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25st and 75th percentile values is the better company.
-- Conduct a hypothesis test using the price differences to determin if there is a significant price difference between the prices of Company A and B.
+- Conduct a hypothesis test using the price differences to determine if there is a significant price difference between the prices of Company A and B.
 - Conduct a hypothesis test using the prices from Copmany A and B to determin if there is a significant difference in mean price of Company A the mean price of Company B.
 
 *** =hint
+Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
 *** =pre_exercise_code
 ```{r}
@@ -442,5 +443,7 @@ Recall from the problem description that we have to decide on which company to u
 
 *** =sct
 ```{r}
-
+msg_bad <- "That is not correct."
+msg_success <- "Correct! We should do a hypothesis test to see if the sample data provides enough evidence in there being a difference between Company A and B products. Since we are dealing with a sample, we have to apply inference. We are also dealing with paired data, so we will look at the price differences, and not the prices directly.."
+test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
