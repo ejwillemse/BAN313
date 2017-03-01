@@ -113,13 +113,11 @@ test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_s
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`). First have a look at the data in the console using the `head(product_comparison)` command, thereafter answer the following:
 
 *** =instructions
-- How many products did we sample to get quotations for?
-- What is the sample mean for product prices from Company A?
-- What is the sample standard deviation for products price from Company A?
-- What is the sample mean for product prices from Company B?
-- What is the sample standard deviation for products price from Company B?
-
-Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
+1. How many products did we sample to get quotations for?
+2. What is the sample mean for product prices from Company A?
+3. What is the sample standard deviation for products price from Company A?
+4. What is the sample mean for product prices from Company B?
+5. What is the sample standard deviation for products price from Company B?
 
 *** =hint
 - Use `?nrow`, `?mean` and `?sd` to find out more about the functions that you can apply to answer the question.
@@ -292,8 +290,6 @@ After checking the conditions we need calculate the necessary sample statistics 
 3. Determine the number of samples and assign the answer to the variable `n`. 
 4. Use the number of samples in conjunction with the histogram to check if the distribution of the variable is near normal: assing your answer, which can either be `TRUE` or `FALSE` to the `normalConditionMet` variable.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
-
-Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
 *** =hint
 
