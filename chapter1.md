@@ -35,7 +35,7 @@ Just hit the 'Submit Answer'.
 
 *** =sample_code
 ```{r}
-#none
+
 ```
 
 *** =solution
