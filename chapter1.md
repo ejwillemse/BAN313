@@ -473,3 +473,126 @@ msg_bad <- "That is not correct."
 msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Copmanies is zero, meaning there prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient effidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
+
+
+
+--- type:NormalExercise lang:r xp:400 skills:1 key:803d9a69c1
+## Calculations for the hypothesis
+
+Our hypothesis are as follows:
+
+- H0: the mean price difference between Company A and Company B is zero,
+- HA: the mean price difference between Company A and Company B is not zero,
+
+and in simbolic form:
+
+- H0: `mu_diff = 0`,
+- HA: `mu_diff != 0`.
+
+Where `mu_diff` is the mean difference for the of the entire population. In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
+
+Since we are dealing with a new sample we will again have to calculate difference in prices per product, get the sample size, and calculate the mean and standard deviation of sample.
+
+Once we have the required sample statistics we need to determine how likely our observation or more in favour of the hypothesis is, under the assumption that the null hypothesis is true. This "likely-hood" is our p-value which we can compare against a significance level (alpha value). Since none were suppied we will use an alpha value of 0.05.
+
+Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the textbook.
+
+To calculate the p-value we will be using the `pt()` function, which gives the distribution function for the student t-distribution. To find out more about the function, type `?pt` in the console. Take note that if used by only supplying `x` and `df` the function, where `x` represents our sample mean, the function will return the probability of observing a value of less than `x` (that is the area under the curve to the left of `x`). Keep in mind that we are doing a double-sided hypothesis test, and we need to calculate the probability of observing a value more in favour of the alternative hypothesis. We therefore need to check whether `x` is positive or negative, calculate the correct area under the curve (that is to the left of `x` if it is negative, and to the right of `x` if it is positive) and multiply this value by 2 since we have a double-sided hypothesis test.
+
+To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself:
+
+*** =instructions
+
+1. Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. Assign your answers to the `n`, `price_diff`, `mean_diff` and `sd_diff` variables, same as before.
+2. Calculate the Standard Error of our sample mean and assign your answer to the `SE` variable.
+3. Calculate the T-score of the sample mean and assign your answer to the `T_score` variable.
+4. Calculate the degrees of freedom associated with our hypothesis test and assign your answer to the `df` variable.
+5. Calculate the p-value of our T-score using the `pt()` function and assign your answer to the `p_value` variable.
+6. Laslty, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+
+*** =hint
+
+Go through the previous exercises and carefully look at your calculations. The R formulas for the Standard Error, T-score and Degrees of Freedom are:
+
+```
+SE = sd_diff/sqrt(price_diff)
+T_score = mean_diff/SE
+df = n - 1
+```
+
+Calculating the p-value is tricky. Start by carefully going through `?pt`. The actual p-value depends on the actual value of `mean_diff`. We know that `pt(T_score, df)` will give the area to the left of `mean_diff` for a t-distribution with degrees of freedom of `df`. If `mean_diff < 0` then the correct area is given by the function and we simply need to multiply it by two since we want to also include the same area under the right side of the tail. Remember that we are dealing with a double-sided hypothesis test, so we don't care whether the mean difference is positive or negative. We are only really interested in the absolute difference. 
+
+If `mean_diff > 0` we know that the incorrect area is given, since we need the area to the right of `mean_diff` in the tail (not the left). To fix this we can either call `pt(T_score, df,  lower.tail = FALSE)` which will then give the upper tail, or we can use `1 - pt(T_score, df)`. After that we still have to multiply the value by two.
+
+*** =pre_exercise_code
+```{r}
+nProducts <- c(100, 200)
+price <- c(100, 10000)
+priceFracB <- c(1, 0.05)
+n <- runif(1, nProducts[1], nProducts[2])
+priceCompA <- round(runif(n, price[1], price[2]), 2)
+priceCompB <- round(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]), 2)
+productCode <- paste('#', round(runif(n, 10000, 99999),0), sep= "")
+
+product_comparison <- data.frame(productCode, priceCompA, priceCompB)
+
+rm(nProducts)
+rm(price)
+rm(priceFracB)
+rm(n)
+rm(productCode)
+rm(priceCompA)
+rm(priceCompB)
+```
+
+*** =sample_code
+```{r}
+# The product_comparison dataframe is available in your workspace. Remember to create and assign your answers to the correct variables as specified in the instructions. Where necessary, view the outcome of your calculation by printing them to the console. You also view the values of your variables by typing them in the console and pressing enter.
+
+# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. 
+
+# 2) Calculate the Standard Error of the sample mean. 
+
+# 3) Calculate the T-score of the sample mean.
+
+# 4) Calculate the degrees of freedom associated with our hypothesis test.
+
+# 5) Calculate the p-value of our T-score using the `pt()` function.
+
+# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis
+
+```
+
+*** =solution
+```{r}
+# Do not just view the answers. You will not have this option available in test and exams. You have to try and figure out the solutions on your own, otherwise you will do poorly in the tests.
+
+# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample, and create and assign your answers to the correct variables (this applies to all the following questions). 
+
+price_diff <- product_comparison$priceCompA - product_comparison$priceCompB
+n <- nrow(product_comparison)
+mean_diff <- mean(price_diff)
+s_diff <- sd(price_diff)
+
+# 2) Calculate the Standard Error of the sample mean. 
+
+SE <- s_diff/sqrt(n)
+
+# 3) Calculate the T-score of the sample mean.
+
+T_score <- mean_diff/SE
+
+# 4) Calculate the degrees of freedom associated with our hypothesis test.
+
+df = n - 1
+
+# 5) Calculate the p-value of our T-score using the `pt()` function.
+
+if(T_score < 0){p-value = 2*pt()}
+
+```
+
+*** =sct
+```{r}
+
+```
