@@ -497,7 +497,7 @@ Since we are dealing with a new sample we will again have to calculate differenc
 
 Once we have the required sample statistics we need to determine how likely our observation or more in favour of the hypothesis is, under the assumption that the null hypothesis is true. This "likely-hood" is our p-value which we can compare against a significance level (alpha value). Since none were supplied we will use an alpha value of 0.05.
 
-Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the textbook.
+Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
 To calculate the p-value we will be using the `pt()` function, which gives the distribution function for the student t-distribution. To find out more about the function, type `?pt` in the console. Take note that if used by only supplying `x` and `df` the function, where `x` represents our sample mean, the function will return the probability of observing a value of less than `x` (that is the area under the curve to the left of `x`). Keep in mind that we are doing a double-sided hypothesis test, and we need to calculate the probability of observing a value more in favour of the alternative hypothesis. We therefore need to check whether `x` is positive or negative, calculate the correct area under the curve (that is to the left of `x` if it is negative, and to the right of `x` if it is positive) and multiply this value by 2 since we have a double-sided hypothesis test.
 
@@ -571,7 +571,9 @@ rm(priceCompB)
 
 *** =solution
 ```{r}
-# Do not just view the answers. You will not have this option available in test and exams. You have to try and figure out the solutions on your own, otherwise you will do poorly in the tests.
+# Do not just view the answers!!!!!!! 
+
+# You will not have this option available in test and exams. You have to try and figure out the solutions on your own, otherwise you will do poorly in the tests.
 
 # 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample, and create and assign your answers to the correct variables (this applies to all the following questions). 
 
@@ -596,11 +598,11 @@ df = n - 1
 
 if(T_score < 0){p_value = 2*pt(T_score, df)}else{p_value = 2*(1-pt(T_score, df))}
 
-# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis
+# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis.
 
 rejectH0 <- p_value < 0.05
 
-# You can print whatever you need to view here
+# You can print whatever you need to view here. For advanced users, you can check if the answers make sense by using the t.test function. And nope, the answer the print part is not included in here. You will have to figure it out for yourself.
 
 ```
 
@@ -639,4 +641,98 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to actually view the `rejectH0` to see what the outcome of the test was, so update your code to print its value to the console. We need to know the outcome of the test to determine if there is a difference between the suppliers.")
 
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
+```
+
+
+
+--- type:NormalExercise lang:r xp:400 skills:1 key:de00830dd6
+## Calculating a confidence interval
+
+For the last question we are going to calculate a confidence interval, and then use that to determine if one company is better than the other, and if so, which one is better. We will reuse much of our previous calculations. To test whether you know how to apply the methods, available hints, instructions and error messages will be kept to a minimum. You can however consult previous exercises as well as [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), which contains all the formulas that you need to successfully answer this question.
+
+In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
+
+For this question, you need to manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. Type `?t.test` in the console to find out more about the function.
+
+*** =instructions
+
+1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low` 
+and the higher confidence interval value to `CI_high`.
+2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` and `chooseCompanyA` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
+3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level.
+*** =hint
+
+None. You have to figure this one out for yourself.
+
+*** =pre_exercise_code
+```{r}
+nProducts <- c(100, 200)
+price <- c(100, 10000)
+priceFracB <- c(1.1, 0.05)
+n <- runif(1, nProducts[1], nProducts[2])
+priceCompA <- round(runif(n, price[1], price[2]), 2)
+priceCompB <- round(priceCompA*rnorm(n, priceFracB[1], priceFracB[2]), 2)
+productCode <- paste('#', round(runif(n, 10000, 99999),0), sep= "")
+
+product_comparison <- data.frame(productCode, priceCompA, priceCompB)
+
+rm(nProducts)
+rm(price)
+rm(priceFracB)
+rm(n)
+rm(productCode)
+rm(priceCompA)
+rm(priceCompB)
+```
+
+*** =sample_code
+```{r}
+# You have a blank canvas, just make sure to assign your final answers to the correct variables.
+```
+
+*** =solution
+```{r}
+# Fine, if you want to know the final answer, here it is. Just remember that part of learning and understanding something is to figure how it works for yourself. And of course, you won't have this option in tests, exams and in industry. And just to nasty we have changed the answer up and calculated most of the stuff in a different way...
+
+CI_level <- 0.98
+pd <- product_comparison$priceCompA - product_comparison$priceCompB
+ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sqrt(var(pd)/nrow(product_comparison))
+CI_low <- mean(pd) - ME
+CI_high <- mean(pd) + ME
+
+CI <- c(mean(pd) - ME, mean(pd) + ME)
+
+if (CI[2] < 0)
+{
+    chooseCompanyA <- TRUE
+    chooseCompanyB <- FALSE
+}else if(CI[1] > 0){
+    chooseCompanyA <- FALSE
+    chooseCompanyB <- TRUE
+}else{
+    chooseCompanyA <- TRUE
+    chooseCompanyB <- TRUE    
+}
+
+t.test(x = product_comparison$priceCompA, y = product_comparison$priceCompB, alternative = "two.sided", paired = TRUE, conf.level = 0.98)
+```
+
+*** =sct
+```{r}
+test_function('nrow', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
+test_function('mean', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
+test_function('sd', args = "x", not_called_msg = "You have to do the calculations. You are missing some function calls to do so.")
+
+test_object("CI_low", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
+test_object("CI_high", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
+
+test_output_contains("CI_low", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
+test_output_contains("CI_high", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
+
+test_object("chooseCompanyA", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
+test_object("chooseCompanyB", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
+
+test_function('t.test', args = c("x", "y", "alternative", "paired", "conf.level"), not_called_msg = "How about using the `t.test` function to check your answer?", args_not_specified_msg = "You need to specify certain input arguments for the function. Have a look at the documentation. You need to set the input arguments to the correct value inside the function call. For example, `t.test(x = variableA, y = ...)`", incorrect_msg = "Some of the input arguments that you specified for the function is incorrect. Have a look at the documentation. For example, `t.test(x = variableA, y = ...)`")
+
+success_msg("Congratulations! You have successfully completed the chapter by applying inference for paired numerical data, and with the minimum amount of guidance, as will be the case in industry. Feel free to retry the chapter for practice.")
 ```
