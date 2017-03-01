@@ -239,7 +239,7 @@ test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_pr
 success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:5921b08b52
+--- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:23cc0a8c6e
 ## Requirements for working with paired data
 
 For the case study we wish to analyse paired numerical data.
