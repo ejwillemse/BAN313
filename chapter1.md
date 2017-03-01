@@ -444,6 +444,32 @@ Have a look at the case study background, shown in the first question, and the c
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "Correct! We should do a hypothesis test to see if the sample data provides enough evidence in there being a difference between Company A and B products. Since we are dealing with a sample, we have to apply inference. We are also dealing with paired data, so we will look at the price differences, and not the prices directly.."
+msg_success <- "Correct! We should do a hypothesis test to see if the sample data provide enough evidence of there being a difference between Company A and B products. Since we are dealing with a sample, we have to apply inference. We are also dealing with paired data, so we will look at the price differences, and not the prices directly. Before conducting the test, let's first setup the hypotheses."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
+```
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:71bd4684d4
+## Which is the correct null and alternative hypothesis for the case study problem:
+
+*** =instructions
+
+- H0: there is no difference between the prices of Company A and Company B, HA: there is a difference between the prices of Company A and Company B.
+- H0: there is no difference between the mean prices of Company A and Company B, HA: there is a difference between the average prices of Company A and Company B.
+- H0: the price differences between Company A and Company B is zero, HA: the price differences between Company A and Company B is not zero.
+- H0: the mean price difference between Company A and Company B is zero, HA: the mean price difference between Company A and Company B is zero.
+
+*** =hint
+Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "That is not correct."
+msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Copmanies is zero, meaning there prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient effidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. "
+test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
