@@ -588,11 +588,43 @@ df = n - 1
 
 # 5) Calculate the p-value of our T-score using the `pt()` function.
 
-if(T_score < 0){p-value = 2*pt()}
+if(T_score < 0){p_value = 2*pt(T_score, df)}else{p_value = 2*(1-pt(T_score, df))}
+
+# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis
+
+rejectH0 <- p_value < 0.05
 
 ```
 
 *** =sct
 ```{r}
+test_object("price_diff", undefined_msg = "Make sure to calculate the price difference per product and assigned your answer to `price_diff`. Also make sure that you calculated it as the price from Company A minus the price from Company B, and that you calculated it per product.")
 
+test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
+
+test_object("n", undefined_msg = "Make sure to define a variable `n`.",
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
+            
+test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
+            incorrect_msg = "Make sure that you calculated the mean price differencse correctly and assigned your answer to `mean_diff`.")
+            
+test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
+            
+test_object("SE", undefined_msg = "Make sure to define a variable `SE`.",
+            incorrect_msg = "Make sure that you calculated the standard error of the sample mean price differences correctly and assigned your answer to `SE`. Refer to the presribed textbook for the correct standard error formula to use.")
+            
+test_object("T_score", undefined_msg = "Make sure to define a variable `T_score`.",
+            incorrect_msg = "Make sure that you calculated the T-score of the sample mean price differences correctly and assigned your answer to `T_score`. Refer to the presribed textbook for the correct T-score formula to use.")
+
+test_object("df", undefined_msg = "Make sure to define a variable `df`.",
+            incorrect_msg = "Make sure that you calculated the degrees of freedom correctly  and assigned your answer to `df`. Refer to the presribed textbook for the correct degrees of freedom formula to use.")
+            
+test_object("p_value", undefined_msg = "Make sure to define a variable `p_value`.",
+            incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the presribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
+
+test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the presribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
+
+success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. You will do this in the last exercise with minimal instructions, hints and error messages.")
 ```
