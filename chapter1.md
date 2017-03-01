@@ -148,23 +148,23 @@ rm(priceCompB)
 ```{r}
 # The product_comparison dataframe is available in your workspace. 
 
-# 1) Find the number of products that we sampled and safe your answer to: n_products
+# 1) Find the number of products that we sampled and assign your answer to: n_products
 
 n_products <-
 
-# 2) Calculate the sample mean for product prices from Company A and safe your answer to: mean_price_A
+# 2) Calculate the sample mean for product prices from Company A and assign your answer to: mean_price_A
 
 mean_price_A <-
 
-# 3) Calculate the sample standard deviation for product prices from Company A and safe your answer to: mean_price_A
+# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: mean_price_A
 
 sd_price_A <-
 
-# 4) Calculate the sample mean for product prices from Company B and safe your answer to: mean_price_B
+# 4) Calculate the sample mean for product prices from Company B and assign your answer to: mean_price_B
 
 mean_price_B <-
 
-# 4) Calculate the sample standard deviation for product prices from Company B and safe your answer to: mean_price_B
+# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: mean_price_B
 
 sd_price_B <-
 
@@ -188,19 +188,19 @@ sd_price_B
 
 n_products <- nrow(product_comparison)
 
-# 2) Calculate the sample mean for product prices from Company A and safe your answer to: mean_price_A
+# 2) Calculate the sample mean for product prices from Company A and assign your answer to: mean_price_A
 
 mean_price_A <- mean(product_comparison$priceCompA)
 
-# 3) Calculate the sample standard deviation for product prices from Company A and safe your answer to: mean_price_A
+# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: mean_price_A
 
 sd_price_A <- sd(product_comparison$priceCompA)
 
-# 4) Calculate the sample mean for product prices from Company B and safe your answer to: mean_price_B
+# 4) Calculate the sample mean for product prices from Company B and assign your answer to: mean_price_B
 
 mean_price_B <- mean(product_comparison$priceCompB)
 
-# 4) Calculate the sample standard deviation for product prices from Company B and safe your answer to: mean_price_B
+# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: mean_price_B
 
 sd_price_B <- sd(product_comparison$priceCompB)
 
