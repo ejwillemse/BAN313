@@ -297,6 +297,10 @@ Make sure you get this part right before going to the next section since you wil
 
 *** =hint
 
+The only new component is to calculate the difference between the price of Company A and Company B per product, and store the result as a newly created vector.
+Recall the function `data.frame$variableName` returns a vector of the values of the `variableName` variable. Have a look at documentation on [vector arithmetics](http://www.r-tutor.com/r-introduction/vector/vector-arithmetics).
+
+
 *** =pre_exercise_code
 ```{r}
 nProducts <- c(100, 200)
