@@ -1,7 +1,7 @@
 title            : Industrial analysis using R
 instructors      :
  - elias.willemse@up.ac.za
-description      : "_Please note that this course is a work in progress, and that we are actively adding to and improving its contents._
+description      : "Please note that this course is a work in progress, and that we are actively adding to and improving its contents.
 
 A significant proportion of the systems with which the engineer is involved, is subjected to variation, and uncertainty while incomplete information is the rule rather than the exception. Knowledge of engineering statistics is of importance in these instances since it provides the tools for the effective handling and quantitative evaluation of the effect of these factors. Modelling is the principle method for evaluating industrial engineering designs, which in the face of uncertainty, requires the practical application of statistical methods and techniques.
 
