@@ -597,10 +597,12 @@ df = n - 1
 # 5) Calculate the p-value of our T-score using the `pt()` function.
 
 if(T_score < 0){p_value = 2*pt(T_score, df)}else{p_value = 2*(1-pt(T_score, df))}
+p_value
 
 # 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis.
 
 rejectH0 <- p_value < 0.05
+rejectH0
 
 # You can print whatever you need to view here. For advanced users, you can check if the answers make sense by using the t.test function. And nope, the answer the print part is not included in here. You will have to figure it out for yourself.
 
