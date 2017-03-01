@@ -279,7 +279,7 @@ Before we can apply inference for paired data, we need to calculate the differen
 - samples should be independent; and
 - the distribution of the variable should be near normal.
 
-We can assume the first condition holds since we took a random sample of product. For the second condition we need to analyse the distribution of the sample and specifically check for skewness, and then look at the number of samples that we have. If we less than 30 samples, then the sample distribution has to be nearly symmetrical. If we have more than 30 but less than 60 samples then moderate skewness can be tollerated, and if we have more then 60 samples then heady skewness can be tollorated.
+We can assume the first condition holds since we took a random sample of product. For the second condition we need to analyse the distribution of the sample and specifically check for skewness, and then look at the number of samples that we have. If we less than 30 samples, then the sample distribution has to be nearly symmetrical. If we have more than 30 but less than 60 samples then moderate skewness can be tolerated, and if we have more then 60 samples then heady skewness can be tolerated.
 
 After checking the conditions we need calculate the necessary sample statistics on the difference in product prices. We will reuse our code for doing so in the following exercises.
 
@@ -288,7 +288,7 @@ After checking the conditions we need calculate the necessary sample statistics 
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
 3. Determine the number of samples and assign the answer to the variable `n`. 
-4. Use the number of samples in conjunction with the histogram to check if the distribution of the variable is near normal: assing your answer, which can either be `TRUE` or `FALSE` to the `normalConditionMet` variable.
+4. Use the number of samples in conjunction with the histogram to check if the distribution of the variable is near normal: assign your answer, which can either be `TRUE` or `FALSE` to the `normalConditionMet` variable.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
 *** =hint
@@ -335,7 +335,7 @@ price_diff <-
 n <- 
 n
 
-# 4a) Use the sample distribution and number of samples to determine if the noraml condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
+# 4a) Use the sample distribution and number of samples to determine if the normal condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
 
 
 
@@ -374,7 +374,7 @@ hist(price_diff)
 n <- nrow(product_comparison)
 n
 
-# 4) Use the sample distribution and number of samples to determine if the noraml condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
+# 4) Use the sample distribution and number of samples to determine if the normal condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
 
 normalConditionMet <- TRUE
 
@@ -411,27 +411,27 @@ test_object("normalConditionMet", undefined_msg = "Make sure to define a variabl
             incorrect_msg = "You should base your answer on histogram and number samples and assign it as either `TRUE` or `FALSE` to `normalConditionMet`.")
             
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
-            incorrect_msg = "Make sure that you calculated the mean price differencse correctly and assigned your answer to `mean_diff`.")
+            incorrect_msg = "Make sure that you calculated the mean price differences correctly and assigned your answer to `mean_diff`.")
             
 test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
             
-success_msg("Well done! By calculating the price difference per product we can now treat the differences as a single numerical variable, and apply the apporpriate statistical techniques. by using the `mean()`, `sd()` and `nrow()` functions, we were able to extract the sample statistics from the data necessary to manauly apply the methods for numerical inference. Before we perform more calculations, let's take a step back and see what is were are trying to achieve by performing inference on paired data.")
+success_msg("Well done! By calculating the price difference per product we can now treat the differences as a single numerical variable, and apply the appropriate statistical techniques. by using the `mean()`, `sd()` and `nrow()` functions, we were able to extract the sample statistics from the data necessary to manually apply the methods for numerical inference. Before we perform more calculations, let's take a step back and see what is were are trying to achieve by performing inference on paired data.")
 ```
 
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:638c133d39
 ## How do we determine which company is better
 
-Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To copmare the companies we took a random sample of products and asked each company to provide a unit price quaote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
+Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To compare the companies we took a random sample of products and asked each company to provide a unit price quote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
 
 *** =instructions
 
 - Take the mean of the product price differences. If the mean is less than 0 we know that Company A is cheaper. If the mean is more than 0 we know that Company B is cheaper. If the mean is zero we know the Companies are the same.
-- Draw a side-by-side boxplot of the prices of Copmany A and B and analyse the mediun price and variance. The company with the lowest medium price and lowest variance is the better company.
-- Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25st and 75th percentile values is the better company.
+- Draw a side-by-side boxplot of the prices of Company A and B and analyse the median price and variance. The company with the lowest medium price and lowest variance is the better company.
+- Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25th and 75th percentile values is the better company.
 - Conduct a hypothesis test using the price differences to determine if there is a significant price difference between the prices of Company A and B.
-- Conduct a hypothesis test using the prices from Copmany A and B to determin if there is a significant difference in mean price of Company A the mean price of Company B.
+- Conduct a hypothesis test using the prices from Company A and B to determine if there is a significant difference in mean price of Company A the mean price of Company B.
 
 *** =hint
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
@@ -470,7 +470,7 @@ Have a look at the case study background, shown in the first question, and the c
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Copmanies is zero, meaning there prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient effidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
+msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Companies is zero, meaning there prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient evidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
@@ -484,7 +484,7 @@ Our hypothesis are as follows:
 - H0: the mean price difference between Company A and Company B is zero,
 - HA: the mean price difference between Company A and Company B is not zero,
 
-and in simbolic form:
+and in symbolic form:
 
 - H0: `mu_diff = 0`,
 - HA: `mu_diff != 0`.
@@ -493,7 +493,7 @@ Where `mu_diff` is the mean difference for the of the entire population. In this
 
 Since we are dealing with a new sample we will again have to calculate difference in prices per product, get the sample size, and calculate the mean and standard deviation of sample.
 
-Once we have the required sample statistics we need to determine how likely our observation or more in favour of the hypothesis is, under the assumption that the null hypothesis is true. This "likely-hood" is our p-value which we can compare against a significance level (alpha value). Since none were suppied we will use an alpha value of 0.05.
+Once we have the required sample statistics we need to determine how likely our observation or more in favour of the hypothesis is, under the assumption that the null hypothesis is true. This "likely-hood" is our p-value which we can compare against a significance level (alpha value). Since none were supplied we will use an alpha value of 0.05.
 
 Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the textbook.
 
@@ -606,25 +606,27 @@ test_object("n", undefined_msg = "Make sure to define a variable `n`.",
             incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
             
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
-            incorrect_msg = "Make sure that you calculated the mean price differencse correctly and assigned your answer to `mean_diff`.")
+            incorrect_msg = "Make sure that you calculated the mean price difference correctly and assigned your answer to `mean_diff`.")
             
 test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
             
 test_object("SE", undefined_msg = "Make sure to define a variable `SE`.",
-            incorrect_msg = "Make sure that you calculated the standard error of the sample mean price differences correctly and assigned your answer to `SE`. Refer to the presribed textbook for the correct standard error formula to use.")
+            incorrect_msg = "Make sure that you calculated the standard error of the sample mean price differences correctly and assigned your answer to `SE`. Refer to the prescribed textbook for the correct standard error formula to use.")
             
 test_object("T_score", undefined_msg = "Make sure to define a variable `T_score`.",
-            incorrect_msg = "Make sure that you calculated the T-score of the sample mean price differences correctly and assigned your answer to `T_score`. Refer to the presribed textbook for the correct T-score formula to use.")
+            incorrect_msg = "Make sure that you calculated the T-score of the sample mean price differences correctly and assigned your answer to `T_score`. Refer to the prescribed textbook for the correct T-score formula to use.")
 
 test_object("df", undefined_msg = "Make sure to define a variable `df`.",
-            incorrect_msg = "Make sure that you calculated the degrees of freedom correctly  and assigned your answer to `df`. Refer to the presribed textbook for the correct degrees of freedom formula to use.")
+            incorrect_msg = "Make sure that you calculated the degrees of freedom correctly  and assigned your answer to `df`. Refer to the prescribed textbook for the correct degrees of freedom formula to use.")
             
 test_object("p_value", undefined_msg = "Make sure to define a variable `p_value`.",
-            incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the presribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
+            incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the prescribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
+
+
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
-            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the presribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the prescribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
 
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. You will do this in the last exercise with minimal instructions, hints and error messages.")
 ```
