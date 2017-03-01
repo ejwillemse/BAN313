@@ -658,7 +658,7 @@ For this question, you need to manually calculate a 98% confidence interval to c
 
 1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low` 
 and the higher confidence interval value to `CI_high`.
-2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` and `chooseCompanyA` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
+2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` AND `chooseCompanyB` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
 3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level.
 *** =hint
 
@@ -733,7 +733,7 @@ test_output_contains("CI_high", incorrect_msg = "You need to print some of your 
 test_object("chooseCompanyA", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
 test_object("chooseCompanyB", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
 
-test_function('t.test', args = c("x", "y", "alternative", "paired", "conf.level"), not_called_msg = "How about using the `t.test` function to check your answer?", args_not_specified_msg = "You need to specify certain input arguments for the function. Have a look at the documentation. You need to set the input arguments to the correct value inside the function call. For example, `t.test(x = variableA, y = ...)`", incorrect_msg = "Some of the input arguments that you specified for the function is incorrect. Have a look at the documentation. For example, `t.test(x = variableA, y = ...)`")
+test_function('t.test', args = c("x", "y", "alternative", "paired", "conf.level"), not_called_msg = "How about using the `t.test` function to check your answer?", args_not_specified_msg = "You need to specify certain input arguments for the function. Have a look at the documentation and figure out which input arguments to use. You also need to set the input arguments to the correct value inside the function call. For example, `t.test(x = variableA, y = ...)`", incorrect_msg = "Some of the input arguments that you specified for the function is incorrect. Have a look at the documentation and figure out which input arguments to use. For example, `t.test(x = variableA, y = ...)`")
 
-success_msg("Congratulations! You have successfully completed the chapter by applying inference for paired numerical data, and with the minimum amount of guidance, as will be the case in industry. Feel free to retry the chapter for practice.")
+success_msg("Congratulations! You have successfully completed the chapter by applying inference for paired numerical data. In the last exercise you were able to correctly apply the methods with the minimum amount of guidance, as will be the case in industry. You were also able to use the `t.test` function to perform the analysis. Feel free to retry the chapter for practice.")
 ```
