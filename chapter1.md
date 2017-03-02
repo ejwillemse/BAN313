@@ -158,7 +158,7 @@ n_products <-
 
 mean_price_A <-
 
-# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: mean_price_A
+# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: sd_price_A
 
 sd_price_A <-
 
@@ -166,7 +166,7 @@ sd_price_A <-
 
 mean_price_B <-
 
-# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: mean_price_B
+# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: sd_price_B
 
 sd_price_B <-
 
@@ -194,7 +194,7 @@ n_products <- nrow(product_comparison)
 
 mean_price_A <- mean(product_comparison$priceCompA)
 
-# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: mean_price_A
+# 3) Calculate the sample standard deviation for product prices from Company A and assign your answer to: sd_price_A
 
 sd_price_A <- sd(product_comparison$priceCompA)
 
@@ -202,7 +202,7 @@ sd_price_A <- sd(product_comparison$priceCompA)
 
 mean_price_B <- mean(product_comparison$priceCompB)
 
-# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: mean_price_B
+# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: sd_price_B
 
 sd_price_B <- sd(product_comparison$priceCompB)
 
