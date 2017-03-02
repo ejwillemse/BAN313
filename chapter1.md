@@ -812,7 +812,9 @@ rm(priceCompB)
 
 *** =sample_code
 ```{r}
-# You have a blank canvas, just make sure to assign your final answers to the correct variables. And DON'T overwrite existing functions when creating new variables. For example, mean = mean(x) will basically make the program crash, since you have no over written the mean function with the actual mean value of x. Don't do it.
+# You have a blank canvas, just make sure to assign your final answers to the correct variables.
+
+#Just DON'T overwrite existing functions when creating new variables. For example, mean = mean(x) will basically make the program crash, since you have now over-written R's mean function with the actual mean value of x. Don't do it.
 ```
 
 *** =solution
