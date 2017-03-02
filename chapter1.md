@@ -424,7 +424,7 @@ success_msg("Well done! By calculating the price difference per product we can n
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:638c133d39
+--- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:638c133d39
 ## How do we determine which company is better
 
 Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To compare the companies we took a random sample of products and asked each company to provide a unit price quote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
@@ -453,7 +453,7 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, m
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:71bd4684d4
+--- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:71bd4684d4
 ## Setting up the hypotheses
 
 Which is the correct null and alternative hypothesis for the case study problem:
@@ -480,7 +480,7 @@ msg_success <- "That is correct! Under the null-hypothesis we will assume that t
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
---- type:NormalExercise lang:r xp:25 skills:1 key:b5c98f6548
+--- type:NormalExercise lang:r xp:100 skills:1 key:b5c98f6548
 ## Overview of R's `pnorm` and `pt` functions
 
 To conduct the hypothesis test semi-manually we need to do the following:
@@ -619,7 +619,7 @@ Once we have the required sample statistics we need to determine how likely our 
 
 Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
-To calculate the p-value we will be using the `pt()` function, which gives the distribution function for the student t-distribution. To find out more about the function, type `?pt` in the console. Take note that if used by only supplying `x` and `df` the function, where `x` represents our sample mean, the function will return the probability of observing a value of less than `x` (that is the area under the curve to the left of `x`). Keep in mind that we are doing a double-sided hypothesis test, and we need to calculate the probability of observing a value more in favour of the alternative hypothesis. We therefore need to check whether `x` is positive or negative, calculate the correct area under the curve (that is to the left of `x` if it is negative, and to the right of `x` if it is positive) and multiply this value by 2 since we have a double-sided hypothesis test.
+To calculate the p-value we will be using the `pt()` function, as discribed in the previous exercise. 
 
 To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself:
 
