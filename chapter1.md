@@ -7,11 +7,13 @@ For the case study, best means cheapest. To compare the vendors we will rely on 
 --- type:NormalExercise lang:r xp:0 skills:1 key:1c5a628f8f
 ## Background
 
+In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other.
+
 A critical component of supply chain management is building and maintaining an effective relationship with the companies within your supply chain. Choosing which companies to do business with is also an important component.
 
-For this Case Study we are employed by a manufacturing company we have to decide which supplier to partner with to supplying materials for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires different parts. We therefore need to choose a supplier that has a very broad range of products available, and with the ability to provide products upon request that are currently not in their catalogue. We do not know how much the company may charge for future products.
+For this Case Study we are employed by a manufacturing company and we have to decide which supplier to partner with. The supplier has to supply components for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires new components. We therefore need to choose a supplier that has a very broad range of products available, and that has the ability to provide products upon request that are currently not in their catalogue. We do not know how much the company may charge for future products.
 
-Currently there are only two suppliers, referred to as Company A and B, to choose from. To compare the companies we have taken a random sample of our current input products, and asked both companies to provide a unit-price for each of the products. We will use this data to infer if one company is better than the other.
+Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partnet with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. THe goal is to use this data to infer if one company is better than the other.
 
 Please take note that the data used for this chapter is randomly generated and will change:
 
