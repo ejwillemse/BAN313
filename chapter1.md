@@ -480,8 +480,59 @@ msg_success <- "That is correct! Under the null-hypothesis we will assume that t
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
+--- type:NormalExercise lang:r xp:25 skills:1 key:b5c98f6548
+## Overview of R's `pnorm` and `pt` functions
 
+To conduct the hypothesis test semi-manually we need to do the following:
 
+1. Calculate the Standard Error (SE) of our sample statistics using an appropriate SE formula.
+2. Calculate the T-score for our sample mean when dealing with numerical data, and the Z-score for our proportion when dealing with categorical data.
+3. Find the p-value of the T-score or Z-score.
+4. Compare the p-value to our alpha value and conclude the hypothesis test.
+
+To find the p-value we can use probability tables. The only problem with this approach is that if we were to get a new sample, we will have to manually look-up the p-value. An advantage of writing a program for the hypothesis test is that it should automate our calculations. We therefore have to find a better way to determine the p-value, ideally using R's built in functions.
+
+The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical z or t value. These values are determined based on the required confidence level, and for the critical t value, by the degrees of freedom. Here we also want to automatically get the critical z or t value using R's built in function, instead of relying on distribution tables or external sources.
+
+To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the t-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console. 
+
+First, we will consider `pnorm` to calculate the p-value. At a minimums, `pnorm(Z_score)` takes the Z-score (`Z_score`) of our observed mean, and returns the probability of obtaining a Z-score of less than that value. It will thus give the area to the left of the Z-score under the curve. If `Z_score <- -1.1` then `pnorm(Z_score) = 0.136`. This means that the probability of obtaining a Z-score of less than -1.1 is about to 0.136. 
+
+Will `pnorm(Z_score)` always give us our p-value for our hypothesis test? No it won't. It depends on our hypothesis test and which area under the normal curve we are interested in. For a double-sided hypothesis test it becomes a bit more tricky. Here we are interested in observing a similar difference from the assumed mean under H0, and we don't care if the difference is positive or negative. We therefore have to look at both the left and right tail areas of our Z-score. If `Z_score <- -1.1`, then `pnorm(Z_score) = 0.136`. But we also want to find the probability of having a Z-score of _greater_ than 1.1 and add this to the previous value. Since the normal distribution is symmetrical we know that P(Z-score < -1.1) = P(Z-score > 1.1), so the p-value is going to be equal to `2*pnorm(Z_score) = 0.272`. But what happens if `Z_score <- 2.1`? Now `2*pnorm(Z_score) = 1.964`, which means our p-value is greater than 1, _which is impossible_! So why is this calculation wrong? 
+
+Remember that `pnorm(Z_score)` returns the probability of obtaining a Z-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the p-value. To get the right-tail area under the normal curve for a positive Z-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the p-value depends on whether our Z-score is positive or negative. For a single-sided hypothesis test it will depend on whether our HA states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the t-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the critical T-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual p-value depends on the hypotheses. 
+
+As an exercise, calculate the p-value for the following scenarios:
+
+*** =instructions
+
+1. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 15.
+2. Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23.
+3. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89.
+4. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10.
+5. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
 --- type:NormalExercise lang:r xp:400 skills:1 key:803d9a69c1
 ## Conducting the hypothesis test
 
@@ -514,7 +565,7 @@ To successfully complete this lab, do the following, and note that you have to d
 3. Calculate the T-score of the sample mean and assign your answer to the `T_score` variable.
 4. Calculate the degrees of freedom associated with our hypothesis test and assign your answer to the `df` variable.
 5. Calculate the p-value of our T-score using the `pt()` function and assign your answer to the `p_value` variable.
-6. Laslty, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+6. Lastly, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
 *** =hint
 
@@ -703,7 +754,7 @@ rm(priceCompB)
 CI_level <- 0.98
 
 pd <- product_comparison$priceCompA - product_comparison$priceCompB
-ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sd(pd)/sqrt(nrow(product_comparison))
+ME <- round(qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sd(pd)/sqrt(nrow(product_comparison)),2)
 CI_low <- mean(pd) - ME
 CI_high <- mean(pd) + ME
 
