@@ -515,7 +515,7 @@ As an exercise, calculate the p-value for the following scenarios:
 2. Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
 3. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
 4. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
-5. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+5. Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 *** =hint
 
@@ -549,7 +549,7 @@ p_value_3 <-
 
 p_value_4 <-
 
-# 5) Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+# 5) Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 p_value_5 <-
 
@@ -575,9 +575,9 @@ p_value_3 <- 1-pt(2.4, 89)
 
 p_value_4 <-  1-pt(-1.5, 10)
 
-# 5) Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+# 5) Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
-p_value_5 <- 2*(1 - pt(2.3, 23))
+p_value_5 <- 2*pt(-3.3, 23)
 
 ```
 
