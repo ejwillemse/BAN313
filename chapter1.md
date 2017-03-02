@@ -619,7 +619,7 @@ Once we have the required sample statistics we need to determine how likely our 
 
 Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
-To calculate the p-value we will be using the `pt()` function, as discribed in the previous exercise. 
+To calculate the p-value we will be using the `pt()` function, as described in the previous exercise. 
 
 To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself:
 
@@ -776,14 +776,14 @@ In this exercise we will use a _new_ sample of products and their prices from Co
 
 For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Note that the you have to use R's built in functions to calculate the critical t-value for the margin of error. You cannot use the probability tables. [This website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) illustrates how to do so in R. Take special note of the required confidence levels in the examples, and what they then put into the R functions. There is some manipulation that takes place first.
 
-Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealinig wiht paired data. 
+Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data. 
 
 *** =instructions
 
 1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low` 
-and the higher confidence interval value to `CI_high`. Refer to [this website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) which illustrates how to calculate Confindence Intervals in R.
+and the higher confidence interval value to `CI_high`. Refer to [this website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) which illustrates how to calculate Confidence Intervals in R.
 2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` AND `chooseCompanyB` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
-3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealinig wiht paired data. 
+3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data. 
 
 *** =hint
 
