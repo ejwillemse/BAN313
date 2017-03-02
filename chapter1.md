@@ -502,17 +502,27 @@ Will `pnorm(Z_score)` always give us our p-value for our hypothesis test? No it 
 
 Remember that `pnorm(Z_score)` returns the probability of obtaining a Z-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the p-value. To get the right-tail area under the normal curve for a positive Z-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the p-value depends on whether our Z-score is positive or negative. For a single-sided hypothesis test it will depend on whether our HA states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the t-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the critical T-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual p-value depends on the hypotheses. 
 
+If you still don't quite understand how it works, have a look at:
+
+- [this website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) that explains the concept of calculating the `p-value` 
+- [this website](http://www.cyclismo.org/tutorial/R/pValues.html) which shows how the p-value can be calculated in R.
+
 As an exercise, calculate the p-value for the following scenarios:
 
 *** =instructions
 
-1. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 15.
-2. Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23.
-3. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89.
-4. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10.
-5. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23.
+1. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
+2. Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
+3. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
+4. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
+5. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 *** =hint
+
+Have a look at the recommended websites.
+
+[This website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) explains the concept in more detail. [This website](http://www.cyclismo.org/tutorial/R/pValues.html) shows how the p-value can be calculated in R.
+
 
 *** =pre_exercise_code
 ```{r}
@@ -521,17 +531,72 @@ As an exercise, calculate the p-value for the following scenarios:
 
 *** =sample_code
 ```{r}
+# Use the pt function to calculate p-values for the following:
+
+# 1) Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 15. Assign your answer to p_value_1.
+
+p_value_1 <-
+
+# 2) Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23. Assign your answer to p_value_2.
+
+p_value_2 <-
+
+# 3) Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89. Assign your answer to p_value_3.
+
+p_value_3 <-
+
+# 4) Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
+
+p_value_4 <-
+
+# 5) Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+
+p_value_5 <-
 
 ```
 
 *** =solution
 ```{r}
+# Use the pt function to calculate p-values for the following:
+
+# 1) Double-sided hypothesis where the T-score is -2.3 and the degrees of freedom is 15. Assign your answer to p_value_1.
+
+p_value_1 <- 2*pt(-2.3, 15)
+
+# 2) Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23. Assign your answer to p_value_2.
+
+p_value_2 <-  pt(-1.1, 23)
+
+# 3) Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89. Assign your answer to p_value_3.
+
+p_value_3 <- 1-pt(2.4, 89)
+
+# 4) Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
+
+p_value_4 <-  1-pt(-1.5, 10)
+
+# 5) Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+
+p_value_5 <- 2*(1 - pt(2.3, 23))
 
 ```
 
 *** =sct
 ```{r}
+test_object("p_value_1", undefined_msg = "Make sure to define a variable `p_value_1`.",
+            incorrect_msg = "Make sure that you calculated the `p_value_1` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.") 
+            
+test_object("p_value_2", undefined_msg = "Make sure to define a variable `p_value_2`.",
+            incorrect_msg = "Make sure that you calculated the `p_value_2` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.") 
 
+test_object("p_value_3", undefined_msg = "Make sure to define a variable `p_value_3`.",
+            incorrect_msg = "Make sure that you calculated the `p_value_3` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.") 
+            
+test_object("p_value_4", undefined_msg = "Make sure to define a variable `p_value_4`.",
+            incorrect_msg = "Make sure that you calculated the `p_value_4` correctly, and take note of of the sign of the T-score and the alternative hypothesis statement.") 
+            
+test_object("p_value_5", undefined_msg = "Make sure to define a variable `p_value_5`.",
+            incorrect_msg = "Make sure that you calculated the `p_value_5` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.") 
 ```
 --- type:NormalExercise lang:r xp:400 skills:1 key:803d9a69c1
 ## Conducting the hypothesis test
