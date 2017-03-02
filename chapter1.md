@@ -20,7 +20,7 @@ Please take note that the data used for this chapter is randomly generated and w
 - each time the chapter is attempted; and
 - when moving from one exercise to the next.
 
-When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods if 
+When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
 To continue with this chapter, hit the 'Submit Answer' button.
 
