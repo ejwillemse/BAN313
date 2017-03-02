@@ -817,7 +817,7 @@ rm(priceCompB)
 
 *** =solution
 ```{r}
-# Fine, if you want to know the final answer, here it is. Just remember that part of learning and understanding something is to figure how it works for yourself. And of course, you won't have this option in tests, exams and in industry. And just to nasty we have changed the answer up and calculated most of the stuff in a different way...
+# Fine, if you want to know the final answer, here it is. Just remember that part of learning and understanding something is to figure out how it works for yourself. And of course, you won't have a show answer option in tests, exams and in industry. Just to be nasty we have calculated most of the stuff in a different way...
 
 CI_level <- 0.98
 
