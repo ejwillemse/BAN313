@@ -13,7 +13,7 @@ A critical component of supply chain management is building and maintaining an e
 
 For this Case Study we are employed by a manufacturing company and we have to decide which supplier to partner with. The supplier has to supply components for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires new components. We therefore need to choose a supplier that has a very broad range of products available, and that has the ability to provide products upon request that are currently not in their catalogue. We do not know how much the company may charge for future products.
 
-Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partnet with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. THe goal is to use this data to infer if one company is better than the other.
+Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partner with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. THe goal is to use this data to infer if one company is better than the other.
 
 Please take note that the data used for this chapter is randomly generated and will change:
 
