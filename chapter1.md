@@ -821,7 +821,7 @@ rm(priceCompB)
 CI_level <- 0.98
 
 pd <- product_comparison$priceCompA - product_comparison$priceCompB
-ME <- round(qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sd(pd)/sqrt(nrow(product_comparison)),2)
+ME <- qt((1-CI_level)/2, nrow(product_comparison) - 1, lower.tail = FALSE)*sd(pd)/sqrt(nrow(product_comparison))
 CI_low <- mean(pd) - ME
 CI_high <- mean(pd) + ME
 
