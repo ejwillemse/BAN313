@@ -13,12 +13,14 @@ A critical component of supply chain management is building and maintaining an e
 
 For this Case Study we are employed by a manufacturing company and we have to decide which supplier to partner with. The supplier has to supply components for our wide range of solar powered products. To complicate matters, the product range is continuously changing, and each new product requires new components. We therefore need to choose a supplier that has a very broad range of products available, and that has the ability to provide products upon request that are currently not in their catalogue. We do not know how much the company may charge for future products.
 
-Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partner with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. THe goal is to use this data to infer if one company is better than the other.
+Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partner with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. The goal is to use this data to infer if one company is better than the other.
 
 Please take note that the data used for this chapter is randomly generated and will change:
 
 - each time the chapter is attempted; and
 - when moving from one exercise to the next.
+
+When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods if 
 
 To continue with this chapter, hit the 'Submit Answer' button.
 
@@ -290,7 +292,7 @@ After checking the conditions we need calculate the necessary sample statistics 
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
 3. Determine the number of samples and assign the answer to the variable `n`. 
-4. Look the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
+4. Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
 *** =hint
