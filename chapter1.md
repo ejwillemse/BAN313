@@ -433,7 +433,7 @@ Recall from the problem description that we have to decide on which company to u
 - Draw a side-by-side boxplot of the prices of Company A and B and analyse the median price and variance. The company with the lowest medium price and lowest variance is the better company.
 - Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25th and 75th percentile values is the better company.
 - Conduct a hypothesis test using the price differences to determine if there is a significant price difference between the prices of Company A and B.
-- Conduct a hypothesis test using the prices from Company A and B to determine if there is a significant difference in mean price of Company A the mean price of Company B.
+- Conduct a hypothesis test using the prices from Company A and B to determine if there is a significant difference in the mean price of Company A and the mean price of Company B.
 
 *** =hint
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
@@ -461,7 +461,7 @@ Which is the correct null and alternative hypothesis for the case study problem:
 - H0: there is no difference between the prices of Company A and Company B, HA: there is a difference between the prices of Company A and Company B.
 - H0: there is no difference between the mean prices of Company A and Company B, HA: there is a difference between the average prices of Company A and Company B.
 - H0: the price differences between Company A and Company B is zero, HA: the price differences between Company A and Company B is not zero.
-- H0: the mean price difference between Company A and Company B is zero, HA: the mean price difference between Company A and Company B is not zero.
+- H0: the mean of price differences between Company A and Company B is zero, HA: the mean of price differences between Company A and Company B is not zero.
 
 *** =hint
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
