@@ -774,14 +774,16 @@ For the last question we are going to calculate a confidence interval, and then 
 
 In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
 
-For this question, you need to manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. Type `?t.test` in the console to find out more about the function.
+For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Note that the you have to use R's built in functions calculate the critical t-value for the margin of error. You cannot use the probability tables. [This website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) illustrates how to do so in R. Take special note of the required confidence levels in the examples, and what they then put into the R functions.
+
+Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealinig wiht paired data. 
 
 *** =instructions
 
 1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low` 
-and the higher confidence interval value to `CI_high`.
+and the higher confidence interval value to `CI_high`. Refer to [this website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) which illustrates how to calculate Confindence Intervals in R.
 2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` AND `chooseCompanyB` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
-3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level.
+3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealinig wiht paired data. 
 *** =hint
 
 None. You have to figure this one out for yourself.
@@ -852,8 +854,8 @@ test_function('sd', args = "x", not_called_msg = "You have to semi-manually do t
 test_object("CI_low", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
 test_object("CI_high", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
 
-test_output_contains("CI_low", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
-test_output_contains("CI_high", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
+#test_output_contains("CI_low", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
+#test_output_contains("CI_high", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
 
 test_object("chooseCompanyA", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
 test_object("chooseCompanyB", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
