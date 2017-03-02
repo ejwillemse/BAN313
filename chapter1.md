@@ -290,7 +290,7 @@ After checking the conditions we need calculate the necessary sample statistics 
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
 3. Determine the number of samples and assign the answer to the variable `n`. 
-4. Use the number of samples in conjunction with the histogram to check if the distribution of the variable is near normal: assign your answer, which can either be `TRUE` or `FALSE` to the `normalConditionMet` variable.
+4. Look the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
 *** =hint
@@ -337,7 +337,7 @@ price_diff <-
 n <- 
 n
 
-# 4a) Use the sample distribution and number of samples to determine if the normal condition has been met. Assign your TRUE or FALSE answer to:  normalConditionMet
+# 4a) Look at the sample distribution and number of samples to decide if the normal condition has been met. If you decide it is near-normal set: normalConditionMet <- TRUE. If not set: `normalConditionMet <- FALSE`.
 
 
 
@@ -622,8 +622,8 @@ test_object("n", undefined_msg = "Make sure to define a variable `n`.",
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
             incorrect_msg = "Make sure that you calculated the mean price difference correctly and assigned your answer to `mean_diff`.")
             
-test_object("sd_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
-            incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
+test_object("sd_diff", undefined_msg = "Make sure to define a variable `sd_diff`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `sd_diff`.")
             
 test_object("SE", undefined_msg = "Make sure to define a variable `SE`.",
             incorrect_msg = "Make sure that you calculated the standard error of the sample mean price differences correctly and assigned your answer to `SE`. Refer to the prescribed textbook for the correct standard error formula to use.")
