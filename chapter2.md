@@ -455,7 +455,7 @@ Now that we know that `length_m` has the strongest relationship with `time_hr` w
 
 *** =instructions
 
-1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
 2. View the output of the model in the console.
 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 
@@ -483,30 +483,30 @@ rm(time_hr)
 
 *** =sample_code
 ```{r}
-# 1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
 
 
 
-# 2. View the output of the model in the console.
+#2. View the output of the model in the console.
 
 
 
-# 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+#3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 
 
 ```
 
 *** =solution
 ```{r}
-# 1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
 
 fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
 
-# 2. View the output of the model in the console.
+#2. View the output of the model in the console.
 
 fit
 
-# 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+#3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 
 plot(boatManufacturing$length_m, boatManufacturing$time_hr)
 abline(fit)
@@ -523,7 +523,7 @@ test_output_contains("fit", incorrect_msg = "You did not view the output of the 
 test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
              incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
              
-test_function("abline", args = c("a", "b"), not_called_msg = "Add the linear regression line to the plot.",
+test_function("abline", not_called_msg = "Add the linear regression line to the plot.",
              incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
              
 success_msg("Correct! By using the `lm()` function we now have the least-squared linear regression line for `length_m` and `time_hr` which we can now use to predict the time required to manufacture a yacht, based on its required length. However, before we can use the linear regression line we first need to check certain conditions.")
