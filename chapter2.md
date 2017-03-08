@@ -1,12 +1,12 @@
 --- 
 title_meta  : Case study 5
 title       : Case study 5 - Yacht production planning
-description : In this case study we will try and predict the production time of luxary yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
+description : In this case study we will try and predict the production time of luxury yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
 
 --- type:NormalExercise lang:r xp:0 skills:1 key:ec139ff825
 ## Background
 
-In this case study we will try and predict the production time of luxary yachts using data on previous productions. 
+In this case study we will try and predict the production time of luxury yachts using data on previous productions. 
 Our objective is to develop a predictive model to be used for production planning. 
 To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
 
@@ -16,9 +16,9 @@ A critical component of manufacturing is production planning, which includes, am
 2. Scheduling the work to be conducted in the facility, including the purchase and delivery of materials.
 3. Setting up and delivering production orders to clients.
 
-We are responsible for production planning at luxary yachts manufacturing company. 
-Given the uniques of our products, our production operates on the produce-to-order prinicple, whereby manufacturing only starts once an order has been placed for a yacht. 
-Clients are also in full control of the yacht specifications, and can decide on the size of the yacht, its interior and a bunch of other custimisations.
+We are responsible for production planning at luxury yachts manufacturing company. 
+Given the uniques of our products, our production operates on the produce-to-order principle, whereby manufacturing only starts once an order has been placed for a yacht. 
+Clients are also in full control of the yacht specifications, and can decide on the size of the yacht, its interior and a bunch of other customisations.
 As a result, each order is unique and has its own materials and manufacturing requirements.
 To manufacture the different yachts, we have a general purpose yacht-building facility, allowing us to build any type of yacht.
 The only-limitation that we have is that we can only manufacture one yacht at a time.
@@ -147,7 +147,7 @@ It consists of five variables:
 
 1. The number of complications (`nComplications`), which is the total number of customisations for the yacht. 
 2. Total yacht price in South African Rands (`price_ZAR`); 
-3. Tacht length in meters (`length_m`).
+3. Yacht length in meters (`length_m`).
 4. Yacht width in meters (`width_m`). 
 5. Top speed in knots (`speed_knots`).
 6. Time in hours it took to manufacture the yacht (`time_hr`). 
@@ -323,4 +323,6 @@ test_object("secondBestPredictor", undefined_msg = "Make sure to define a variab
             
 test_object("worstPredictor", undefined_msg = "Make sure to define a variable `worstPredictor`.",
             incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
+            
+success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want analyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficient between the variables to see exactly how strong the descriptive variable correlates to our response variable..")
 ```
