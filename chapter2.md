@@ -314,4 +314,13 @@ test_function("plot", args = c("x", "y"), index = 4, not_called_msg = "Draw a sc
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 5, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    
+test_object("bestPredictor", undefined_msg = "Make sure to define a variable `bestPredictor`.",
+            incorrect_msg = "Use the scatter plots to identify the _best_ predictor for manufacturing time and assign your answer to `production_mean`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
+            
+test_object("secondBestPredictor", undefined_msg = "Make sure to define a variable `secondBestPredictor`.",
+            incorrect_msg = "Use the scatter plots to identify the _second best_ predictor for manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
+            
+test_object("worstPredictor", undefined_msg = "Make sure to define a variable `worstPredictor`.",
+            incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
 ```
