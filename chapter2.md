@@ -539,7 +539,7 @@ success_msg("Correct! By using the `lm()` function we now have the least-squared
 --- type:NormalExercise lang:r xp:100 skills:1 key:4dfe0cdb7c
 ## Linear regression conditions
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
 For the linear regression line to be useful for predictive purposes, certain conditions must hold:
 
@@ -548,10 +548,10 @@ For the linear regression line to be useful for predictive purposes, certain con
 3. The residuals from the regression line must be nearly normal.
 4. The variability of our observations around our regression line must be constant.
 
-Recall that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
+Recall that a residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
 `y_hat <- beta_0 + beta_1*x`
 
-Both `beta_0` and `beta_1` were determined using the `lm` model so as to minimise the sum of the residuals squared of all our observations.
+Both `beta_0` and `beta_1` are determined using the `lm` model so as to minimise the sum of the residuals squared of all our observations.
 
 In this exercise we will fist calculate the residual of the first observation, and thereafter view all the residuals to see if the conditions for linear regression has been met.
 
@@ -632,8 +632,8 @@ hist(res)
 test_object("res_obs1", undefined_msg = "Make sure to define an object `res_obs1`.",
             incorrect_msg = "Make sure that you called the `lm` function, then assigned its coefficients correctly to use the straight line formula, and then used the formula to calculate the residual of the first observation.")
 
-test_object("res", undefined_msg = "Make sure to define an object `residuals`.",
-            incorrect_msg = "Make sure that you called the `residuals` function correctly. Use `?residuals` for help on the function.")
+test_object("res", undefined_msg = "Make sure to define an object `res`.",
+            incorrect_msg = "Make sure that you called the `res` function correctly. Use `?residuals` for help on the function.")
 
 test_function("plot", args = c("x", "y"), not_called_msg = "Draw plot of the descriptive variable and residual.",
              incorrect_msg = "Make sure that your x (descriptive) and y (residual) variables for the plot are correct.")
@@ -649,7 +649,7 @@ success_msg("Correct! We need to analyse the residuals to check if we can use th
 --- type:NormalExercise lang:r xp:100 skills:1 key:8f7127b622
 ## Making a prediction
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
 For the last question we are going to predict how long a 340m length yacht is going to take to manufacture. We will also check whether we will be extrapolating, meaning that we are going to make a production based on a descriptive variable that falls outside our observed values.
 
