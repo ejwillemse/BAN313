@@ -141,16 +141,27 @@ test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_b
 --- type:NormalExercise lang:r xp:100 skills:1 key:59933cccde
 ## Analysing the data
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. It consists of five variables. The number of complications (`nComplications`), which is the total number of customisations for the yacht; total yacht price in South African Rands (`price_ZAR`); yacht length in meters (`length_m`); yacht width in meters (`width_m`); top speed in knots (`speed_knots`); and the time in hours it took to manufacture the yacht (`time_hr`). First have a look at the data in the console using the `head(boatManufacturing)` command, thereafter answer the following:
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. 
+
+It consists of five variables:
+
+1. The number of complications (`nComplications`), which is the total number of customisations for the yacht. 
+2. Total yacht price in South African Rands (`price_ZAR`); 
+3. Tacht length in meters (`length_m`).
+4. Yacht width in meters (`width_m`). 
+5. Top speed in knots (`speed_knots`).
+6. Time in hours it took to manufacture the yacht (`time_hr`). 
+
+First have a look at the data in the console using the `head(boatManufacturing)` command, thereafter answer the following:
 
 *** =instructions
 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
 2. Calculate the mean manufacture time of a yacht and assign your answer to `production_mean`.
 3. Draw a histogram of the manufacture time of yachts to analyse the distribution.
 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
-5. Decide on which variable you think will be the _best predictor_ of manufacture time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
+5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
-7. Decide on which variable you think will be the _worst_ predictor of manufacture time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
+7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
 
 
 *** =pre_exercise_code
@@ -284,5 +295,12 @@ worstPredictor
 
 *** =sct
 ```{r}
-
+test_object("nYachts", undefined_msg = "Make sure to define a variable `nYachts`.",
+            incorrect_msg = "Make sure that you calculated the number of yachts manufactured correctly and assigned your answer to `nYachts`.") 
+    
+test_object("production_mean", undefined_msg = "Make sure to define a variable `production_mean`.",
+            incorrect_msg = "Make sure that you calculated the mean manufacturing time of the yachts correctly and assigned your answer to `production_mean`.") 
+            
+test_function('hist', args = "x", not_called_msg = "Draw a histogram of the mean manufacturing time for yachts.",
+              incorrect_msg = "Your call to `hist()` is incorrect. Make sure you are drawing a histogram of the correct variable.")
 ```
