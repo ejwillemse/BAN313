@@ -459,7 +459,7 @@ Now that we know that `length_m` has the strongest relationship with `time_hr` w
 
 *** =instructions
 
-1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
+1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`.
 2. View the output of the model in the console.
 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 
@@ -489,7 +489,7 @@ rm(time_hr)
 
 *** =sample_code
 ```{r}
-# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
+# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`.
 
 
 
@@ -504,7 +504,7 @@ rm(time_hr)
 
 *** =solution
 ```{r}
-# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. To do so, use `fit <- lm(...)`.
+# 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`.
 
 fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
 
