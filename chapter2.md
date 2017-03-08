@@ -410,7 +410,7 @@ cor_length <- cor(boatManufacturing$length_m, boatManufacturing$time_hr)
 
 # 3. Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
 
-cor_width <- cor(boatManufacturing$length_m, boatManufacturing$time_hr)
+cor_width <- cor(boatManufacturing$width_m, boatManufacturing$time_hr)
 
 # 4. Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
 
@@ -444,5 +444,5 @@ test_object("cor_price", undefined_msg = "Make sure to define a variable `cor_pr
 test_object("allPositive", undefined_msg = "Make sure to define a variable `allPositive`.",
             incorrect_msg = "Check the calculate correlations to see if any are negative. If so, set `allPositive <- FALSE`, else `allPositive <- TRUE`.")
 
-success_msg("Correct! The correlation coefficient allows us to quantify the strength of a relationship between two variables. Thereby we can easily identify the descriptive variable with the strongest correlation to the response variable, and the that to fit a linear regression line, which is what we will do next.")
+success_msg("Correct! The correlation coefficient allows us to quantify the strength of a relationship between two variables. Thereby we can easily identify the descriptive variable with the strongest correlation to the response variable, and use that to fit a linear regression line, which is what we will do next.")
 ```
