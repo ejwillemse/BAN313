@@ -446,3 +446,65 @@ test_object("allPositive", undefined_msg = "Make sure to define a variable `allP
 
 success_msg("Correct! The correlation coefficient allows us to quantify the strength of a relationship between two variables. Thereby we can easily identify the descriptive variable with the strongest correlation to the response variable, and use that to fit a linear regression line, which is what we will do next.")
 ```
+--- type:NormalExercise lang:r xp:100 skills:1 key:d275dff6e3
+## Fitting a linear regression line
+
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+
+Now that we know that `length_m` has the strongest relationship with `time_hr` we can fit and plot a linear regression line on our data and use the coefficients of the line to predict how long a boat will take to manufacture, based on its length. To fit a model we will use the `lm` command. Type `?lm` in the console to see how the function works, and thereafter complete the following:
+
+*** =instructions
+
+1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+2. View the output of the model in the console.
+3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+nBoats <- floor(runif(1, min = 100, max = 200))
+nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+width_m <- length_m/4 + rnorm(n = nBoats, mean = 15, sd = 5)
+speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
+price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
+time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
+boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
+
+rm(nBoats)
+rm(nComplications)
+rm(length_m)
+rm(width_m)
+rm(speed_knots)
+rm(price_ZAR)
+rm(time_hr)
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+# 1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+
+fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
+
+# 2. View the output of the model in the console.
+
+fit
+
+# 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+
+plot(boatManufacturing$length_m, boatManufacturing$time_hr)
+abline(fit)
+
+```
+
+*** =sct
+```{r}
+test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
+            incorrect_msg = "Make sure that you called the `lm` function correctly. Use `?lm` for help on the function.") 
+```
