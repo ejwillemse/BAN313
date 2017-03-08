@@ -136,7 +136,7 @@ Use the `?function` to find out more about each command.
 *** =sct
 ```{r}
 msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
-msg_success <- "Correct! By assigning a explanatory variable to `x` and the response variable to `y` from data on previous orders we can call the function `lm(y~x)` to fit the least-squared regression line to the data points. We can also use `summary(lm(y~x))` to view its outputs."
+msg_success <- "Correct! By assigning a explanatory variable to `x` and the response variable to `y`, based on data of previous orders, we can call the function `lm(y~x)` to fit the least-squared regression line to the data points. We can also use `summary(lm(y~x))` to view its outputs."
 test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad, msg_bad, msg_bad, msg_bad))
 ```
 
@@ -145,7 +145,7 @@ test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_b
 --- type:NormalExercise lang:r xp:100 skills:1 key:59933cccde
 ## Analysing the data
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
 It consists of five variables:
 
