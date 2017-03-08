@@ -109,7 +109,7 @@ test_mc(correct = 8, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_b
 
 ## R functions to apply
 
-Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
+Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through the `?function` command.
 
 *** =instructions
 - `plot()`
