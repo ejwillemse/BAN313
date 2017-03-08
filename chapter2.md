@@ -564,7 +564,22 @@ Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.h
 
 *** =pre_exercise_code
 ```{r}
+nBoats <- floor(runif(1, min = 100, max = 200))
+nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+width_m <- length_m/4 + rnorm(n = nBoats, mean = 15, sd = 5)
+speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
+price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
+time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
+boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
 
+rm(nBoats)
+rm(nComplications)
+rm(length_m)
+rm(width_m)
+rm(speed_knots)
+rm(price_ZAR)
+rm(time_hr)
 ```
 
 *** =sample_code
@@ -574,7 +589,13 @@ Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.h
 
 *** =solution
 ```{r}
+# 1. Calulate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals.
 
+fit <- lm(boatManufacturing$time_hr~boatManufacturing$time_hr$length_m)
+
+# 2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res <- residuals`. Use `?residuals` to find out more about the function.
+# 3. View a plot of the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
+# 4. View a histogram of the residuals to see if it's nearly normal.
 ```
 
 *** =sct
