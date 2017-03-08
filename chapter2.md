@@ -528,3 +528,44 @@ test_function("abline", not_called_msg = "Add the linear regression line to the 
              
 success_msg("Correct! By using the `lm()` function we now have the least-squared linear regression line for `length_m` and `time_hr` which we can now use to predict the time required to manufacture a yacht, based on its required length. However, before we can use the linear regression line we first need to check certain conditions.")
 ```
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:4dfe0cdb7c
+## Linear regression conditions
+
+For the linear regression line to be useful for predictive purposes, certain conditions must hold:
+
+1. The samples which we used to fit the line must be independet.
+2. The relationship between the descriptive and response variables must be linear.
+3. The residuals from the regression line must be nearly normal.
+4. The variability of our observations around our regression line must be constant.
+
+Recal that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form ```
+y_hat <- beta_0 + beta_1*x
+```
+
+Both `beta_0` and `beta_1` were determined using the `lm` model so as to minimuse the sum of the residuals squared of all our observations.
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
