@@ -225,7 +225,7 @@ sd_price_B
 test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
             incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.") 
 
-test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
+test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.")
             
 test_object("mean_price_A", undefined_msg = "Make sure to define a variable `mean_price_A`.",
             incorrect_msg = "Make sure that you calculated the sample mean for product prices from Company A correctly and assigned your answer to `mean_price_A`.")
