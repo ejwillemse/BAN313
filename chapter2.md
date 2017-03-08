@@ -209,11 +209,11 @@ hist()
 
 # 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
 
-plot()
-plot()
-plot()
-plot()
-plot()
+plot() # nComplications
+plot() # length_m
+plot() # width_m
+plot() # speed_knots
+plot() # price_ZAR
 
 # 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
               
@@ -252,13 +252,13 @@ production_mean <- mean(boatManufacturing$time_hr)
 
 hist(boatManufacturing$time_hr)
 
-# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time in the sequence specified below:
 
-plot(boatManufacturing$nComplications, boatManufacturing$time_hr)
-plot(boatManufacturing$length_m, boatManufacturing$time_hr)
-plot(boatManufacturing$width_m, boatManufacturing$time_hr)
-plot(boatManufacturing$speed_knots, boatManufacturing$time_hr)
-plot(boatManufacturing$price_ZAR, boatManufacturing$time_hr)
+plot(boatManufacturing$nComplications, boatManufacturing$time_hr) # nComplications
+plot(boatManufacturing$length_m, boatManufacturing$time_hr) # length_m
+plot(boatManufacturing$width_m, boatManufacturing$time_hr) # width_m
+plot(boatManufacturing$speed_knots, boatManufacturing$time_hr) # speed_knots
+plot(boatManufacturing$price_ZAR, boatManufacturing$time_hr) # price_ZAR
 
 # 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
 
@@ -304,9 +304,9 @@ test_object("production_mean", undefined_msg = "Make sure to define a variable `
 test_function('hist', args = "x", not_called_msg = "Draw a histogram of the mean manufacturing time for yachts.",
               incorrect_msg = "Your call to `hist()` is incorrect. Make sure you are drawing a histogram of the correct variable.")
               
-test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
+test_function("plot", args = c("x", "y"), index = 1, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
-test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
+test_function("plot", args = c("x", "y"), index = 2, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 3, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
