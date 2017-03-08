@@ -320,12 +320,12 @@ test_object("bestPredictor", undefined_msg = "Make sure to define a variable `be
             incorrect_msg = "Use the scatter plots to identify the _best_ predictor for manufacturing time and assign your answer to `production_mean`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
             
 test_object("secondBestPredictor", undefined_msg = "Make sure to define a variable `secondBestPredictor`.",
-            incorrect_msg = "Use the scatter plots to identify the _second best_ predictor for manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
+            incorrect_msg = "Use the scatter plots to identify the _second best_ predictor for manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `secondBestPredictor <- 'nComplications'`---remember the quotation marks.") 
             
 test_object("worstPredictor", undefined_msg = "Make sure to define a variable `worstPredictor`.",
-            incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
+            incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `worstPredictor <- 'nComplications'`---remember the quotation marks.") 
             
-success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want analyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficient between the variables to see exactly how strong the descriptive variable correlates to our response variable.")
+success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want ato nalyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficients between of variables to see exactly how strong the descriptive variables correlate to our response variable.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:073be0f413
 ## Quantifying the relationship
