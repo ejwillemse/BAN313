@@ -36,7 +36,11 @@ Please take note that the data used for this chapter is randomly generated and w
 
 When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-To continue with this chapter, hit the 'Submit Answer' button.
+Before continuing, have a quick look at the following tutorial as you may need to refer to it during the course of the chapter: 
+
+* Refer to [http://www.cyclismo.org/tutorial/R/linearLeastSquares.html](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html).
+
+After going through the tutorial and to continue with this chapter, hit the 'Submit Answer' button.
 
 *** =instructions
 
@@ -523,7 +527,7 @@ test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
 test_output_contains("fit", incorrect_msg = "You did not view the output of the fitted regression line `fit`.")
 
 test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
-             incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+             incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
              
 test_function("abline", not_called_msg = "Add the linear regression line to the plot.",
              incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
@@ -539,21 +543,21 @@ Data on all the previous productions of the company can be found in the workspac
 
 For the linear regression line to be useful for predictive purposes, certain conditions must hold:
 
-1. The samples which we used to fit the line must be independet.
+1. The samples which we used to fit the line must be independent.
 2. The relationship between the descriptive and response variables must be linear.
 3. The residuals from the regression line must be nearly normal.
 4. The variability of our observations around our regression line must be constant.
 
-Recal that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
+Recall that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
 `y_hat <- beta_0 + beta_1*x`
 
-Both `beta_0` and `beta_1` were determined using the `lm` model so as to minimuse the sum of the residuals squared of all our observations.
+Both `beta_0` and `beta_1` were determined using the `lm` model so as to minimise the sum of the residuals squared of all our observations.
 
 In this exercise we will fist calculate the residual of the first observation, and thereafter view all the residuals to see if the conditions for linear regression has been met.
 
 *** =instructions
 
-1. Calulate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals.
+1.  Calculate the residual of the _first_ observation in the dataset by comparing its actual `time_hr` against its predicted `time_hr` based on its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the final residual value to `res_obs1`.
 2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res <- residuals`. Use `?residuals` to find out more about the function.
 3. View a plot of the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
 4. View a histogram of the residuals to see if it's nearly normal.
@@ -584,21 +588,157 @@ rm(time_hr)
 
 *** =sample_code
 ```{r}
+# 1. Calculate the residual of the _first_ observation in the dataset by comparing its actual `time_hr` against its predicted `time_hr` based on its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the final residual value to `res_obs1`.
+
+
+
+# 2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res `. Use `?residuals` to find out more about the function.
+
+
+
+# 3. View a plot of `length_m` and the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
+
+
+
+# 4. View a histogram of the residuals to see if it's nearly normal.
+
+
 
 ```
 
 *** =solution
 ```{r}
-# 1. Calulate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals.
+# 1. Calculate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the residual value to `res_obs1`.
 
-fit <- lm(boatManufacturing$time_hr~boatManufacturing$time_hr$length_m)
+fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
+time_hr_predict <- fit$coefficients[[1]] + fit$coefficients[[2]]*boatManufacturing$length_m[1]
+res_obs1 <- boatManufacturing$time_hr[1] - time_hr_predict
 
-# 2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res <- residuals`. Use `?residuals` to find out more about the function.
-# 3. View a plot of the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
+# 2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res `. Use `?residuals` to find out more about the function.
+
+res <- residuals(fit)
+
+# 3. View a plot of `length_m` and the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
+
+plot(boatManufacturing$length_m, res)
+
 # 4. View a histogram of the residuals to see if it's nearly normal.
+
+hist(res)
 ```
 
 *** =sct
 ```{r}
+test_object("res_obs1", undefined_msg = "Make sure to define an object `res_obs1`.",
+            incorrect_msg = "Make sure that you called the `lm` function, then assigned its coefficients correctly to use the straight line formula, and then used the formula to calculate the residual of the first observation.")
 
+test_object("res", undefined_msg = "Make sure to define an object `residuals`.",
+            incorrect_msg = "Make sure that you called the `residuals` function correctly. Use `?residuals` for help on the function.")
+
+test_function("plot", args = c("x", "y"), not_called_msg = "Draw plot of the descriptive variable and residual.",
+             incorrect_msg = "Make sure that your x (descriptive) and y (residual) variables for the plot are correct.")
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the residuals.",
+             incorrect_msg = "raw a histogram of the residuals.")
+
+success_msg("Correct! We need to analyse the residuals to check if we can use the regression line for predictive purposes. Depending on the data you may notice the residuals may not have constant variability, but it should follow a normal distribution. In cases where all conditions are not met we can still use the regression line. We just have to interpret the results more carefully. We also did not check the independence assumption. Given the uniqueness of yachts and that only one can be manufactured at a time we can assume that each sample is independent.")
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:8f7127b622
+## Making a prediction
+
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+
+For the last question we are going to predict how long a 340m length yacht is going to take to manufacture. We will also check whether we will be extrapolating, meaning that we are going to make a production based on a descriptive variable that falls outside our observed values.
+
+Similar to the previous questions we will do the following:
+
+*** =instructions
+
+1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
+2. Convert the line into a regression line equation and use the equation to predict how long a 340m boat will take to manufacture. Assign your answer to `y_340m`.
+3. Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated`.
+
+*** =hint
+
+Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help and look at what we've done in the previous exercises.
+
+*** =pre_exercise_code
+```{r}
+nBoats <- floor(runif(1, min = 100, max = 200))
+nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+width_m <- length_m/4 + rnorm(n = nBoats, mean = 15, sd = 5)
+speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
+price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
+time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
+boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
+
+rm(nBoats)
+rm(nComplications)
+rm(length_m)
+rm(width_m)
+rm(speed_knots)
+rm(price_ZAR)
+rm(time_hr)
+```
+
+*** =sample_code
+```{r}
+
+# 1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
+
+
+
+# 2. Convert the line into a regression line equation and use the equation to predict how long a 340m boat will take to manufacture. Assign your answer to `y_340m` and print the result to the console.
+
+
+
+# 3. Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated` and print the result to the console.
+
+
+```
+
+*** =solution
+```{r}
+
+# 1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
+
+fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
+plot(boatManufacturing$length_m, boatManufacturing$time_hr)
+abline(fit)
+
+# 2. Convert the line into a regression line equation and use the equation to predict how long a 340m boat will take to manufacture. Assign your answer to `y_340m` and print the result to the console.
+
+x <- 340
+y_340m <- fit$coefficients[[1]] + fit$coefficients[[2]]*x
+y_340m
+
+# 3. Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated` and print the result to the console.
+
+if (x < min(boatManufacturing$length_m) | x > max(boatManufacturing$length_m)){predictionExtrapolated <- TRUE}else{predictionExtrapolated <- FALSE}
+predictionExtrapolated
+
+```
+
+*** =sct
+```{r}
+test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
+            incorrect_msg = "Make sure that you fitted the linear-regression line correctly and assigned the result to `fit`")
+
+test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
+             incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
+             
+test_function("abline", not_called_msg = "Add the linear regression line to the plot.",
+             incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
+
+test_object("y_340m", undefined_msg = "Make sure to define an object `y_340m`.",
+            incorrect_msg = "Make sure that created a linear regression line equation using the fitted line, calculate the predicted manufacturing time for a 340m yacht correctly, and assigned the result to `y_340m`.")
+
+test_object("predictionExtrapolated", undefined_msg = "Make sure to define an object `predictionExtrapolated`.",
+            incorrect_msg = "Check if the yacht length falls outside the observed yacht length. If it is then we are using the model to extrapolate and `predictionExtrapolated <- TRUE`. If not, we can be more reliant on the model results and `predictionExtrapolated <- FALSE`.")
+            
+success_msg("Correct! You have successfully developed and used a model that predicts how long a new boat will take to manufacture, based its required length. To do this, you first identified the variable that correlates the best with the response variable. You then used the variable and the response variable and fitted a linear regression line to available data. Next you used the regression line and analysed the residuals to check if conditions for regression were met. Lastly, you used the regression line to predict how long a 350m boat will take to manufacture.")
 ```
