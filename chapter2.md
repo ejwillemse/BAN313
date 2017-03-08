@@ -330,7 +330,7 @@ success_msg("Good job! By looking at the scatter plots we can get a sense of how
 --- type:NormalExercise lang:r xp:100 skills:1 key:073be0f413
 ## Quantifying the relationship
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
 In the previous exercise we eye-balled the best predictor for manufacturing time.
 Better would be to quantify it, which is straightforward to do in R, using the `cor` function.
@@ -453,7 +453,7 @@ success_msg("Correct! The correlation coefficient allows us to quantify the stre
 --- type:NormalExercise lang:r xp:100 skills:1 key:d275dff6e3
 ## Fitting a linear regression line
 
-Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
 Now that we know that `length_m` has the strongest relationship with `time_hr` we can fit and plot a linear regression line on our data and use the coefficients of the line to predict how long a boat will take to manufacture, based on its length. To fit a model we will use the `lm` command. Type `?lm` in the console to see how the function works, and thereafter complete the following:
 
