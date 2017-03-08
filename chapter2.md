@@ -651,7 +651,7 @@ success_msg("Correct! We need to analyse the residuals to check if we can use th
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
 
-For the last question we are going to predict how long a 340m length yacht is going to take to manufacture. We will also check whether we will be extrapolating, meaning that we are going to make a production based on a descriptive variable that falls outside our observed values.
+For the last question we are going to predict how long a 340m length yacht is going to take to manufacture. We will also check whether we will be extrapolating, meaning that we are going to make a prediction based on a descriptive variable value that falls outside our observed values.
 
 Similar to the previous questions we will do the following:
 
