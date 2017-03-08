@@ -69,3 +69,220 @@ summary(cars)
 ```{r}
 success_msg("Let's try and use our knowledge on statistical inference to assist our company.")
 ```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:c6773a7f96
+## Statistical methods to apply
+
+Based on the case study description, which do you think is the correct statistical method to apply?
+
+*** =instructions
+- Inference for a single proportion.
+- Inference for the difference between two proportions.
+- Goodness-of-fit test.
+- Test for independence.
+- Inference for a single mean.
+- Inference for paired numerical data.
+- Inference for the difference between two means.
+- Regression analysis
+
+*** =hint
+Have a look at the chapters on regression in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
+
+*** =pre_exercise_code
+```{r}
+#none
+```
+
+*** =sct
+```{r}
+msg_bad <- "That is not correct. Have a look at the chapters on regression in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
+
+msg_success <- "Correct! We want to predict how long a yacht will take to manufacture, based on its features. To do so we need to identify appropriate explanatory variables that best predict our response variable, which in this case, is the time required to complete the production of a yacht. The explanatory variables are features of the yacht. Using data on previous productions we need to first identify which explanatory variables to use, and thereafter fit a linear-model using the existing data. The linear-model can thereafter be used to predict the time required to complete an order based on its key features."
+test_mc(correct = 8, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success))
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:b2d2f1b742
+
+## R functions to apply
+
+Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
+
+*** =instructions
+- `plot()`
+- `mean()`
+- `sd()`
+- `nrow()`
+- `prop.test()`
+- `t.test()`
+- `lm()`
+- `cor()`
+- `var()`
+- `cov()`
+- None of the above, we will have to write our own R code to apply the method.
+
+*** =hint
+
+Use the `?function` to find out more about each command.
+
+*** =pre_exercise_code
+```{r}
+#none
+```
+
+*** =sct
+```{r}
+msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
+msg_success <- "Correct! By assigning a explanatory variable to `x` and the response variable to `y` from data on previous orders we can call the function `lm(y~x)` to fit the least-squared regression line to the data points. We can also use `summary(lm(y~x))` to view its outputs."
+test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad, msg_bad, msg_bad, msg_bad))
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:59933cccde
+## Analysing the data
+
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. It consists of five variables. The number of complications (`nComplications`), which is the total number of customisations for the yacht; total yacht price in South African Rands (`price_ZAR`); yacht length in meters (`length_m`); yacht width in meters (`width_m`); top speed in knots (`speed_knots`); and the time in hours it took to manufacture the yacht (`time_hr`). First have a look at the data in the console using the `head(boatManufacturing)` command, thereafter answer the following:
+
+*** =instructions
+1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
+2. Calculate the mean manufacture time of a yacht and assign your answer to `production_mean`.
+3. Draw a histogram of the manufacture time of yachts to analyse the distribution.
+4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
+5. Decide on which variable you think will be the _best predictor_ of manufacture time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
+6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
+7. Decide on which variable you think will be the _worst_ predictor of manufacture time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
+
+
+*** =pre_exercise_code
+```{r}
+nBoats <- floor(runif(1, min = 100, max = 200))
+nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+width_m <- length_m/4 + rnorm(n = nBoats, mean = 15, sd = 5)
+speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
+price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
+time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
+boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
+
+# plot(nComplications, time_hr)
+# plot(length_m, time_hr)
+# plot(width_m, time_hr)
+# plot(speed_knots, time_hr)
+# plot(price_ZAR, time_hr)
+
+rm(nBoats)
+rm(nComplications)
+rm(length_m)
+rm(width_m)
+rm(speed_knots)
+rm(price_ZAR)
+rm(time_hr)
+
+```
+
+*** =sample_code
+```{r}
+# The boatManufacturing dataframe is available in your workspace. 
+
+# 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
+
+nYachts <- 
+
+# 2. Calculate the mean manufacture time of a yacht and assign your answer to `production_mean`.
+
+production_mean <- 
+
+# 3. Draw a histogram of the manufacture time of yachts to analyse the distribution.
+
+hist()
+
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
+
+plot()
+plot()
+plot()
+plot()
+plot()
+
+# 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
+              
+bestPredictor <- 
+
+# 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
+
+secondBestPredictor <- 
+
+# 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
+
+worstPredictor <- 
+
+# Print the results here:
+
+nYachts
+production_mean
+bestPredictor
+secondBestPredictor
+worstPredictor
+```
+
+*** =solution
+```{r}
+# The boatManufacturing dataframe is available in your workspace. 
+
+# 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
+
+nYachts <- nrow(boatManufacturing)
+
+# 2. Calculate the mean manufacture time of a yacht and assign your answer to `production_mean`.
+
+production_mean <- mean(boatManufacturing$time_hr)
+
+# 3. Draw a histogram of the manufacture time of yachts to analyse the distribution.
+
+hist(boatManufacturing$time_hr)
+
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
+
+plot(boatManufacturing$nComplications, boatManufacturing$time_hr)
+plot(boatManufacturing$length_m, boatManufacturing$time_hr)
+plot(boatManufacturing$width_m, boatManufacturing$time_hr)
+plot(boatManufacturing$speed_knots, boatManufacturing$time_hr)
+plot(boatManufacturing$price_ZAR, boatManufacturing$time_hr)
+
+# 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
+
+discriptiveVariables <- c('nComplications', 'length_m', 'width_m', 'speed_knots', 'price_ZAR')
+
+cors <- c(cor(boatManufacturing$nComplications, boatManufacturing$time_hr),
+          cor(boatManufacturing$length_m, boatManufacturing$time_hr),
+          cor(boatManufacturing$width_m, boatManufacturing$time_hr),
+          cor(boatManufacturing$speed_knots, boatManufacturing$time_hr),
+          cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr))
+              
+bestPredictor <- discriptiveVariables[which.max(cors)]
+
+# 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
+
+corsTemp = cors
+corsTemp[which.max(cors)] <- 0
+
+secondBestPredictor <- discriptiveVariables[which.max(corsTemp)]
+
+# 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
+
+worstPredictor <- discriptiveVariables[which.min(cors)]
+
+# Print the results here:
+
+nYachts
+production_mean
+bestPredictor
+secondBestPredictor
+worstPredictor
+
+```
+
+*** =sct
+```{r}
+
+```
