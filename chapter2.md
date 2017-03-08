@@ -324,7 +324,7 @@ test_object("secondBestPredictor", undefined_msg = "Make sure to define a variab
 test_object("worstPredictor", undefined_msg = "Make sure to define a variable `worstPredictor`.",
             incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
             
-success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want analyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficient between the variables to see exactly how strong the descriptive variable correlates to our response variable..")
+success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want analyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficient between the variables to see exactly how strong the descriptive variable correlates to our response variable.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:073be0f413
 ## Quantifying the relationship
@@ -483,6 +483,16 @@ rm(time_hr)
 
 *** =sample_code
 ```{r}
+# 1. Fit a linear regression line to the `length_m` and `time_hr` function and assign the line the object `fit`. To do so, use `fit <- lm(...)`.
+
+
+
+# 2. View the output of the model in the console.
+
+
+
+# 3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+
 
 ```
 
@@ -506,5 +516,15 @@ abline(fit)
 *** =sct
 ```{r}
 test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
-            incorrect_msg = "Make sure that you called the `lm` function correctly. Use `?lm` for help on the function.") 
+            incorrect_msg = "Make sure that you called the `lm` function correctly. Use `?lm` for help on the function.")
+
+test_output_contains("fit", incorrect_msg = "You did not view the output of the fitted regression line `fit`.")
+
+test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
+             incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+             
+test_function("abline", args = c("a", "b"), not_called_msg = "Add the linear regression line to the plot.",
+             incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
+             
+success_msg("Correct! By using the `lm()` function we now have the least-squared linear regression line for `length_m` and `time_hr` which we can now use to predict the time required to manufacture a yacht, based on its required length. However, before we can use the linear regression line we first need to check certain conditions.")
 ```
