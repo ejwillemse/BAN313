@@ -71,7 +71,7 @@ summary(cars)
 
 *** =sct
 ```{r}
-success_msg("Let's try and use our knowledge on statistical inference to assist our company.")
+success_msg("Let's try and use our knowledge on regression to assist our company.")
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:c6773a7f96
