@@ -163,6 +163,9 @@ First have a look at the data in the console using the `head(boatManufacturing)`
 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
 
+*** =hint
+
+Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 *** =pre_exercise_code
 ```{r}
@@ -174,12 +177,6 @@ speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
 price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
 time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
 boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
-
-# plot(nComplications, time_hr)
-# plot(length_m, time_hr)
-# plot(width_m, time_hr)
-# plot(speed_knots, time_hr)
-# plot(price_ZAR, time_hr)
 
 rm(nBoats)
 rm(nComplications)
@@ -348,6 +345,9 @@ To complete the exercise, do the following:
 5. Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
 6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
 
+*** =hint
+
+Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 *** =pre_exercise_code
 ```{r}
@@ -461,6 +461,8 @@ Now that we know that `length_m` has the strongest relationship with `time_hr` w
 
 *** =hint
 
+Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
+
 *** =pre_exercise_code
 ```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
@@ -533,6 +535,8 @@ success_msg("Correct! By using the `lm()` function we now have the least-squared
 --- type:NormalExercise lang:r xp:100 skills:1 key:4dfe0cdb7c
 ## Linear regression conditions
 
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe.
+
 For the linear regression line to be useful for predictive purposes, certain conditions must hold:
 
 1. The samples which we used to fit the line must be independet.
@@ -540,15 +544,23 @@ For the linear regression line to be useful for predictive purposes, certain con
 3. The residuals from the regression line must be nearly normal.
 4. The variability of our observations around our regression line must be constant.
 
-Recal that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form ```
-y_hat <- beta_0 + beta_1*x
-```
+Recal that the residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
+`y_hat <- beta_0 + beta_1*x`
 
 Both `beta_0` and `beta_1` were determined using the `lm` model so as to minimuse the sum of the residuals squared of all our observations.
 
+In this exercise we will fist calculate the residual of the first observation, and thereafter view all the residuals to see if the conditions for linear regression has been met.
+
 *** =instructions
 
+1. Calulate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals.
+2. Use the `residuals()` function to calculate all the residuals for the observations and assign the results to `res <- residuals`. Use `?residuals` to find out more about the function.
+3. View a plot of the residuals to see if variability is constant, meaning it doesn't seem to contract or expand.
+4. View a histogram of the residuals to see if it's nearly normal.
+
 *** =hint
+
+Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 *** =pre_exercise_code
 ```{r}
