@@ -326,3 +326,123 @@ test_object("worstPredictor", undefined_msg = "Make sure to define a variable `w
             
 success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want analyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficient between the variables to see exactly how strong the descriptive variable correlates to our response variable..")
 ```
+--- type:NormalExercise lang:r xp:100 skills:1 key:073be0f413
+## Quantifying the relationship
+
+Data on all the previous productions of the company can be found in the workspace as the `boatManufacturing` dataframe. 
+
+In the previous exercise we eye-balled the best predictor for manufacturing time.
+Better would be to quantify it, which is straightforward to do in R, using the `cor` function.
+Type `?cor` in the console to find out more about the function.
+
+
+Typically a correlation can be defined as positive, negative, weak, moderate and strong. In this exercise we are going to going to quantify the correlation between variables and manufacturing time, and thereafter classify the correlation as either positive or negative.
+
+To complete the exercise, do the following:
+
+*** =instructions
+1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
+2. Calculate the correlation between `length_m` and `time_hr` and assign your answer to `cor_length`.
+3. Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
+4. Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
+5. Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
+6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
+
+
+*** =pre_exercise_code
+```{r}
+nBoats <- floor(runif(1, min = 100, max = 200))
+nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
+width_m <- length_m/4 + rnorm(n = nBoats, mean = 15, sd = 5)
+speed_knots <- round(runif(n = nBoats, min = 50, max = 100), 0)
+price_ZAR <- nComplications*100000 + length_m*width_m*2500 + speed_knots*50000
+time_hr <- length_m*10 + rnorm(n = nBoats, mean = 300, sd = 150)
+boatManufacturing <- data.frame(nComplications, length_m, width_m, speed_knots, price_ZAR, time_hr)
+
+rm(nBoats)
+rm(nComplications)
+rm(length_m)
+rm(width_m)
+rm(speed_knots)
+rm(price_ZAR)
+rm(time_hr)
+
+```
+
+*** =sample_code
+```{r}
+# 1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
+
+
+
+# 2. Calculate the correlation between `length_m` and `time_hr` and assign your answer to `cor_length`.
+
+
+
+# 3. Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
+
+
+
+# 4. Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
+
+
+
+# 5. Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
+
+
+
+# 6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
+
+
+
+```
+
+*** =solution
+```{r}
+# 1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
+
+cor_nComplications <- cor(boatManufacturing$nComplications, boatManufacturing$time_hr)
+
+# 2. Calculate the correlation between `length_m` and `time_hr` and assign your answer to `cor_length`.
+
+cor_length <- cor(boatManufacturing$length_m, boatManufacturing$time_hr)
+
+# 3. Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
+
+cor_width <- cor(boatManufacturing$length_m, boatManufacturing$time_hr)
+
+# 4. Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
+
+cor_speed <- cor(boatManufacturing$speed_knots, boatManufacturing$time_hr)
+
+# 5. Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
+
+cor_price <- cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr)
+
+# 6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
+
+if (min(cor_nComplications, cor_length, cor_width, cor_speed, cor_price) < 0){allPositive <- FALSE}else{allPositive <- TRUE}
+```
+
+*** =sct
+```{r}
+test_object("cor_nComplications", undefined_msg = "Make sure to define a variable `cor_nComplications`.",
+            incorrect_msg = "Make sure that you calculated the correlation between `nComplications` and `time_hr` correctly.") 
+    
+test_object("cor_length", undefined_msg = "Make sure to define a variable `cor_length`.",
+            incorrect_msg = "Make sure that you calculated the correlation between `length_m` and `time_hr` correctly.") 
+            
+test_object("cor_width", undefined_msg = "Make sure to define a variable `cor_width`.",
+            incorrect_msg = "Make sure that you calculated the correlation between `width_m` and `time_hr` correctly.") 
+test_object("cor_speed", undefined_msg = "Make sure to define a variable `cor_speed`.",
+            incorrect_msg = "Make sure that you calculated the correlation between `speed_knots` and `time_hr` correctly.")
+
+test_object("cor_price", undefined_msg = "Make sure to define a variable `cor_price`.",
+            incorrect_msg = "Make sure that you calculated the correlation between `price_ZART` and `time_hr` correctly.")
+
+test_object("allPositive", undefined_msg = "Make sure to define a variable `allPositive`.",
+            incorrect_msg = "Check the calculate correlations to see if any are negative. If so, set `allPositive <- FALSE`, else `allPositive <- TRUE`.")
+
+success_msg("Correct! The correlation coefficient allows us to quantify the strength of a relationship between two variables. Thereby we can easily identify the descriptive variable with the strongest correlation to the response variable, and the that to fit a linear regression line, which is what we will do next.")
+```
