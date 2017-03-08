@@ -304,9 +304,9 @@ test_object("production_mean", undefined_msg = "Make sure to define a variable `
 test_function('hist', args = "x", not_called_msg = "Draw a histogram of the mean manufacturing time for yachts.",
               incorrect_msg = "Your call to `hist()` is incorrect. Make sure you are drawing a histogram of the correct variable.")
               
-test_function("plot", args = c("x", "y"), index = 1, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
+test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
-test_function("plot", args = c("x", "y"), index = 2, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
+test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 3, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
