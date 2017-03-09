@@ -555,7 +555,7 @@ Both `beta_0` and `beta_1` are determined using the `lm` model so as to minimise
 
 In this exercise we will fist calculate the residual of the first observation, and thereafter view all the residuals to see if the conditions for linear regression has been met.
 
-Please make sure that you understan what a residual represents in linear regression before attempting the assignment, and refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) to see how the cofficients from the linear regression model should be extracted.
+Please make sure that you understan what a residual represents in linear regression before attempting the assignment, revisit the [following textbook]() if necessary. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) to see how the cofficients from the linear regression model should be extracted.
 
 *** =instructions
 
