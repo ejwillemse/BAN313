@@ -162,7 +162,7 @@ First have a look at the data in the console using the `head(boatManufacturing)`
 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
 2. Calculate the mean manufacturing time of a yacht and assign your answer to `production_mean`.
 3. Draw a histogram of the manufacturing time of yachts to analyse the distribution.
-4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one the we want to predict using x.
+4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one that we want to predict using x.
 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
@@ -208,7 +208,7 @@ production_mean <-
 
 hist()
 
-# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one the we want to predict using x.
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one that we want to predict using x.
 
 plot() # nComplications
 plot() # length_m
