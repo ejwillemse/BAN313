@@ -269,7 +269,7 @@ cors <- c(abs(cor(boatManufacturing$nComplications, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$length_m, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$width_m, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$speed_knots, boatManufacturing$time_hr)),
-          abs(cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr))
+          abs(cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr)))
               
 bestPredictor <- discriptiveVariables[which.max(cors)]
 
