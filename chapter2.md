@@ -555,6 +555,8 @@ Both `beta_0` and `beta_1` are determined using the `lm` model so as to minimise
 
 In this exercise we will fist calculate the residual of the first observation, and thereafter view all the residuals to see if the conditions for linear regression has been met.
 
+Please make sure that you know what a residual is for linear regression before attempting the assignment, and refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) to see how the cofficients from the linear regression model should be extracted.
+
 *** =instructions
 
 1.  Calculate the residual of the _first_ observation in the dataset by comparing its actual `time_hr` against its predicted `time_hr` based on its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the final residual value to `res_obs1`.
