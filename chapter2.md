@@ -162,7 +162,7 @@ First have a look at the data in the console using the `head(boatManufacturing)`
 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
 2. Calculate the mean manufacturing time of a yacht and assign your answer to `production_mean`.
 3. Draw a histogram of the manufacturing time of yachts to analyse the distribution.
-4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time.
+4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one the we want to predict using x.
 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
@@ -208,7 +208,7 @@ production_mean <-
 
 hist()
 
-# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time.
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one the we want to predict using x.
 
 plot() # nComplications
 plot() # length_m
@@ -253,7 +253,7 @@ production_mean <- mean(boatManufacturing$time_hr)
 
 hist(boatManufacturing$time_hr)
 
-# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against the manufacture time in the sequence specified below:
+# 4. For each of the five possible descriptive variables, draw a scatter plot of the variable against manufacturing time. You have figure out for yourself which should be the x and y variables, depending on the problem description. Remember x is the descriptive variable and y is the response variable, the one the we want to predict using x.
 
 plot(boatManufacturing$nComplications, boatManufacturing$time_hr) # nComplications
 plot(boatManufacturing$length_m, boatManufacturing$time_hr) # length_m
@@ -306,15 +306,15 @@ test_function('hist', args = "x", not_called_msg = "Draw a histogram of the mean
               incorrect_msg = "Your call to `hist()` is incorrect. Make sure you are drawing a histogram of the correct variable.")
               
 test_function("plot", args = c("x", "y"), index = 1, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
-                                                    incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 2, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
-                                                    incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 3, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
-                                                    incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 4, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
-                                                    incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 5, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
-                                                    incorrect_msg = "Make sure the your x (descriptive) and y (response) variables for the plot are correct.")
+                                                    incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
                                                     
 test_object("bestPredictor", undefined_msg = "Make sure to define a variable `bestPredictor`.",
             incorrect_msg = "Use the scatter plots to identify the _best_ predictor for manufacturing time and assign your answer to `production_mean`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
