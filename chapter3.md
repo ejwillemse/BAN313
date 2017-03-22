@@ -64,12 +64,26 @@ summary(cars)
 
 *** =sct
 ```{r}
-success_msg("Let's try and use our knowledge on regression to assist our company.")
+success_msg("Let's use probability distributions to answer some questions.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
-## <<<New Exercise>>>
+## Drill-hole sizes
 
+We wish to replace our current very old drilling machine. 
+The machine is required to drill a hole with a diameter of 10cm within 0.5cm tollerance.
+If the hole is larger than 10.5cm, the part has to be scrapped.
+Similarly, if the hole is smaller than 9.5cm the hole will also be scrapped.
+
+We also want to use the machine to drill holes for other products that have different tollerance.
+One product may have a 0.25cm tollerance, another 1cm.
+
+We have identified a possible replacement machine, and its supplier assured us it will perform according to specification.
+As industrial engineers we insisted that the supplier provide us with data on its performance, so that we can make a more informed decision on whether it will meet our requirement.
+
+The supplier has given us data on different holes drilled by the machine during its testing.
+The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
+The data is available in the `holeSize` dataframe.
 
 *** =instructions
 
@@ -77,7 +91,9 @@ success_msg("Let's try and use our knowledge on regression to assist our company
 
 *** =pre_exercise_code
 ```{r}
-
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10, 0.35), 2))
+clear(n)
 ```
 
 *** =sample_code
