@@ -759,6 +759,7 @@ Have a look at the class slides available from [this link](https://clickup.up.ac
 msg_bad <- "Incorrect. That is not the necessary parameter for the poisson distribution."
 msg_success <- "That is correct! For a poisson distribution we need the arrival rate of the random variable."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
+```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:97f9e17aa1
 ## Using the best distribution for passanger arrivals
