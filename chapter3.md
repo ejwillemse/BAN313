@@ -467,8 +467,8 @@ The data that we will use to estimate the key parameters are available in the `c
 
 *** =instructions
 
-1. Estimate $min_{x}$ for the uniform distribution and assign your answer to `minOrders`. 
-2. Estimate $max_{x}$ for the normal distribution and assign your answer to `maxOrders`. 
+1. Estimate $min$ for the uniform distribution and assign your answer to `minOrders`. 
+2. Estimate $max$ for the uniform distribution and assign your answer to `maxOrders`. 
 3. Use the uniform distribution propability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
 4. View all the above values by printing them to the console output via the `script.R` file.
 
