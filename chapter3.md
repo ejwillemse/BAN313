@@ -327,7 +327,7 @@ success_msg("Correct! We have no successfully fitted a normal distribution to th
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:acbbc34771
-## Order per day
+## Predicting softdrink orders for the next day
 
 We are responsible for inventory management for a softdrink company.
 Due to a strike, the company cannot produce softdrink. The company is afraid that it may not be able to fullfill customer orders for the next day.
