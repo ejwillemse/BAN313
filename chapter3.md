@@ -31,39 +31,9 @@ The specific R functions that we will be using are:
 pnorm(), qnorm(), rnorm(), ppois(), qpois(), rpois(), pexp(), qexp(), rexp(), punif(), qunif(), runif()
 ```
 
-To find out more about the functions, type `?function` in the R console.
+To find out more about the functions, type `?function` in the R console. The basic usage of the functions is described in [this page](http://www.cyclismo.org/tutorial/R/probability.html).
 
-A critical component of manufacturing is production planning, which includes, amongst others:
-
-1. Determine the resource and material requirements for production.
-2. Scheduling the work to be conducted in the facility, including the purchase and delivery of materials.
-3. Setting up and delivering production orders to clients.
-
-We are responsible for production planning at luxury yachts manufacturing company. 
-Given the uniques of our products, our production operates on the produce-to-order principle, whereby manufacturing only starts once an order has been placed for a yacht. 
-Clients are also in full control of the yacht specifications, and can decide on the size of the yacht, its interior and a bunch of other customisations.
-As a result, each order is unique and has its own materials and manufacturing requirements.
-To manufacture the different yachts, we have a general purpose yacht-building facility, allowing us to build any type of yacht.
-The only-limitation that we have is that we can only manufacture one yacht at a time.
-
-A key input into production planning is the expected time that an order will take to complete.
-This information is critical to communicate to the customer.
-It is also used to predict when the next built will start, and to schedule its material delivery accordingly.
-
-In this case study we will develop a simple predictive model, in the form of a linear-regression model, to predict how long a yacht will take to complete based on some of its key specifications.
-
-Please take note that the data used for this chapter is randomly generated and will change:
-
-- each time the chapter is attempted; and
-- when moving from one exercise to the next.
-
-When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
-
-Before continuing, have a quick look at the following tutorial as you may need to refer to it during the course of the chapter: 
-
-* Refer to [http://www.cyclismo.org/tutorial/R/linearLeastSquares.html](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html).
-
-After going through the tutorial and to continue with this chapter, hit the 'Submit Answer' button.
+Consult the accompanying lecture slides, `Lecture_Week6.pdf`, available on _clickUP_ under the `Theme 2: Simulation models/Week 6 Introduction to key statistical distributions: lecture material/`, or by clicking [on this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
 
 *** =instructions
 
