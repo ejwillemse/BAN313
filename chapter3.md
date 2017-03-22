@@ -352,7 +352,7 @@ In the following parts we will find the key parameters of the distribution and u
 
 *** =hint
 
-Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which of the four distributions
+Use `hist(clienOrders$ordersPerDay)` to analyse the distribution and see which of the four distributions
 
 * normal, 
 * poisson and exponential, 
@@ -361,7 +361,7 @@ Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which o
 
 it most closely represents.
 
-Use the `nDefective <- nrow(subset(holeSize, holeDiameter_cm < lower_limit | holeDiameter_cm > upper_limit))` to find the number of deffective products for different tollerance limits.
+Use the `less210 <- nrow(subset(clienOrders, ordersPerDay < lower_limit))` to find the number of days that less than the specified number of products were ordered.
 
 *** =pre_exercise_code
 ```{r}
@@ -379,7 +379,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250),
 
 
 
-# 5. View the values by printing them to the console output via the `script.R` file. Print the values here:
+# 3. View the values by printing them to the console output via the `script.R` file. Print the values here:
 
 
 
@@ -387,7 +387,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250),
 
 *** =solution
 ```{r}
-hist(holeSize$holeDiameter_cm)
+hist(clienOrders$ordersPerDay)
 less210 <- nrow(subset(clienOrders, ordersPerDay < 210))
 less210
 ```
