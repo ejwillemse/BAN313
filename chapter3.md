@@ -459,7 +459,7 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
 ## Using the best distribution for softdrink orders
 
-To use the distribution, $X \sim U(min_{x}, max_{x})$ we first need to estimate its key parameters, namely the mininum and maximum value for the number of units ordered per day. 
+To use the distribution, $X \sim \mathcal{U}(min, max)$ we first need to estimate its key parameters, namely the mininum and maximum value for the number of units ordered per day. 
 Thereafter we will emperically calculate the fraction of days in which more than 210 units will be ordered using `punif()` function.
 This represents the probability that we will run out of stock on the next day.
 
