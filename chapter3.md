@@ -243,15 +243,15 @@ Thereafter we will emperically calculate the fraction of products that meet diff
 
 The data that we will use to estimate the key parameters are available in the `holeSize` dataframe. Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
 
-Hint, to assist in your answers, draw a simple normal distribution and check where the lower and upper tollerance limits lie. Pay special attention that the tollerance limits may not neccisseraly be symmetrically around the mean, in which case you need to calculate the probability for each tollerance limit. 
+Hint, to assist in your answers, draw a figure of the normal distribution of the hole-size and check where the lower and upper tollerance limits lie. Pay special attention that the tollerance limits may not neccisseraly be symmetrically around the mean, in which case you need to calculate the probability for each tollerance limit, and calculate the area between the upper and lowered limit. This is covered in Example~2.49 on page 93 in the [prescibed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
 *** =instructions
 
-1. Estimate $\mu$ for the normal distribution and assign your answer to $meanHoleSize$. 
-2. Estimate $\sigma$ for the normal distribution and assign your answer to $sdHoleSize$. 
-3. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.5cm_ tollerance limit.
-4. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.75cm_ tollerance limit.
-5. View the values by printing them to the console output via the `script.R` file.
+1. Estimate $\mu$ for the normal distribution and assign your answer to `meanHoleSize`. 
+2. Estimate $\sigma$ for the normal distribution and assign your answer to `sdHoleSize`. 
+3. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.5cm_ tollerance limit and assign your answer to `fWork05`.
+4. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.75cm_ tollerance limit and assign your answer to `fWork075`.
+5. View all the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
@@ -263,20 +263,65 @@ The `pnorm` function has three inputs, `q`, $\mu$ and $\sigma$. To calculate the
 
 *** =pre_exercise_code
 ```{r}
-
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
+rm(n)
 ```
 
 *** =sample_code
 ```{r}
+# The data are available in the holeSize dataframe.
+
+# 1. Estimate mu for the normal distribution and assign your answer to `meanHoleSize`. 
+
+
+
+# 2. Estimate sigma for the normal distribution and assign your answer to `sdHoleSize`. 
+
+
+
+# 3. Use the normal distribution propability function and determine the fraction of holes that will fall within a 0.5cm tollerance limit and assign your answer to `fWork05`.
+
+
+
+# 4. Use the normal distribution propability function and determine the fraction of holes that will fall within a 0.75cm tollerance limit and assign your answer to `fWork075`.
+
+
+
+# 5. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
 
 ```
 
 *** =solution
 ```{r}
-
+meanHoleSize <- mean(holeSize$holeDiameter_cm)
+sdHoleSize <- sd(holeSize$holeDiameter_cm)
+fWork05 <- pnorm(10+0.5, mean = meanHoleSize, sd = sdHoleSize) - pnorm(10-0.5, mean = meanHoleSize, sd = sdHoleSize)
+fWork075 <- pnorm(10+0.75, mean = meanHoleSize, sd = sdHoleSize) - pnorm(10-0.75, mean = meanHoleSize, sd = sdHoleSize)
+meanHoleSize
+sdHoleSize
+fWork05
+fWork075
 ```
 
 *** =sct
 ```{r}
+test_object("meanHoleSize", undefined_msg = "Make sure to define an object `meanHoleSize`.",
+            incorrect_msg = "Make sure that you calculated the mean hole size correctly and assigned your answer to `meanHoleSize`")     
 
+test_object("sdHoleSize", undefined_msg = "Make sure to define an object `sdHoleSize`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation of hole size correctly and assigned your answer to `sdHoleSize`")     
+
+test_object("fWork05", undefined_msg = "Make sure to define an object `fWork05`.",
+            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.5cm tollerace correctly and assigned the result to `fWork05`") 
+
+test_object("fWork075", undefined_msg = "Make sure to define an object `fWork075`.",
+            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.75cm tollerace correctly and assigned the result to `fWork075`") 
+
+test_output_contains("meanHoleSize", incorrect_msg = "You did not view the actual value `meanHoleSize`.")
+test_output_contains("sdHoleSize", incorrect_msg = "You did not view the actual value `sdHoleSize`.")
+test_output_contains("fWork05", incorrect_msg = "You did not view the actual value `fWork05`.")
+test_output_contains("fWork075", incorrect_msg = "You did not view the actual value `fWork075`.")
+
+success_msg("Correct! We have no successfully fitted a normal distribution to the hole size and used the distribution to emperically calculate the fraction of products that are within specification.")
 ```
