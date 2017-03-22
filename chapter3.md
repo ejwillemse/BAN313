@@ -553,6 +553,7 @@ The columns (variables) of the dataset and the variable types are as follow:
 * `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
 * `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
 * `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
+* `second`: the second of the minute during which the passanger arrived, from from \{00, 01, \ldots, 59\}.
 * `timeStamp`: exact time of the passenger arrival, in the format `hh:mm:ss`.
 * `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
 * `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
@@ -694,4 +695,56 @@ test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the n
              incorrect_msg = "Make sure to draw the histogram for the number of customers that arrived per minute. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
 
 success_msg("Correct! Now that we looked at the distribution of the number of customers that arrive per minute, we can decide which distribution best represent variable.")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:1c8e286d4a
+## Choosing the best distribution for the drill-hole sizes
+
+Based on the histogram of the drill-hole sizes, which of the following distributions best represent the drill-hole size resulting from the drilling machine?
+
+*** =instructions
+* normal, 
+* poisson and exponential, 
+* power-law, or 
+* uniform.
+
+*** =hint
+Have a look at the distribution that you generated in the previous exercise.
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
+msg_success <- "That is correct! The distribution that best describes the number of passanger arrivals per minute is the poisson or exponential distribution. Next we need to find the key parameters for the distribution."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:13682c55f6
+## Passanger arrival distribution parameter.
+
+Which distribution parameter(s) do we need to determine to model the number of passanger arrivals? 
+
+*** =instructions
+
+* min and max,
+* mean or arrival rate, or
+* mean and standard deviation.
+
+*** =hint
+Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Incorrect. That is not the necessary parameter for the poisson distribution."
+msg_success <- "That is correct! For a poisson distribution we need the arrival rate of the random variable."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
 ```
