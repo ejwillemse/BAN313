@@ -914,10 +914,160 @@ test_object("arrivalRate", undefined_msg = "Make sure to define an object `arriv
             incorrect_msg = "Make sure that you calculated lambda correctly and assigned your answer to `arrivalRate`")     
 
 test_object("pInsufficent", undefined_msg = "Make sure to define an object `pInsufficent`.",
-            incorrect_msg = "Make sure that you calculated the probability of the two gates, where each gate can process two customers per minute, correctly and assign your answer to `pInsufficent`")
+            incorrect_msg = "Make sure that you calculated the probability of the two gates being _insufficient_, where each gate can process two customers per minute, correctly and assign your answer to `pInsufficent`")
 
 test_output_contains("arrivalRate", incorrect_msg = "You did not view the actual value `arrivalRate`.")
 test_output_contains("pInsufficent", incorrect_msg = "You did not view the actual value `pInsufficent`.")
 
 success_msg("Correct! We have now successfully fitted a poisson distribution to number of customers that arrive within a one-minute interval and used the distribution to emperically calculate the probability of two access-gates being insufficient.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:3c7b8033f9
+## Using the best distribution for the number of access-gates
+
+The station wants to probability of their access-gates being insufficient being less than 0.05.
+Recall that a gate can process approximately 2 passangers per minute.
+What is the minimum number of access-gates required to ensure that this is the case?
+
+The number of customers that arrived within each minute interval has again been precaculated and is available as the `nArrivePerMin` object.
+
+*** =instructions
+
+1. Determine the minimum number of access-gates required to ensure that the probablity of the gates be insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`.
+2. View the above values by printing them to the console output via the `script.R` file.
+
+*** =hint
+
+use the `qnorm` function to determine the 95th percentile point, which represents the number of passanger arrivals, or more, that will occure with a probability of 0.05.
+Thereafter use this number to determine the minimum number of access-gates.
+
+*** =pre_exercise_code
+```{r}
+tod <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(todFormatted)
+}
+
+tomns <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(mints)
+}
+
+tosecs <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(secs)
+}
+
+genData <- function()
+{
+  nCustomersPerWeek <- 63000/8*5
+  dayPeak <- c(2,2,2,1,1)
+  dayPeakNorm <- dayPeak/sum(dayPeak)
+  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+  
+  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+  
+  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+  dayHrs <- 16:17
+  dayMinutes <- 1:60
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+                'Park', 'Rhodesfield', 'OR-Tambo')
+  
+  mydataTemplate <- data.frame(day = numeric(), 
+                               dow = character(),
+                               hour = numeric(),
+                               timeStamp = character(),
+                               cardLoad = logical(),
+                               origin = character())
+  
+  mydata <- mydataTemplate
+  
+  i = 0
+  for (nWeek in 1:(30/length(dows)))
+  {
+    for (d in 1:length(dows))
+    {
+      i = i + 1
+      nDay = nCustomersPerWeek*dayPeakNorm[d]
+      for (h in 1:length(dayHrs))
+      {
+        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+        startTime <- 0
+        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        nArrivals <- length(timeStamp)
+        
+        day <- rep(i, nArrivals)
+        dow <- rep(dows[d], nArrivals)
+        hour <- rep(dayHrs[h], nArrivals)
+        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+        origin <- sample(stations, size = nArrivals, replace = T)
+        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
+        mydata <- rbind(mydata, hourFrame)
+      }
+    }
+  }
+  return(mydata)
+}
+
+gauArrive <- genData()
+rm(genData)
+rm(tod)
+rm(tomns)
+rm(tosecs)
+
+nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
+```
+
+*** =sample_code
+```{r}
+# The number of customers that arrived within each minute interval has been precaculated and is available as the `nArrivePerMin` object.
+
+#1. Determine the minimum number of access-gates required to ensure that the probablity of the gates be insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`
+
+
+
+#2. View the above value by printing it to the console output via the `script.R` file.
+
+
+
+```
+
+*** =solution
+```{r}
+arrivalRate <- mean(nArrivePerMin)
+qInsufficent <- qpois(0.05, arrivalRate, lower.tail = FALSE)
+minGates <- ceiling(qInsufficent/2)
+minGates
+```
+
+*** =sct
+```{r}
+test_object("minGates", undefined_msg = "Make sure to define an object `minGates`.",
+            incorrect_msg = "Make sure that you calculated the minimum number of access-gates correctly and assigned your answer to `minGates`")     
+
+test_output_contains("minGates", incorrect_msg = "You did not view the actual value `minGates`.")
+
+success_msg("Correct! We have now successfully used a poisson distribution to calculate the minimum number of access-gates that will ensure that the probability of the gates being insufficient for customer arrivals is less than 0.05.")
 ```
