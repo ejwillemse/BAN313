@@ -364,12 +364,12 @@ Use the `less210 <- nrow(subset(clienOrders, ordersPerDay < lower_limit))` to fi
 
 *** =pre_exercise_code
 ```{r}
-clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250), 0))
+clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 0))
 ```
 
 *** =sample_code
 ```{r}
-# The data are available in the holeSize dataframe.
+# The data are available in the clienOrders dataframe.
 # 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
 
 
