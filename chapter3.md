@@ -527,6 +527,6 @@ test_output_contains("minOrders", incorrect_msg = "You did not view the actual v
 test_output_contains("maxOrders", incorrect_msg = "You did not view the actual value `maxOrders`.")
 test_output_contains("pStockOut", incorrect_msg = "You did not view the actual value `pStockOut`.")
 
-success_msg("Correct! We have no successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to emperically calculate the probability of a stockout.")
+success_msg("Correct! We have now successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to emperically calculate the probability of a stockout.")
 ```
 
