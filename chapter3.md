@@ -545,7 +545,7 @@ This information is necessary to determine the number of outbound access gate to
 The Gautrain can determine whether an access gate should be inbound or outbound.
 Approximately five passangers can go through the gate per minute.
 
-Data on the arrival time of customers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
+Data on the arrival time of passangers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
 
 The columns (variables) of the dataset and the variable types are as follow:
 
@@ -557,38 +557,26 @@ The columns (variables) of the dataset and the variable types are as follow:
 * `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
 * `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
 
-
-
-
-The machine is required to drill a hole with a diameter of 10cm within 0.5cm tollerance.
-If the hole is larger than 10.5cm, the part has to be scrapped.
-Similarly, if the hole is smaller than 9.5cm the hole will also be scrapped.
-
-We also want to use the machine to drill holes for other products that have different tollerance.
-One product may have a 0.25cm tollerance, another 1cm.
-
-We have identified a possible replacement machine, and its supplier assured us it will perform according to specification.
-As industrial engineers we insisted that the supplier provide us with data on its performance, so that we can make a more informed decision on whether it will meet our requirement.
-
-The supplier has given us data on different holes drilled by the machine during its testing.
-The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
-The data is available in the `holeSize` dataframe.
-
-For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes of the machine. 
+For the first part of this question, analyse the distribution of the number of passanger arriving per minute and identify the distribution that best describes this variable. 
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning support questions.
 
 *** =instructions
 
-1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with `breaks` parameter. 
-2. How many samples fall outside the 0.5cm tollerance limit and are therefore defective: assign your answer to `nDefective05`.
-3. How many samples fall outside the 0.25cm tollerance limit and are therefore defective: assign your answer to `nDefective025`.
-4. How many samples fall outside the 1cm tollerance limit and are therefore defective: assign your answer to `nDefective1`.
-5. View the values by printing them to the console output via the `script.R` file.
-
-
-*** =instructions
+1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. 
+2. Analyse the distribution of the number of passanger arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
 
 *** =hint
+
+First calculate the number of customers that arrived within each minute interval using the `table()` command.
+Remember to call the command over the `day`, `hour` and `minute` factors:  `table(dataframe$factor1, dataframe$factor2, dataframe$factor3)`.
+The resulting table can be directly plotted using `hist(nArrivePerMin)`.
+
+Use the histogram to analyse the distribution and see which of the four distributions
+
+* normal, 
+* poisson and exponential, 
+* power-law, or 
+* uniform.
 
 *** =pre_exercise_code
 ```{r}
@@ -617,119 +605,93 @@ tomns <- function(x, h)
 
 genData <- function()
 {
-nCustomersPerWeek <- 63000/8*5
-dayPeak <- c(2,2,2,1,1)
-dayPeakNorm <- dayPeak/sum(dayPeak)
-arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
-arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-
-pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-
-dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-dayHrs <- 16:17
-dayMinutes <- 1:60
-stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
-              'Park', 'Rhodesfield', 'OR-Tambo')
-
-mydataTemplate <- data.frame(day = numeric(), 
-                             dow = character(),
-                             hour = numeric(),
-                             timeStamp = character(),
-                             cardLoad = logical(),
-                             origin = character())
-
-mydata <- mydataTemplate
-
-i = 0
-for (nWeek in 1:(30/length(dows)))
-{
-  for (d in 1:length(dows))
-  {
-    i = i + 1
-    nDay = nCustomersPerWeek*dayPeakNorm[d]
-    for (h in 1:length(dayHrs))
+    nCustomersPerWeek <- 63000/8*5
+    dayPeak <- c(2,2,2,1,1)
+    dayPeakNorm <- dayPeak/sum(dayPeak)
+    arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+    arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+    
+    pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+    
+    dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+    dayHrs <- 16:17
+    dayMinutes <- 1:60
+    stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+                  'Park', 'Rhodesfield', 'OR-Tambo')
+    
+    mydataTemplate <- data.frame(day = numeric(), 
+                                 dow = character(),
+                                 hour = numeric(),
+                                 timeStamp = character(),
+                                 cardLoad = logical(),
+                                 origin = character())
+    
+    mydata <- mydataTemplate
+    
+    i = 0
+    for (nWeek in 1:(30/length(dows)))
     {
-      arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
-      startTime <- 0
-      arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
-      timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-      nArrivals <- length(timeStamp)
-      
-      day <- rep(i, nArrivals)
-      dow <- rep(dows[d], nArrivals)
-      hour <- rep(dayHrs[h], nArrivals)
-      minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-      cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
-      origin <- sample(stations, size = nArrivals, replace = T)
-      hourFrame <- data.frame(day, dow, hour, minute, timeStamp, cardLoad, origin)
-      mydata <- rbind(mydata, hourFrame)
+      for (d in 1:length(dows))
+      {
+        i = i + 1
+        nDay = nCustomersPerWeek*dayPeakNorm[d]
+        for (h in 1:length(dayHrs))
+        {
+          arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+          startTime <- 0
+          arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+          timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+          nArrivals <- length(timeStamp)
+          
+          day <- rep(i, nArrivals)
+          dow <- rep(dows[d], nArrivals)
+          hour <- rep(dayHrs[h], nArrivals)
+          minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+          cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+          origin <- sample(stations, size = nArrivals, replace = T)
+          hourFrame <- data.frame(day, dow, hour, minute, timeStamp, cardLoad, origin)
+          mydata <- rbind(mydata, hourFrame)
+        }
+      }
     }
-  }
+    return(mydata)
 }
 
-creditLoad = subset(mydata, cardLoad == TRUE)
-hist(table(mydata$hour, mydata$day, mydata$minute), breaks = 30)
+gauArrive <- genData()
+rm(genData)
+rm(tod)
+rm(tomns)
 
-nCustomersPerWeek <- 63000/8*5
-dayPeak <- c(2,2,2,1,1)
-dayPeakNorm <- dayPeak/sum(dayPeak)
-arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
-arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-
-pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-
-dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-dayHrs <- 5:21
-stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
-              'Park', 'Rhodesfield', 'OR-Tambo')
-
-mydataTemplate <- data.frame(day = numeric(), 
-                            dow = character(),
-                            hour = numeric(),
-                            timeStamp = character(),
-                            cardLoad = logical(),
-                            origin = character())
-
-mydata <- mydataTemplate
-
-i = 0
-for (nWeek in 1:(5/length(dows)))
-{
-  for (d in 1:length(dows))
-  {
-    i = i + 1
-    nDay = nCustomersPerWeek*dayPeakNorm[d]
-    for (h in 1:length(dayHrs))
-    {
-      arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
-      startTime <- 0
-      arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
-      timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-      nArrivals <- length(timeStamp)
-      
-      day <- rep(i, nArrivals)
-      dow <- rep(dows[d], nArrivals)
-      hour <- rep(dayHrs[h], nArrivals)
-      cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
-      origin <- sample(stations, size = nArrivals, replace = T)
-      hourFrame <- data.frame(day, dow, hour, timeStamp, cardLoad, origin)
-      mydata <- rbind(mydata, hourFrame)
-    }
-  }
-}
 ```
 
 *** =sample_code
 ```{r}
+# The data are available in the gauArrive dataframe.
+
+# 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. 
+
+
+
+# 2. Analyse the distribution of the number of passangers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
+
+
 
 ```
 
 *** =solution
 ```{r}
-
+nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
+hist(nArrivePerMin)
 ```
 
 *** =sct
 ```{r}
+     
+test_object("nArrivePerMin", undefined_msg = "Make sure to define an object `nArrivePerMin`.",
+            incorrect_msg = "Make sure that you calculated the number of customers that arrived during each minute interval and assigned your answer to `nArrivePerMin`")     
 
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of customers that arrived per minute to see what the distribution looks like.",
+             incorrect_msg = "Make sure to draw the histogram for the number of customers that arrived per minute. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
+
+success_msg("Correct! Now that we looked at the distribution of the number of customers that arrive per minute, we can decide which distribution best represent variable.")
 ```
