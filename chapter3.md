@@ -480,7 +480,7 @@ The `punif` function has three inputs, `q`, `min` and `max`. Remember to check w
 
 *** =pre_exercise_code
 ```{r}
-clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250), 0))
+clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 0))
 ```
 
 *** =sample_code
