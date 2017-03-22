@@ -434,7 +434,7 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:4085ce9982
 ## Softdrink orders distribution parameters.
 
-Which distribution parameters do we need to determine to model the hole-size as a normal distribution? 
+Which distribution parameters do we need to determine to model the number of units ordered per day as a uniform distribution? 
 
 *** =instructions
 
