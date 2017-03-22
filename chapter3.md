@@ -185,7 +185,7 @@ success_msg("Correct! Now that we looked at the distribution of hole-sizes, and 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
 ## Choosing the best distribution for the drill-hole sizes
 
-Based on the histogram of the drill-hole sizes, which of the following distributions best represents the drill-hole size resulting from the drilling machine?
+Based on the histogram of the drill-hole sizes, which of the following distributions best represent the drill-hole size resulting from the drilling machine?
 
 *** =instructions
 * normal, 
@@ -203,7 +203,35 @@ Have a look at the distribution that you generated in the previous exercise.
 
 *** =sct
 ```{r}
-msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chanse that the distribution looks like something else by accident."
-msg_success <- "That is correct! The distribution that best describes the resulting hole-size is the normal distribution."
+msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
+msg_success <- "That is correct! The distribution that best describes the resulting hole-size is the normal distribution. Next we need to find the key parameters for the distribution."
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
+```
+
+
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:f49344f14e
+## Drill-hole size distribution parameters.
+
+Which distribution parameters do we need to determine to model the hole-size as a normal distribution? 
+
+*** =instructions
+
+* min and max;
+* mean or arrival rate; or
+* mean and standard deviation;
+
+*** =hint
+Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Incorrect. That is not the necessary parameters for the normal distribution."
+msg_success <- "That is correct! For a normal distribution we need the mean and standard deviation of the random variable"
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 ```
