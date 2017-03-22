@@ -3,7 +3,7 @@ title_meta  : Case study 6
 title       : Case study 6 - Different applications of probability distributions
 description : In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. The distribitions that we will look at are normal, poisson and exponential, power-law, and uniform. After eye-balling the applicable distribution we will find the appropraite distribution parameters, using the data, and then empirically answer some basic planning decisions using the appropriate distribution with its parameters.
 
---- type:NormalExercise lang:r xp:0 skills:1 key:ec139ff825
+--- type:NormalExercise lang:r xp:0 skills:1 key:4fdf3ba090
 ## Background
 
 In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. 
@@ -65,4 +65,32 @@ summary(cars)
 *** =sct
 ```{r}
 success_msg("Let's try and use our knowledge on regression to assist our company.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+## <<<New Exercise>>>
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
 ```
