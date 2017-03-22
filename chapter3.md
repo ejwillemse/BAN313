@@ -243,7 +243,7 @@ Thereafter we will emperically calculate the fraction of products that meet diff
 
 The data that we will use to estimate the key parameters are available in the `holeSize` dataframe. Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
 
-Hint, to assist in your answers, draw a figure of the normal distribution of the hole-size and check where the lower and upper tollerance limits lie. Pay special attention that the tollerance limits may not neccisseraly be symmetrically around the mean, in which case you need to calculate the probability for each tollerance limit, and calculate the area between the upper and lowered limit. This is covered in Example~2.49 on page 93 in the [prescibed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
+Hint, to assist in your answers, on a piece of paper draw a figure of the normal distribution of the hole-size and check where the lower and upper tollerance limits lie. Pay special attention that the tollerance limits may not neccisseraly be symmetrically around the mean, in which case you need to calculate the probability for each tollerance limit, and calculate the area between the upper and lowered limit. This is covered in Example~2.49 on page 93 in the [prescibed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
 *** =instructions
 
