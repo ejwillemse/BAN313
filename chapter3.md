@@ -325,3 +325,82 @@ test_output_contains("fWork075", incorrect_msg = "You did not view the actual va
 
 success_msg("Correct! We have no successfully fitted a normal distribution to the hole size and used the distribution to emperically calculate the fraction of products that are within specification.")
 ```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:acbbc34771
+## Order per day
+
+We are responsible for inventory management for a softdrink company.
+Due to a strike, the company cannot produce softdrink. The company is afraid that it may not be able to fullfill customer orders for the next day.
+Human resources believe that the strike will be this evening, and we therefore need to determine if we have enough inventory for tomorrow's orders.
+Orders are only placed by our clients in the morning and delivered on the same day.
+Our clients are unaware of the strike, and management has no intention of informing them of it.
+We currently have 210 units of the softdrink in stock.
+
+Management wishes to know what probabilty is of running out of stock during the next day.
+Depending on the probability they can either import soft-drink from another manufacturing plant via expensive air-delivery, or decide to take their chances and wait for the strike to end and resume manufacturing.
+
+The sales data for the previous 30 days' orders are available in the `clienOrders` dataframe, which consists of the day and the number of units ordered on that day by our clients.
+
+For the first part of this question, analyse the distribution of the number orders per day and identify the distribution that best describes this value. 
+In the following parts we will find the key parameters of the distribution and use the distribution function to answer some the above question.
+
+*** =instructions
+
+1. Analyse the distribution of the orders per day using the `hist()` function and by playing around with `breaks` parameter. 
+2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
+3. View the values by printing them to the console output via the `script.R` file. Print the values here:
+
+*** =hint
+
+Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which of the four distributions
+
+* normal, 
+* poisson and exponential, 
+* power-law, or 
+* uniform,
+
+it most closely represents.
+
+Use the `nDefective <- nrow(subset(holeSize, holeDiameter_cm < lower_limit | holeDiameter_cm > upper_limit))` to find the number of deffective products for different tollerance limits.
+
+*** =pre_exercise_code
+```{r}
+clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250), 0))
+```
+
+*** =sample_code
+```{r}
+# The data are available in the holeSize dataframe.
+# 1. Analyse the distribution of the orders per day using the `hist()` function and by playing around with `breaks` parameter. 
+
+
+
+# 2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
+
+
+
+# 5. View the values by printing them to the console output via the `script.R` file. Print the values here:
+
+
+
+```
+
+*** =solution
+```{r}
+hist(holeSize$holeDiameter_cm)
+less210 <- nrow(subset(clienOrders, ordersPerDay < 210))
+less210
+```
+
+*** =sct
+```{r}
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of orders per day to see what the distribution looks like.",
+             incorrect_msg = "Make sure to draw the histogram for the number of orders per day. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
+     
+test_object("less210", undefined_msg = "Make sure to define an object `less210`.",
+            incorrect_msg = "Make sure that you calculated the number of times that clients ordered less than 210 units and assigned the result to `nDefective05`")     
+
+test_output_contains("less210", incorrect_msg = "You did not view the actual value `less210`.")
+
+success_msg("Correct! Now that we looked at the distribution of orders per day, and have an idea of the number of times that our clients ordered less units than what is in our inventory, we can decide which distribution best represent the number of units ordered and predict the probability of running out of stock tomorrow.")
+```
