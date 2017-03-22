@@ -180,8 +180,6 @@ test_output_contains("nDefective1", incorrect_msg = "You did not view the actual
 success_msg("Correct! Now that we looked at the distribution of hole-sizes, and have an idea of the number of products that are not according to specificaion, we can decide which distribution best represent the hole-sizes resulting from the drilling machine.")
 ```
 
-
-
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
 ## Choosing the best distribution for the drill-hole sizes
 
@@ -330,23 +328,24 @@ success_msg("Correct! We have no successfully fitted a normal distribution to th
 ## Predicting softdrink orders for the next day
 
 We are responsible for inventory management for a softdrink company.
-Due to a strike, the company cannot produce softdrink. The company is afraid that it may not be able to fullfill customer orders for the next day.
-Human resources believe that the strike will be this evening, and we therefore need to determine if we have enough inventory for tomorrow's orders.
+Due to a strike, the company cannot produce softdrinks. 
+The company is afraid that it may not be able to fullfill customer orders for the next day.
+Human resources believe that the strike will end this evening, and we therefore need to determine if we have enough inventory for tomorrow's orders.
 Orders are only placed by our clients in the morning and delivered on the same day.
 Our clients are unaware of the strike, and management has no intention of informing them of it.
 We currently have 210 units of the softdrink in stock.
 
-Management wishes to know what probabilty is of running out of stock during the next day.
-Depending on the probability they can either import soft-drink from another manufacturing plant via expensive air-delivery, or decide to take their chances and wait for the strike to end and resume manufacturing.
+Management wishes to know the probabilty of running out of stock during the next day.
+Depending on the probability they can either import softdrinks from another manufacturing plant via expensive air-delivery, or decide to take their chances and wait for the strike to end and resume manufacturing.
 
-The sales data for the previous 30 days' orders are available in the `clienOrders` dataframe, which consists of the day and the number of units ordered on that day by our clients.
+The sales data for the previous 30 days' orders are available in the `clienOrders` dataframe, which consists of the day and the number of units ordered on that day by all our clients.
 
-For the first part of this question, analyse the distribution of the number orders per day and identify the distribution that best describes this value. 
-In the following parts we will find the key parameters of the distribution and use the distribution function to answer some the above question.
+For the first part of this question, analyse the distribution of the number of units ordered per day and identify the distribution that best describes this random variable. 
+In the following parts we will find the key parameters of the distribution and use the distribution function to answer the above question.
 
 *** =instructions
 
-1. Analyse the distribution of the orders per day using the `hist()` function and by playing around with `breaks` parameter. 
+1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
 2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
 3. View the values by printing them to the console output via the `script.R` file. Print the values here:
 
@@ -371,7 +370,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250),
 *** =sample_code
 ```{r}
 # The data are available in the holeSize dataframe.
-# 1. Analyse the distribution of the orders per day using the `hist()` function and by playing around with `breaks` parameter. 
+# 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
 
 
 
@@ -394,13 +393,139 @@ less210
 
 *** =sct
 ```{r}
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of orders per day to see what the distribution looks like.",
-             incorrect_msg = "Make sure to draw the histogram for the number of orders per day. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of units ordered per day to see what the distribution looks like.",
+             incorrect_msg = "Make sure to draw the histogram for the number of units ordered per day. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
      
 test_object("less210", undefined_msg = "Make sure to define an object `less210`.",
             incorrect_msg = "Make sure that you calculated the number of times that clients ordered less than 210 units and assigned the result to `nDefective05`")     
 
 test_output_contains("less210", incorrect_msg = "You did not view the actual value `less210`.")
 
-success_msg("Correct! Now that we looked at the distribution of orders per day, and have an idea of the number of times that our clients ordered less units than what is in our inventory, we can decide which distribution best represent the number of units ordered and predict the probability of running out of stock tomorrow.")
+success_msg("Correct! Now that we looked at the distribution of the number of units ordered per day, and have an idea of the number of times that our clients ordered less units than what is in our inventory, we can decide which distribution best represent the number of units ordered per day and predict the probability of running out of stock tomorrow.")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:83144b0372
+
+## Choosing the best distribution for softdrink orders
+
+Based on the histogram of the number of units ordered per day, which of the following distributions best represent the variable?
+
+*** =instructions
+* normal, 
+* poisson and exponential, 
+* power-law, or 
+* uniform,
+
+*** =hint
+Have a look at the distribution that you generated in the previous exercise.
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
+msg_success <- "That is correct! The distribution that best describes the number of units ordered per day is the uniform distribution. Next we need to find the key parameters for the distribution."
+test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:4085ce9982
+## Softdrink orders distribution parameters.
+
+Which distribution parameters do we need to determine to model the hole-size as a normal distribution? 
+
+*** =instructions
+
+* min and max;
+* mean or arrival rate; or
+* mean and standard deviation;
+
+*** =hint
+Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sct
+```{r}
+msg_bad <- "Incorrect. That is not the necessary parameters for the uniform distribution."
+msg_success <- "That is correct! For a uniform distribution we need the mininum and maximum value for the random variable"
+test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad))
+```
+--- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+## Using the best distribution for softdrink orders
+
+To use the distribution, $X \sim \mathcal{U}(min_x, max_x)$ we first need to estimate its key parameters, namely the mininum and maximum value for the number of units ordered per day. 
+Thereafter we will emperically calculate the fraction of days in which more than 210 units will be ordered using `punif()` function.
+This represents the probability that we will run out of stock on the next day.
+
+The data that we will use to estimate the key parameters are available in the `clienOrders` dataframe.
+
+*** =instructions
+
+1. Estimate $min_x$ for the uniform distribution and assign your answer to `minOrders`. 
+2. Estimate $max_x$ for the normal distribution and assign your answer to `maxOrders`. 
+3. Use the uniform distribution propability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
+4. View all the above values by printing them to the console output via the `script.R` file.
+
+*** =hint
+
+To calculate $min_x$ and $max_x$, simply use `min` and `max` on `clienOrders$ordersPerDay`. 
+
+The `punif` function has three inputs, `q`, `min` and `max`. Remember to check whether it returns the probability of having a value less than `q` or more than `q`.
+
+*** =pre_exercise_code
+```{r}
+clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250), 0))
+```
+
+*** =sample_code
+```{r}
+# The data are available in the clienOrders dataframe.
+# 1. Estimate min_x for the uniform distribution and assign your answer to `minOrders`. 
+
+
+
+# 2. Estimate max_x for the normal distribution and assign your answer to `maxOrders`. 
+
+
+
+# 3. Use the uniform distribution propability function and determine the probability that more than 210 units will be ordered tomorrow and assign your answer to `pStockOut`.
+
+
+
+# 4. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
+
+```
+
+*** =solution
+```{r}
+minOrders <- min(clienOrders$ordersPerDay)
+maxOrders <- max(clienOrders$ordersPerDay)
+pStockOut <- runif(q = 210, min = minOrders, max = maxOrders, lower.tail = FALSE)
+minOrders
+maxOrders
+pStockOut
+```
+
+*** =sct
+```{r}
+test_object("minOrders", undefined_msg = "Make sure to define an object `minOrders`.",
+            incorrect_msg = "Make sure that you calculated the minimum number of units ordered per day correctly and assigned your answer to `minOrders`")     
+
+test_object("maxOrders", undefined_msg = "Make sure to define an object `maxOrders`.",
+            incorrect_msg = "Make sure that you calculated the maximum number of units ordered per day correctly and assigned your answer to `maxOrders`")       
+
+test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
+            incorrect_msg = "Make sure that you calculated the probability of stockout correctly and assigned your answer to `pStockOut`") 
+
+test_output_contains("minOrders", incorrect_msg = "You did not view the actual value `minOrders`.")
+test_output_contains("maxOrders", incorrect_msg = "You did not view the actual value `maxOrders`.")
+test_output_contains("pStockOut", incorrect_msg = "You did not view the actual value `pStockOut`.")
+
+success_msg("Correct! We have no successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to emperically calculate the probability of a stockout.")
 ```
