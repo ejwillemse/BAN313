@@ -459,7 +459,7 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
 ## Using the best distribution for softdrink orders
 
-To use the distribution, $X \sim \mathcal{U}(min_x, max_x)$ we first need to estimate its key parameters, namely the mininum and maximum value for the number of units ordered per day. 
+To use the distribution, $X \sim U(min_{x}, max_{x})$ we first need to estimate its key parameters, namely the mininum and maximum value for the number of units ordered per day. 
 Thereafter we will emperically calculate the fraction of days in which more than 210 units will be ordered using `punif()` function.
 This represents the probability that we will run out of stock on the next day.
 
@@ -467,14 +467,14 @@ The data that we will use to estimate the key parameters are available in the `c
 
 *** =instructions
 
-1. Estimate $min_x$ for the uniform distribution and assign your answer to `minOrders`. 
-2. Estimate $max_x$ for the normal distribution and assign your answer to `maxOrders`. 
+1. Estimate $min_{x}$ for the uniform distribution and assign your answer to `minOrders`. 
+2. Estimate $max_{x}$ for the normal distribution and assign your answer to `maxOrders`. 
 3. Use the uniform distribution propability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
 4. View all the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
-To calculate $min_x$ and $max_x$, simply use `min` and `max` on `clienOrders$ordersPerDay`. 
+To calculate $min_{x}$ and $max_{x}$, simply use `min` and `max` on `clienOrders$ordersPerDay`. 
 
 The `punif` function has three inputs, `q`, `min` and `max`. Remember to check whether it returns the probability of having a value less than `q` or more than `q`.
 
@@ -529,3 +529,4 @@ test_output_contains("pStockOut", incorrect_msg = "You did not view the actual v
 
 success_msg("Correct! We have no successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to emperically calculate the probability of a stockout.")
 ```
+
