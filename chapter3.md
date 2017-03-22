@@ -208,8 +208,6 @@ msg_success <- "That is correct! The distribution that best describes the result
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
 ```
 
-
-
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:f49344f14e
 ## Drill-hole size distribution parameters.
 
@@ -233,5 +231,54 @@ Have a look at the class slides available from [this link](https://clickup.up.ac
 ```{r}
 msg_bad <- "Incorrect. That is not the necessary parameters for the normal distribution."
 msg_success <- "That is correct! For a normal distribution we need the mean and standard deviation of the random variable"
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_bad, msg_success))
+test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
+```
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:54412012be
+## Using the best distribution for the drill-hole sizes
+
+To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean $\mu$ and standard deviation $\sigma$ of the drill hole sizes. 
+Thereafter we will emperically calculate the fraction of products that meet different specification limits using the `pnorm()` function.
+
+The data that we will use to estimate the key parameters are available in the `holeSize` dataframe. Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
+
+Hint, to assist in your answers, draw a simple normal distribution and check where the lower and upper tollerance limits lie. Pay special attention that the tollerance limits may not neccisseraly be symmetrically around the mean, in which case you need to calculate the probability for each tollerance limit. 
+
+*** =instructions
+
+1. Estimate $\mu$ for the normal distribution and assign your answer to $meanHoleSize$. 
+2. Estimate $\sigma$ for the normal distribution and assign your answer to $sdHoleSize$. 
+3. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.5cm_ tollerance limit.
+4. Use the normal distribution propability function and determine the fraction of holes that will fall within a _0.75cm_ tollerance limit.
+5. View the values by printing them to the console output via the `script.R` file.
+
+*** =hint
+
+To calculate $\mu$ and $\sigma$, simply use `mean` and `sd` on `holeSize$holeDiameter_cm`. 
+
+Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function. 
+
+The `pnorm` function has three inputs, `q`, $\mu$ and $\sigma$. To calculate the fraction of products that fall within a lower and upper limit, you need to call `pnorm` twice: once by setting `q = lower_limit` and once by setting `q = upper_limit`. The function gives the probability of getting a value lower than `q`, so you have to then figure you which probability value to subtract from which to get the area between two limits. This is covered in Example~2.49 on page 93 in the [prescibed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
+
+
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
 ```
