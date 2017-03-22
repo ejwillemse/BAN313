@@ -25,7 +25,7 @@ We will follow the following crude steps to model a process as a specific distri
 3. Estimate the distribution parameters using the sample data.
 4. Use the R functions of the distribution to calculate percentiles and probabilities as required.
 
-The specific R functions that we will be using are:
+The specific R functions that are applicable to this section are:
 
 ```
 pnorm(), qnorm(), rnorm(), ppois(), qpois(), rpois(), pexp(), qexp(), rexp(), punif(), qunif(), runif()
@@ -110,7 +110,7 @@ Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which o
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform,
+* uniform.
 
 it most closely represents.
 
@@ -126,6 +126,7 @@ rm(n)
 *** =sample_code
 ```{r}
 # The data are available in the holeSize dataframe.
+
 # 1. Analyse the distribution of the hole-sizes using the `hist()` function, and by playing around with `breaks` parameter. 
 
 
@@ -189,7 +190,7 @@ Based on the histogram of the drill-hole sizes, which of the following distribut
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform,
+* uniform.
 
 *** =hint
 Have a look at the distribution that you generated in the previous exercise.
@@ -213,9 +214,9 @@ Which distribution parameters do we need to determine to model the hole-size as 
 
 *** =instructions
 
-* min and max;
-* mean or arrival rate; or
-* mean and standard deviation;
+* min and max,
+* mean or arrival rate, or
+* mean and standard deviation.
 
 *** =hint
 Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
@@ -288,6 +289,9 @@ rm(n)
 
 # 5. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
 
+
+
+
 ```
 
 *** =solution
@@ -356,7 +360,7 @@ Use `hist(clienOrders$ordersPerDay)` to analyse the distribution and see which o
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform,
+* uniform.
 
 it most closely represents.
 
@@ -414,7 +418,7 @@ Based on the histogram of the number of units ordered per day, which of the foll
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform,
+* uniform.
 
 *** =hint
 Have a look at the distribution that you generated in the previous exercise.
@@ -438,9 +442,9 @@ Which distribution parameters do we need to determine to model the number of uni
 
 *** =instructions
 
-* min and max;
-* mean or arrival rate; or
-* mean and standard deviation;
+* min and max,
+* mean or arrival rate, or
+* mean and standard deviation.
 
 *** =hint
 Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
@@ -486,6 +490,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 *** =sample_code
 ```{r}
 # The data are available in the clienOrders dataframe.
+
 # 1. Estimate min_x for the uniform distribution and assign your answer to `minOrders`. 
 
 
@@ -499,6 +504,8 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 
 
 # 4. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
+
+
 
 ```
 
@@ -530,3 +537,199 @@ test_output_contains("pStockOut", incorrect_msg = "You did not view the actual v
 success_msg("Correct! We have now successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to emperically calculate the probability of a stockout.")
 ```
 
+--- type:NormalExercise lang:r xp:100 skills:1 key:8baad0d53b
+## Gautrain arrival rate
+
+We wish to determine the number of passangers arriving _per minute_ from the Gautrain between 16:00 and 18:00PM.
+This information is necessary to determine the number of outbound access gate to activate during the peak-arrival time.
+The Gautrain can determine whether an access gate should be inbound or outbound.
+Approximately five passangers can go through the gate per minute.
+
+Data on the arrival time of customers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
+
+The columns (variables) of the dataset and the variable types are as follow:
+
+* `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
+* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
+* `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
+* `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
+* `timeStamp`: exact time of the passenger arrival, in the format `hh:mm:ss`.
+* `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
+* `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
+
+
+
+
+The machine is required to drill a hole with a diameter of 10cm within 0.5cm tollerance.
+If the hole is larger than 10.5cm, the part has to be scrapped.
+Similarly, if the hole is smaller than 9.5cm the hole will also be scrapped.
+
+We also want to use the machine to drill holes for other products that have different tollerance.
+One product may have a 0.25cm tollerance, another 1cm.
+
+We have identified a possible replacement machine, and its supplier assured us it will perform according to specification.
+As industrial engineers we insisted that the supplier provide us with data on its performance, so that we can make a more informed decision on whether it will meet our requirement.
+
+The supplier has given us data on different holes drilled by the machine during its testing.
+The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
+The data is available in the `holeSize` dataframe.
+
+For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes of the machine. 
+In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning support questions.
+
+*** =instructions
+
+1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with `breaks` parameter. 
+2. How many samples fall outside the 0.5cm tollerance limit and are therefore defective: assign your answer to `nDefective05`.
+3. How many samples fall outside the 0.25cm tollerance limit and are therefore defective: assign your answer to `nDefective025`.
+4. How many samples fall outside the 1cm tollerance limit and are therefore defective: assign your answer to `nDefective1`.
+5. View the values by printing them to the console output via the `script.R` file.
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+tod <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(todFormatted)
+}
+
+tomns <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(mns)
+}
+
+
+genData <- function()
+{
+nCustomersPerWeek <- 63000/8*5
+dayPeak <- c(2,2,2,1,1)
+dayPeakNorm <- dayPeak/sum(dayPeak)
+arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+
+pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+
+dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+dayHrs <- 16:17
+dayMinutes <- 1:60
+stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+              'Park', 'Rhodesfield', 'OR-Tambo')
+
+mydataTemplate <- data.frame(day = numeric(), 
+                             dow = character(),
+                             hour = numeric(),
+                             timeStamp = character(),
+                             cardLoad = logical(),
+                             origin = character())
+
+mydata <- mydataTemplate
+
+i = 0
+for (nWeek in 1:(30/length(dows)))
+{
+  for (d in 1:length(dows))
+  {
+    i = i + 1
+    nDay = nCustomersPerWeek*dayPeakNorm[d]
+    for (h in 1:length(dayHrs))
+    {
+      arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+      startTime <- 0
+      arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+      timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+      nArrivals <- length(timeStamp)
+      
+      day <- rep(i, nArrivals)
+      dow <- rep(dows[d], nArrivals)
+      hour <- rep(dayHrs[h], nArrivals)
+      minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+      cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+      origin <- sample(stations, size = nArrivals, replace = T)
+      hourFrame <- data.frame(day, dow, hour, minute, timeStamp, cardLoad, origin)
+      mydata <- rbind(mydata, hourFrame)
+    }
+  }
+}
+
+creditLoad = subset(mydata, cardLoad == TRUE)
+hist(table(mydata$hour, mydata$day, mydata$minute), breaks = 30)
+
+nCustomersPerWeek <- 63000/8*5
+dayPeak <- c(2,2,2,1,1)
+dayPeakNorm <- dayPeak/sum(dayPeak)
+arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+
+pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+
+dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+dayHrs <- 5:21
+stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+              'Park', 'Rhodesfield', 'OR-Tambo')
+
+mydataTemplate <- data.frame(day = numeric(), 
+                            dow = character(),
+                            hour = numeric(),
+                            timeStamp = character(),
+                            cardLoad = logical(),
+                            origin = character())
+
+mydata <- mydataTemplate
+
+i = 0
+for (nWeek in 1:(5/length(dows)))
+{
+  for (d in 1:length(dows))
+  {
+    i = i + 1
+    nDay = nCustomersPerWeek*dayPeakNorm[d]
+    for (h in 1:length(dayHrs))
+    {
+      arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+      startTime <- 0
+      arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+      timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+      nArrivals <- length(timeStamp)
+      
+      day <- rep(i, nArrivals)
+      dow <- rep(dows[d], nArrivals)
+      hour <- rep(dayHrs[h], nArrivals)
+      cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+      origin <- sample(stations, size = nArrivals, replace = T)
+      hourFrame <- data.frame(day, dow, hour, timeStamp, cardLoad, origin)
+      mydata <- rbind(mydata, hourFrame)
+    }
+  }
+}
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
+```
