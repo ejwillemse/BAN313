@@ -543,7 +543,8 @@ success_msg("Correct! We have now successfully fitted a uniform distribution to 
 We wish to determine the number of passangers arriving _per minute_ from the Gautrain between 16:00 and 18:00PM.
 This information is necessary to determine the number of outbound access gate to activate during the peak-arrival time.
 The Gautrain can determine whether an access gate should be inbound or outbound.
-Approximately five passangers can go through the gate per minute.
+Approximately _two_ passangers can go through the gate per minute, and they the station is considering having only _two_ outbound access-gates open during the peak-time.
+The question that we need to answer is what is the propability of more the two outbound access-gates being insufficient?
 
 Data on the arrival time of passangers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
 
@@ -600,69 +601,80 @@ tomns <- function(x, h)
   mns = formatC(mints, width=2,format='f',digits=0,flag='0')
   scs = formatC(secs, width=2,format='f',digits=0,flag='0')
   todFormatted = paste(hrs,mns,scs,sep=":")
-  return(mns)
+  return(mints)
 }
 
+tosecs <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(secs)
+}
 
 genData <- function()
 {
-    nCustomersPerWeek <- 63000/8*5
-    dayPeak <- c(2,2,2,1,1)
-    dayPeakNorm <- dayPeak/sum(dayPeak)
-    arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
-    arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-    
-    pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-    
-    dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-    dayHrs <- 16:17
-    dayMinutes <- 1:60
-    stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
-                  'Park', 'Rhodesfield', 'OR-Tambo')
-    
-    mydataTemplate <- data.frame(day = numeric(), 
-                                 dow = character(),
-                                 hour = numeric(),
-                                 timeStamp = character(),
-                                 cardLoad = logical(),
-                                 origin = character())
-    
-    mydata <- mydataTemplate
-    
-    i = 0
-    for (nWeek in 1:(30/length(dows)))
+  nCustomersPerWeek <- 63000/8*5
+  dayPeak <- c(2,2,2,1,1)
+  dayPeakNorm <- dayPeak/sum(dayPeak)
+  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+  
+  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+  
+  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+  dayHrs <- 16:17
+  dayMinutes <- 1:60
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+                'Park', 'Rhodesfield', 'OR-Tambo')
+  
+  mydataTemplate <- data.frame(day = numeric(), 
+                               dow = character(),
+                               hour = numeric(),
+                               timeStamp = character(),
+                               cardLoad = logical(),
+                               origin = character())
+  
+  mydata <- mydataTemplate
+  
+  i = 0
+  for (nWeek in 1:(30/length(dows)))
+  {
+    for (d in 1:length(dows))
     {
-      for (d in 1:length(dows))
+      i = i + 1
+      nDay = nCustomersPerWeek*dayPeakNorm[d]
+      for (h in 1:length(dayHrs))
       {
-        i = i + 1
-        nDay = nCustomersPerWeek*dayPeakNorm[d]
-        for (h in 1:length(dayHrs))
-        {
-          arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
-          startTime <- 0
-          arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
-          timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-          nArrivals <- length(timeStamp)
-          
-          day <- rep(i, nArrivals)
-          dow <- rep(dows[d], nArrivals)
-          hour <- rep(dayHrs[h], nArrivals)
-          minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-          cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
-          origin <- sample(stations, size = nArrivals, replace = T)
-          hourFrame <- data.frame(day, dow, hour, minute, timeStamp, cardLoad, origin)
-          mydata <- rbind(mydata, hourFrame)
-        }
+        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+        startTime <- 0
+        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        nArrivals <- length(timeStamp)
+        
+        day <- rep(i, nArrivals)
+        dow <- rep(dows[d], nArrivals)
+        hour <- rep(dayHrs[h], nArrivals)
+        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+        origin <- sample(stations, size = nArrivals, replace = T)
+        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
+        mydata <- rbind(mydata, hourFrame)
       }
     }
-    return(mydata)
+  }
+  return(mydata)
 }
 
 gauArrive <- genData()
 rm(genData)
 rm(tod)
 rm(tomns)
-
+rm(tosecs)
 ```
 
 *** =sample_code
@@ -747,4 +759,164 @@ Have a look at the class slides available from [this link](https://clickup.up.ac
 msg_bad <- "Incorrect. That is not the necessary parameter for the poisson distribution."
 msg_success <- "That is correct! For a poisson distribution we need the arrival rate of the random variable."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:97f9e17aa1
+## Using the best distribution for passanger arrivals
+
+To use the distribution, $X \sim \text{Poisson}(\lambda)$ we first need to estimate its key parametes, namely the expected number of customers that arrive per minute, $\lambda$. 
+Thereafter we will emperically calculate the probability of the two outbound access-gates being insufficient during any minute interval using the `ppois()` function.
+Recall that the station is considering installing _two_ outbound access-gates and each gate can process approximately _two_ passangers per minute. 
+For now we will ignore the knock-on effect that insufficient or excess resources during a time-interval will have on the following time-interval.
+
+The data that we will use to estimate the key parameters are available in the `gauArrive` dataframe. The number of customers that arrived within each minute interval has been precaculated and is available as the `nArrivePerMin` object.
+
+*** =instructions
+
+1. Estimate $\lambda$ for the poisson distribution and assign your answer to `arrivalRate`. 
+2. Use the poisson distribution propability function and determine the probability that the two outbound access-gates will be insufficient during any minute interval and assign your answer to `pInsufficent`.
+3. View the above values by printing them to the console output via the `script.R` file.
+
+*** =hint
+
+To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals. 
+
+To calculate the probability of the two-access gates being insufficient we first need to establish the maximum number of customers that two gates can cope with within a minute, which in this case is $2 \times 2 = 4$ and then calculate the probability of more than 4 customers arriving during a minute interval.
+
+*** =pre_exercise_code
+```{r}
+tod <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(todFormatted)
+}
+
+tomns <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(mints)
+}
+
+tosecs <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(secs)
+}
+
+genData <- function()
+{
+  nCustomersPerWeek <- 63000/8*5
+  dayPeak <- c(2,2,2,1,1)
+  dayPeakNorm <- dayPeak/sum(dayPeak)
+  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+  
+  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+  
+  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+  dayHrs <- 16:17
+  dayMinutes <- 1:60
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+                'Park', 'Rhodesfield', 'OR-Tambo')
+  
+  mydataTemplate <- data.frame(day = numeric(), 
+                               dow = character(),
+                               hour = numeric(),
+                               timeStamp = character(),
+                               cardLoad = logical(),
+                               origin = character())
+  
+  mydata <- mydataTemplate
+  
+  i = 0
+  for (nWeek in 1:(30/length(dows)))
+  {
+    for (d in 1:length(dows))
+    {
+      i = i + 1
+      nDay = nCustomersPerWeek*dayPeakNorm[d]
+      for (h in 1:length(dayHrs))
+      {
+        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+        startTime <- 0
+        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        nArrivals <- length(timeStamp)
+        
+        day <- rep(i, nArrivals)
+        dow <- rep(dows[d], nArrivals)
+        hour <- rep(dayHrs[h], nArrivals)
+        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+        origin <- sample(stations, size = nArrivals, replace = T)
+        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
+        mydata <- rbind(mydata, hourFrame)
+      }
+    }
+  }
+  return(mydata)
+}
+
+gauArrive <- genData()
+rm(genData)
+rm(tod)
+rm(tomns)
+rm(tosecs)
+
+nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
+```
+
+*** =sample_code
+```{r}
+# The number of customers that arrived within each minute interval has been precaculated and is available as the `nArrivePerMin` object.
+
+# 1. Estimate lambda for the poisson distribution and assign your answer to `arrivalRate`. 
+
+
+
+# 2. Use the poisson distribution propability function and determine the probability that the two outbound access-gates will be insufficient during any minute interval and assign your answer to `pInsufficent`.
+
+
+
+# 3. View the above values by printing them to the console output via the `script.R` file.
+
+
+
+```
+
+*** =solution
+```{r}
+arrivalRate <- mean(nArrivePerMin)
+pInsufficent <- ppois(2*2, arrivalRate, lower.tail = FALSE)
+arrivalRate
+pInsufficent
+```
+
+*** =sct
+```{r}
+test_object("arrivalRate", undefined_msg = "Make sure to define an object `arrivalRate`.",
+            incorrect_msg = "Make sure that you calculated lambda correctly and assigned your answer to `arrivalRate`")     
+
+test_object("pInsufficent", undefined_msg = "Make sure to define an object `pInsufficent`.",
+            incorrect_msg = "Make sure that you calculated the probability of the two gates, where each gate can process two customers per minute, correctly and assign your answer to `pInsufficent`")
+
+test_output_contains("arrivalRate", incorrect_msg = "You did not view the actual value `arrivalRate`.")
+test_output_contains("pInsufficent", incorrect_msg = "You did not view the actual value `pInsufficent`.")
+
+success_msg("Correct! We have now successfully fitted a poisson distribution to number of customers that arrive within a one-minute interval and used the distribution to emperically calculate the probability of two access-gates being insufficient.")
 ```
