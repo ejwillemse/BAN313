@@ -506,7 +506,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay <- round(runif(30, 150, 250),
 ```{r}
 minOrders <- min(clienOrders$ordersPerDay)
 maxOrders <- max(clienOrders$ordersPerDay)
-pStockOut <- runif(q = 210, min = minOrders, max = maxOrders, lower.tail = FALSE)
+pStockOut <- punif(q = 210, min = minOrders, max = maxOrders, lower.tail = FALSE)
 minOrders
 maxOrders
 pStockOut
