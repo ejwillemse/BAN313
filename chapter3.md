@@ -698,9 +698,9 @@ success_msg("Correct! Now that we looked at the distribution of the number of cu
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:1c8e286d4a
-## Choosing the best distribution for the drill-hole sizes
+## Choosing the best distribution for passanger arrivals
 
-Based on the histogram of the drill-hole sizes, which of the following distributions best represent the drill-hole size resulting from the drilling machine?
+Based on the histogram of the number of passangers arriving per minute, which of the following distributions best represent this random variable?
 
 *** =instructions
 * normal, 
@@ -718,7 +718,7 @@ Have a look at the distribution that you generated in the previous exercise.
 
 *** =sct
 ```{r}
-msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
+msg_bad <- "Incorrect. You may need to redo the previous exercise and increase or reduce the number of breaks."
 msg_success <- "That is correct! The distribution that best describes the number of passanger arrivals per minute is the poisson or exponential distribution. Next we need to find the key parameters for the distribution."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
 ```
