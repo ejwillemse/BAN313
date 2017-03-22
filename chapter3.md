@@ -261,8 +261,6 @@ Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find o
 
 The `pnorm` function has three inputs, `q`, $\mu$ and $\sigma$. To calculate the fraction of products that fall within a lower and upper limit, you need to call `pnorm` twice: once by setting `q = lower_limit` and once by setting `q = upper_limit`. The function gives the probability of getting a value lower than `q`, so you have to then figure you which probability value to subtract from which to get the area between two limits. This is covered in Example~2.49 on page 93 in the [prescibed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
-
-
 *** =pre_exercise_code
 ```{r}
 
