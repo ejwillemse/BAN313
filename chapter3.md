@@ -565,7 +565,7 @@ In the following parts we will find the key parameters of the distribution and u
 
 *** =instructions
 
-1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. 
+1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
 2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
 
 *** =hint
@@ -684,8 +684,7 @@ rm(tosecs)
 ```{r}
 # The data are available in the gauArrive dataframe.
 
-# 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. 
-
+# 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
 
 
 
