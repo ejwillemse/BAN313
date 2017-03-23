@@ -1083,7 +1083,7 @@ To do so we first need to calculate the inter-arrival time, in minutes, between 
 
 Recall that the data frame has the following variables:
   
-  * `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
+* `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
 * `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
 * `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
 * `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
