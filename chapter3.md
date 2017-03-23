@@ -9,7 +9,7 @@ description : In this case study we will analyse data for different processes, a
 In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. 
 The distributions that we will look at are:
   
-  * normal, 
+* normal, 
 * poisson and exponential,  and
 * uniform. 
 
@@ -359,9 +359,9 @@ Use `hist(clienOrders$ordersPerDay)` to analyse the distribution and see which o
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform.
+* uniform,
 
-it most closely represents.
+that it most closely represents.
 
 Use `less210 <- nrow(subset(clienOrders, ordersPerDay < lower_limit))` to find the number of days that less than the specified number of products were ordered.
 
@@ -373,6 +373,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 *** =sample_code
 ```{r}
 # The data are available in the clienOrders dataframe.
+
 # 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
 
 
