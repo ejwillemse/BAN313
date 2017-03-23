@@ -923,8 +923,9 @@ success_msg("Correct! We have now successfully fitted a poisson distribution to 
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:3c7b8033f9
-## Using the best distribution for the number of access-gates
+## Using the best distribution for the inter-arrival time of passanger
 
+For this question we are going to repeat the 
 The station wants to probability of their access-gates being insufficient being less than 0.05.
 Recall that a gate can process approximately 2 passangers per minute.
 What is the minimum number of access-gates required to ensure that this is the case?
@@ -1070,4 +1071,148 @@ test_object("minGates", undefined_msg = "Make sure to define an object `minGates
 test_output_contains("minGates", incorrect_msg = "You did not view the actual value `minGates`.")
 
 success_msg("Correct! We have now successfully used a poisson distribution to calculate the minimum number of access-gates that will ensure that the probability of the gates being insufficient for customer arrivals is less than 0.05.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:957fe3a04a
+## Using the best distribution for passanger inter-arrival times
+
+In this question we are again going to focus on passanger-arrivals at the Gautrain, but this time we will analyse the inter-arrival times of customers. That is the time between the arrivals of two consecutive passangers.
+
+To do so we first need to calculate the inter-arrival time, in minutes, between all consecutive passangers.
+
+Recall that the data frame has the following variables:
+
+* `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
+* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
+* `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
+* `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
+* `second`: the second of the minute during which the passanger arrived, from from \{00, 01, \ldots, 59\}.
+* `timeStamp`: exact time of the passenger arrival, in the format `hh:mm:ss`.
+* `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
+* `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
+
+To calculate the inter-arrival time we first need to calculate the minute since the start of the day at which each customer arrived. This can be achieved using the following formula:
+
+```
+minuteArrived <- hour*60 + minute + second/60
+```
+
+Thereafter we need to calculate the time between arrivals, taking care _not_ to include the time between the first arrival of a day and the last arrival of the previous day. With the above formula, these inter-arrival times should be ignored since they will give negative inter arrival times. For example, on day 1 the last customer arrived at 1079.167 minutes since the start of that day and on day 2 the first customer arrived at 960.16 minutes since the start of that day. The inter-arrival time between these two consecutive customers will be negative. We can use this information and the `subset` function to remove inter arrival times that are negative. To actually calculate the inter-arrival times we can use the `diff` function. 
+
+Type `?diff()` in the console or visit [this page](http://stackoverflow.com/questions/8404611/how-to-find-the-difference-in-value-in-every-two-consecutive-rows-in-r) to see how it can be used.
+
+Once we have the inter-arrival time between consecutive visits we can use the distribution, $X \sim \text{Exp}(\lambda)$, but we first need to estimate its key parametes, namely the expected number of customers that arrive per minute, $\lambda$, which is $\frac{1}{\text{mean-intertime}}$.
+
+Thereafter we can emperically calculate the probability of the next passanger arriving within 0.5 minutes after the current one arrived.
+
+*** =instructions
+
+1. Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
+2. Remove all negative inter arrival times from `minuteArrived` and assign the result to `minuteArrivedClean`.
+3. Calculate the arrival rate for the exponential distribution using `minuteArrivedClean` and assign your answer to `arriveRate`.
+4. Calculate the probability of a customer arriving withing 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
+5. View the above values by printing them to the console output via the `script.R` file.
+
+*** =hint
+
+To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals. 
+
+To calculate the probability of the two-access gates being insufficient we first need to establish the maximum number of customers that two gates can cope with within a minute, which in this case is $2 \times 2 = 4$ and then calculate the probability of more than 4 customers arriving during a minute interval.
+
+*** =pre_exercise_code
+```{r}
+tod <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(todFormatted)
+}
+
+tomns <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(mints)
+}
+
+tosecs <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(secs)
+}
+
+genData <- function()
+{
+  nCustomersPerWeek <- 63000/8*5
+  dayPeak <- c(2,2,2,1,1)
+  dayPeakNorm <- dayPeak/sum(dayPeak)
+  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+  
+  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+  
+  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+  dayHrs <- 16:17
+  dayMinutes <- 1:60
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+                'Park', 'Rhodesfield', 'OR-Tambo')
+  
+  mydataTemplate <- data.frame(day = numeric(), 
+                               dow = character(),
+                               hour = numeric(),
+                               timeStamp = character(),
+                               cardLoad = logical(),
+                               origin = character())
+  
+  mydata <- mydataTemplate
+  
+  i = 0
+  for (nWeek in 1:(30/length(dows)))
+  {
+    for (d in 1:length(dows))
+    {
+      i = i + 1
+      nDay = nCustomersPerWeek*dayPeakNorm[d]
+      for (h in 1:length(dayHrs))
+      {
+        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+        startTime <- 0
+        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        nArrivals <- length(timeStamp)
+        
+        day <- rep(i, nArrivals)
+        dow <- rep(dows[d], nArrivals)
+        hour <- rep(dayHrs[h], nArrivals)
+        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+        origin <- sample(stations, size = nArrivals, replace = T)
+        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
+        mydata <- rbind(mydata, hourFrame)
+      }
+    }
+  }
+  return(mydata)
+}
+
+gauArrive <- genData()
+rm(genData)
+rm(tod)
+rm(tomns)
+rm(tosecs)
+
 ```
