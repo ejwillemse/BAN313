@@ -928,7 +928,7 @@ success_msg("Correct! We have now successfully fitted a poisson distribution to 
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:3c7b8033f9
-## Using the best distribution for to determine the number of access gates
+## Using the best distribution to determine the number of access gates
 
 The station wants the probability of their access-gates being insufficient to be less than 0.05.
 Recall that a gate can process approximately 2 passengers per minute.
