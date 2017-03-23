@@ -1107,7 +1107,7 @@ To actually calculate the inter-arrival times we can use the `diff` function. Ty
 
 Once we have the inter-arrival time between consecutive visits we can use the distribution, $X \sim \text{Exp}(\lambda)$, but we first need to estimate its key parameter, namely the expected number of customers that arrive per minute, $\lambda$, which is $\frac{1}{\text{mean-intertime}}$.
 
-Thereafter we can empirically calculate the probability of the next passenger arriving within 0.5 minutes after the current one arrived.
+Thereafter we can empirically calculate the probability of the next passenger arriving within 0.5 minutes after the current one arrived. To do so we can use the `pexp` function.
 
 *** =instructions
 
