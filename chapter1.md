@@ -52,7 +52,7 @@ Just hit the 'Submit Answer'.
 success_msg("Let's try and use our knowledge on statistical inference to assist our company.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:a9ac72e6f7
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
 ## Statistical methods to apply
 
 Based on the case study description, which do you think is the correct statistical method to apply?
@@ -82,7 +82,7 @@ msg_success <- "Correct! We want to compare the average unit-price for the two c
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:cd4c8c8aa5
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:cd4c8c8aa5
 ## R functions to apply
 
 Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
@@ -242,7 +242,7 @@ test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_pr
 success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:23cc0a8c6e
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:23cc0a8c6e
 ## Requirements for working with paired data
 
 For the case study we wish to analyse paired numerical data.
@@ -424,7 +424,7 @@ success_msg("Well done! By calculating the price difference per product we can n
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:638c133d39
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:638c133d39
 ## How do we determine which company is better
 
 Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To compare the companies we took a random sample of products and asked each company to provide a unit price quote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
@@ -453,7 +453,7 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, m
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:25 skills:1 key:71bd4684d4
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:71bd4684d4
 ## Setting up the hypotheses
 
 Which is the correct null and alternative hypothesis for the case study problem:
@@ -598,7 +598,7 @@ test_object("p_value_4", undefined_msg = "Make sure to define a variable `p_valu
 test_object("p_value_5", undefined_msg = "Make sure to define a variable `p_value_5`.",
             incorrect_msg = "Make sure that you calculated the `p_value_5` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.") 
 ```
---- type:NormalExercise lang:r xp:400 skills:1 key:803d9a69c1
+--- type:NormalExercise lang:r xp:100 skills:1 key:803d9a69c1
 ## Conducting the hypothesis test
 
 Our hypotheses are as follow:
@@ -767,7 +767,7 @@ success_msg("Congrats! You have successfully completed the hypothesis test using
 
 
 
---- type:NormalExercise lang:r xp:400 skills:1 key:de00830dd6
+--- type:NormalExercise lang:r xp:100 skills:1 key:de00830dd6
 ## Calculating a confidence interval
 
 For the last question we are going to calculate a confidence interval, and then use that to determine if one company is better than the other, and if so, which one is better. We will reuse much of our previous calculations. To test whether you know how to apply the methods, available hints, instructions and error messages will be kept to a minimum. You can however consult previous exercises as well as [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), which contains all the formulas that you need to successfully answer this question.
