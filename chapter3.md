@@ -109,7 +109,7 @@ Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which o
 * normal, 
 * poisson and exponential, 
 * power-law, or 
-* uniform.
+* uniform,
 
 it most closely represents.
 
@@ -236,7 +236,7 @@ test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 --- type:NormalExercise lang:r xp:100 skills:1 key:54412012be
 ## Using the best distribution for the drill-hole sizes
 
-To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean $\mu$ and standard deviation $\sigma$ of the drill-hole sizes. 
+To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean, $\mu$, and standard deviation, $\sigma$, of the drill-hole sizes. 
 Thereafter we will empirically calculate the fraction of products that meet different specification limits using the `pnorm()` function.
 
 The data that we will use to estimate the key parameters are available in the `holeSize` dataframe. Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
