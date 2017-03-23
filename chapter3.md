@@ -544,13 +544,14 @@ We wish to determine the number of passengers arriving _per minute_ from the Gau
 This information is necessary to determine the number of outbound access gates to activate during the peak-arrival time.
 The Gautrain can easily switch  an access gate from inbound to outbound.
 Approximately _two_ passengers can go through the gate per minute, and the station is considering having only _two_ outbound access-gates open during the peak-time.
-The question that we need to answer is what is the probability the two outbound access-gates being insufficient?
+The question that we need to answer is what is the probability of the two outbound access-gates being insufficient?
+Insufficient means that the number of passengers arriving during the minute will be more than the access gates can process.
 
 Data on the arrival time of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
 
 The columns (variables) of the dataset and the variable types are as follow:
   
-  * `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
+* `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
 * `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
 * `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
 * `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
