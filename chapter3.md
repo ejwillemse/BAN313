@@ -560,13 +560,13 @@ The columns (variables) of the dataset and the variable types are as follow:
 * `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
 * `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
 
-For the first part of this question, analyse the distribution of the number of passenger arriving per minute and identify the distribution that best describes this variable. 
+For the first part of this question, analyse the distribution of the number of passengers arriving per minute and identify the distribution that best describes this variable. 
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning support questions.
 
 *** =instructions
 
 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. 
-2. Analyse the distribution of the number of passenger arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
+2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
 
 *** =hint
 
@@ -688,6 +688,7 @@ rm(tosecs)
 
 
 
+
 # 2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
 
 
@@ -770,6 +771,7 @@ test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
 To use the distribution, $X \sim \text{Poisson}(\lambda)$, we first need to estimate its key parameter, namely the expected number of customers that arrive per minute, $\lambda$. 
 Thereafter we will empirically calculate the probability of the two outbound access-gates being insufficient during any minute interval using the `ppois()` function.
 Recall that the station is considering installing _two_ outbound access-gates and each gate can process approximately _two_ passengers per minute. 
+Insufficient means that the number of passengers arriving during the minute will be more than the access gates can process.
 For now we will ignore the knock-on effect that insufficient or excess resources during a time-interval will have on the following time-interval.
 
 The data that we will use to estimate the key parameters are available in the `gauArrive` dataframe. The number of customers that arrived within each minute interval has been pre-calculated and is available as the `nArrivePerMin` object.
@@ -926,10 +928,9 @@ success_msg("Correct! We have now successfully fitted a poisson distribution to 
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:3c7b8033f9
-## Using the best distribution for the inter-arrival time of passengers
+## Using the best distribution for to determine the number of access gates
 
-For this question we are going to repeat the 
-The station wants to probability of their access-gates being insufficient being less than 0.05.
+The station wants the probability of their access-gates being insufficient to be less than 0.05.
 Recall that a gate can process approximately 2 passengers per minute.
 What is the minimum number of access-gates required to ensure that this is the case?
 
@@ -937,7 +938,7 @@ The number of customers that arrived within each minute interval has again been 
 
 *** =instructions
 
-1. Determine the minimum number of access-gates required to ensure that the probability of the gates be insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`.
+1. Determine the minimum number of access-gates required to ensure that the probability of the gates being insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`.
 2. View the above value by printing it to the console output via the `script.R` file.
 
 *** =hint
