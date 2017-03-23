@@ -350,7 +350,7 @@ In the following parts we will find the key parameters of the distribution and u
 
 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
 2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
-3. View the values by printing them to the console output via the `script.R` file. Print the values here:
+3. View the values by printing them to the console output via the `script.R` file.
   
   *** =hint
 
