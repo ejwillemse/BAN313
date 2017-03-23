@@ -1108,18 +1108,16 @@ Thereafter we can empirically calculate the probability of the next passenger ar
 
 *** =instructions
 
-Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
-Calculate the inter-arrival time between consecutive arrivals and assign the result to the vector `interArrive`.
-Remove all negative inter arrival times from `interArrive` and assign the result to `interArriveClean`.
-Calculate the arrival rate for the exponential distribution using `interArriveClean` and assign your answer to `arriveRate`.
-Calculate the probability of a customer arriving within 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
-View the above values by printing them to the console output via the `script.R` file.
+1. Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
+2. Calculate the inter-arrival time between consecutive arrivals and assign the result to the vector `interArrive`.
+3. Remove all negative inter arrival times from `interArrive` and assign the result to `interArriveClean`.
+4. Calculate the arrival rate for the exponential distribution using `interArriveClean` and assign your answer to `arriveRate`.
+5. Calculate the probability of a customer arriving within 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
+6. View the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
-To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals. 
-
-To calculate the probability of the two-access gates being insufficient we first need to establish the maximum number of customers that two gates can cope with within a minute, which in this case is $2 \times 2 = 4$ and then calculate the probability of more than 4 customers arriving during a minute interval.
+TBC
 
 *** =pre_exercise_code
 ```{r}
@@ -1217,4 +1215,66 @@ rm(tod)
 rm(tomns)
 rm(tosecs)
 
+```
+
+*** =sample_code
+```{r}
+# The data are available in the gauArrive dataframe.
+
+#1. Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
+
+
+
+#2. Calculate the inter-arrival time between consecutive arrivals and assign the result to the vector `interArrive`. It may be useful to draw a histogram of `interArrive`.
+
+
+
+#3. Remove all negative inter arrival times from `interArrive` and assign the result to `interArriveClean`. It may be useful to draw a histogram of `interArriveClean`.
+
+
+
+#4. Calculate the arrival rate for the exponential distribution using `interArriveClean` and assign your answer to `arriveRate`.
+
+
+
+#5. Calculate the probability of a customer arriving within 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
+
+
+
+#6. View the above values by printing them to the console output via the `script.R` file.
+
+
+
+```
+
+*** =solution
+```{r}
+minuteArrived = gauArrive$hour*60 + gauArrive$minute + gauArrive$second/60
+interArrive = diff(minuteArrived)
+interArriveClean = subset(interArrive, interArrive >= 0)
+arriveRate = 1/(mean(interArriveClean))
+pWithin30sec = pexp(0.5, arriveRate)
+pWithin30sec
+```
+
+*** =sct
+```{r}
+test_object("minuteArrived", undefined_msg = "Make sure to define an object `minuteArrived`.",
+            incorrect_msg = "Make sure that you calculated the minute of each customer's arrival correctly, using the formula given in the instructions and assign your answer to the vector `minuteArrived`")     
+
+test_object("interArrive", undefined_msg = "Make sure to define an object `interArrive`.",
+            incorrect_msg = "Make sure that you calculated the time between all consecutive arrivals correct, using the function given in the instructions, and assign your answer to `interArrive`")    
+
+test_object("interArriveClean", undefined_msg = "Make sure to define an object `interArriveClean`.",
+            incorrect_msg = "Make sure that you removed negative inter arrival times and assigned the resulting vector to `interArriveClean`. You can use the `subset(vector, vector > value)` command.") 
+
+test_object("arriveRate", undefined_msg = "Make sure to define an object `arriveRate`.",
+            incorrect_msg = "Make sure that you calculated the arrival rate customers correctly, using the formula given in the notes and in the instructions, and assigned your answer to `arriveRate`.") 
+
+test_object("pWithin30sec", undefined_msg = "Make sure to define an object `pWithin30sec`.",
+            incorrect_msg = "Make sure that you calculated the probability of a customer arriving within 30 seconds of the current customer, meaning the inter-arrival time is less than 30 seconds, and assigned your answer to `pWithin30sec`.") 
+
+test_output_contains("pWithin30sec", incorrect_msg = "You did not view the actual value `pWithin30sec`.")
+
+success_msg("Correct! That's it for this chapter.")
 ```
