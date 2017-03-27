@@ -369,7 +369,7 @@ rm(n)
 *** =solution
 ```{r}
 h <- hist(holeSize$holeDiameter_cm, breaks = 9)
-hBreaks <- h$counts
+hCounts <- h$counts
 chisq.test(hBreaks)
 ```
 
