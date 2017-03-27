@@ -558,9 +558,9 @@ To complete the question, do the following:
 3. View the mean and standard deviation of `holeDiameter_boot` by printing their values to the console. You do not need to assign the values to anything. Just print and view it and compare it to the mean and standard deviation of the original sample.
 4. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `holeMeans`.
 5. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `holeSD`.
-6. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the hole-size samples 10000 times. In each execution of the `for` loop you can assign the results to `holeDiameter_boot`. Calculate the mean and standard deviation of `holeDiameter_boot` and store the results in the appropriate `i` position of `holeMeans` and `holeSD`. Hint: if you are unsure how to do this, have a look at the previous datacamp courses.
+6. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the hole-size samples 10000 times. In each execution of the `for` loop you can assign the results to `holeDiameter_boot_test`. Calculate the mean and standard deviation of `holeDiameter_boot` and store the results in the appropriate `i` position of `holeMeans` and `holeSD`. Hint: if you are unsure how to do this, have a look at the previous datacamp courses.
 7. Draw histograms of `holeMeans` and `holeSD`.
-8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `holeMeansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
+8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `meansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
 9. View `meanInter` and `sdInter` by printing their values to the console.
 10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest as the mean and standard deviation of the drill-hole size normal distribution. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 11. View the value of `pDefective05` by printing it to the console.
@@ -581,18 +581,17 @@ rm(n)
 
 *** =sample_code
 ```{r}
-set.seed(35) # leave this code here
 # The data are available in the holeSize dataframe.
 
 #1. View the mean and standard deviation of `holeDiameter` by printing their values to the console. You do not need to assign the values to anything. Just print and view it.
 
 
 
-#2. Using the `sample` function take a random sample with replacement from the hole-size samples and assign the results to `holeDiameter_boot`.
+#2. Using the `sample` function take a random sample with replacement from the hole-size samples and assign the results to `holeDiameter_boot_test`.
 
 
 
-#3. View the mean and standard deviation of `holeDiameter_boot` by printing their values to the console. You do not need to assign the values to anything. Just print and view it and compare it to the mean and standard deviation of the original sample.
+#3. View the mean and standard deviation of `holeDiameter_boot_test` by printing their values to the console. You do not need to assign the values to anything. Just print and view it and compare it to the mean and standard deviation of the original sample.
 
 
 
@@ -619,7 +618,7 @@ for(i in 1:10000)
 
 
 
-#8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `holeMeansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
+#8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `meansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
 
 
 
@@ -641,7 +640,7 @@ pDefective05
 *** =solution
 ```{r}
 set.seed(35)
-holeDiameter_boot <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
+holeDiameter_boot_test <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
 holeMeans <- rep(NA, 10000)
 holeSD <- rep(NA, 10000)
 for (i in 1:10000)
@@ -668,8 +667,8 @@ pDefective05
 
 *** =sct
 ```{r}
-test_object("holeDiameter_boot", undefined_msg = "Make sure to define an object `holeDiameter_boot`.",
-            incorrect_msg = "Make sure that you took a sample from `holeSize$holeDiameter` with replacement and assigned the result to `holeDiameter_boot`")     
+test_object("holeDiameter_boot_test", undefined_msg = "Make sure to define an object `holeDiameter_boot_test`.",
+            incorrect_msg = "Make sure that you took a sample from `holeSize$holeDiameter` with replacement and assigned the result to `holeDiameter_boot_test`")     
 
 test_object("holeMeans", undefined_msg = "Make sure to define an object `holeMeans`.",
             incorrect_msg = "Make sure that you initiated `holeMeans` correctly with 10000 `NAs` using the `rep` command.")     
