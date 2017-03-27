@@ -639,7 +639,6 @@ pDefective05
 
 *** =solution
 ```{r}
-set.seed(35)
 holeDiameter_boot_test <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
 holeMeans <- rep(NA, 10000)
 holeSD <- rep(NA, 10000)
