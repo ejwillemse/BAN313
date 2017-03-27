@@ -439,7 +439,7 @@ sdHoleSize <- sd(holeSize$holeDiameter_cm)
 
 h1 <- hist(holeSize$holeDiameter_cm, breaks = 100)
 null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))
-plot(null.probs)
+plot(null.probs1)
 
 h2 <- hist(holeSize$holeDiameter_cm, breaks = 9)
 null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))
