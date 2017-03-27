@@ -194,7 +194,7 @@ Using the above code we can change the number of breaks in the histogram, assign
 
 To calculate the $\chi^2$ value we can use the following formula:
 
-$$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}}$$,
+$$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}},$$
 
 where $k$ is the number of bins, $O\_{i}$ is the observed number of cases in bin $i$ and $E\_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
 
@@ -323,4 +323,66 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the p-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
 
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+## Drill-hole: goodness-of-fit for the uniform distribution part 2
+
+For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
+
+*** =instructions
+
+1. Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
+2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
+3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+
+** =hint
+
+Go through the previous exercise to see how `hCount` can be calculated. Use `?chisq.test` to find out more about the function.
+
+*** =pre_exercise_code
+```{r}
+set.seed(35)
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
+rm(n)
+```
+
+*** =sample_code
+```{r}
+# The data are available in the holeSize dataframe.
+
+#1. Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
+
+
+
+#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
+
+
+
+#3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+
+
+
+```
+
+*** =solution
+```{r}
+h <- hist(holeSize$holeDiameter_cm, breaks = 9)
+hBreaks <- h$counts
+chisq.test(hBreaks)
+```
+
+*** =sct
+```{r}
+test_object("h", undefined_msg = "Make sure to define an object `h`.",
+            incorrect_msg = "Make sure that you assigned the histogram with 9 breaks to the object `h`. Note that you have to call `hist` twice, once to view the histogram and the second time to assign it to `h`")
+
+test_object("hCounts", undefined_msg = "Make sure to define an object `hCounts`.",
+            incorrect_msg = "Make sure that you assigned the number of counts for each bin to the object `hCounts`. Note that you have to call `h$counts` twice, once to view the number of counts and the second time to assign it to `hCounts`")
+
+test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
+              "incorrect_msg = "Make sure to use the `chisq.test` function correctly. In this question, all it needs is the counts per bin.")
+
+success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal and t-distribution.")
 ```
