@@ -45,14 +45,15 @@ Take note that the data used for this chapter is randomly generated and will cha
 - each time the chapter is attempted; and
 - when moving from one exercise to the next.
 
-When completing the chapter, read the all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
+When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
 **DO NOT** jump straight to the instructions and skip the preceding question background. The question background contains valuable information to assist you in completing the question.
 
+To continue with this chapter confirm the following:
+
 *** =instructions
 
-
-* I have not have completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
+* I have not completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
 
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
@@ -111,7 +112,7 @@ Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which o
 * poisson and exponential,
 * power-law,
 * uniform, or
-* t-distribution,
+* $t$-distribution,
 
 it most closely represents.
 
@@ -157,7 +158,7 @@ rm(n)
 hist(holeSize$holeDiameter_cm)
 meanHole <- mean(holeSize$holeDiameter_cm)
 sdHole <- sd(holeSize$holeDiameter_cm)
-pDefective03 <- pnorm(10-0.3, meanHole, sdHole, lower.tail = TRUE) + pnorm(10+0.3, meanHole, sdHole, lower.tail = TRUE)
+pDefective03 <- pnorm(10-0.3, meanHole, sdHole, lower.tail = TRUE) + pnorm(10+0.3, meanHole, sdHole, lower.tail = FALSE)
 pDefective03
 ```
 
@@ -171,5 +172,5 @@ test_object("pDefective03", undefined_msg = "Make sure to define an object `pDef
 
 test_output_contains("pDefective03", incorrect_msg = "You did not view the actual value of  `pDefective03`.")
 
-success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the t-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform  is a good representation of hole-size.")
+success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the $t$-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform distributions are good representations of hole-size.")
 ```
