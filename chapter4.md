@@ -325,7 +325,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+--- type:NormalExercise lang:r xp:100 skills:1 key:2056a3af3a
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
 
 For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
@@ -387,7 +387,7 @@ test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in fu
 success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal and t-distribution.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+--- type:NormalExercise lang:r xp:100 skills:1 key:5df974f21f
 ## Drill-hole: goodness-of-fit for the normal distribution
 
 Since we expect hole-size to follow a normal distribution, it makes sense to do a $\chi^2$ goodness-of-fit test using this distribution. To do so we can use the `chisq.test`, but in this case we have to supply more than the observed cases per bin. We also need to find the expected number of cases per bin should the variable follow a normal distribution. To do so is not trivial, but fortunately there are pre-existing code that we can use for this purpose.
