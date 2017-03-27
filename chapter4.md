@@ -480,5 +480,5 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
 
-success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bin, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for continuous distribution anymore.)
+success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bin, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for continuous distribution anymore.")
 ```
