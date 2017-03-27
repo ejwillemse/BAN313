@@ -325,7 +325,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:c328bf5bb4
+--- type:NormalExercise lang:r xp:100 skills:1 key:0894c44736
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
 
 For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
