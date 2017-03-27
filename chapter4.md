@@ -356,11 +356,11 @@ rm(n)
 
 
 
-#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
+#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
 
 
 
-#3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+#3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
 
 
@@ -370,7 +370,7 @@ rm(n)
 ```{r}
 h <- hist(holeSize$holeDiameter_cm, breaks = 9)
 hCounts <- h$counts
-chisq.test(hBreaks)
+chisq.test(hCounts)
 ```
 
 *** =sct
