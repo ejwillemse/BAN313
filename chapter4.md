@@ -194,9 +194,9 @@ Using the above code we can change the number of breaks in the histogram, assign
 
 To calculate the $\chi^2$ value we can use the following formula:
 
-$$\chi^2 = \sum_{i=1}^{k}\frac{(O_{i}-E_{i})^2}{E_{i}}$$,
+$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}}$,
 
-where $k$ is the number of bins, $O_{i}$ is the observed number of cases in bin $i$ and $E_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
+where $k$ is the number of bins, $O\_{i}$ is the observed number of cases in bin $i$ and $E\_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
 
 Once we have our $\chi^2$ value we can calculate the probability of getting this value, or greater, using `pchisq(q, df, lower.tail = FALSE)` which takes as input the $\chi^2$ value, `q`, degrees-of-freedom, `df, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned, hence `lower.tail = FALSE`.
 
