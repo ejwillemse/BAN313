@@ -641,12 +641,12 @@ pDefective05
 *** =solution
 ```{r}
 set.seed(35)
-holeDiameter_boot <- sample(holeSize$holeDiameter, size = nrow(holeSize), replace = TRUE)
+holeDiameter_boot <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
 holeMeans <- rep(NA, 10000)
 holeSD <- rep(NA, 10000)
 for (i in 1:10000)
 {
-  holeDiameter_boot <- sample(holeSize$holeDiameter, size = nrow(holeSize), replace = TRUE)
+  holeDiameter_boot <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
   holeMeans[i] <- mean(holeDiameter_boot)
   holeSD[i] <- sd(holeDiameter_boot)
 }
