@@ -581,6 +581,7 @@ rm(n)
 
 *** =sample_code
 ```{r}
+set.seed(35) # leave this code here
 # The data are available in the holeSize dataframe.
 
 #1. View the mean and standard deviation of `holeDiameter` by printing their values to the console. You do not need to assign the values to anything. Just print and view it.
@@ -639,6 +640,7 @@ pDefective05
 
 *** =solution
 ```{r}
+set.seed(35)
 holeDiameter_boot <- sample(holeSize$holeDiameter, size = nrow(holeSize), replace = TRUE)
 holeMeans <- rep(NA, 10000)
 holeSD <- rep(NA, 10000)
