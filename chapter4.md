@@ -178,11 +178,11 @@ success_msg("Correct! The data seems to follow a normal distribution, but there 
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
 ## Drill-hole: goodness-of-fit for the uniform distribution part 1
 
-The first distribution that we are going to test is the uniform distribution, even though we are certain that the drilling holes do not follow this distribution. Knowing the answer in advance is useful when mastering a new techniques since we can easily check if the answer from our technique is correct.
+The first distribution that we are going to test is the uniform distribution, even though we are certain that the drilling holes do not follow this distribution. Knowing the answer in advance is useful when mastering new techniques since we can easily check if the answer from our techniques make sense.
 
 We will first perform the goodness-of-fit test by manually calculating the $\chi^2$ value of our sample, compared to the expected uniform distribution.
 
-Recall that for the $\chi^2$ goodness-of-fit test we work with bins, and compare the number of observed cases in each bin with the expected number of cases should our variable follow a certain distribution. Importantly, for continuous data we need to decide on the number of bins. Do so we can draw a histogram of the variable, using the `hist` function and change the number of breaks in the histogram. Even better, by assigning the histogram to an object, R can automatically return the number of observations for each interval, thus we don't have to do it manually. The following code illustrates this process:
+Recall that for the $\chi^2$ goodness-of-fit test we work with bins, and compare the number of observed cases in each bin with the expected number of cases should our variable follow a certain distribution. Importantly, for continuous data we need to decide on the number of bins. We can do so by drawing a histogram of the variable, using the `hist` function, and then change the number of breaks in the histogram. Even better, by assigning the histogram to an object, R can automatically return the number of observations for each interval, thus we don't have to do it manually. The following code illustrates this process:
 
 ```
 h <- hist(someVariable)
@@ -190,19 +190,19 @@ h$counts # this gives the number of cases in each bin of the histogram
 hCounts <- h$counts # now we can use the number of counts.
 ```
 
-Using the above code we can change the number of breaks in the histogram, assign the histogram to $h$ and use $h$counts$ to get the count per bin.
+Using the above code we can change the number of breaks in the histogram, assign the histogram to $h$ and use `h$counts` to get the count per bin.
 
-To calculate the $\chi^2$ we can use the following formula:
+To calculate the $\chi^2$ value we can use the following formula:
 
-$\chi^2 = \sum_{i=1}^{k}\frac{(O_i−E_i)^2}{E_i}2$,
+$\chi^2 = \sum_{i=1}^{k}\frac{(O_{i}−E_{i})^2}{E_{i}}$,
 
-where $k$ is the number of bins, $O_i$ is the observed number of cases in bin $i$ and $E_i$ is the expected number of cases in bin $i$ for the expected distribution.
+where $k$ is the number of bins, $O_{i}$ is the observed number of cases in bin $i$ and $E_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
 
-Once we have our $\chi^2$ we can calculate the probability of getting this value, or greater, using the `pchisq(q, df, lower.tail = FALSE)` which takes $\chi^2$ value, `q`, degrees-of-freedom `df, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned.
+Once we have our $\chi^2$ value we can calculate the probability of getting this value, or greater, using `pchisq(q, df, lower.tail = FALSE)` which takes as input the $\chi^2$ value, `q`, degrees-of-freedom, `df, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned, hence `lower.tail = FALSE`.
 
-The probability of getting the $\chi^2$ is very small, we conclude that there is sufficient evidence that the variable **DOES NOT** follow the expected distribution. If $\chi^2$ is big, we say there is not sufficient evidence to discard the distribution.
+If the probability of getting the $\chi^2$ value is very small, we conclude that there is sufficient evidence that the variable *DOES NOT* follow the expected distribution. If $\chi^2$ is big, we say there is not sufficient evidence to discard the distribution.
 
-For this question we will do the following:
+Using the data available in the `holeSize` dataframe, complete this question do the following:
 
 *** =instructions
 
@@ -231,13 +231,15 @@ rm(n)
 
 *** =sample_code
 ```{r}
+# The data are available in the holeSize dataframe.
+
 # 1. Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
 
 
 
-#2. Redraw the histogram bust this time assign it to the object `h`.
+#2. Redraw the histogram but this time assign it to the object `h`.
 
-
+h <-
 
 #3. View the object `h` to make sure that it is the histogram with 10 bins.
 
@@ -307,7 +309,7 @@ test_object("expectedCount", undefined_msg = "Make sure to define an object `exp
             incorrect_msg = "Make sure that you calculated the expected number of counts in each of the 10 bins correctly and assigned it to `expectedCount`. You need to use the total number of samples in our calculation.")
 
 test_object("chiSqr", undefined_msg = "Make sure to define an object `chiSqr`.",
-            incorrect_msg = "Make sure that you calculated the $\chi^2$ test statistic correctly and assigned your answer to `chiSqr`.")
+            incorrect_msg = "Make sure that you calculated the chi-square test statistic correctly and assigned your answer to `chiSqr`.")
 
 test_object("df", undefined_msg = "Make sure to define an object `df`.",
             incorrect_msg = "Make sure that you calculated the degrees-of-freedom correctly and assigned your answer to `df`. Note that the degrees-of-freedom is NOT based on the number of samples. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014)."
