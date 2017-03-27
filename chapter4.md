@@ -51,9 +51,10 @@ When completing the chapter, read the all the available information and instruct
 
 *** =instructions
 
-* I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
-Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material.
+* I have not have completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
+
+* I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
 *** =hist
 
@@ -69,6 +70,106 @@ Note that if you have not completed the prescribed preparation material you may 
 
 *** =sct
 ```{r}
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 1, feedback_msgs = c(msg_success))
+test_mc(correct = 2, feedback_msgs = c(msg_success, msg_success))
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+## Drill-hole sizes
+
+We wish to replace our current very old drilling machine.
+The machine is required to drill a hole with a diameter of 10cm within 0.5cm tolerance.
+If the hole is larger than 10.5cm, the part has to be scrapped.
+Similarly, if the hole is smaller than 9.5cm the part will also be scrapped.
+
+We also want to use the machine to drill holes for other products that have different tolerances.
+One product may have a 0.25cm tolerance, another 1cm.
+
+We have identified a possible replacement machine, and its supplier assured us that it will perform according to specifications.
+We insisted that the supplier provide us with data on its performance, so that we can make a more informed decision on whether it will meet our requirements.
+
+The supplier has given us data on different holes drilled by the machine during its testing.
+The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
+The data is available in the `holeSize` dataframe.
+
+For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes from the machine, find it's key parameters from the sample and using R's built-in function, use the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a 0.30cm tolerance limit.
+
+*** =instructions
+
+1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
+2. Determine the key parameters of the distribution (note that this part is not checked for correctness).
+3. Using the distribution (not the sample data), calculate the **probability** of a hole drilled by the machine to fall **outside** a 0.30cm tolerance limit, and will therefore be defective. Assign your answer to `pDefective03`.
+4. View the value of `pDefective03` by printing it to the console output via the `script.R` file.
+
+*** =hint
+
+Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which of the four distributions
+
+* normal,
+* poisson and exponential,
+* power-law,
+* uniform, or
+* t-distribution,
+
+it most closely represents.
+
+Use the appropriate function from the following to calculate the probability of a hole falling outside the 0.30cm tolerance limit:
+
+```
+pnorm, ppois, pexp, punif, pt.
+```
+Remember that outside the tolerance means the hole is either smaller than 10 - 0.3cm **or** bigger than 10 + 0.3cm.
+
+*** =pre_exercise_code
+```{r}
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
+rm(n)
+```
+
+*** =sample_code
+```{r}
+# The data are available in the holeSize dataframe.
+
+# 1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
+
+
+
+# 2. Determine the key parameters of the distribution (note that this part is not checked for correctness).
+
+
+
+# 3. Using the distribution (not the sample data), calculate the **probability** of a hole drilled by the machine to fall **outside** a 0.30cm tolerance limit, and will therefore be defective. Assign your answer to `pDefective03`.
+
+
+
+
+# 4. View the value of `pDefective03` by printing it to the console output via the `script.R` file.Print the values here:
+
+
+
+```
+
+*** =solution
+```{r}
+hist(holeSize$holeDiameter_cm)
+meanHole <- mean(holeSize$holeDiameter_cm)
+sdHole <- sd(holeSize$holeDiameter_cm)
+pDefective03 <- pnorm(10-0.3, meanHole, sdHole, lower.tail = TRUE) + pnorm(10+0.3, meanHole, sdHole, lower.tail = TRUE)
+pDefective03
+```
+
+*** =sct
+```{r}
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the hole diameters of the samples to see what the distribution looks like.",
+              incorrect_msg = "Make sure to draw the histogram for the hole diameters. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
+
+test_object("pDefective03", undefined_msg = "Make sure to define an object `pDefective03`.",
+            incorrect_msg = "Make sure that you calculated the probability of a hole that is drilled by the machine falling outside the 0.3cm tolerance correctly, and assigned the result to `pDefective03`. You have to use the probability distribution function to calculate `pDefective03`. Do not use the sample data. To use the probability distribution function you need to calculate its key parameters using the sample data, thereafter use the appropriate R function.")     
+
+test_output_contains("pDefective03", incorrect_msg = "You did not view the actual value of  `pDefective03`.")
+
+success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the t-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform  is a good representation of hole-size.")
 ```
