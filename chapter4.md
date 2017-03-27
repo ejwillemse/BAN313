@@ -444,11 +444,11 @@ plot(null.probs1)
 h2 <- hist(holeSize$holeDiameter_cm, breaks = 9)
 null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))
 
-chisq.test(x = h2$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)
+chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE, simulate.p.value=TRUE)
 
-rejectH0 <- chisq.test(x = h2$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)$p.value < 0.05
+rejectH0 <- chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE, simulate.p.value=TRUE)$p.value < 0.05
 
-chisq.test(x = h1$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)
+chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE, simulate.p.value=TRUE)
 ```
 
 *** =sct
@@ -472,13 +472,13 @@ test_object("null.probs1", undefined_msg = "Make sure to define an object `null.
             incorrect_msg = "Make sure that you calculate `null.probs2` using the code given.")    
 
 test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
-              "incorrect_msg = "Make sure to use the `chisq.test` on function on `h2` as described.")
+              incorrect_msg = "Make sure to use the `chisq.test` on function on `h2` as described.")
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the p-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
 
 test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
-              "incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
+              incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
 
 success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bin, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for continuous distribution anymore.)
 ```
