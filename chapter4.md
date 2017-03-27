@@ -194,7 +194,7 @@ Using the above code we can change the number of breaks in the histogram, assign
 
 To calculate the $\chi^2$ value we can use the following formula:
 
-$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}}$,
+$$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}}$$,
 
 where $k$ is the number of bins, $O\_{i}$ is the observed number of cases in bin $i$ and $E\_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
 
