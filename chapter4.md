@@ -174,3 +174,151 @@ test_output_contains("pDefective03", incorrect_msg = "You did not view the actua
 
 success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the $t$-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform distributions are good representations of hole-size.")
 ```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+## Drill-hole: goodness-of-fit for the uniform distribution part 1
+
+The first distribution that we are going to test is the uniform distribution, even though we are certain that the drilling holes do not follow this distribution. Knowing the answer in advance is useful when mastering a new techniques since we can easily check if the answer from our technique is correct.
+
+We will first perform the goodness-of-fit test by manually calculating the $\chi^2$ value of our sample, compared to the expected uniform distribution.
+
+Recall that for the $\chi^2$ goodness-of-fit test we work with bins, and compare the number of observed cases in each bin with the expected number of cases should our variable follow a certain distribution. Importantly, for continuous data we need to decide on the number of bins. Do so we can draw a histogram of the variable, using the `hist` function and change the number of breaks in the histogram. Even better, by assigning the histogram to an object, R can automatically return the number of observations for each interval, thus we don't have to do it manually. The following code illustrates this process:
+
+```
+h <- hist(someVariable)
+h$counts # this gives the number of cases in each bin of the histogram
+hCounts <- h$counts # now we can use the number of counts.
+```
+
+Using the above code we can change the number of breaks in the histogram, assign the histogram to $h$ and use $h$counts$ to get the count per bin.
+
+To calculate the $\chi^2$ we can use the following formula:
+
+$\chi^2 = \sum_{i=1}^{k}\frac{(O_i−E_i)^2}{E_i}2$,
+
+where $k$ is the number of bins, $O_i$ is the observed number of cases in bin $i$ and $E_i$ is the expected number of cases in bin $i$ for the expected distribution.
+
+Once we have our $\chi^2$ we can calculate the probability of getting this value, or greater, using the `pchisq(q, df, lower.tail = FALSE)` which takes $\chi^2$ value, `q`, degrees-of-freedom `df, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned.
+
+The probability of getting the $\chi^2$ is very small, we conclude that there is sufficient evidence that the variable **DOES NOT** follow the expected distribution. If $\chi^2$ is big, we say there is not sufficient evidence to discard the distribution.
+
+For this question we will do the following:
+
+*** =instructions
+
+1. Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
+2. Redraw the histogram bust this time assign it to the object `h`.
+3. View the object `h` to make sure that it is the histogram with 10 bins.
+4. View the number of observations in each bin of the histogram by printing `h$counts` to the console.
+5. Assign the number of observations in each bin to `hCounts`.
+6. Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins. Assign your answer to `expectedCount`. Do not round your answer.
+7. Using `hCounts` and `expectedCount`, calculate the $chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
+8. Calculate the degrees-of-freedom for the test and assign your answer to `df`.
+9. Calculate the $p$-value for the test and assign you answer to `p`.
+10. View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+
+*** =hint
+
+If you don't know how to calculate the chi-squared value or the degrees-of-freedom, review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014). Thereafter carefully go through all the background and instructions.
+
+*** =pre_exercise_code
+```{r}
+set.seed(35)
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
+rm(n)
+```
+
+*** =sample_code
+```{r}
+# 1. Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
+
+
+
+#2. Redraw the histogram bust this time assign it to the object `h`.
+
+
+
+#3. View the object `h` to make sure that it is the histogram with 10 bins.
+
+
+
+#4. View the number of observations in each bin of the histogram by printing `h$counts` to the console.
+
+
+
+# 5. Assign the number of observations in each bin to `hCounts`.
+
+
+
+# 6. Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins. Assign your answer to `expectedCount`. Do not round your answer.
+
+
+
+#7. Using `hCounts` and `expectedCount`, calculate the chi-squared value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
+
+
+
+#8. Calculate the degrees-of-freedom for the test and assign your answer to `df`.
+
+
+
+#9. Calculate the p-value for the test and assign you answer to `p`.
+
+
+
+#10. View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+
+
+
+```
+
+*** =solution
+```{r}
+hist(holeSize$holeDiameter_cm, breaks = 9)
+h <- hist(holeSize$holeDiameter_cm, breaks = 9)
+h
+h$counts
+hCounts <- h$counts
+expectedCount <- nrow(holeSize)/10
+chiSqr <- sum((hCounts - expectedCount)^2/expectedCount)
+df <- 10 - 1
+p <- pchisq(chiSqr, df, lower.tail = FALSE)
+p
+if(p < 0.05){rejectH0 <- TRUE}else{rejectH0 <- FALSE}
+```
+
+*** =sct
+```{r}
+test_function("hist", args = c("x", "breaks"), not_called_msg = "Draw a histogram with 9 breaks of the hole diameters of the samples to see what the distribution looks like.",
+              incorrect_msg = "Make sure to draw the histogram with 9 breaks for the hole diameters.")
+
+test_object("h", undefined_msg = "Make sure to define an object `h`.",
+            incorrect_msg = "Make sure that you assigned the histogram with 9 breaks to the object `h`. Note that you have to call `hist` twice, once to view the histogram and the second time to assign it to `h`")     
+
+test_output_contains("h", incorrect_msg = "You did not view the `h` to see if it's the same as the histogram.")
+
+test_output_contains("h$counts", incorrect_msg = "You did not view the number of cases in each histogram bin using `h$counts`.")
+
+test_object("hCounts", undefined_msg = "Make sure to define an object `hCounts`.",
+            incorrect_msg = "Make sure that you assigned the number of counts for each bin to the object `hCounts`. Note that you have to call `h$counts` twice, once to view the number of counts and the second time to assign it to `hCounts`")     
+
+test_object("expectedCount", undefined_msg = "Make sure to define an object `expectedCount`.",
+            incorrect_msg = "Make sure that you calculated the expected number of counts in each of the 10 bins correctly and assigned it to `expectedCount`. You need to use the total number of samples in our calculation.")
+
+test_object("chiSqr", undefined_msg = "Make sure to define an object `chiSqr`.",
+            incorrect_msg = "Make sure that you calculated the $\chi^2$ test statistic correctly and assigned your answer to `chiSqr`.")
+
+test_object("df", undefined_msg = "Make sure to define an object `df`.",
+            incorrect_msg = "Make sure that you calculated the degrees-of-freedom correctly and assigned your answer to `df`. Note that the degrees-of-freedom is NOT based on the number of samples. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014)."
+
+test_object("p", undefined_msg = "Make sure to define an object `p`.",
+            incorrect_msg = "Make sure that you calculated the $p$-value for the test statistic correctly using `pchisq()` assigned your answer to `p`."
+
+test_output_contains("p", incorrect_msg = "You did not view the actual value of  `p`.")
+
+test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the $p$-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
+
+success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
+```
