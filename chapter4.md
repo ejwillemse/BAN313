@@ -325,7 +325,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:0894c44736
+--- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
 
 For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
@@ -356,11 +356,11 @@ rm(n)
 
 
 
-#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
+#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
 
 
 
-#3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
+#3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
 
 
 
@@ -369,20 +369,116 @@ rm(n)
 *** =solution
 ```{r}
 h <- hist(holeSize$holeDiameter_cm, breaks = 9)
-hCounts <- h$counts
-chisq.test(hCounts)
+hBreaks <- h$counts
+chisq.test(hBreaks)
 ```
 
 *** =sct
 ```{r}
 test_object("h", undefined_msg = "Make sure to define an object `h`.",
-            incorrect_msg = "Make sure that you assigned the histogram with 9 breaks to the object `h`.")
+            incorrect_msg = "Make sure that you assigned the histogram with 9 breaks to the object `h`. Note that you have to call `hist` twice, once to view the histogram and the second time to assign it to `h`")
 
 test_object("hCounts", undefined_msg = "Make sure to define an object `hCounts`.",
             incorrect_msg = "Make sure that you assigned the number of counts for each bin to the object `hCounts`. Note that you have to call `h$counts` twice, once to view the number of counts and the second time to assign it to `hCounts`")
 
 test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
-              incorrect_msg = "Make sure to use the `chisq.test` function correctly. In this question, all it needs is the counts per bin.")
+              "incorrect_msg = "Make sure to use the `chisq.test` function correctly. In this question, all it needs is the counts per bin.")
 
 success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal and t-distribution.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+## Drill-hole: goodness-of-fit for the normal distribution
+
+Since we expect hole-size to follow a normal distribution, it makes sense to do a $\chi^2$ goodness-of-fit test using this distribution. To do so we can use the `chisq.test`, but in this case we have to supply more than the observed cases per bin. We also need to find the expected number of cases per bin should the variable follow a normal distribution. To do so is not trivial, but fortunately there are pre-existing code that we can use for this purpose.
+
+To test for other distributions, the `chisq.test` function needs as input `p`, which is the probability of an observation falling within each bin. Note that unlike the uniform distribution, the probability will be different for each bin. If we know the value of our bin break-points, `breaks`, and the sample mean and standard deviation the following code can be used as-is to calculate the bin probabilities for a normal distribution:
+
+```
+null.probs <- diff(pnorm(h$breaks, mean, sd))
+```
+
+where `h` is the histogram of our sample data assigned to the object `h`.
+
+Thereafter we can call the `chisq.test` as follows:
+
+```
+chisq.test(x = h$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)
+```
+
+To complete the question, do the following:
+
+*** =instructions
+
+1. Calculate the mean and standard deviation for the drill-hole size and assign your answer to `holeMean` and `holeSD`.
+2. Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
+3. Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, holeMean, holeSD))`.
+4. Draw a barplot of the probabilities, using `barplot(null.probs)`, to see that the bin probabilities follow a normal distribution.
+5. Draw a histogram of the hole-size variable with *9* breaks and assign the histogram to `h2`.
+6. Calculate the bin probabilities for 9 bins by calling `null.probs2 <- diff(pnorm(h2$breaks, holeMean, holeSD))`.
+7. Perform the goodness-of-fit test by calling `chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE, simulate.p.value=TRUE)` and view the results.
+8. Based on the output of the test decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+9. Perform the goodness-of-fit test this time using the 100 bin histogram by calling `chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE, simulate.p.value=TRUE)` and note the difference in the results.
+
+** =hint
+
+Go through the previous exercise to see how `hCount` can be calculated. Use `?chisq.test` to find out more about the function. Refer to the class slides.
+
+*** =pre_exercise_code
+```{r}
+set.seed(35)
+n <- runif(1, 300, 400)
+holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
+rm(n)
+```
+
+*** =solution
+```{r}
+meanHoleSize <- mean(holeSize$holeDiameter_cm)
+sdHoleSize <- sd(holeSize$holeDiameter_cm)
+
+h1 <- hist(holeSize$holeDiameter_cm, breaks = 100)
+null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))
+plot(null.probs)
+
+h2 <- hist(holeSize$holeDiameter_cm, breaks = 9)
+null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))
+
+chisq.test(x = h2$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)
+
+rejectH0 <- chisq.test(x = h2$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)$p.value < 0.05
+
+chisq.test(x = h1$counts, p = null.probs, rescale.p=TRUE, simulate.p.value=TRUE)
+```
+
+*** =sct
+```{r}
+test_object("meanHoleSize", undefined_msg = "Make sure to define an object `meanHoleSize`.",
+            incorrect_msg = "Make sure that you calculated the mean hole size correctly and assigned your answer to `meanHoleSize`")     
+
+test_object("sdHoleSize", undefined_msg = "Make sure to define an object `sdHoleSize`.",
+            incorrect_msg = "Make sure that you calculated the standard deviation of hole size correctly and assigned your answer to `sdHoleSize`")
+
+test_object("h1", undefined_msg = "Make sure to define an object `h1`.",
+            incorrect_msg = "Make sure that you assigned the histogram with *100* breaks to the object `h1`.")     
+
+test_object("null.probs1", undefined_msg = "Make sure to define an object `null.probs1.",
+            incorrect_msg = "Make sure that you calculate `null.probs1` using the code given.")     
+
+test_object("h2", undefined_msg = "Make sure to define an object `h2`.",
+            incorrect_msg = "Make sure that you assigned the histogram with *9* breaks to the object `h2`.")     
+
+test_object("null.probs1", undefined_msg = "Make sure to define an object `null.probs2.",
+            incorrect_msg = "Make sure that you calculate `null.probs2` using the code given.")    
+
+test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
+              "incorrect_msg = "Make sure to use the `chisq.test` on function on `h2` as described.")
+
+test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the p-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
+
+test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
+              "incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
+
+success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bin, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for continuous distribution anymore.)
 ```
