@@ -1,4 +1,4 @@
---- 
+---
 title_meta  : Case study 5
 title       : Case study 5 - Yacht production planning
 description : In this case study we will try and predict the production time of luxury yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
@@ -7,7 +7,7 @@ description : In this case study we will try and predict the production time of 
 ## Background
 
 In this case study we will try and predict the production time of luxury yachts using data on previous productions. 
-Our objective is to develop a predictive model to be used for production planning. 
+Our objective is to develop a predictive model to be used for production planning.
 To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
 
 A critical component of manufacturing is production planning, which includes, amongst others:
@@ -16,8 +16,8 @@ A critical component of manufacturing is production planning, which includes, am
 2. Scheduling the work to be conducted in the facility, including the purchase and delivery of materials.
 3. Setting up and delivering production orders to clients.
 
-We are responsible for production planning at luxury yachts manufacturing company. 
-Given the uniques of our products, our production operates on the produce-to-order principle, whereby manufacturing only starts once an order has been placed for a yacht. 
+We are responsible for production planning at luxury yachts manufacturing company.
+Given the uniques of our products, our production operates on the produce-to-order principle, whereby manufacturing only starts once an order has been placed for a yacht.
 Clients are also in full control of the yacht specifications, and can decide on the size of the yacht, its interior and a bunch of other customisations.
 As a result, each order is unique and has its own materials and manufacturing requirements.
 To manufacture the different yachts, we have a general purpose yacht-building facility, allowing us to build any type of yacht.
@@ -36,7 +36,7 @@ Please take note that the data used for this chapter is randomly generated and w
 
 When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-Before continuing, have a quick look at the following tutorial as you may need to refer to it during the course of the chapter: 
+Before continuing, have a quick look at the following tutorial as you may need to refer to it during the course of the chapter:
 
 * Refer to [http://www.cyclismo.org/tutorial/R/linearLeastSquares.html](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html).
 
@@ -145,16 +145,16 @@ test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_b
 --- type:NormalExercise lang:r xp:100 skills:1 key:59933cccde
 ## Analysing the data
 
-Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
 
 It consists of five variables:
 
-1. The number of complications (`nComplications`), which is the total number of customisations for the yacht. 
-2. Total yacht price in South African Rands (`price_ZAR`); 
+1. The number of complications (`nComplications`), which is the total number of customisations for the yacht.
+2. Total yacht price in South African Rands (`price_ZAR`);
 3. Yacht length in meters (`length_m`).
-4. Yacht width in meters (`width_m`). 
+4. Yacht width in meters (`width_m`).
 5. Top speed in knots (`speed_knots`).
-6. Time in hours it took to manufacture the yacht (`time_hr`). 
+6. Time in hours it took to manufacture the yacht (`time_hr`).
 
 First have a look at the data in the console using the `head(boatManufacturing)` command, thereafter answer the following:
 
@@ -194,15 +194,15 @@ rm(time_hr)
 
 *** =sample_code
 ```{r}
-# The boatManufacturing dataframe is available in your workspace. 
+# The boatManufacturing dataframe is available in your workspace.
 
 # 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
 
-nYachts <- 
+nYachts <-
 
 # 2. Calculate the mean manufacture time of a yacht and assign your answer to `production_mean`.
 
-production_mean <- 
+production_mean <-
 
 # 3. Draw a histogram of the manufacture time of yachts to analyse the distribution.
 
@@ -217,16 +217,16 @@ plot() # speed_knots
 plot() # price_ZAR
 
 # 5. Decide on which variable you think will be the _best predictor_ of manufacturing time and assign your answer to `bestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.
-              
-bestPredictor <- 
+
+bestPredictor <-
 
 # 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
 
-secondBestPredictor <- 
+secondBestPredictor <-
 
 # 7. Decide on which variable you think will be the _worst_ predictor of manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `worstPredictor`.
 
-worstPredictor <- 
+worstPredictor <-
 
 # Print the results here:
 
@@ -239,7 +239,7 @@ worstPredictor
 
 *** =solution
 ```{r}
-# The boatManufacturing dataframe is available in your workspace. 
+# The boatManufacturing dataframe is available in your workspace.
 
 # 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
 
@@ -270,7 +270,7 @@ cors <- c(abs(cor(boatManufacturing$nComplications, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$width_m, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$speed_knots, boatManufacturing$time_hr)),
           abs(cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr)))
-              
+
 bestPredictor <- discriptiveVariables[which.max(cors)]
 
 # 6. Decide on which variable you think will be the _second best_ predictor of manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `secondBestPredictor`.
@@ -297,14 +297,14 @@ worstPredictor
 *** =sct
 ```{r}
 test_object("nYachts", undefined_msg = "Make sure to define a variable `nYachts`.",
-            incorrect_msg = "Make sure that you calculated the number of yachts manufactured correctly and assigned your answer to `nYachts`.") 
-    
+            incorrect_msg = "Make sure that you calculated the number of yachts manufactured correctly and assigned your answer to `nYachts`.")
+
 test_object("production_mean", undefined_msg = "Make sure to define a variable `production_mean`.",
-            incorrect_msg = "Make sure that you calculated the mean manufacturing time of the yachts correctly and assigned your answer to `production_mean`.") 
-            
+            incorrect_msg = "Make sure that you calculated the mean manufacturing time of the yachts correctly and assigned your answer to `production_mean`.")
+
 test_function('hist', args = "x", not_called_msg = "Draw a histogram of the mean manufacturing time for yachts.",
               incorrect_msg = "Your call to `hist()` is incorrect. Make sure you are drawing a histogram of the correct variable.")
-              
+
 test_function("plot", args = c("x", "y"), index = 1, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 2, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
@@ -315,22 +315,22 @@ test_function("plot", args = c("x", "y"), index = 4, not_called_msg = "Draw a sc
                                                     incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
 test_function("plot", args = c("x", "y"), index = 5, not_called_msg = "Draw a scatter plot for all five variables against the yacht manufacturing time.",
                                                     incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
-                                                    
+
 test_object("bestPredictor", undefined_msg = "Make sure to define a variable `bestPredictor`.",
-            incorrect_msg = "Use the scatter plots to identify the _best_ predictor for manufacturing time and assign your answer to `production_mean`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.") 
-            
+            incorrect_msg = "Use the scatter plots to identify the _best_ predictor for manufacturing time and assign your answer to `production_mean`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `bestPredictor <- 'nComplications'`---remember the quotation marks.")
+
 test_object("secondBestPredictor", undefined_msg = "Make sure to define a variable `secondBestPredictor`.",
-            incorrect_msg = "Use the scatter plots to identify the _second best_ predictor for manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `secondBestPredictor <- 'nComplications'`---remember the quotation marks.") 
-            
+            incorrect_msg = "Use the scatter plots to identify the _second best_ predictor for manufacturing time and assign your answer to `secondBestPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `secondBestPredictor <- 'nComplications'`---remember the quotation marks.")
+
 test_object("worstPredictor", undefined_msg = "Make sure to define a variable `worstPredictor`.",
-            incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `worstPredictor <- 'nComplications'`---remember the quotation marks.") 
-            
+            incorrect_msg = "Use the scatter plots to identify the _worst predictor_ for manufacturing time and assign your answer to `worstPredictor`. Simply assign the variable name, as a string, to `bestPredictor`. For example, if you think it is `nComplications`, then `worstPredictor <- 'nComplications'`---remember the quotation marks.")
+
 success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want ato nalyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficients between of variables to see exactly how strong the descriptive variables correlate to our response variable.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:073be0f413
 ## Quantifying the relationship
 
-Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
 
 In the previous exercise we eye-balled the best predictor for manufacturing time.
 Better would be to quantify it, which is straightforward to do in R, using the `cor` function.
@@ -432,13 +432,13 @@ if (min(cor_nComplications, cor_length, cor_width, cor_speed, cor_price) < 0){al
 *** =sct
 ```{r}
 test_object("cor_nComplications", undefined_msg = "Make sure to define a variable `cor_nComplications`.",
-            incorrect_msg = "Make sure that you calculated the correlation between `nComplications` and `time_hr` correctly.") 
-    
+            incorrect_msg = "Make sure that you calculated the correlation between `nComplications` and `time_hr` correctly.")
+
 test_object("cor_length", undefined_msg = "Make sure to define a variable `cor_length`.",
-            incorrect_msg = "Make sure that you calculated the correlation between `length_m` and `time_hr` correctly.") 
-            
+            incorrect_msg = "Make sure that you calculated the correlation between `length_m` and `time_hr` correctly.")
+
 test_object("cor_width", undefined_msg = "Make sure to define a variable `cor_width`.",
-            incorrect_msg = "Make sure that you calculated the correlation between `width_m` and `time_hr` correctly.") 
+            incorrect_msg = "Make sure that you calculated the correlation between `width_m` and `time_hr` correctly.")
 test_object("cor_speed", undefined_msg = "Make sure to define a variable `cor_speed`.",
             incorrect_msg = "Make sure that you calculated the correlation between `speed_knots` and `time_hr` correctly.")
 
@@ -453,7 +453,7 @@ success_msg("Correct! The correlation coefficient allows us to quantify the stre
 --- type:NormalExercise lang:r xp:100 skills:1 key:d275dff6e3
 ## Fitting a linear regression line
 
-Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
 
 Now that we know that `length_m` has the strongest relationship with `time_hr` we can fit and plot a linear regression line on our data and use the coefficients of the line to predict how long a boat will take to manufacture, based on its length. To fit a model we will use the `lm` command. Type `?lm` in the console to see how the function works, and thereafter complete the following:
 
@@ -528,10 +528,10 @@ test_output_contains("fit", incorrect_msg = "You did not view the output of the 
 
 test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
              incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
-             
+
 test_function("abline", not_called_msg = "Add the linear regression line to the plot.",
              incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
-             
+
 success_msg("Correct! By using the `lm()` function we now have the least-squared linear regression line for `length_m` and `time_hr` which we can now use to predict the time required to manufacture a yacht, based on its required length. However, before we can use the linear regression line we first need to check certain conditions.")
 ```
 
@@ -539,7 +539,7 @@ success_msg("Correct! By using the `lm()` function we now have the least-squared
 --- type:NormalExercise lang:r xp:100 skills:1 key:4dfe0cdb7c
 ## Linear regression conditions
 
-Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
 
 For the linear regression line to be useful for predictive purposes, certain conditions must hold:
 
@@ -548,7 +548,7 @@ For the linear regression line to be useful for predictive purposes, certain con
 3. The residuals from the regression line must be nearly normal.
 4. The variability of our observations around our regression line must be constant.
 
-Recall that a residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form 
+Recall that a residual is calculated for each observation as the the actual observation's y value minus its predicted y value using the linear regression line. The linear regression line is of the form
 `y_hat <- beta_0 + beta_1*x`
 
 Both `beta_0` and `beta_1` are determined using the `lm` model so as to minimise the sum of the residuals squared of all our observations.
@@ -651,7 +651,7 @@ success_msg("Correct! We need to analyse the residuals to check if we can use th
 --- type:NormalExercise lang:r xp:100 skills:1 key:8f7127b622
 ## Making a prediction
 
-Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe. 
+Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
 
 For the last question we are going to predict how long a 340m length yacht is going to take to manufacture. We will also check whether we will be extrapolating, meaning that we are going to make a prediction based on a descriptive variable value that falls outside our observed values.
 
@@ -732,7 +732,7 @@ test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
 
 test_function("plot", args = c("x", "y"), not_called_msg = "Draw a scatter plot of the descriptive and predictive variable.",
              incorrect_msg = "Make sure that your x (descriptive) and y (response) variables for the plot are correct.")
-             
+
 test_function("abline", not_called_msg = "Add the linear regression line to the plot.",
              incorrect_msg = "Make sure the you added the linear regression line using the `fit` object that you created.")
 
@@ -741,6 +741,6 @@ test_object("y_340m", undefined_msg = "Make sure to define an object `y_340m`.",
 
 test_object("predictionExtrapolated", undefined_msg = "Make sure to define an object `predictionExtrapolated`.",
             incorrect_msg = "Check if the yacht length falls outside the observed yacht length. If it is then we are using the model to extrapolate and `predictionExtrapolated <- TRUE`. If not, we can be more reliant on the model results and `predictionExtrapolated <- FALSE`.")
-            
+
 success_msg("Correct! You have successfully developed and used a model that predicts how long a new boat will take to manufacture, based on its required length. To do this, you first identified the variable that correlates the best with the response variable. You then used the variable and the response variable and fitted a linear regression line. Next you used the regression line and analysed the residuals to check if conditions for regression were met. Lastly, you used the regression line to predict how long a 350m boat will take to manufacture.")
 ```

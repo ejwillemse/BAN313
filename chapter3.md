@@ -1,17 +1,17 @@
 ---
 title_meta  : Case study 6
 title       : Case study 6 - Different applications of probability distributions
-description : In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. The distributions that we will look at are normal, poisson and exponentia and uniform distributions. After eye-balling the applicable distribution we will find the appropriate distribution parameters, using the data, and then empirically answer some basic planning decisions using the appropriate distribution with its parameters.
+description : "In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. The distributions that we will look at are normal, poisson and exponential and uniform distributions. After eye-balling the applicable distribution we will find the appropriate distribution parameters, using the data, and then empirically answer some basic planning decisions using the appropriate distribution with its parameters."
 
 --- type:NormalExercise lang:r xp:0 skills:1 key:4fdf3ba090
 ## Background
 
-In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. 
+In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions.
 The distributions that we will look at are:
-  
-* normal, 
+
+* normal,
 * poisson and exponential,  and
-* uniform. 
+* uniform.
 
 To find out more about all R's built-in distribution functions, type `help("distributions")` in the R console.
 
@@ -76,7 +76,7 @@ success_msg("Let's use probability distributions to answer some questions.")
 --- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
 ## Drill-hole sizes
 
-We wish to replace our current very old drilling machine. 
+We wish to replace our current very old drilling machine.
 The machine is required to drill a hole with a diameter of 10cm within 0.5cm tolerance.
 If the hole is larger than 10.5cm, the part has to be scrapped.
 Similarly, if the hole is smaller than 9.5cm the part will also be scrapped.
@@ -91,12 +91,12 @@ The supplier has given us data on different holes drilled by the machine during 
 The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
 The data is available in the `holeSize` dataframe.
 
-For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes from the machine. 
+For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes from the machine.
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning questions.
 
 *** =instructions
 
-1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter. 
+1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
 2. How many samples fell outside the 0.5cm tolerance limit and are therefore defective: assign your answer to `nDefective05`.
 3. How many samples fell outside the 0.25cm tolerance limit and are therefore defective: assign your answer to `nDefective025`.
 4. How many samples fell outside the 1cm tolerance limit and are therefore defective: assign your answer to `nDefective1`.
@@ -106,9 +106,9 @@ In the following parts we will find the key parameters of the distribution and u
 
 Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which of the four distributions
 
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 * uniform,
 
 it most closely represents.
@@ -126,7 +126,7 @@ rm(n)
 ```{r}
 # The data are available in the holeSize dataframe.
 
-# 1. Analyse the distribution of the hole-sizes using the `hist()` function, and by playing around with `breaks` parameter. 
+# 1. Analyse the distribution of the hole-sizes using the `hist()` function, and by playing around with `breaks` parameter.
 
 
 
@@ -168,10 +168,10 @@ test_object("nDefective05", undefined_msg = "Make sure to define an object `nDef
             incorrect_msg = "Make sure that you calculated the number of holes that are outside the 0.5cm tolerance and assigned the result to `nDefective05`")     
 
 test_object("nDefective025", undefined_msg = "Make sure to define an object `nDefective025`.",
-            incorrect_msg = "Make sure that you calculated the number of holes that are outside the 0.25cm tolerance and assigned the result to `nDefective025`") 
+            incorrect_msg = "Make sure that you calculated the number of holes that are outside the 0.25cm tolerance and assigned the result to `nDefective025`")
 
 test_object("nDefective1", undefined_msg = "Make sure to define an object `nDefective1`.",
-            incorrect_msg = "Make sure that you calculated the number of holes that are outside the 1cm tolerance and assigned the result to `nDefective1`") 
+            incorrect_msg = "Make sure that you calculated the number of holes that are outside the 1cm tolerance and assigned the result to `nDefective1`")
 
 test_output_contains("nDefective05", incorrect_msg = "You did not view the actual value of  `nDefective05`.")
 test_output_contains("nDefective025", incorrect_msg = "You did not view the actual value of  `nDefective025`.")
@@ -186,9 +186,9 @@ success_msg("Correct! Now that we looked at the distribution of hole-sizes, and 
 Based on the histogram of the drill-hole sizes, which of the following distributions best represent this random variable?
 
 *** =instructions
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 * uniform.
 
 *** =hint
@@ -209,7 +209,7 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:f49344f14e
 ## Drill-hole size distribution parameters.
 
-Which distribution parameters do we need to determine to model the hole-size as a normal distribution? 
+Which distribution parameters do we need to determine to model the hole-size as a normal distribution?
 
 *** =instructions
 
@@ -236,7 +236,7 @@ test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 --- type:NormalExercise lang:r xp:100 skills:1 key:54412012be
 ## Using the best distribution for the drill-hole sizes
 
-To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean, $\mu$, and standard deviation, $\sigma$, of the drill-hole sizes. 
+To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean, $\mu$, and standard deviation, $\sigma$, of the drill-hole sizes.
 Thereafter we will empirically calculate the fraction of products that meet different specification limits using the `pnorm()` function.
 
 The data that we will use to estimate the key parameters are available in the `holeSize` dataframe. Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
@@ -245,17 +245,17 @@ To assist in answering the question, on a piece of paper draw a figure of the no
 
 *** =instructions
 
-1. Estimate $\mu$ for the normal distribution and assign your answer to `meanHoleSize`. 
-2. Estimate $\sigma$ for the normal distribution and assign your answer to `sdHoleSize`. 
+1. Estimate $\mu$ for the normal distribution and assign your answer to `meanHoleSize`.
+2. Estimate $\sigma$ for the normal distribution and assign your answer to `sdHoleSize`.
 3. Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.5cm_ tolerance limit and assign your answer to `fWork05`.
 4. Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.75cm_ tolerance limit and assign your answer to `fWork075`.
 5. View all the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
-To calculate $\mu$ and $\sigma$, simply use `mean` and `sd` on `holeSize$holeDiameter_cm`. 
+To calculate $\mu$ and $\sigma$, simply use `mean` and `sd` on `holeSize$holeDiameter_cm`.
 
-Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function. 
+Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find out more about using the `pnorm` function.
 
 The `pnorm` function has three inputs, `q`, $\mu$ and $\sigma$. To calculate the fraction of products that fall within a lower and upper limit, you need to call `pnorm` twice: once by setting `q = lower_limit` and once by setting `q = upper_limit`. The function gives the probability of getting a value lower than `q`, so you have to then figure you which probability value to subtract from which to get the area between two limits. This is covered in Example 2.49 on page 93 in the [prescribed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
@@ -270,11 +270,11 @@ rm(n)
 ```{r}
 # The data are available in the holeSize dataframe.
 
-# 1. Estimate mu for the normal distribution and assign your answer to `meanHoleSize`. 
+# 1. Estimate mu for the normal distribution and assign your answer to `meanHoleSize`.
 
 
 
-# 2. Estimate sigma for the normal distribution and assign your answer to `sdHoleSize`. 
+# 2. Estimate sigma for the normal distribution and assign your answer to `sdHoleSize`.
 
 
 
@@ -314,10 +314,10 @@ test_object("sdHoleSize", undefined_msg = "Make sure to define an object `sdHole
             incorrect_msg = "Make sure that you calculated the standard deviation of hole size correctly and assigned your answer to `sdHoleSize`")     
 
 test_object("fWork05", undefined_msg = "Make sure to define an object `fWork05`.",
-            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.5cm tolerance correctly and assigned the result to `fWork05`") 
+            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.5cm tolerance correctly and assigned the result to `fWork05`")
 
 test_object("fWork075", undefined_msg = "Make sure to define an object `fWork075`.",
-            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.75cm tolerance correctly and assigned the result to `fWork075`") 
+            incorrect_msg = "Make sure that you calculated the fraction of holes that are _within_ the 0.75cm tolerance correctly and assigned the result to `fWork075`")
 
 test_output_contains("meanHoleSize", incorrect_msg = "You did not view the actual value of `meanHoleSize`.")
 test_output_contains("sdHoleSize", incorrect_msg = "You did not view the actual value of `sdHoleSize`.")
@@ -331,7 +331,7 @@ success_msg("Correct! We have successfully fitted a normal distribution to the h
 ## Predicting soft-drink orders for the next day
 
 We are responsible for the inventory management for a soft-drink company.
-Due to a strike, the company cannot produce soft-drinks. 
+Due to a strike, the company cannot produce soft-drinks.
 The company is afraid that it may not be able to fulfil customer orders for the next day.
 Human resources believe that the strike will end this evening, and we therefore need to determine if we have enough inventory for tomorrow's orders.
 Orders are only placed by our clients in the morning and delivered on the same day.
@@ -343,22 +343,22 @@ Depending on the probability they can either import soft-drinks from another man
 
 The sales data for the previous 30 days' orders are available in the `clienOrders` dataframe, which consists of the day and the number of units ordered on that day by all our clients.
 
-For the first part of this question, analyse the distribution of the number of units ordered per day and identify the distribution that best describes this random variable. 
+For the first part of this question, analyse the distribution of the number of units ordered per day and identify the distribution that best describes this random variable.
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer the above question.
 
 *** =instructions
 
-1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
+1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter.
 2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
 3. View the values by printing them to the console output via the `script.R` file.
-  
+
   *** =hint
 
 Use `hist(clienOrders$ordersPerDay)` to analyse the distribution and see which of the four distributions
 
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 * uniform,
 
 that it most closely represents.
@@ -374,7 +374,7 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 ```{r}
 # The data are available in the clienOrders dataframe.
 
-# 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter. 
+# 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter.
 
 
 
@@ -415,9 +415,9 @@ success_msg("Correct! Now that we looked at the distribution of the number of un
 Based on the histogram of the number of units ordered per day, which of the following distributions best represent the variable?
 
 *** =instructions
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 * uniform.
 
 *** =hint
@@ -438,7 +438,7 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:4085ce9982
 ## Soft-drink orders distribution parameters.
 
-Which distribution parameters do we need to determine to model the number of units ordered per day as a uniform distribution? 
+Which distribution parameters do we need to determine to model the number of units ordered per day as a uniform distribution?
 
 *** =instructions
 
@@ -463,7 +463,7 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
 ## Using the best distribution for soft-drink orders
 
-To use the distribution, $X \sim \mathcal{U}(min, max)$ we first need to estimate its key parameters, namely the minimum and maximum value for the number of units ordered per day. 
+To use the distribution, $X \sim \mathcal{U}(min, max)$ we first need to estimate its key parameters, namely the minimum and maximum value for the number of units ordered per day.
 Thereafter we will empirically calculate the fraction of days in which more than 210 units will be ordered using the `punif()` function.
 This represents the probability that we will run out of stock on the next day.
 
@@ -471,14 +471,14 @@ The data that we will use to estimate the key parameters are available in the `c
 
 *** =instructions
 
-1. Estimate $min$ for the uniform distribution and assign your answer to `minOrders`. 
-2. Estimate $max$ for the uniform distribution and assign your answer to `maxOrders`. 
+1. Estimate $min$ for the uniform distribution and assign your answer to `minOrders`.
+2. Estimate $max$ for the uniform distribution and assign your answer to `maxOrders`.
 3. Use the uniform distribution probability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
 4. View all the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
-To calculate $min_{x}$ and $max_{x}$, simply use `min` and `max` on `clienOrders$ordersPerDay`. 
+To calculate $min_{x}$ and $max_{x}$, simply use `min` and `max` on `clienOrders$ordersPerDay`.
 
 The `punif` function has three inputs, `q`, `min` and `max`. Remember to check whether it returns the probability of having a value less than `q` or more than `q`.
 
@@ -491,11 +491,11 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 ```{r}
 # The data are available in the clienOrders dataframe.
 
-# 1. Estimate min_x for the uniform distribution and assign your answer to `minOrders`. 
+# 1. Estimate min_x for the uniform distribution and assign your answer to `minOrders`.
 
 
 
-# 2. Estimate max_x for the normal distribution and assign your answer to `maxOrders`. 
+# 2. Estimate max_x for the normal distribution and assign your answer to `maxOrders`.
 
 
 
@@ -528,7 +528,7 @@ test_object("maxOrders", undefined_msg = "Make sure to define an object `maxOrde
             incorrect_msg = "Make sure that you calculated the maximum number of units ordered per day correctly and assigned your answer to `maxOrders`")       
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-            incorrect_msg = "Make sure that you calculated the probability of stockout correctly and assigned your answer to `pStockOut`") 
+            incorrect_msg = "Make sure that you calculated the probability of stockout correctly and assigned your answer to `pStockOut`")
 
 test_output_contains("minOrders", incorrect_msg = "You did not view the actual value `minOrders`.")
 test_output_contains("maxOrders", incorrect_msg = "You did not view the actual value `maxOrders`.")
@@ -550,9 +550,9 @@ Insufficient means that the number of passengers arriving during the minute will
 Data on the arrival time of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `gauArrive` dataframe.
 
 The columns (variables) of the dataset and the variable types are as follow:
-  
+
 * `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
-* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
+* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}.
 * `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
 * `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
 * `second`: the second of the minute during which the passenger arrived, from from \{00, 01, \ldots, 59\}.
@@ -560,13 +560,13 @@ The columns (variables) of the dataset and the variable types are as follow:
 * `cardLoad`: whether the passenger had to load money on his or her card using the terminal-teller, which is either `TRUE` if the loaded money, or `FALSE` if they did not.
 * `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
 
-For the first part of this question, analyse the distribution of the number of passengers arriving per minute and identify the distribution that best describes this variable. 
+For the first part of this question, analyse the distribution of the number of passengers arriving per minute and identify the distribution that best describes this variable.
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning support questions.
 
 *** =instructions
 
 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
-2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
+2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter.
 
 *** =hint
 
@@ -576,9 +576,9 @@ The resulting table can be directly plotted using `hist(nArrivePerMin)`.
 
 Use the histogram to analyse the distribution and see which of the four distributions
 
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 uniform,
 
 best describe the variable.
@@ -625,24 +625,24 @@ genData <- function()
   dayPeakNorm <- dayPeak/sum(dayPeak)
   arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
   arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-  
+
   pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-  
+
   dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
   dayHrs <- 16:17
   dayMinutes <- 1:60
-  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
                 'Park', 'Rhodesfield', 'OR-Tambo')
-  
-  mydataTemplate <- data.frame(day = numeric(), 
+
+  mydataTemplate <- data.frame(day = numeric(),
                                dow = character(),
                                hour = numeric(),
                                timeStamp = character(),
                                cardLoad = logical(),
                                origin = character())
-  
+
   mydata <- mydataTemplate
-  
+
   i = 0
   for (nWeek in 1:(30/length(dows)))
   {
@@ -657,7 +657,7 @@ genData <- function()
         arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
         timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
         nArrivals <- length(timeStamp)
-        
+
         day <- rep(i, nArrivals)
         dow <- rep(dows[d], nArrivals)
         hour <- rep(dayHrs[h], nArrivals)
@@ -688,7 +688,7 @@ rm(tosecs)
 
 
 
-# 2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter. 
+# 2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter.
 
 
 
@@ -718,9 +718,9 @@ success_msg("Correct! Now that we looked at the distribution of the number of cu
 Based on the histogram of the number of passengers arriving per minute, which of the following distributions best represent this random variable?
 
 *** =instructions
-* normal, 
-* poisson and exponential, 
-* power-law, or 
+* normal,
+* poisson and exponential,
+* power-law, or
 * uniform.
 
 *** =hint
@@ -741,7 +741,7 @@ test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:13682c55f6
 ## Passenger arrival distribution parameter.
 
-Which distribution parameter(s) do we need to determine to model the number of passenger arrivals? 
+Which distribution parameter(s) do we need to determine to model the number of passenger arrivals?
 
 *** =instructions
 
@@ -767,9 +767,9 @@ test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:97f9e17aa1
 ## Using the best distribution for passenger arrivals
 
-To use the distribution, $X \sim \text{Poisson}(\lambda)$, we first need to estimate its key parameter, namely the expected number of customers that arrive per minute, $\lambda$. 
+To use the distribution, $X \sim \text{Poisson}(\lambda)$, we first need to estimate its key parameter, namely the expected number of customers that arrive per minute, $\lambda$.
 Thereafter we will empirically calculate the probability of the two outbound access-gates being insufficient during any minute interval using the `ppois()` function.
-Recall that the station is considering installing _two_ outbound access-gates and each gate can process approximately _two_ passengers per minute. 
+Recall that the station is considering installing _two_ outbound access-gates and each gate can process approximately _two_ passengers per minute.
 Insufficient means that the number of passengers arriving during the minute will be more than the access gates can process.
 For now we will ignore the knock-on effect that insufficient or excess resources during a time-interval will have on the following time-interval.
 
@@ -777,13 +777,13 @@ The data that we will use to estimate the key parameters are available in the `g
 
 *** =instructions
 
-1. Estimate $\lambda$ for the poisson distribution and assign your answer to `arrivalRate`. 
+1. Estimate $\lambda$ for the poisson distribution and assign your answer to `arrivalRate`.
 2. Use the poisson distribution probability function and determine the probability that the two outbound access-gates will be insufficient during any minute interval and assign your answer to `pInsufficent`.
 3. View the above values by printing them to the console output via the `script.R` file.
 
 *** =hint
 
-To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals. 
+To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals.
 
 To calculate the probability of the two-access gates being insufficient we first need to establish the maximum number of customers that two gates can cope with within a minute, which in this case is $2 \times 2 = 4$ and then calculate the probability of more than 4 customers arriving during a minute interval.
 
@@ -829,24 +829,24 @@ genData <- function()
   dayPeakNorm <- dayPeak/sum(dayPeak)
   arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
   arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-  
+
   pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-  
+
   dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
   dayHrs <- 16:17
   dayMinutes <- 1:60
-  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
                 'Park', 'Rhodesfield', 'OR-Tambo')
-  
-  mydataTemplate <- data.frame(day = numeric(), 
+
+  mydataTemplate <- data.frame(day = numeric(),
                                dow = character(),
                                hour = numeric(),
                                timeStamp = character(),
                                cardLoad = logical(),
                                origin = character())
-  
+
   mydata <- mydataTemplate
-  
+
   i = 0
   for (nWeek in 1:(30/length(dows)))
   {
@@ -861,7 +861,7 @@ genData <- function()
         arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
         timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
         nArrivals <- length(timeStamp)
-        
+
         day <- rep(i, nArrivals)
         dow <- rep(dows[d], nArrivals)
         hour <- rep(dayHrs[h], nArrivals)
@@ -890,7 +890,7 @@ nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 ```{r}
 # The number of customers that arrived within each minute interval has been pre-calculated and is available as the `nArrivePerMin` object.
 
-# 1. Estimate lambda for the poisson distribution and assign your answer to `arrivalRate`. 
+# 1. Estimate lambda for the poisson distribution and assign your answer to `arrivalRate`.
 
 
 
@@ -987,24 +987,24 @@ genData <- function()
   dayPeakNorm <- dayPeak/sum(dayPeak)
   arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
   arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-  
+
   pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-  
+
   dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
   dayHrs <- 16:17
   dayMinutes <- 1:60
-  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
                 'Park', 'Rhodesfield', 'OR-Tambo')
-  
-  mydataTemplate <- data.frame(day = numeric(), 
+
+  mydataTemplate <- data.frame(day = numeric(),
                                dow = character(),
                                hour = numeric(),
                                timeStamp = character(),
                                cardLoad = logical(),
                                origin = character())
-  
+
   mydata <- mydataTemplate
-  
+
   i = 0
   for (nWeek in 1:(30/length(dows)))
   {
@@ -1019,7 +1019,7 @@ genData <- function()
         arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
         timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
         nArrivals <- length(timeStamp)
-        
+
         day <- rep(i, nArrivals)
         dow <- rep(dows[d], nArrivals)
         hour <- rep(dayHrs[h], nArrivals)
@@ -1084,9 +1084,9 @@ In this question we are again going to focus on passenger-arrivals at the Gautra
 To do so we first need to calculate the inter-arrival time, in minutes, between all consecutive passengers.
 
 Recall that the data frame has the following variables:
-  
+
 * `day`: day when the arrival was captured, ranging from \{1, 2, \ldots, 30\}.
-* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}. 
+* `dow`: the day of the week when the arrival was captured, and limited to \{`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`\}.
 * `hour`: the hour of the day during which the passenger arrived, from \{16, 17}, where 16 represents 16:00PM--17:00PM and 17 represents 17:00PM--18:00PM,.
 * `minute`: the minute of the hour during which the passenger arrived, from \{00, 01, \ldots, 59\}, where 00 represents the time from 16:00PM--16:01PM or 17:00PM--18:01PM. Note that the time is reset at the start of each hour.
 * `second`: the second of the minute during which the passenger arrived, from from \{00, 01, \ldots, 59\}.
@@ -1095,12 +1095,12 @@ Recall that the data frame has the following variables:
 * `origin`: the station where the passenger first got on the train, and limited to \{`Pretoria`, `Centurion`, `Midrand`, `Marlboro`, `Sandton`, `Rosebank`, `Park`, `Rhodesfield`, `OR-Tambo`\}
 
 To calculate the inter-arrival time we first need to calculate the minute since the start of the day at which each customer arrived. This can be done using the following formula:
-  
+
   ```
 minuteArrived <- hour*60 + minute + second/60
 ```
 
-Thereafter we need to calculate the time between arrivals, taking care _not_ to include the time between the first arrival of a day and the last arrival of the previous day. With the above formula, these inter-arrival times should be ignored since they will give negative inter arrival times. For example, on day 1 the last customer arrived at 1079.167 minutes since the start of that day and on day 2 the first customer arrived at 960.16 minutes since the start of that day. The inter-arrival time between these two consecutive customers will be negative. We can use this information and the `subset` function to remove inter arrival times that are negative. 
+Thereafter we need to calculate the time between arrivals, taking care _not_ to include the time between the first arrival of a day and the last arrival of the previous day. With the above formula, these inter-arrival times should be ignored since they will give negative inter arrival times. For example, on day 1 the last customer arrived at 1079.167 minutes since the start of that day and on day 2 the first customer arrived at 960.16 minutes since the start of that day. The inter-arrival time between these two consecutive customers will be negative. We can use this information and the `subset` function to remove inter arrival times that are negative.
 
 To actually calculate the inter-arrival times we can use the `diff` function. Type `?diff()` in the console or visit [this page](http://stackoverflow.com/questions/8404611/how-to-find-the-difference-in-value-in-every-two-consecutive-rows-in-r) to see how it can be used.
 
@@ -1163,24 +1163,24 @@ genData <- function()
   dayPeakNorm <- dayPeak/sum(dayPeak)
   arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
   arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
-  
+
   pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
-  
+
   dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
   dayHrs <- 16:17
   dayMinutes <- 1:60
-  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank', 
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
                 'Park', 'Rhodesfield', 'OR-Tambo')
-  
-  mydataTemplate <- data.frame(day = numeric(), 
+
+  mydataTemplate <- data.frame(day = numeric(),
                                dow = character(),
                                hour = numeric(),
                                timeStamp = character(),
                                cardLoad = logical(),
                                origin = character())
-  
+
   mydata <- mydataTemplate
-  
+
   i = 0
   for (nWeek in 1:(30/length(dows)))
   {
@@ -1195,7 +1195,7 @@ genData <- function()
         arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
         timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
         nArrivals <- length(timeStamp)
-        
+
         day <- rep(i, nArrivals)
         dow <- rep(dows[d], nArrivals)
         hour <- rep(dayHrs[h], nArrivals)
@@ -1268,13 +1268,13 @@ test_object("interArrive", undefined_msg = "Make sure to define an object `inter
             incorrect_msg = "Make sure that you calculated the time between all consecutive arrivals correct, using the function given in the instructions, and assign your answer to `interArrive`")    
 
 test_object("interArriveClean", undefined_msg = "Make sure to define an object `interArriveClean`.",
-            incorrect_msg = "Make sure that you removed negative inter arrival times and assigned the resulting vector to `interArriveClean`. You can use the `subset(vector, vector > value)` command.") 
+            incorrect_msg = "Make sure that you removed negative inter arrival times and assigned the resulting vector to `interArriveClean`. You can use the `subset(vector, vector > value)` command.")
 
 test_object("arriveRate", undefined_msg = "Make sure to define an object `arriveRate`.",
-            incorrect_msg = "Make sure that you calculated the arrival rate customers correctly, using the formula given in the notes and in the instructions, and assigned your answer to `arriveRate`.") 
+            incorrect_msg = "Make sure that you calculated the arrival rate customers correctly, using the formula given in the notes and in the instructions, and assigned your answer to `arriveRate`.")
 
 test_object("pWithin30sec", undefined_msg = "Make sure to define an object `pWithin30sec`.",
-            incorrect_msg = "Make sure that you calculated the probability of a customer arriving within 30 seconds of the current customer, meaning the inter-arrival time is less than 30 seconds, and assigned your answer to `pWithin30sec`.") 
+            incorrect_msg = "Make sure that you calculated the probability of a customer arriving within 30 seconds of the current customer, meaning the inter-arrival time is less than 30 seconds, and assigned your answer to `pWithin30sec`.")
 
 test_output_contains("pWithin30sec", incorrect_msg = "You did not view the actual value `pWithin30sec`.")
 

@@ -1,4 +1,4 @@
---- 
+---
 title_meta  : Case study 4
 title       : Case study 4 - Choosing the best vendor
 description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. 
@@ -150,7 +150,7 @@ rm(priceCompB)
 
 *** =sample_code
 ```{r}
-# The product_comparison dataframe is available in your workspace. 
+# The product_comparison dataframe is available in your workspace.
 
 # 1) Find the number of products that we sampled and assign your answer to: n_products
 
@@ -185,7 +185,7 @@ sd_price_B
 
 *** =solution
 ```{r}
-# The product_comparison dataframe is available in your workspace. 
+# The product_comparison dataframe is available in your workspace.
 # Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
 
 # 1) Find the number of products and safe your answer to: n_products
@@ -223,22 +223,22 @@ sd_price_B
 *** =sct
 ```{r}
 test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
-            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.") 
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.")
 
 test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.")
-            
+
 test_object("mean_price_A", undefined_msg = "Make sure to define a variable `mean_price_A`.",
             incorrect_msg = "Make sure that you calculated the sample mean for product prices from Company A correctly and assigned your answer to `mean_price_A`.")
-            
+
 test_object("sd_price_A", undefined_msg = "Make sure to define a variable `sd_price_A`.",
             incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company A correctly and assigned your answer to `sd_price_A`.")
-            
+
 test_object("mean_price_B", undefined_msg = "Make sure to define a variable `mean_price_B`.",
             incorrect_msg = "Make sure that you calculated the sample mean for product prices from Company B correctly and assigned your answer to `mean_price_B`.")
-            
+
 test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_price_B`.",
             incorrect_msg = "Make sure that you calculated the standard deviation for product prices from Company B correctly and assigned your answer to `sd_price_B`.")
-            
+
 success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
 
@@ -276,7 +276,7 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
 --- type:NormalExercise lang:r xp:100 skills:1 key:19491ec2a5
 ## Analysing the difference between product prices
 
-The component price data has been loaded in the workspace as the `product_comparison` dataframe. Note that sample is different from the previous question. 
+The component price data has been loaded in the workspace as the `product_comparison` dataframe. Note that sample is different from the previous question.
 
 Before we can apply inference for paired data, we need to calculate the difference in price from Company A and Company B per product. Thereafter we need to check the conditions for numerical inference. These are that:
 
@@ -291,7 +291,7 @@ After checking the conditions we need calculate the necessary sample statistics 
 
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
-3. Determine the number of samples and assign the answer to the variable `n`. 
+3. Determine the number of samples and assign the answer to the variable `n`.
 4. Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
@@ -324,11 +324,11 @@ rm(priceCompB)
 
 *** =sample_code
 ```{r}
-# The product_comparison dataframe is available in your workspace. 
+# The product_comparison dataframe is available in your workspace.
 
 # 1) Calculate the difference between Company A's price and that of Company B for each product, and assign the answer to the vector: price_diff
 
-price_diff <- 
+price_diff <-
 
 # 2) Draw a histogram of the price difference to analyse the sample distribution (use control-enter to execute your code and view the results).
 
@@ -336,7 +336,7 @@ price_diff <-
 
 # 3) Determine the number samples and, assign the answer to n, and print the answer to the console (use control-enter to execute your code and view the results).
 
-n <- 
+n <-
 n
 
 # 4a) Look at the sample distribution and number of samples to decide if the normal condition has been met. If you decide it is near-normal set: normalConditionMet <- TRUE. If not set: `normalConditionMet <- FALSE`.
@@ -363,7 +363,7 @@ s_diff
 
 *** =solution
 ```{r}
-# The product_comparison dataframe is available in your workspace. 
+# The product_comparison dataframe is available in your workspace.
 
 # 1) Calculate the difference between Company A's price and that of Company B for each product, and assign the answer to the vector: price_diff
 
@@ -407,19 +407,19 @@ test_function('hist', args = "x", not_called_msg = "You did not draw a histogram
 test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
 
 test_object("n", undefined_msg = "Make sure to define a variable `n`.",
-            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.")
 
 test_output_contains("n", incorrect_msg = "You did not view the actual value `n`. You need to check the sample size to determine if the normal condition is met.")
 
 test_object("normalConditionMet", undefined_msg = "Make sure to define a variable `normalConditionMet`.",
             incorrect_msg = "You should base your answer on histogram and number samples and assign it as either `TRUE` or `FALSE` to `normalConditionMet`.")
-            
+
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
             incorrect_msg = "Make sure that you calculated the mean price differences correctly and assigned your answer to `mean_diff`.")
-            
+
 test_object("s_diff", undefined_msg = "Make sure to define a variable `s_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `s_diff`.")
-            
+
 success_msg("Well done! By calculating the price difference per product we can now treat the differences as a single numerical variable, and apply the appropriate statistical techniques. by using the `mean()`, `sd()` and `nrow()` functions, we were able to extract the sample statistics from the data necessary to manually apply the methods for numerical inference. Before we perform more calculations, let's take a step back and see what is were are trying to achieve by performing inference on paired data.")
 ```
 
@@ -494,17 +494,17 @@ To find the p-value we can use probability tables. The only problem with this ap
 
 The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical z or t value. These values are determined based on the required confidence level, and for the critical t value, by the degrees of freedom. Here we also want to automatically get the critical z or t value using R's built in function, instead of relying on distribution tables or external sources.
 
-To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the t-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console. 
+To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the t-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console.
 
-First, we will consider `pnorm` to calculate the p-value. At a minimums, `pnorm(Z_score)` takes the Z-score (`Z_score`) of our observed mean, and returns the probability of obtaining a Z-score of less than that value. It will thus give the area to the left of the Z-score under the curve. If `Z_score <- -1.1` then `pnorm(Z_score) = 0.136`. This means that the probability of obtaining a Z-score of less than -1.1 is about to 0.136. 
+First, we will consider `pnorm` to calculate the p-value. At a minimums, `pnorm(Z_score)` takes the Z-score (`Z_score`) of our observed mean, and returns the probability of obtaining a Z-score of less than that value. It will thus give the area to the left of the Z-score under the curve. If `Z_score <- -1.1` then `pnorm(Z_score) = 0.136`. This means that the probability of obtaining a Z-score of less than -1.1 is about to 0.136.
 
-Will `pnorm(Z_score)` always give us our p-value for our hypothesis test? No it won't. It depends on our hypothesis test and which area under the normal curve we are interested in. For a double-sided hypothesis test it becomes a bit more tricky. Here we are interested in observing a similar difference from the assumed mean under H0, and we don't care if the difference is positive or negative. We therefore have to look at both the left and right tail areas of our Z-score. If `Z_score <- -1.1`, then `pnorm(Z_score) = 0.136`. But we also want to find the probability of having a Z-score of _greater_ than 1.1 and add this to the previous value. Since the normal distribution is symmetrical we know that P(Z-score < -1.1) = P(Z-score > 1.1), so the p-value is going to be equal to `2*pnorm(Z_score) = 0.272`. But what happens if `Z_score <- 2.1`? Now `2*pnorm(Z_score) = 1.964`, which means our p-value is greater than 1, _which is impossible_! So why is this calculation wrong? 
+Will `pnorm(Z_score)` always give us our p-value for our hypothesis test? No it won't. It depends on our hypothesis test and which area under the normal curve we are interested in. For a double-sided hypothesis test it becomes a bit more tricky. Here we are interested in observing a similar difference from the assumed mean under H0, and we don't care if the difference is positive or negative. We therefore have to look at both the left and right tail areas of our Z-score. If `Z_score <- -1.1`, then `pnorm(Z_score) = 0.136`. But we also want to find the probability of having a Z-score of _greater_ than 1.1 and add this to the previous value. Since the normal distribution is symmetrical we know that P(Z-score < -1.1) = P(Z-score > 1.1), so the p-value is going to be equal to `2*pnorm(Z_score) = 0.272`. But what happens if `Z_score <- 2.1`? Now `2*pnorm(Z_score) = 1.964`, which means our p-value is greater than 1, _which is impossible_! So why is this calculation wrong?
 
-Remember that `pnorm(Z_score)` returns the probability of obtaining a Z-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the p-value. To get the right-tail area under the normal curve for a positive Z-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the p-value depends on whether our Z-score is positive or negative. For a single-sided hypothesis test it will depend on whether our HA states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the t-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the critical T-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual p-value depends on the hypotheses. 
+Remember that `pnorm(Z_score)` returns the probability of obtaining a Z-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the p-value. To get the right-tail area under the normal curve for a positive Z-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the p-value depends on whether our Z-score is positive or negative. For a single-sided hypothesis test it will depend on whether our HA states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the t-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the critical T-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual p-value depends on the hypotheses.
 
 If you still don't quite understand how it works, have a look at:
 
-- [this website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) that explains the concept of calculating the `p-value` 
+- [this website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) that explains the concept of calculating the `p-value`
 - [this website](http://www.cyclismo.org/tutorial/R/pValues.html) which shows how the p-value can be calculated in R.
 
 As an exercise, calculate the p-value for the following scenarios:
@@ -584,19 +584,19 @@ p_value_5 <- 2*pt(-3.3, 23)
 *** =sct
 ```{r}
 test_object("p_value_1", undefined_msg = "Make sure to define a variable `p_value_1`.",
-            incorrect_msg = "Make sure that you calculated the `p_value_1` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.") 
-            
+            incorrect_msg = "Make sure that you calculated the `p_value_1` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.")
+
 test_object("p_value_2", undefined_msg = "Make sure to define a variable `p_value_2`.",
-            incorrect_msg = "Make sure that you calculated the `p_value_2` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.") 
+            incorrect_msg = "Make sure that you calculated the `p_value_2` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.")
 
 test_object("p_value_3", undefined_msg = "Make sure to define a variable `p_value_3`.",
-            incorrect_msg = "Make sure that you calculated the `p_value_3` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.") 
-            
+            incorrect_msg = "Make sure that you calculated the `p_value_3` correctly, and take note of the sign of the T-score and of the alternative hypothesis statement.")
+
 test_object("p_value_4", undefined_msg = "Make sure to define a variable `p_value_4`.",
-            incorrect_msg = "Make sure that you calculated the `p_value_4` correctly, and take note of of the sign of the T-score and the alternative hypothesis statement.") 
-            
+            incorrect_msg = "Make sure that you calculated the `p_value_4` correctly, and take note of of the sign of the T-score and the alternative hypothesis statement.")
+
 test_object("p_value_5", undefined_msg = "Make sure to define a variable `p_value_5`.",
-            incorrect_msg = "Make sure that you calculated the `p_value_5` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.") 
+            incorrect_msg = "Make sure that you calculated the `p_value_5` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:803d9a69c1
 ## Conducting the hypothesis test
@@ -619,7 +619,7 @@ Once we have the required sample statistics we need to determine how likely our 
 
 Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
-To calculate the p-value we will be using the `pt()` function, as described in the previous exercise. 
+To calculate the p-value we will be using the `pt()` function, as described in the previous exercise.
 
 To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself:
 
@@ -642,9 +642,9 @@ T_score = mean_diff/SE
 df = n - 1
 ```
 
-Calculating the p-value is tricky. Start by carefully going through the documentation by typing `?pt` in the console. 
+Calculating the p-value is tricky. Start by carefully going through the documentation by typing `?pt` in the console.
 
-The actual p-value depends on the actual value of `T_score`. We know that `pt(T_score, df)` will give the area to the left of `T_score` for a t-distribution with degrees of freedom of `df`. If `T_score < 0` then the correct area is given by the function and we simply need to multiply it by two since we want to also include the same area under the right side of the tail. Remember that we are dealing with a double-sided hypothesis test, so we don't care whether the mean difference is positive or negative. We are only really interested in the absolute difference. 
+The actual p-value depends on the actual value of `T_score`. We know that `pt(T_score, df)` will give the area to the left of `T_score` for a t-distribution with degrees of freedom of `df`. If `T_score < 0` then the correct area is given by the function and we simply need to multiply it by two since we want to also include the same area under the right side of the tail. Remember that we are dealing with a double-sided hypothesis test, so we don't care whether the mean difference is positive or negative. We are only really interested in the absolute difference.
 
 If `T_score > 0` we know that the incorrect area is given, since we need the area to the right of `T_score` in the tail (not the left). To fix this we can either call `pt(T_score, df,  lower.tail = FALSE)` which will then give the upper tail, or we can use `1 - pt(T_score, df)`. After that we still have to multiply the value by two.
 
@@ -673,9 +673,9 @@ rm(priceCompB)
 ```{r}
 # The product_comparison dataframe is available in your workspace. Remember to create and assign your answers to the correct variables as specified in the instructions. Where necessary, view the outcome of your calculation by printing them to the console. You can also view the values of your variables by typing them in the console and pressing enter.
 
-# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. 
+# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample.
 
-# 2) Calculate the Standard Error of the sample mean. 
+# 2) Calculate the Standard Error of the sample mean.
 
 # 3) Calculate the T-score of the sample mean.
 
@@ -691,18 +691,18 @@ rm(priceCompB)
 
 *** =solution
 ```{r}
-# Do not just view the answers!!!!!!! 
+# Do not just view the answers!!!!!!!
 
 # You will not have this option available in test and exams. You have to try and figure out the solutions on your own, otherwise you will do poorly in the tests.
 
-# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample, and create and assign your answers to the correct variables (this applies to all the following questions). 
+# 1) Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample, and create and assign your answers to the correct variables (this applies to all the following questions).
 
 price_diff <- product_comparison$priceCompA - product_comparison$priceCompB
 n <- nrow(product_comparison)
 mean_diff <- mean(price_diff)
 sd_diff <- sd(price_diff)
 
-# 2) Calculate the Standard Error of the sample mean. 
+# 2) Calculate the Standard Error of the sample mean.
 
 SE <- sd_diff/sqrt(n)
 
@@ -735,23 +735,23 @@ test_object("price_diff", undefined_msg = "Make sure to calculate the price diff
 test_function('nrow', args = "x", not_called_msg = "There are different ways to calculate the number of samples. To ensure that your code produce consistent results, regardless of the dataset used, use the `nrow` command to determine the number of samples in the data frame. Type `?nrow` in the console if you are unsure how it works.",)
 
 test_object("n", undefined_msg = "Make sure to define a variable `n`.",
-            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.") 
-            
+            incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n`.")
+
 test_object("mean_diff", undefined_msg = "Make sure to define a variable `mean_diff`.",
             incorrect_msg = "Make sure that you calculated the mean price difference correctly and assigned your answer to `mean_diff`.")
-            
+
 test_object("sd_diff", undefined_msg = "Make sure to define a variable `sd_diff`.",
             incorrect_msg = "Make sure that you calculated the standard deviation of the price differences correctly and assigned your answer to `sd_diff`.")
-            
+
 test_object("SE", undefined_msg = "Make sure to define a variable `SE`.",
             incorrect_msg = "Make sure that you calculated the standard error of the sample mean price differences correctly and assigned your answer to `SE`. Refer to the prescribed textbook for the correct standard error formula to use.")
-            
+
 test_object("T_score", undefined_msg = "Make sure to define a variable `T_score`.",
             incorrect_msg = "Make sure that you calculated the T-score of the sample mean price differences correctly and assigned your answer to `T_score`. Refer to the prescribed textbook for the correct T-score formula to use.")
 
 test_object("df", undefined_msg = "Make sure to define a variable `df`.",
             incorrect_msg = "Make sure that you calculated the degrees of freedom correctly  and assigned your answer to `df`. Refer to the prescribed textbook for the correct degrees of freedom formula to use.")
-            
+
 test_object("p_value", undefined_msg = "Make sure to define a variable `p_value`.",
             incorrect_msg = "Make sure that you calculated the p-value correctly and assigned your answer to `p_value`. Refer to the prescribed textbook on how to determine the p-value of doubled sided hypothesis test using the t-distribution. You may also use probability tables to check your calculated value that you got using the `pt()` function.")
 
@@ -759,7 +759,7 @@ test_output_contains("p_value", incorrect_msg = "We have to view the `p_value` t
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. Refer to the prescribed textbook on how to determine if we can reject (`TRUE`) or not reject (`FALSE`) the null hypothesis based on alpha.")
-            
+
 test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to actually view the `rejectH0` to see what the outcome of the test was, so update your code to print its value to the console. We need to know the outcome of the test to determine if there is a difference between the suppliers.")
 
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
@@ -776,14 +776,14 @@ In this exercise we will use a _new_ sample of products and their prices from Co
 
 For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Note that the you have to use R's built in functions to calculate the critical t-value for the margin of error. You cannot use the probability tables. [This website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) illustrates how to do so in R. Take special note of the required confidence levels in the examples, and what they then put into the R functions. There is some manipulation that takes place first.
 
-Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data. 
+Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
 
 *** =instructions
 
-1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low` 
+1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low`
 and the higher confidence interval value to `CI_high`. Refer to [this website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) which illustrates how to calculate Confidence Intervals in R.
 2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` AND `chooseCompanyB` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
-3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data. 
+3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
 
 *** =hint
 
