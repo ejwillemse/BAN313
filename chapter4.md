@@ -525,7 +525,7 @@ test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"),
 success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:5df974f21f
+--- type:NormalExercise lang:r xp:100 skills:1 key:a483221d79
 ## Drill-hole: parameter estimation using bootstrapping
 
 In the previous question we have formally tested the goodness-of-fit for the normal distribution, and found that due to the large $p$-value of the $\chi^2$ test statistic we cannot reject $H\_0$, which is that hole-size follows a normal distribution with a mean and standard deviation equal to that of the sample data. If we were to repeat the question with a new sample, we would get a different sample mean and standard deviation, even though the process output follows the same distribution.
