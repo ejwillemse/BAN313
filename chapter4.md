@@ -53,6 +53,8 @@ When completing the chapter, read the all the available information and instruct
 
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
+Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material.
+
 *** =hist
 
 *** =pre_exercise_code
