@@ -659,7 +659,7 @@ if(abs(meanInter[1] - 10 - 0.5) > abs(meanInter[2] - 10.0 + 0.5))
 }else{
   worstMean <- meanInter[2]
 }
-worstSD <- meanSD[2]
+worstSD <- sdInter[2]
 pDefective05 <- pnorm(10 - 0.5, worstMean, worstSD) + pnorm(10 + 0.5, worstMean, worstSD, lower.tail = FALSE)
 pDefective05
 ```
@@ -675,13 +675,13 @@ test_object("holeMeans", undefined_msg = "Make sure to define an object `holeMea
 test_object("holeMeans", undefined_msg = "Make sure to define an object `holeMeans`.",
             incorrect_msg = "Make sure that you stored the mean of each of 10000 simulations in `holeMeans`.")  
 
-test_object("holeMeans", undefined_msg = "Make sure to define an object `holeSD`.",
+test_object("holeSD", undefined_msg = "Make sure to define an object `holeSD`.",
             incorrect_msg = "Make sure that you stored the standard deviation of each of 10000 simulations in `holeSD`.")
 
-test_function("hist", args = c("x", not_called_msg = "Draw a histogram of hole `holeMeans`.",
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `holeMeans`.",
               incorrect_msg = "Draw a histogram of `holeMeans`.")
 
-test_function("hist", args = c("x", not_called_msg = "Draw a histogram of `holeSD`.",
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of `holeSD`.",
               incorrect_msg = "Draw a histogram of `holeSD`.")
 
 test_object("meanInter", undefined_msg = "Make sure to define a variable `meanInter`.",
