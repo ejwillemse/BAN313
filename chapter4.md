@@ -312,15 +312,15 @@ test_object("chiSqr", undefined_msg = "Make sure to define an object `chiSqr`.",
             incorrect_msg = "Make sure that you calculated the chi-square test statistic correctly and assigned your answer to `chiSqr`.")
 
 test_object("df", undefined_msg = "Make sure to define an object `df`.",
-            incorrect_msg = "Make sure that you calculated the degrees-of-freedom correctly and assigned your answer to `df`. Note that the degrees-of-freedom is NOT based on the number of samples. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014)."
+            incorrect_msg = "Make sure that you calculated the degrees-of-freedom correctly and assigned your answer to `df`. Note that the degrees-of-freedom is NOT based on the number of samples. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014).")
 
 test_object("p", undefined_msg = "Make sure to define an object `p`.",
-            incorrect_msg = "Make sure that you calculated the $p$-value for the test statistic correctly using `pchisq()` assigned your answer to `p`."
+            incorrect_msg = "Make sure that you calculated the p-value for the test statistic correctly using `pchisq()` assigned your answer to `p`.")
 
 test_output_contains("p", incorrect_msg = "You did not view the actual value of  `p`.")
 
 test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
-            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the $p$-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`. View the p-value and then decide for yourself if `rejectH0<-TRUE` or `rejectH0<-FALSE`.")
 
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
 ```
