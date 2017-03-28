@@ -695,3 +695,128 @@ test_object("pDefective05", undefined_msg = "Make sure to define a variable `pDe
 
 success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for any parameter, including the mean and the standard deviation. The confidence intervals can then be used to get a conservative estimate of the process output.")
 ```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:8baad0d53b
+## Gautrain arrival rate: fitting the poisson distribution
+
+In the last questions we are going to analyse the number of passengers arriving _per minute_ from the Gautrain between 16:00 and 18:00PM.
+This information is necessary to determine the number of outbound access gates to activate during the peak-arrival time.
+Recall that the Gautrain can easily switch  an access gate from inbound to outbound.
+Approximately _two_ passengers can go through the gate per minute, and the station is considering having only _two_ outbound access-gates open during the peak-time.
+The question that we need to answer is what is the probability of the two outbound access-gates being insufficient?
+Insufficient means that the number of passengers arriving during the minute will be more than the access gates can process.
+
+The arrival rate per minute of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `nArrivePerMin` vector.
+
+In this question we are going to fit a distribution to the arrivals per minute.
+
+*** =instructions
+
+1. Draw a histogram of the arrivals per minute and check if it follows a poisson distribution.
+2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
+3. Perform a $\chi^2$ goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`; perform the test using `chisq.test(...)` function and view the results.
+4. Based on the output of the test decide for yourself whether the data do no follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
+
+*** =hint
+
+The steps required to complete this question is the same as the previous questions.
+
+*** =pre_exercise_code
+```{r}
+set.seed(35)
+tod <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(todFormatted)
+}
+
+tomns <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(mints)
+}
+
+tosecs <- function(x, h)
+{
+  mints = floor(x/60)
+  secs = round(x - 60*mints, 2)
+  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
+  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
+  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
+  todFormatted = paste(hrs,mns,scs,sep=":")
+  return(secs)
+}
+
+genData <- function()
+{
+  nCustomersPerWeek <- 63000/8*5
+  dayPeak <- c(2,2,2,1,1)
+  dayPeakNorm <- dayPeak/sum(dayPeak)
+  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
+  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
+
+  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
+
+  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+  dayHrs <- 16:17
+  dayMinutes <- 1:60
+  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
+                'Park', 'Rhodesfield', 'OR-Tambo')
+
+  mydataTemplate <- data.frame(day = numeric(),
+                               dow = character(),
+                               hour = numeric(),
+                               timeStamp = character(),
+                               cardLoad = logical(),
+                               origin = character())
+
+  mydata <- mydataTemplate
+
+  i = 0
+  for (nWeek in 1:(30/length(dows)))
+  {
+    for (d in 1:length(dows))
+    {
+      i = i + 1
+      nDay = nCustomersPerWeek*dayPeakNorm[d]
+      for (h in 1:length(dayHrs))
+      {
+        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
+        startTime <- 0
+        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
+        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        nArrivals <- length(timeStamp)
+
+        day <- rep(i, nArrivals)
+        dow <- rep(dows[d], nArrivals)
+        hour <- rep(dayHrs[h], nArrivals)
+        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
+        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
+        origin <- sample(stations, size = nArrivals, replace = T)
+        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
+        mydata <- rbind(mydata, hourFrame)
+      }
+    }
+  }
+  return(mydata)
+}
+
+gauArrive <- genData()
+nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
+rm(genData)
+rm(tod)
+rm(tomns)
+rm(tosecs)
+rm(gauArrive)
+```
