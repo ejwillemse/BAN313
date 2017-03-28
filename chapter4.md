@@ -784,7 +784,7 @@ test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `re
 success_msg("Correct! The $\chi^2$ test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejectING $H_0$. The $\chi^2$ test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the $\chi^2$ test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the $\chi^2$ test are met.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a483221d79
+--- type:NormalExercise lang:r xp:100 skills:1 key:26ce6147d6
 ## Gautrain arrival rate: parameter estimation using bootstrapping
 
 In the previous question we have formally tested the goodness-of-fit for the poisson distribution and found that we cannot reject $H_0$. We can therefore model the number passenger arrivals per minute, $X$, using a poisson distribution, such that:
