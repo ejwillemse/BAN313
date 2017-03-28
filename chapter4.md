@@ -3,7 +3,7 @@ title_meta  : Case study 7
 title       : Case study 7 - Fitting probability distributions and estimating distribution parameters
 description : "In this case study we revisit the examples from Case study 6, where we analysed data for different processes, and eyeballed the data to see if the processes can be modelled using specific probability distribution functions. In this case study we will use formal methods to test if a distribution is appropriate, using the chi-squared goodness-of-fit test. We will also use boot-strapping methods to estimate model parameters."
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
 ## Background
 
 In this case study we will revisit the examples of [Case study 6: Different applications of probability distributions](https://campus.datacamp.com/courses/industrial-analysis-using-r/10161) and use formal methods to test whether the processes can be modelled using specific probability distribution functions. We will further use bootstrapping techniques to estimate model parameters.
