@@ -422,7 +422,7 @@ To complete the question, do the following:
 
 *** =hint
 
-Go through the previous exercise to see how `hCount` can be calculated. Use `?chisq.test` to find out more about the function. Refer to the class slides.
+Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function. Refer to the class slides.
 
 *** =pre_exercise_code
 ```{r}
