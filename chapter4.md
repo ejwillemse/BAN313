@@ -877,7 +877,7 @@ nArrivePerMin <- rpois(30*120, 5)
 
 #11. View your final answer by printing `nGates` to the console.
 
-
+```
 
 *** =solution
 ```{r}
