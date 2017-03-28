@@ -536,10 +536,10 @@ The basic component of bootstrapping is as follows. Using the sample data we wil
 
 1. Sample from the sample data with replacement. The number of samples from the samples will be equal to the original sample size.
 2. Calculate the parameters of interests on the sample of samples.
-3. Repeat steps 1 and 2 a large number of times and capture the key parameters of interest each time. Each sample from the sample can be considered a simulation, or a boostrap.
+3. Repeat steps 1 and 2 a large number of times and capture the key parameters of interest each time. Each sample from the sample can be considered a simulation, or a bootstrap.
 4. Statistically analyse the distribution of the parameters captured over the multiple runs of step 3.
 
-The following R functions will come in handy when doing boostrapping:
+The following R functions will come in handy when doing bootstrapping:
 
 ```
 rep, for, sample, quantile
@@ -667,10 +667,7 @@ pDefective05
 *** =sct
 ```{r}
 test_object("holeDiameter_boot_test", undefined_msg = "Make sure to define an object `holeDiameter_boot_test`.",
-            incorrect_msg = "Make sure that you took a sample from `holeSize$holeDiameter` with replacement and assigned the result to `holeDiameter_boot_test`")     
-
-test_object("holeMeans", undefined_msg = "Make sure to define an object `holeMeans`.",
-            incorrect_msg = "Make sure that you initiated `holeMeans` correctly with 10000 `NAs` using the `rep` command.")     
+            incorrect_msg = "Make sure that you took a sample from `holeSize$holeDiameter` with replacement and assigned the result to `holeDiameter_boot_test`")       
 
 test_object("holeMeans", undefined_msg = "Make sure to define an object `holeMeans`.",
             incorrect_msg = "Make sure that you stored the mean of each of 10000 simulations in `holeMeans`.")  
@@ -784,5 +781,143 @@ test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"),
 test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `rejectPoisson`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectPoisson`. View the p-value fromo the chi-square test and then decide for yourself if `rejectPoisson<-TRUE` or `rejectPoisson<-FALSE`.")
 
-success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for any parameter, including the mean and the standard deviation. The confidence intervals can then be used to get a conservative estimate of the process output.")
+success_msg("Correct! The $\chi^2$ test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejectING $H_0$. The $\chi^2$ test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the $\chi^2$ test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the $\chi^2$ test are met.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:a483221d79
+## Gautrain arrival rate: parameter estimation using bootstrapping
+
+In the previous question we have formally tested the goodness-of-fit for the poisson distribution and found that we cannot reject $H_0$. We can therefore model the number passenger arrivals per minute, $X$, using a poisson distribution, such that:
+
+$$X \sim \text{Poisson}(\lambda),$$
+
+where $\lambda$ is the expected (mean) number of arrivals per minute. For the goodness-of-fit test we estimated $\lambda$  using the sample data, but if we got a new sample, we would get a different expected number of arrivals per minute, even though arrivals follow the same poisson distribution.
+
+Ideally we would like to calculate confidence intervals for the arrival rate, and thereby make our analyses of the arrivals more robust. In this question we will do exactly that by using bootstrapping to calculate the arrival rate.
+
+Approximately _three_ passengers can go through Gautrain access gate per minute. The Gautrain wants to know how many access-gates should be in operation. The main constraint is that the probability of the access-gates not being able to process all the passengers arriving during a minute should be less than 0.05. We need to determine the number of access gates to ensure that the probability of the access-gates being insufficient to deal with the arriving customers during a minute is less than 0.05.
+
+To answer the question we will do the following:
+
+1. Calculate 99% confidence interval for the expected arrival rate per minute, $\lambda$, using the bootstrap method.
+2. Use $X \sim \text{Poisson}(\lambda)$ by setting $\lambda$ the upper-limit of the confidence interval to calculate the 95$^\text{th}$ percentile of the number of customers arriving per minute, refer to as $X\_{95}$. This means that 95\% of the time, less than $X\_{95}$ customers will arrive per minute, meaning there is a 5% chance that more than $X\_{95}$ customers will arrive per minute.
+3. Lastly we will use $X\_{95}$ and the given information that three passengers can go through a gate per minute to determine the number of required gates.
+
+The arrival rate per minute of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `nArrivePerMin` vector.
+
+The instructions for the question are as follow:
+
+*** =instructions
+
+1. View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
+2. Using the `sample` function take a random sample with replacement from the nArrivePerMin samples and assign the results to `nArrivePerMin_boot_test`.
+3. View the mean number of arrivals of `nArrivePerMin_boot_test` by printing the value to the console. You do not need to assign the value to anything. Just print and view it and compare it to the mean of the original sample.
+4. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `meanArrivePerMin`.
+5. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the `nArrivePerMin` samples 10000 times. In each execution of the `for` loop you can assign the results to `nArrivePerMin_boot`. Calculate the mean of `nArrivePerMin_boot` and store the results in the appropriate `i` position of `meanArrivePerMin`. Hint: if you are unsure how to do this, have a look at the previous questions and deatacamp courses.
+6. Draw histograms of `meanArrivePerMin`.
+7. Use the `quantile` function to calculate 99% confidence interval for `meanArrivePerMin` using the `quantile` function and assign the results to `meanInter`. Hint: if you are unsure how to do this, have a look at the previous question.`
+8. View `meanInter` by printing its value to the console.
+9. Use the upper-value of `meanInter` for $\lambda$ and calculate the 95$^\text{th}$ percentile of the number of customers arriving per minute. Hint: use the `qpois(p=0.95, lambda)` function. Assign your answer to `nArrive95`.
+10. Calculate the minimum number of gates required using the 95$^\text{th}$ percentile and the information that a single gate can process _three_ customers per minute. Remember to round your final answer-up. Assign your final answer to `nGates`.
+11. View your final answer by printing `nGates` to the console.
+
+*** =hint
+
+Refer to the previous question on bootstrapping and the previous BAN313 chapter.
+
+*** =pre_exercise_code
+```{r}
+set.seed(31)
+nArrivePerMin <- rpois(30*120, 5)
+```
+
+*** =sample_code
+```{r}
+# The arrivals per minute are available in the `nArrivePerMin` vector.
+
+#1. View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
+
+
+
+#2. Using the `sample` function take a random sample with replacement from the nArrivePerMin samples and assign the results to `nArrivePerMin_boot_test`.
+
+
+
+#3. View the mean number of arrivals of `nArrivePerMin_boot_test` by printing the value to the console. You do not need to assign the value to anything. Just print and view it and compare it to the mean of the original sample.
+
+
+
+#4. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `meanArrivePerMin`.
+
+
+
+#5. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the `nArrivePerMin` samples 10000 times. In each execution of the `for` loop you can assign the results to `nArrivePerMin_boot`. Calculate the mean of `nArrivePerMin_boot` and store the results in the appropriate `i` position of `meanArrivePerMin`. Hint: if you are unsure how to do this, have a look at the previous questions and deatacamp courses.
+
+
+
+#6. Draw histograms of `meanArrivePerMin`.
+
+
+
+#7. Use the `quantile` function to calculate 99% confidence interval for `meanArrivePerMin` using the `quantile` function and assign the results to `meanInter`. Hint: if you are unsure how to do this, have a look at the previous question.`
+
+
+
+#8. View `meanInter` by printing its value to the console.
+
+
+
+#9. Use the upper-value of `meanInter` for $\lambda$ and calculate the 95th percentile of the number of customers arriving per minute. Hint: use the `qpois(p=0.95, lambda)` function. Assign your answer to `nArrive95`.
+
+
+
+#10. Calculate the minimum number of gates required using the 95th percentile and the information that a single gate can process _three_ customers per minute. Remember to round your final answer-up. Assign your final answer to `nGates`.
+
+
+
+#11. View your final answer by printing `nGates` to the console.
+
+
+
+*** =solution
+```{r}
+mean(nArrivePerMin)
+nArrivePerMin_boot_test <- sample(nArrivePerMin, size = length(nArrivePerMin), replace = TRUE)
+mean(nArrivePerMin_boot_test)
+meanArrivePerMin <- rep(NA, 10000)
+for (i in 1:10000)
+{
+  nArrivePerMin_boot <- sample(nArrivePerMin, size = length(nArrivePerMin), replace = TRUE)
+  meanArrivePerMin[i] <- mean(nArrivePerMin_boot)
+}
+hist(meanArrivePerMin)
+meanInter <- quantile(meanArrivePerMin, c(0.005, 0.995))
+meanInter
+
+nArrive95 <- qpois(p=0.95, meanInter[2])
+nGates <- ceiling(nArrive95/3)
+nGates
+```
+
+*** =sct
+```{r}
+test_object("nArrivePerMin_boot_test", undefined_msg = "Make sure to define an object `nArrivePerMin_boot_test`.",
+            incorrect_msg = "Make sure that you took a sample from `nArrivePerMin` with replacement and assigned the result to `nArrivePerMin_boot_test`")     
+
+test_object("meanArrivePerMin", undefined_msg = "Make sure to define an object `meanArrivePerMin`.",
+            incorrect_msg = "Make sure that you stored the mean number of arrivals for each the 10000 simulations in `meanArrivePerMin`.")     
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `meanArrivePerMin`.",
+              incorrect_msg = "Draw a histogram of `meanArrivePerMin`.")
+
+test_object("meanInter", undefined_msg = "Make sure to define a variable `meanInter`.",
+            incorrect_msg = "Calculate the 99% confidence interval for `meanArrivePerMin` and assign the results to `meanInter`.")
+
+test_object("nArrive95", undefined_msg = "Make sure to define a variable `nArrive95`.",
+            incorrect_msg = "Calculate the 95th percentile for mean number of arrivals using the upper-limit of `meanInter` and the `qpois` function.")
+
+test_object("nGates", undefined_msg = "Make sure to define a variable `nGates`.",
+            incorrect_msg = "Calculate the number of required gates using `nArrive95` and assign your answer to `nGates`.")
+
+success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for the arrival rate. The confidence intervals can then be used to get a conservative estimate of the number of arrivals which can then be used to determine the resource requirements.")
 ```
