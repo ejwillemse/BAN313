@@ -714,8 +714,8 @@ In this question we are going to fit a distribution to the arrivals per minute.
 
 1. Draw a histogram of the arrivals per minute and check if it follows a poisson distribution.
 2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
-3. Perform a $\chi^2$ goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`; perform the test using `chisq.test(...)` function and view the results.
-4. Based on the output of the test decide for yourself whether the data do no follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
+3. Perform a $\chi^2$ goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(ppois(...))` correctly.
+4. Based on the output of the test decide for yourself whether the data do no follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow a poisson distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
 
 *** =hint
 
@@ -723,100 +723,66 @@ The steps required to complete this question is the same as the previous questio
 
 *** =pre_exercise_code
 ```{r}
-set.seed(35)
-tod <- function(x, h)
-{
-  mints = floor(x/60)
-  secs = round(x - 60*mints, 2)
-  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
-  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
-  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
-  todFormatted = paste(hrs,mns,scs,sep=":")
-  return(todFormatted)
-}
+set.seed(31)
+nArrivePerMin <- rpois(30*120, 5)
+```
 
-tomns <- function(x, h)
-{
-  mints = floor(x/60)
-  secs = round(x - 60*mints, 2)
-  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
-  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
-  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
-  todFormatted = paste(hrs,mns,scs,sep=":")
-  return(mints)
-}
+*** =sample_code
+```{r}
+# The arrivals per minute are available in the `nArrivePerMin` vector.
 
-tosecs <- function(x, h)
-{
-  mints = floor(x/60)
-  secs = round(x - 60*mints, 2)
-  hrs = formatC(h, width=2,format='f',digits=0,flag='0')
-  mns = formatC(mints, width=2,format='f',digits=0,flag='0')
-  scs = formatC(secs, width=2,format='f',digits=0,flag='0')
-  todFormatted = paste(hrs,mns,scs,sep=":")
-  return(secs)
-}
+#1. Draw a histogram of the arrivals per minute and check if it follows a poisson distribution.
 
-genData <- function()
-{
-  nCustomersPerWeek <- 63000/8*5
-  dayPeak <- c(2,2,2,1,1)
-  dayPeakNorm <- dayPeak/sum(dayPeak)
-  arrivalPeak <- c(1, 1, 2, 4, 2, 1, 1, 1, 1, 2, 4, 6, 6, 6, 4, 2, 1, 1)
-  arrivalPeakNorm <- arrivalPeak/sum(arrivalPeak)
 
-  pCardLoad <- c(0.05, 0.05, 0.025, 0.025, 0.025)
 
-  dows <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
-  dayHrs <- 16:17
-  dayMinutes <- 1:60
-  stations <- c('Pretoria', 'Centurion', 'Midrand', 'Marlboro', 'Sandton', 'Rosebank',
-                'Park', 'Rhodesfield', 'OR-Tambo')
+#2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
 
-  mydataTemplate <- data.frame(day = numeric(),
-                               dow = character(),
-                               hour = numeric(),
-                               timeStamp = character(),
-                               cardLoad = logical(),
-                               origin = character())
 
-  mydata <- mydataTemplate
 
-  i = 0
-  for (nWeek in 1:(30/length(dows)))
-  {
-    for (d in 1:length(dows))
-    {
-      i = i + 1
-      nDay = nCustomersPerWeek*dayPeakNorm[d]
-      for (h in 1:length(dayHrs))
-      {
-        arrivalRatePerHour <- nDay*arrivalPeakNorm[h]
-        startTime <- 0
-        arrivalTime <- cumsum(rexp(arrivalRatePerHour*2, rate = arrivalRatePerHour)*60*60)
-        timeStamp <- tod(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-        nArrivals <- length(timeStamp)
+#3. Perform a chi^2 goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include:
 
-        day <- rep(i, nArrivals)
-        dow <- rep(dows[d], nArrivals)
-        hour <- rep(dayHrs[h], nArrivals)
-        minute <- tomns(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-        second <- tosecs(arrivalTime[arrivalTime < 60*60], dayHrs[h])
-        cardLoad <- runif(nArrivals, 0, 1) < pCardLoad[d]
-        origin <- sample(stations, size = nArrivals, replace = T)
-        hourFrame <- data.frame(day, dow, hour, minute, second, timeStamp, cardLoad, origin)
-        mydata <- rbind(mydata, hourFrame)
-      }
-    }
-  }
-  return(mydata)
-}
+#assigning a histogram to `h` (do not manually specify the number of breaks);
 
-gauArrive <- genData()
-nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
-rm(genData)
-rm(tod)
-rm(tomns)
-rm(tosecs)
-rm(gauArrive)
+
+
+#determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`;
+
+
+
+#perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(ppois(...))` correctly.
+
+
+
+#4. Based on the output of the test decide for yourself whether the data do no follow a poisson distribution with rate equal to lambda .  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow a poisson distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
+
+
+
+```
+
+*** =solution
+```{r}
+hist(nArrivePerMin)
+arriveRate <- mean(nArrivePerMin)
+h <- hist(nArrivePerMin)
+null.probs <- diff(ppois(h$breaks, arriveRate))
+chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE, simulate.p.value = TRUE)
+chiTestResults <- chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE, simulate.p.value = TRUE)
+if (chiTestResults$p.value < 0.05){rejectPoisson <- TRUE}else{rejectPoisson <- FALSE}
+```
+
+*** =sct
+```{r}
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of arrivals per minute `nArrivePerMin`.",
+              incorrect_msg = "Draw a histogram of the number of arrivals per minute `nArrivePerMin`.")
+
+test_object("arriveRate", undefined_msg = "Make sure to define an object `arriveRate`.",
+            incorrect_msg = "Make sure that calculated the mean arrival rate correctly and assigned your answer to `arriveRate`.")     
+
+test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
+              incorrect_msg = "Make sure to use the `chisq.test` function. Refer to the previous questions on instructions.")  
+
+test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `rejectPoisson`.",
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectPoisson`. View the p-value fromo the chi-square test and then decide for yourself if `rejectPoisson<-TRUE` or `rejectPoisson<-FALSE`.")
+
+success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for any parameter, including the mean and the standard deviation. The confidence intervals can then be used to get a conservative estimate of the process output.")
 ```
