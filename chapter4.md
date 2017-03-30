@@ -384,7 +384,7 @@ test_object("hCounts", undefined_msg = "Make sure to define an object `hCounts`.
 test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function correctly. In this question, all it needs is the counts per bin.")
 
-success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal and t-distribution.")
+success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal distribution.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:5df974f21f
