@@ -172,7 +172,7 @@ test_object("pDefective03", undefined_msg = "Make sure to define an object `pDef
 
 test_output_contains("pDefective03", incorrect_msg = "You did not view the actual value of  `pDefective03`.")
 
-success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the $t$-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform distributions are good representations of hole-size.")
+success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape. In the next questions we are going to perform a goodness-of-fit test to see if the normal or uniform distributions are good representations of hole-size.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
