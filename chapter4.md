@@ -413,7 +413,7 @@ To complete the question, do the following:
 1. Calculate the mean and standard deviation for the drill-hole size and assign your answer to `meanHoleSize` and `sdHoleSize`.
 2. Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
 3. Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))`.
-4. Draw a barplot of the probabilities, using `barplot(null.probs)`, to see that the bin probabilities follow a normal distribution.
+4. Draw a barplot of the probabilities, using `barplot(null.probs1)`, to see that the bin probabilities follow a normal distribution.
 5. Draw a histogram of the hole-size variable with *9* breaks and assign the histogram to `h2`.
 6. Calculate the bin probabilities for 9 bins by calling `null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))`.
 7. Perform the goodness-of-fit test by calling `chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE, simulate.p.value=TRUE)` and view the results.
@@ -522,7 +522,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
 
-success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
+success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distributions. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:a483221d79
