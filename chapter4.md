@@ -212,7 +212,7 @@ Using the data available in the `holeSize` dataframe, complete this question by 
 4. View the number of observations in each bin of the histogram by printing `h$counts` to the console.
 5. Assign the number of observations in each bin to `hCounts`.
 6. Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins. Assign your answer to `expectedCount`. Do not round your answer.
-7. Using `hCounts` and `expectedCount`, calculate the $chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
+7. Using `hCounts` and `expectedCount`, calculate the $\chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
 8. Calculate the degrees-of-freedom for the test and assign your answer to `df`.
 9. Calculate the $p$-value for the test and assign you answer to `p`.
 10. View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
