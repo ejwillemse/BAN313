@@ -328,7 +328,7 @@ success_msg("Correct! As expected the uniform distribution is not a good fit for
 --- type:NormalExercise lang:r xp:100 skills:1 key:2056a3af3a
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
 
-For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
+For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else is supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
 
 *** =instructions
 
@@ -336,7 +336,7 @@ For this question we are going to perform the $\chi^2$ goodness-of-fit test usin
 2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
 3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
-** =hint
+*** =hint
 
 Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function.
 
