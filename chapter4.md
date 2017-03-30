@@ -534,8 +534,8 @@ Ideally we would like to calculate confidence intervals for the distribution par
 
 The basic component of bootstrapping is as follows. Using the sample data we will do the following:
 
-1. Sample from the sample data with replacement. The number of samples from the samples will be equal to the original sample size.
-2. Calculate the parameters of interests on the sample of samples.
+1. Sample from the sample data with replacement. The number of samples from the sample will be equal to the original sample size.
+2. Calculate the parameters of interest on the sample of samples.
 3. Repeat steps 1 and 2 a large number of times and capture the key parameters of interest each time. Each sample from the sample can be considered a simulation, or a bootstrap.
 4. Statistically analyse the distribution of the parameters captured over the multiple runs of step 3.
 
@@ -562,7 +562,7 @@ To complete the question, do the following:
 7. Draw histograms of `holeMeans` and `holeSD`.
 8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `meansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
 9. View `meanInter` and `sdInter` by printing their values to the console.
-10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest as the mean and standard deviation of the drill-hole size normal distribution. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
+10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 11. View the value of `pDefective05` by printing it to the console.
 
 *** =hint
@@ -626,7 +626,7 @@ for(i in 1:10000)
 meanInter
 sdInter
 
-#10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest as the mean and standard deviation of the drill-hole size normal distribution. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
+#10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 
 
 
