@@ -47,7 +47,7 @@ Take note that the data used for this chapter is randomly generated and will cha
 
 When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-**DO NOT** jump straight to the instructions and skip the preceding question background. The question background contains valuable information to assist you in completing the question.
+**DO NOT** jump straight to the instructions and skip the each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
 
 To continue with this chapter confirm the following:
 
