@@ -3,7 +3,7 @@ title_meta  : Case study 7
 title       : Case study 7 - Fitting probability distributions and estimating distribution parameters
 description : "In this case study we revisit the examples from Case study 6, where we analysed data for different processes, and eyeballed the data to see if the processes can be modelled using specific probability distribution functions. In this case study we will use formal methods to test if a distribution is appropriate, using the chi-squared goodness-of-fit test. We will also use boot-strapping methods to estimate model parameters."
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
 ## Background
 
 In this case study we will revisit the examples of [Case study 6: Different applications of probability distributions](https://campus.datacamp.com/courses/industrial-analysis-using-r/10161) and use formal methods to test whether the processes can be modelled using specific probability distribution functions. We will further use bootstrapping techniques to estimate model parameters.
@@ -16,7 +16,7 @@ In this case study we will revisit the examples of [Case study 6: Different appl
 4. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014).
 5. Go through _Section 4.5: Bootstrapping for the standard deviation (p.195)_ of the prescribed textbook by Diez et al (2014).
 6. Go through the goodness-of-fit using R tutorial, available from [this link](https://www.r-bloggers.com/goodness-of-fit-test-in-r/).
-7. Review the lecture slides `Lecture_Week7.pdf`, available on _clickUP_ under `Theme 2: Simulation models/Week 7 Distribution fitting: lecture material`, or by clicking [on this link](https://clickup.up.ac.za/bbcswebdav/pid-1017449-dt-content-rid-11442908_1/courses/ban313_s1_2017/Lecture_Week7.pdf).
+7. Review the lecture slides `Lecture_Week7.pdf`, available on _clickUP_ under `Theme 2: Simulation models/Week 7 Distribution fitting: lecture material`, or by clicking [on this link](https://clickup.up.ac.za/bbcswebdav/pid-1017449-dt-content-rid-11965449_1/courses/ban313_s1_2017/Lecture_Week7%281%29.pdf).
 
 The prescribed textbook is:
 
@@ -57,7 +57,7 @@ To continue with this chapter confirm the following:
 
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
-*** =hist
+*** =hint
 
 *** =pre_exercise_code
 ```{r}
