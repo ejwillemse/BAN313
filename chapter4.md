@@ -81,7 +81,7 @@ test_mc(correct = 2, feedback_msgs = c(msg_success, msg_success))
 ## Drill-hole sizes
 
 We wish to replace our current very old drilling machine.
-The machine is required to drill a hole with a diameter of 10cm within 0.5cm tolerance.
+The machine is required to drill a hole with a diameter of 10cm within a 0.5cm tolerance.
 If the hole is larger than 10.5cm, the part has to be scrapped.
 Similarly, if the hole is smaller than 9.5cm the part will also be scrapped.
 
@@ -95,7 +95,7 @@ The supplier has given us data on different holes drilled by the machine during 
 The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
 The data is available in the `holeSize` dataframe.
 
-For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes from the machine, find it's key parameters from the sample and using R's built-in function, use the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a 0.30cm tolerance limit.
+For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes. Find the key parameters from the sample for the distribution. Use R's built-in function and the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a **0.30cm** tolerance limit.
 
 *** =instructions
 
