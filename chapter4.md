@@ -202,7 +202,7 @@ Once we have our $\chi^2$ value we can calculate the probability of getting this
 
 If the probability of getting the $\chi^2$ value is very small, we conclude that there is sufficient evidence that the variable *DOES NOT* follow the expected distribution. If $\chi^2$ is big, we say there is not sufficient evidence to discard the distribution.
 
-Using the data available in the `holeSize` dataframe, complete this question do the following:
+Using the data available in the `holeSize` dataframe, complete this question by doing the following:
 
 *** =instructions
 
