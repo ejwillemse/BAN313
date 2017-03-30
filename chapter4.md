@@ -28,7 +28,7 @@ In this lab we will look at the same examples from Case study 6, and do the foll
 
 1. Visualise the process data using histograms and guess what distribution can be used to model the process.
 2. Use the statistical chi-square goodness-of-fit test to formally test if the distribution is appropriate.
-3. Analyse the distribution of and estimate confidence interval for key distribution parameters using the bootstrapping method.
+3. Analyse the distribution of and estimate confidence intervals for key distribution parameters using the bootstrapping method.
 4. Use the R functions of the distribution to calculate percentiles and probabilities as required.
 
 
