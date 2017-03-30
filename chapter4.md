@@ -28,7 +28,7 @@ In this lab we will look at the same examples from Case study 6, and do the foll
 
 1. Visualise the process data using histograms and guess what distribution can be used to model the process.
 2. Use the statistical chi-square goodness-of-fit test to formally test if the distribution is appropriate.
-3. Analyse the distribution of and estimate confidence interval for key distribution parameters using the bootstrapping method.
+3. Analyse the distribution of and estimate confidence intervals for key distribution parameters using the bootstrapping method.
 4. Use the R functions of the distribution to calculate percentiles and probabilities as required.
 
 
@@ -47,7 +47,7 @@ Take note that the data used for this chapter is randomly generated and will cha
 
 When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-**DO NOT** jump straight to the instructions and skip the preceding question background. The question background contains valuable information to assist you in completing the question.
+**DO NOT** jump straight to the instructions and skip the each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
 
 To continue with this chapter confirm the following:
 
@@ -81,7 +81,7 @@ test_mc(correct = 2, feedback_msgs = c(msg_success, msg_success))
 ## Drill-hole sizes
 
 We wish to replace our current very old drilling machine.
-The machine is required to drill a hole with a diameter of 10cm within 0.5cm tolerance.
+The machine is required to drill a hole with a diameter of 10cm within a 0.5cm tolerance.
 If the hole is larger than 10.5cm, the part has to be scrapped.
 Similarly, if the hole is smaller than 9.5cm the part will also be scrapped.
 
@@ -95,7 +95,7 @@ The supplier has given us data on different holes drilled by the machine during 
 The data consist of a number of drill samples, with the hole diameter for each hole measured and captured.
 The data is available in the `holeSize` dataframe.
 
-For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes from the machine, find it's key parameters from the sample and using R's built-in function, use the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a 0.30cm tolerance limit.
+For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes. Find the key parameters from the sample for the distribution. Use R's built-in function and the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a **0.30cm** tolerance limit.
 
 *** =instructions
 
@@ -172,7 +172,7 @@ test_object("pDefective03", undefined_msg = "Make sure to define an object `pDef
 
 test_output_contains("pDefective03", incorrect_msg = "You did not view the actual value of  `pDefective03`.")
 
-success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape, specifically the $t$-distribution. In the next questions we are going to perform a goodness-of-fit test to see if the normal, $t$ or uniform distributions are good representations of hole-size.")
+success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape. In the next questions we are going to perform a goodness-of-fit test to see if the normal or uniform distributions are good representations of hole-size.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
@@ -198,11 +198,11 @@ $$\chi^2 = \sum\_{i=1}^{k}\frac{(O\_{i}-E\_{i})^2}{E\_{i}},$$
 
 where $k$ is the number of bins, $O\_{i}$ is the observed number of cases in bin $i$ and $E\_{i}$ is the expected number of cases in bin $i$ for the expected distribution.
 
-Once we have our $\chi^2$ value we can calculate the probability of getting this value, or greater, using `pchisq(q, df, lower.tail = FALSE)` which takes as input the $\chi^2$ value, `q`, degrees-of-freedom, `df, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned, hence `lower.tail = FALSE`.
+Once we have our $\chi^2$ value we can calculate the probability of getting this value, or greater, using `pchisq(q, df, lower.tail = FALSE)` which takes as input the $\chi^2$ value, `q`, degrees-of-freedom, `df`, and wether the lower (left) or upper (right) tail value should be returned. For the $\chi^2$-test the upper tail value should be returned, hence `lower.tail = FALSE`.
 
 If the probability of getting the $\chi^2$ value is very small, we conclude that there is sufficient evidence that the variable *DOES NOT* follow the expected distribution. If $\chi^2$ is big, we say there is not sufficient evidence to discard the distribution.
 
-Using the data available in the `holeSize` dataframe, complete this question do the following:
+Using the data available in the `holeSize` dataframe, complete this question by doing the following:
 
 *** =instructions
 
@@ -212,7 +212,7 @@ Using the data available in the `holeSize` dataframe, complete this question do 
 4. View the number of observations in each bin of the histogram by printing `h$counts` to the console.
 5. Assign the number of observations in each bin to `hCounts`.
 6. Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins. Assign your answer to `expectedCount`. Do not round your answer.
-7. Using `hCounts` and `expectedCount`, calculate the $chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
+7. Using `hCounts` and `expectedCount`, calculate the $\chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
 8. Calculate the degrees-of-freedom for the test and assign your answer to `df`.
 9. Calculate the $p$-value for the test and assign you answer to `p`.
 10. View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
@@ -328,17 +328,17 @@ success_msg("Correct! As expected the uniform distribution is not a good fit for
 --- type:NormalExercise lang:r xp:100 skills:1 key:2056a3af3a
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
 
-For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
+For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else is supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
 
 *** =instructions
 
 1. Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
-2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
-3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
+3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
-** =hint
+*** =hint
 
-Go through the previous exercise to see how `hCount` can be calculated. Use `?chisq.test` to find out more about the function.
+Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function.
 
 *** =pre_exercise_code
 ```{r}
@@ -356,11 +356,11 @@ rm(n)
 
 
 
-#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
+#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
 
 
 
-#3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+#3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
 
 
@@ -384,7 +384,7 @@ test_object("hCounts", undefined_msg = "Make sure to define an object `hCounts`.
 test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function correctly. In this question, all it needs is the counts per bin.")
 
-success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal and t-distribution.")
+success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal distribution.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:5df974f21f
@@ -413,7 +413,7 @@ To complete the question, do the following:
 1. Calculate the mean and standard deviation for the drill-hole size and assign your answer to `meanHoleSize` and `sdHoleSize`.
 2. Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
 3. Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))`.
-4. Draw a barplot of the probabilities, using `barplot(null.probs)`, to see that the bin probabilities follow a normal distribution.
+4. Draw a barplot of the probabilities, using `barplot(null.probs1)`, to see that the bin probabilities follow a normal distribution.
 5. Draw a histogram of the hole-size variable with *9* breaks and assign the histogram to `h2`.
 6. Calculate the bin probabilities for 9 bins by calling `null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))`.
 7. Perform the goodness-of-fit test by calling `chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE, simulate.p.value=TRUE)` and view the results.
@@ -522,7 +522,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function on `h1` as described.")
 
-success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distribution. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
+success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distributions. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:a483221d79
@@ -534,8 +534,8 @@ Ideally we would like to calculate confidence intervals for the distribution par
 
 The basic component of bootstrapping is as follows. Using the sample data we will do the following:
 
-1. Sample from the sample data with replacement. The number of samples from the samples will be equal to the original sample size.
-2. Calculate the parameters of interests on the sample of samples.
+1. Sample from the sample data with replacement. The number of samples from the sample will be equal to the original sample size.
+2. Calculate the parameters of interest on the sample of samples.
 3. Repeat steps 1 and 2 a large number of times and capture the key parameters of interest each time. Each sample from the sample can be considered a simulation, or a bootstrap.
 4. Statistically analyse the distribution of the parameters captured over the multiple runs of step 3.
 
@@ -562,7 +562,7 @@ To complete the question, do the following:
 7. Draw histograms of `holeMeans` and `holeSD`.
 8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `meansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
 9. View `meanInter` and `sdInter` by printing their values to the console.
-10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest as the mean and standard deviation of the drill-hole size normal distribution. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
+10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 11. View the value of `pDefective05` by printing it to the console.
 
 *** =hint
@@ -573,7 +573,6 @@ To complete the question, do the following:
 
 *** =pre_exercise_code
 ```{r}
-set.seed(35)
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
@@ -627,7 +626,7 @@ for(i in 1:10000)
 meanInter
 sdInter
 
-#10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest as the mean and standard deviation of the drill-hole size normal distribution. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
+#10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 
 
 
@@ -781,7 +780,7 @@ test_function("chisq.test", args = c("x", "p", "rescale.p", "simulate.p.value"),
 test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `rejectPoisson`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectPoisson`. View the p-value fromo the chi-square test and then decide for yourself if `rejectPoisson<-TRUE` or `rejectPoisson<-FALSE`.")
 
-success_msg("Correct! The $\chi^2$ test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejectING $H_0$. The $\chi^2$ test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the $\chi^2$ test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the $\chi^2$ test are met.")
+success_msg("Correct! The chi-squared test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejecting H0. The chi-squared test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the chi-squared test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the chi-squared test are met.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:26ce6147d6
