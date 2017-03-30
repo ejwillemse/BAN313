@@ -333,12 +333,12 @@ For this question we are going to perform the $\chi^2$ goodness-of-fit test usin
 *** =instructions
 
 1. Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
-2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
-3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
+3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
 ** =hint
 
-Go through the previous exercise to see how `hCount` can be calculated. Use `?chisq.test` to find out more about the function.
+Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function.
 
 *** =pre_exercise_code
 ```{r}
@@ -356,11 +356,11 @@ rm(n)
 
 
 
-#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCount`.
+#2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
 
 
 
-#3. Perform the goodness-of-fit test by calling `chisq.test(hCount)` and view the results.
+#3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
 
 
