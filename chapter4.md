@@ -573,7 +573,6 @@ To complete the question, do the following:
 
 *** =pre_exercise_code
 ```{r}
-set.seed(35)
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
