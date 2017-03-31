@@ -435,10 +435,10 @@ Recall that we wish to determine if the process is producing the same outputs as
 
 The two competing hypotheses that we can test are:
 
-* $H_0$: The true proportion of defective products manufactured under the new supervisor is 14%;
-* $H_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 14%.
+* $H\_0$: The true proportion of defective products manufactured under the new supervisor is 14%;
+* $H\_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 14%.
 
-Consistent with a hypothesis test we will assume that $H_0$ is true, and then calculate the probability of getting a defect-proportion from a batch of 30 products of 27% or more. To calculate the probability we will simulate $H_0$ using the code from our previous example.
+Consistent with a hypothesis test we will assume that $H\_0$ is true, and then calculate the probability of getting a defect-proportion from a batch of 30 products of 27% or more. To calculate the probability we will simulate $H\_0$ using the code from our previous example.
 
 This requires us to perform thousands of simulations and capture the scrap-proportion of each. Thereafter we can analyse the distribution of the scrapping-proportion, and lastly calculate the number of simulations which had a scrapping-proportion of more than 27%. This number can then be used to calculate the probability of having hist scrapping-proportion or higher, thus representing our $p$-value. If the value is small we can conclude that there is sufficient evidence that the manager did indeed have an influence on the scrapping-proportion. The issue can then be investigate further.
 
