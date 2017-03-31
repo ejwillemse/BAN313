@@ -173,7 +173,7 @@ test_object("pSmaller", undefined_msg = "Make sure to define an object `pSmaller
 success_msg("Correct! By using R's built-in sampling functions we can simulate processes by randomly sampling from the process' distribution. In the next question we will look at a more complex version of the drill-hole example.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+--- type:NormalExercise lang:r xp:100 skills:1 key:21188c8230
 ## Simulating the drilling process with rework
 
 We know the diameter of the drill-holes is $X \sim \mathcal{N}(\mu = 10, \sigma = 0.2)$, and that the drill-hole should have a diameter of 10cm with a tolerance of 0.25cm.
@@ -304,7 +304,7 @@ test_object("pScrappedAct", undefined_msg = "Make sure to define an object `pScr
 success_msg("Correct! By using R's built in functions we simulated the drilling process with rework, which is a bit more complex than the previous example. The simulated proportion is different from the actual proportion since the simulated proportion presents one random instance of manufacturing a 1000 product batch. Should we simulate another batch we will get a different proportion. It's not always easy, or even possible, to calculate the true proportion analytically. Sometimes we have to develop a simulation model to analyse process output. Having the simulation also allows us to use it for inference. This will be illustrated in the next question.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+--- type:NormalExercise lang:r xp:100 skills:1 key:99f60f5510
 
 ### Inference with simulation: scrapping too many parts (Part 1)
 
@@ -375,7 +375,7 @@ test_object("pScrappedSim", undefined_msg = "Make sure to define an object `pScr
 success_msg("Correct! We can easily simulate 30 products using our previous code. The only question is, does this provide evidence that the manager is somehow resulted in the process performing poorly?")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:00816b640d
 
 ### Inference with simulation: scrapping too many parts (Part 2)
 
@@ -409,7 +409,7 @@ msg_success <- "Correct. It may be tempting to make a decision using the manager
 test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+--- type:NormalExercise lang:r xp:100 skills:1 key:06ab68ef37
 
 ### Inference with simulation: scrapping too many parts (Part 3)
 
@@ -535,7 +535,7 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 success_msg("Correct! We have now used the simulation model to perform a hypothesis test. The last question is then, how do we use the model results to assist management in their decision the production manager.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:698fda148f
 
 ### Inference with simulation: scrapping too many parts (Part 4)
 
