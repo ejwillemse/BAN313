@@ -207,7 +207,7 @@ reworkSimulation <- sample(x = outcomes, size = nRework, replace = TRUE, pOutcom
 To see how many parts were unsucssessfully scrapped, we just need to count the number `FALSEs` in `reworkSimulation`. This can be done using the `table` command, or by using:
 
 ```
-length(subset(reworkSimulation, reworkSimulation == FALSE))/
+length(subset(reworkSimulation, reworkSimulation == FALSE))
 ```
 
 To simulate the number of products that are defective out of a production batch of 1000 we need to determine the number of products that will be immediately scrapped plus the number of products that will be scrapped after rework.
@@ -276,7 +276,8 @@ Refer to the previous question on how to simulate drill-hole sizes. To simulate 
 
 
 
-#8. Calculate the analytical proportion of scrapped using the given formula and see how it compares the simulated proportion. Assign your answer to `pScrappedAct`.
+#8. Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
+
 
 
 
@@ -289,7 +290,7 @@ nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
 nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 pFixed <- 0.65
 reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == TRUE))
+nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 nScrapTotal = nScrap + nReworkScrap
 pScrappedSim <- nScrapTotal/1000
 pScrappedAct <- pnorm(10 + 0.25, 10, 0.2, lower.tail = FALSE) + 0.36*pnorm(10 - 0.25, 10, 0.2, lower.tail = TRUE)
