@@ -536,12 +536,13 @@ p_value <- nScrap27/10000
 
 if(p_value < 0.05){rejectH0 <- TRUE}else{rejectH0 <- FALSE}
 ```
+
 *** =sct
 ```{r}
 test_object("propSimulated", undefined_msg = "Make sure to define an object `propSimulated`.", incorrect_msg = "Make sure that you stored the scrapping-proportion of each of the 10000 30-drill-holes simulations in `propSimulated`.")       
 
-test_function("hist", args = c("x"), undefined_msg = "Draw a histogram of `propSimulated`",
-incorrect_msg = , undefined_msg = "Draw a histogram of `propSimulated`.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `propSimulated`.", incorrect_msg = "Draw a histogram of `propSimulated`.")
+
 
 test_object("nScrap27", undefined_msg = "Make sure to define an object `nScrap27`.", incorrect_msg = "Make sure that you calculated the total number of simulations which had a scrapping-proportion of 27% or higher correctly and assign your answer to `nScrap27`.")
 
