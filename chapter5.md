@@ -319,7 +319,7 @@ success_msg("Correct! By using R's built in functions we simulated the drilling 
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:99f60f5510
 
-### Inference with simulation: scrapping too many parts (Part 1)
+## Inference with simulation: scrapping too many parts (Part 1)
 
 A production manager was recently appointed to oversee the production line that includes the drill-press process. In the first day of his appointed a small production run was completed of 30 products. Of the 30 products, 8 had to be scrapped due to the hole size.
 
@@ -395,7 +395,7 @@ success_msg("Correct! We can easily simulate 30 products using our previous code
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:00816b640d
 
-### Inference with simulation: scrapping too many parts (Part 2)
+## Inference with simulation: scrapping too many parts (Part 2)
 
 Comparing the simulated 30 product scrap-proportion against the manager's 30 product scrap-proportion, do you believe that the new manager should be fired?
 
@@ -429,7 +429,7 @@ test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:06ab68ef37
 
-### Inference with simulation: scrapping too many parts (Part 3)
+## Inference with simulation: scrapping too many parts (Part 3)
 
 Recall that we wish to determine if the process is producing the same outputs as before, or whether the process has somehow worsen under his supervision.
 
@@ -521,7 +521,7 @@ for (i in 1:10000)
 
   pFixed <- 0.65
   reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == TRUE))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 
   nScrapTotal = nScrap + nReworkScrap
 
@@ -556,7 +556,7 @@ success_msg("Correct! We have now used the simulation model to perform a hypothe
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:698fda148f
 
-### Inference with simulation: scrapping too many parts (Part 4)
+## Inference with simulation: scrapping too many parts (Part 4)
 
 Based on the hypothesis, should the new manager should be fired?
 
