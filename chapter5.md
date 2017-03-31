@@ -293,7 +293,7 @@ reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFi
 nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 nScrapTotal = nScrap + nReworkScrap
 pScrappedSim <- nScrapTotal/1000
-pScrappedAct <- pnorm(10 + 0.25, 10, 0.2, lower.tail = FALSE) + 0.36*pnorm(10 - 0.25, 10, 0.2, lower.tail = TRUE)
+pScrappedAct <- pnorm(10 + 0.25, 10, 0.2, lower.tail = FALSE) + 0.35*pnorm(10 - 0.25, 10, 0.2, lower.tail = TRUE)
 ```
 
 *** =sct
