@@ -423,7 +423,7 @@ Comparing the simulated 30 product scrap-proportion against the manager's 30 pro
 ```{r}
 msg_bad <- "That is incorrect."
 
-msg_success <- "Correct. It may be tempting to make a decision using the manager's actual proportion and the simulated proportion, but we only performed one-simulation. We know the process is random so using one simulation doesn't proof anything. It's similar to management firing the manager based on one production run of 30 products. Ideally management should evaluate the manager over thousands of production runs, and thereby see if the bad production run was just due to bad-luck, or if it happens consistently. The same principle applies to the simulation. We need to perform multiple simulations and look at the distribution of the simulation results. Only then can we see how rare the manager's proportion is. This is easy to do with computers and R."
+msg_success <- "Correct. It may be tempting to make a decision using the manager's actual proportion and the simulated proportion, but we only performed one-simulation. We know the process is random so using one simulation doesn't prove anything. It's similar to management firing the manager based on one production run of 30 products. Ideally management should evaluate the manager over thousands of production runs, and thereby see if the bad production run was just due to bad-luck, or if it happens consistently. The same principle applies to the simulation. We need to perform multiple simulations and look at the distribution of the simulation results. Only then can we see how rare the manager's proportion is. This is easy to do with computers and R."
 test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 ```
 
