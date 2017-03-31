@@ -377,7 +377,7 @@ nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
 nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 pFixed <- 0.65
 reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == TRUE))
+nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 nScrapTotal = nScrap + nReworkScrap
 pScrappedSim <- nScrapTotal/batchSize
 ```
