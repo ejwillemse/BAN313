@@ -12,7 +12,7 @@ Due to process randomness, such as vibrations, the product moving around in the 
 It differs from hole to hole, and thus represents a random process.
 
 An imperfect hole is expected and the product is designed to account for this. The hole has a 0.25cm tolerance limit.
-If a hole diameter is within (9.75cm, 10.25cm) the product will work according to specifications, otherwise it is defective.
+If a hole diameter is within [9.75cm, 10.25cm] the product will work according to specifications, otherwise it is defective.
 
 As the production planner we want to answer the following simple question.
 If we manufacture 1000 products, how many will be defective because of the drill hole-size being either too large or too small?
@@ -189,11 +189,13 @@ Repairing is not always possible, and when it is possible it is not always effec
 For our drill-hole example we have the following repair options.
 If a hole is too big the product is scrapped since we cannot make the hole smaller.
 If a hole is too small, we can attempt to re-drill the hole using a specialized drilling machine.
-With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the products will be scrapped in any-case. The probability of the rework being successful is known to be **65%**.
+With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the product will be scrapped in any-case. 
+
+The probability of the rework being successful is known to be **65%**.
 
 
 To simulate the rework process we can use the `sample` function with replacement.
-First we need to determine the number of products that we will rework, `nRework`, and then use the probability of a rework being successful, `pFixed`.
+First we need to determine the number of products that we will rework, `nRework`, and then use the probability of a rework being successful, `pFixed = 0.65`.
 Thereafter we can simulate which products are reworked successfully and which are note using the following code:
 
 ```
@@ -208,11 +210,11 @@ We can actually calculate the proportion of scrapped products analytically using
 
 $$p_\text{scrap} = P(X > 10.25) + P(X < 9.75)\times (1-0.65),$$
 
-where $P(X > 10.25)$ is the probability of a hole being larger than 10.25cm and $P(X < 10.25)$ is the probability of a hole being smaller than 9.75cm. The second term is multiplied by (1-0.65), which is the probability of a reworked product being unsuccessfully repaired, and therefore scrapped.
+where $P(X > 10.25)$ is the probability of a hole being larger than 10.25cm and $P(X < 10.25)$ is the probability of a hole being smaller than 9.75cm. The second term is multiplied by 1-0.65 = 0.35, which is the probability of a reworked product being unsuccessfully repaired, and therefore scrapped.
 
 The formula thus means:
 
-_The probability of a product being scrapped is equal to the probability of its hole being larger than 10.25cm **or** being smaller than 9.75cm **and*** being unsuccessfully reworked_.
+_The probability of a product being scrapped is equal to the probability of its hole being larger than 10.25cm **or** being smaller than 9.75cm **and** being unsuccessfully reworked_.
 
 To calculate $P(X > 10.25)$ and $P(X < 9.75)$ we can use the provided information that hole-size follows a normal distribution, and R's `pnorm` function. For example: `pnorm(9.75, 10, 0.25)` gives us the probability that the hole will be smaller than 9.75 and will be reworked.
 
@@ -227,7 +229,7 @@ To complete the question do the following:
 5. Calculate and view the number of reworked products that were unsuccessfully repaired and scrapped. Assign your answer to `nReworkScrap`.
 6. Calculate and view the total number of products, out of the 1000 simulated products, that were scrapped. Assign your answer to `nScrapTotal`.
 7. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim`.
-8. Calculate the analytical proportion of scrapped using the given formula and see how it compares the simulated proportion. Assign your answer to `pScrappedAct`.
+8. Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
 
 *** =hint
 
