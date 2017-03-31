@@ -8,7 +8,7 @@ description : "In this case study we will revisit the drilling hole example and 
 
 In this case study we will revisit the drilling hole example where we are investigating the production of a product.
 During the product's manufacturing process, a hole with a diameter of 10cm has to be drilled into the product by a drill-press.
-Due to process randomness, such as vibrations, the product moving around in the drill cramp, defects in the product material, etc. the drill-hole is not always the same diameter.
+Due to process randomness, such as vibrations, the product moving around in the drill-clamp, defects in the product material, etc. the drill-hole is not always the same diameter.
 It differs from hole to hole, and thus represents a random process.
 
 An imperfect hole is expected and the product is designed to account for this. The hole has a 0.25cm tolerance limit.
@@ -17,7 +17,7 @@ If a hole diameter is within (9.75cm, 10.25cm) the product will work according t
 As the production planner we want to answer the following simple question.
 If we manufacture 1000 products, how many will be defective because of the drill hole-size being either too large or too small?
 
-**Before continuing with this chapter complete:** [Case study 7 - Fitting probability distributions and estimating distribution parameters](https://campus.datacamp.com/courses/industrial-analysis-using-r/10364?ex=1)
+**Before continuing with this chapter**, complete [Case study 7 - Fitting probability distributions and estimating distribution parameters](https://campus.datacamp.com/courses/industrial-analysis-using-r/10364?ex=1)
 
 The specific R functions that are applicable to this chapter are:
 
@@ -56,7 +56,7 @@ success_msg("Let's complete the questions.")
 --- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
 ## Simulating the drilling process
 
-From a previous exercise we know the diameter of the drill holes, $X$, follow a normal distribution with the following parameters:
+From a previous exercise we know the diameter of the drill holes, $X$, follows a normal distribution with the following parameters:
 
 $$X \sim \mathcal{N}(\mu = 10, \sigma = 0.2)$$
 
@@ -65,7 +65,7 @@ The upper and lower tolerance limits for the hole are:
 * $X\_{low} = 10 - 0.25 = 9.75$
 * $X\_{up} = 10 + 0.25 = 10.25$
 
-The probability of a drill-hole falling outside the tolerances, $p$, can be easily calculated using the following code:
+The probability, $p$, of a drill-hole falling outside the tolerances can be easily calculated using the following code:
 
 ```
 p <- pnorm(9.75, 10, 0.2) + pnorm(10.25, 10, 0.2, lower.tail = FALSE)
@@ -73,15 +73,17 @@ p <- pnorm(9.75, 10, 0.2) + pnorm(10.25, 10, 0.2, lower.tail = FALSE)
 
 If were were to manufacture 1000 products, we would expect $1000 \times p$ products to be defective.
 
-An alternative way to answer the question to simulate the drilling process, and therefore artificially `produce` drill-holes and then check the number of drillholes that fall outside the specification limits.
+An alternative way to answer the question to simulate the drilling process. We can artificially produce drill-holes and then check the number of drillholes that fall outside the specification limits.
 
-For this purpose we can use the following R function
+This can be done using the following R function
 
 ```
 rnorm()
 ```
 
-Type `?rnorm` in the console to find out more about the function. Similar to `pnorm`, it takes as input the mean and standard deviation of a normal distribution. It also takes `n` which is the number of samples that we want to draw from the normal distribution with the specified mean and standard deviation.
+You can type `?rnorm` in the console to find out more about the function. 
+
+Similar to `pnorm`, it takes as input the mean and standard deviation of a normal distribution. It also takes `n` which is the number of samples that we want to draw from the normal distribution with the specified mean and standard deviation.
 
 To simulate 1000 drill-holes we can use the function as follows:
 
@@ -95,7 +97,9 @@ To simulate a single drill-hole we can use the function as follows:
 drillHoleDiameters <- rnorm(n=1, mean = 10, sd = 0.2)
 ```
 
-The same structure can be used to simulate any of R's built in distribution.
+Note that the same structure can be used to simulate any of R's built in distribution.
+
+To complete this question answer the following:
 
 *** =instructions
 
@@ -134,7 +138,7 @@ Use `drillHoleDiameters <- rnorm(n=1000, mean = 10, sd = 0.2)` to simulate a 100
 
 
 
-#5. Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the $1000 \times p$ calculation as given in the question background. You just have to view the two numbers.
+#5. Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the 1000 x p calculation as given in the question background. You just have to view the two numbers.
 
 
 
@@ -184,7 +188,7 @@ Repairing is not always possible, and when it is possible it is not always effec
 
 For our drill-hole example we have the following repair options.
 If a hole is too big the product is scrapped since we cannot make the hole smaller.
-If a hole is too small, we can attempt to re-drill the hole using the specialized drilling machine.
+If a hole is too small, we can attempt to re-drill the hole using a specialized drilling machine.
 With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the products will be scrapped in any-case. The probability of the rework being successful is known to be **65%**.
 
 
