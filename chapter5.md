@@ -512,7 +512,7 @@ for (i in 1:10000)
 }
 
 hist(propSimulated)
-nScrap27 <- lenght(subset(propSimulated, propSimulated >= 0.27))
+nScrap27 <- length(subset(propSimulated, propSimulated >= 0.27))
 
 p_value <- nScrap27/10000
 
