@@ -222,7 +222,7 @@ The formula thus means:
 
 _The probability of a product being scrapped is equal to the probability of its hole being larger than 10.25cm **or** being smaller than 9.75cm **and** being unsuccessfully reworked_.
 
-To calculate $P(X > 10.25)$ and $P(X < 9.75)$ we can use the provided information that hole-size follows a normal distribution, and R's `pnorm` function. For example: `pnorm(9.75, 10, 0.25)` gives us the probability that the hole will be smaller than 9.75 and will be reworked.
+To calculate $P(X > 10.25)$ and $P(X < 9.75)$ we can use the provided information that hole-size follows a normal distribution, and R's `pnorm` function. For example: `pnorm(9.75, 10, 0.2)` gives us the probability that the hole will be smaller than 9.75 and will be reworked.
 
 To complete the question do the following:
 
@@ -323,7 +323,7 @@ success_msg("Correct! By using R's built in functions we simulated the drilling 
 
 A production manager was recently appointed to oversee the production line that includes the drill-press process. In the first day of his appointed a small production run was completed of 30 products. Of the 30 products, 8 had to be scrapped due to the hole size.
 
-Management is very concerned about the high-scrap proportion of 27%, especially since we indicated to Management that the probability of a product been scrapped is only 22%. Management is considering firing the production line manager.
+Management is very concerned about the high-scrap proportion of 27%, especially since we indicated to Management that the probability of a product been scrapped is only 14%. Management is considering firing the production line manager.
 
 Is there sufficient evidence to do so?
 
@@ -331,8 +331,8 @@ We wish to determine if the process is producing the same outputs as before, or 
 
 We can formally investigate the issue using inference for proportion. The two competing hypotheses that we can test are:
 
-* $H_0$: The true proportion of defective products manufactured under the new supervisor is 22%;
-* $H_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 22%.
+* $H_0$: The true proportion of defective products manufactured under the new supervisor is 14%;
+* $H_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 14%.
 
 Consistent with a hypothesis test we will assume that $H_0$ is true, and then calculate the probability of getting a defect-proportion from a batch of 30 products of 27% or more. To calculate the probability we will simulate $H_0$ using the code from our previous example.
 
