@@ -582,6 +582,6 @@ Based on the hypothesis, should the new manager should be fired?
 ```{r}
 msg_bad <- "That is incorrect."
 
-msg_success <- "Correct. There is not enough evidence to reject the null-hypothesis. Therefore we tell management there is not enough evidence to infer that he had a negative effect on the process. He may have just been unlucky overseeing a `bad` production batch, which happens by chance. On another day, a good production batch may happen whereby very few products are scrapped. This is just part of the randomness of the process."
+msg_success <- "Correct. There is not enough evidence to reject the null-hypothesis. Therefore we tell management there is not enough evidence to infer that he had a negative effect on the process. He may have just been unlucky overseeing a _bad_ production batch, which happens by chance. On another day, a good production batch may happen whereby very few products are scrapped. This is just part of the randomness of the process."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
