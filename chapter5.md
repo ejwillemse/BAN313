@@ -350,6 +350,11 @@ This is a repeat of the previous exercise. Set the number of drill-holes equal t
 
 *** =pre_exercise_code
 ```{r}
+
+```
+
+*** =sample_code
+```{r}
 # 1. Simulate 30 drill-holes sizes and assign your answer to `drillHoleDiameters`.
 
 
