@@ -22,6 +22,10 @@ The prescribed textbook is:
 
 * Diez, D. M., Barr, C. D., and Çetinkaya Rundel, M. (2014). _Introductory Statistics With Randomization and Simulation_. CreateSpace Independent Publishing Platform. Available at [this link](https://www.openintro.org/stat/textbook.php?stat_book=isrs), 1st edition.
 
+The following video on bootstrapping may also be useful, especially the first five minutes:
+
+* [https://youtu.be/_nhgHjdLE-I](https://youtu.be/_nhgHjdLE-I)
+
 **After completing the above, read the below instructions carefully.**
 
 In this lab we will look at the same examples from Case study 6, and do the following:

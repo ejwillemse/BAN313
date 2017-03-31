@@ -22,7 +22,7 @@ If we manufacture 1000 products, how many will be defective because of the drill
 The specific R functions that are applicable to this chapter are:
 
 ```
-rnorm(), seq(), for, if, length
+rnorm(), seq(), for
 ```
 
 *** =instructions
@@ -335,6 +335,22 @@ To complete the question do the following:
 
 This is a repeat of the previous exercise. Set the number of drill-holes equal to 30 instead of 1000.
 
+*** =pre_exercise_code
+```{r}
+# 1. Simulate 30 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+
+
+
+# 2. Calculate the total number of products, out of the 30 simulated products, that were scrapped. Assign your answer to `nScrapTotal`. This will include the products that were immediately scrapped and that were scrapped after rework.
+
+
+
+# 3. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim` and view the result and compare it against the 27% scrap-proportion of the production manager.
+
+
+
+```
+
 *** =solution
 ```{r}
 batchSize = 30
@@ -423,7 +439,59 @@ To complete the question do the following:
 5. Using `nScrap27`, calculate the $p\text{-value}$ for the hypothesis test and assign your answer to `p_value`.
 6. Assuming a significance level of $\alpha = 0.05$, decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
-*** =answer
+*** =hint
+```{r}
+
+```
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+#1. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `propSimulated`.
+
+propSimulated <- rep(
+
+#2. Simulate the 30 batch drilling-process 10000 times, calculate each simulation's scrapping-proportion and store the results in the appropriate `i` position of `propSimulated`.
+
+for (i in 1:10000)
+{
+  drillHoleDiameters <- rnorm(
+  nScrap <-
+  nRework <-
+
+  pFixed <- 0.65
+  reworkSimulation <- sample(
+  nReworkScrap <-
+
+  nScrapTotal = nScrap + nReworkScrap
+
+  pScrappedSim <-
+  propSimulated[i] <- pScrappedSim
+}
+
+#3. Draw a histogram of `propSimulated`.
+
+hist(propSimulated)
+
+#4. Calculate the **number** of simulations which had a scrapping-proportion of 27% or more and assign your answer to `nScrap27`.
+
+
+
+#5. Using `nScrap27`, calculate the p-value for the hypothesis test and assign your answer to `p_value`.
+
+
+
+#6. Assuming a significance level of alpha = 0.05, decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+
+
+
+```
+
+*** =solution
 
 ```{r}
 propSimulated <- rep(NA, 10000)
@@ -439,7 +507,7 @@ for (i in 1:10000)
 
   nScrapTotal = nScrap + nReworkScrap
 
-  pScrappedSim <- nScrapTotal/batchSize
+  pScrappedSim <- nScrapTotal/30
   propSimulated[i] <- pScrappedSim
 }
 
@@ -450,9 +518,24 @@ p_value <- nScrap27/10000
 
 if(p_value < 0.05){rejectH0 <- TRUE}else{rejectH0 <- FALSE}
 ```
+*** =sct
+```{r}
+test_object("propSimulated", undefined_msg = "Make sure to define an object `propSimulated`.", incorrect_msg = "Make sure that you stored the scrapping-proportion of each of the 10000 30-drill-holes simulations in `propSimulated`.")       
 
+test_function("hist", obj = c("x"), undefined_msg = "Draw a histogram of `propSimulated`",
+incorrect_msg = , undefined_msg = "Draw a histogram of `propSimulated`.")
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
+test_object("nScrap27", undefined_msg = "Make sure to define an object `nScrap27`.", incorrect_msg = "Make sure that you calculated the total number of simulations which had a scrapping-proportion of 27% or higher correctly and assign your answer to `nScrap27`.")
+
+test_object("p_value", undefined_msg = "Make sure to define an object `p_value`.", incorrect_msg = "Make sure that you calculated the probability of having a scrapping-proportion of 27% or higher correctly and assign your answer to `nScrap27`.")
+
+test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
+            incorrect_msg = "Based on `p_value`, make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`.")
+
+success_msg("Correct! We have now used the simulation model to perform a hypothesis test. The last question is then, how do we use the model results to assist management in their decision the production manager.")
+```
+
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:8eaf7b9ebd
 
 ### Inference with simulation: scrapping too many parts (Part 4)
 
@@ -480,6 +563,6 @@ Based on the hypothesis, should the new manager should be fired?
 ```{r}
 msg_bad <- "That is incorrect."
 
-msg_success <- "Correct. It may be tempting to make a decision using the manager's actual proportion and the simulated proportion, but we only performed one-simulation. We know the process is random so using one simulation doesn't proof anything. It's similar to management firing the manager based on one production run of 30 products. Ideally management should evaluate the manager over thousands of production runs, and thereby see if the bad production run was just due to bad-luck, or if it happens consistently. The same principle applies to the simulation. We need to perform multiple simulations and look at the distribution of the simulation results. Only then can we see how rare the manager's proportion is. This is easy to do with computers and R."
+msg_success <- "Correct. There is not enough evidence to reject the null-hypothesis. Therefore we tell management there is not enough evidence to infer that he had a negative effect on the process. He may have just been unlucky overseeing a `bad` production batch, which happens by chance. On another day, a good production batch may happen whereby very few products are scrapped. This is just part of the randomness of the process."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
