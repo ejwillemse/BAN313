@@ -204,6 +204,12 @@ pOutcome <- c(pFixed, 1 - pFixed) # probability of TRUE and FALSE
 reworkSimulation <- sample(x = outcomes, size = nRework, replace = TRUE, pOutcome)
 ```
 
+To see how many parts were unsucssessfully scrapped, we just need to count the number `FALSEs` in `reworkSimulation`. This can be done using the `table` command, or by using:
+
+```
+length(subset(reworkSimulation, reworkSimulation == FALSE))/
+```
+
 To simulate the number of products that are defective out of a production batch of 1000 we need to determine the number of products that will be immediately scrapped plus the number of products that will be scrapped after rework.
 
 We can actually calculate the proportion of scrapped products analytically using the following formulas:
