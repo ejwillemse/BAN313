@@ -379,4 +379,6 @@ incorrect_msg = "Something went wrong in calculating `nStockOut`. It should be t
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
 incorrect_msg = "Something went wrong in calculating `pStockOut`. It should be the proportion of days on which a stock-out occurred. Use `nStockOut` and the number of days in our study period to calculate it.")
+
+success_msg("Correct! The given code can be used to calculate the stock-levels for any number of days based on known orders. As mentioned, orders are random. In the next question we are going to take this into account by transforming our code into a simulation model.")
 ```
