@@ -166,7 +166,7 @@ msg_bad5 <- "That is incorrect. Carefully go through the given formulas. Remembe
 test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad4, msg_bad5))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+--- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
 ## Calculating starting and ending inventory levels and stock-outs
 
 Using the following formulas we can calculate the starting and ending inventory levels for consecutive days:
