@@ -672,3 +672,27 @@ invSim1_v2 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
 invSim2_v2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
 invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 ```
+
+*** =sct
+```{r}
+test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
+
+test_object("invSim2", undefined_msg = "Make sure to define an object `invSim2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
+
+test_object("invSim3", undefined_msg = "Make sure to define an object `invSim3`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
+
+test_object("invSim1_v2", undefined_msg = "Make sure to define an object `invSim1_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
+
+test_object("invSim2_v2", undefined_msg = "Make sure to define an object `invSim2_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
+
+test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
+
+
+success_msg("Correct! We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. Each time we run the simulation, we will get different levels. This is expected since the simulation model mimics a random processes. The question is then, how do we use the model to predict inventory levels and stock-outs? The answer is that we have to run the simulation numerous times, and capture our key measurement with each simulation. We can use our above code to do so, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.")
+```
