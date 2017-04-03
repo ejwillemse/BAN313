@@ -195,34 +195,33 @@ I_end <- rep(NA, 5)
 stockOut <- rep(NA, 5)
 ```
 
-The reason for using `I_start <- seq(NA, 6)` and not `I_start <- seq(NA, 5)` will be explored later on.
+The reason for using `I\_start <- seq(NA, 6)` and not `I\_start <- seq(NA, 5)` will be explored later on.
 
-Since it was given that $I_\text{start} = 120$, we have to set `I_start[1] <- 120`.
+Since it was given that $I\_\text{start} = 120$, we have to set `I\_start[1] <- 120`.
 
-The following code calculates the ending inventory level for Day $t = 1$:
+The following code calculates the ending inventory level for Day 1:
 
 ```
 I_end[1] <- max(0, I_start[1] - O[1])
 ```
 
-The `max(0,...)` function ensures that inventory is set to 0 when more products are ordered than available. The only problem with the above code is that it does not explicitly take stock-outs into account. If $I_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$. It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
+The `max(0,...)` function ensures that inventory is set to 0 when more products are ordered than available. The only problem with the above code is that it does not explicitly take stock-outs into account. If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$. It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
 
 An `if(){}else{}` statement can be used to model stock-outs, and to update the `stockOut` variable:
 
 ```
 if(I_start[1] < O[1])
 {
-  # stock-out occurred, not all order were met
   stockOut[1] <- 1
   I_end[1] <- 0
 }else{
-  # stock-out did not occur, all orders were met
   stockOut[1] <- 0
   I_end[1] <- I_start[1] - O[1]
 }
 ```
 
 Carefully go through the above code to see how stock-outs are modelled.
+
 If the products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
 We can also choose to set `stockOut[1] <- TRUE`, but using `stockOut[1] <- 1` for a stock-out and `stockOut[1] <- 0` otherwise makes it a bit easier to calculate the number of stock-outs later on. It will simply be `sum(stockOut)`.
 If a stockout occurred, our ending inventory is set to 0.
@@ -240,16 +239,13 @@ Instead of hardcoding $t$, we can make our code more generic, to calculate the s
 ```
 if(I_start[t] < O[t])
 {
-  # stock-out occurred, not all order were met
   stockOut[t] <- 1
   I_end[t] <- 0
 }else{
-  # stock-out did not occur, all orders were met
   stockOut[t] <- 0
   I_end[t] <- I_start[t] - O[t]
 }
 
-# calculate the starting inventory for the next day, t + 1
 I_start[t+1] <- I_end[t] + P
 ```
 
