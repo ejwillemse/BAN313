@@ -175,7 +175,7 @@ Using the following formulas we can calculate the starting and ending inventory 
 $$I\_\text{end}(t) = \max\(0, I\_\text{start}(t) - O(t)),$$
 $$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
-Instead of calculating the levels by we can write an R programme to do so for us.
+Instead of calculating the levels by hand we can write an R programme to do so for us.
 
 Assume that the setup is the same as before, where we manufacture 150 products per day and our starting inventory for Day 1 is 120 products. The number of products ordered, $O(t)$, for 10 consecutive days were:
 ```
