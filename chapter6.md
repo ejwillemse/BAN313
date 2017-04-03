@@ -185,9 +185,9 @@ O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
 In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$, is then `O[2]`. Our starting inventory for Day 1 is $I\_\text{start} = 120$, and our production batch size is $P = 150$.
 
-In this exercise we will track our starting and ending inventory-levels from Days 1 to 5, and for each day calculate if there was a stock-out.
+In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day calculate if there was a stock-out.
 
-To do so we will initialise and use the following three vectors:
+To do so we will initialise, populate and analyse the following three vectors:
 
 ```
 I_start <- rep(NA, 6)
