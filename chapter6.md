@@ -693,6 +693,5 @@ incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and
 test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
 incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
 
-
-success_msg("Correct! We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. Each time we run the simulation, we will get different levels. This is expected since the simulation model mimics a random processes. The question is then, how do we use the model to predict inventory levels and stock-outs? The answer is that we have to run the simulation numerous times, and capture our key measurement with each simulation. We can use our above code to do so, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.")
+success_msg("Correct! By converting the simulation model into a function we can now more easily perform the simulation for different inputs. In the next question we will run the simulation model numerious times, and statistically analyse the simulation output.")
 ```
