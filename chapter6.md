@@ -709,7 +709,7 @@ To do so we will imbed the simulation function within a `for` loop and capture t
 3. Draw a histogram of the 10000 simulation results.
 4. Calculate and view the median stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
 5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
-6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_200`.
+6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
 7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
 8. Draw a histogram of the 10000 simulation results.
 9. Calculate and view he median stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
@@ -778,7 +778,7 @@ for (i in 1:10000)
 
 
 
-# 6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_200`.
+# 6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
 
 
 
@@ -869,5 +869,5 @@ incorrect_msg = "Something went wrong in calculating the median stock-out propor
 test_object("p10stockouts_160", undefined_msg = "Make sure to define an object `p10stockouts_160`.",
 incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_160`.")
 
-success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products more than halved the median stock-out proportion The last thing to consider in this lab is that production is also random. In the next question we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
+success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products more halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next question we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
 ```
