@@ -172,8 +172,8 @@ test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad
 
 Using the following formulas we can calculate the starting and ending inventory levels for consecutive days:
 
-$$I_\text{end}(t) = \max\{0, I_\text{start}(t) - O(t)\},$$
-$$I_\text{start}(t + 1) = I_\text{end}(t) + P.$$
+$$I\_\text{end}(t) = \max\(0, I\_\text{start}(t) - O(t)),$$
+$$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
 Instead of calculating the levels by we can write an R programme to do so for us.
 
