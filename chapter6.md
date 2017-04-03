@@ -362,13 +362,13 @@ incorrect_msg = "Something went wrong in calculating `I_start`. Remember that it
 test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
 incorrect_msg = "Something went wrong in calculating `I_end`. Remember that it has to be calculated for each day `t`.")
 
-test_function("barplot", args = c("x"), not_called_msg = "Draw a barplot of `stockOut`.",
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
 incorrect_msg = "Draw a barplot of `stockOut`.")
 
-test_function("barplot", args = c("x"), not_called_msg = "Draw a barplot of `I_start`.",
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
 incorrect_msg = "Draw a barplot of `I_start`.")
 
-test_function("barplot", args = c("x"), not_called_msg = "Draw a barplot of `I_end`.",
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
 incorrect_msg = "Draw a barplot of `I_end`.")
 
 test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
