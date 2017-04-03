@@ -848,7 +848,7 @@ p10stockouts_160 <- length(subset(pStockOutSimulations_160, pStockOutSimulations
 *** =sct
 ```{r}
 test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stocko-uts for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
 
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
 
@@ -870,4 +870,183 @@ test_object("p10stockouts_160", undefined_msg = "Make sure to define an object `
 incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_160`.")
 
 success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products more halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next question we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
+## Simulating stock-outs based on random production and random orders
+
+In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
+In this exercise we will change this assumption, using the simulation model from the previous chapter.
+
+Recall that a hole is drilled in the product during its manufacturing of our product.
+The hole size follows a random distribution and if it is too big the product is scrapped.
+If it is too small the hole is re-drilled, the success of which also follows a random process.
+The result is that if we manufacture $M$ products, then a random fraction of the products will be within specifications an usable.
+The amount of available products, $P$, will thus be random.
+Luckily we already have simulation to model the amount of available products after scrapping defective products.
+
+In this exercise we will convert the production simulation model into a function and imbed the function into our inventory-level simulation model.
+Thereafter we will repeat run 10000 simulations for the 30 days of of manufacturing and ordering and capture the proportion of stock-outs for each day.
+
+The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products are within specification, `P_inspec`, and can be sold.
+The remaining products are scrapped.
+
+*** =instructions
+
+1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
+2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
+3. Calculate and compare the median stock-out rates over 10000 simulations of producing 150 products and 160 products per day over 30 days with random orders and a starting inventory level of 120 products.
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+# 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
+productionSimulation <- function(P)
+{
+  drillHoleDiameters <- rnorm(P, 10, 0.2)
+  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
+
+  pFixed <- 0.65
+  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
+
+  nScrapTotal = nScrap + nReworkScrap
+  P_inspec <- ...
+}
+
+# 2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...`
+inventorySimulation <- function(n, I_start0, P)
+{
+
+  O <- round(runif(n, 100, 200), 0)
+
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
+  {
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + ...
+  }
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
+}
+
+# 3. Calculate and compare the median stock-out rates over 10000 simulations of producing 150 products and 160 products per day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`
+
+pStockOutSimulations_150 <- rep(NA, 10000)
+for(i in 1:10000)
+{
+  pStockOutSimulations_150[i] <- inventorySimulation(...)
+}
+hist(pStockOutSimulations_150)
+pStockoutMedian_150 <-
+
+pStockOutSimulations_160 <- rep(NA, 10000)
+for(i in 1:10000)
+{
+  pStockOutSimulations_160[i] <- inventorySimulation(...)
+}
+hist(pStockOutSimulations_160)
+pStockoutMedian_160 <-
+
+pStockoutMedian_150
+pStockoutMedian_160
+```
+
+*** =solution
+```{r}
+productionSimulation <- function(P)
+{
+  drillHoleDiameters <- rnorm(P, 10, 0.2)
+  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
+
+  pFixed <- 0.65
+  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
+
+  nScrapTotal = nScrap + nReworkScrap
+  P_inspec <- P - nScrapTotal
+}
+
+inventorySimulation <- function(n, I_start0, P)
+{
+
+  O <- round(runif(n, 100, 200), 0)
+
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
+  {
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + productionSimulation(P)
+  }
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
+}
+
+pStockOutSimulations_150 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
+hist(pStockOutSimulations_150)
+pStockoutMedian_150 <- median(pStockOutSimulations_150)
+
+pStockOutSimulations_160 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
+hist(pStockOutSimulations_160)
+pStockoutMedian_160 <- median(pStockOutSimulations_160)
+```
+*** =sct
+```{r}
+test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
+
+test_object("pStockoutMedian_150", undefined_msg = "Make sure to define an object `pStockoutMedian_150`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_150`.")
+
+test_object("pStockOutSimulations_160", undefined_msg = "Make sure to define an object `pStockOutSimulations_160`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_160` and that you specified the input parameters correctly.")
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_160`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_160`.")
+
+test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
+
+success_msg("Correct! We have no developed a simulation model that takes random production and orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to a random production process. The proportion of stock-outs is also much higher and increasing the production size from 150 to 160 made less of an impact than previously. This is expected such some of the products are scrapped. Using the simulation model we can check what impact a more precise machine drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products. The examples used in this chapter were somewhat simplified. The distribution of process outputs are seldom given. Instead we need to infer the outputs using actual data. This can be achieved using the techniques from the previous chapters.")
 ```
