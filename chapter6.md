@@ -628,8 +628,7 @@ invSim2_v2
 invSim3_v2 <- inventorySimulation(n = , I_start0 = , P = )
 invSim3_v2
 
-````
-
+```
 
 *** =solution
 ```{r}
