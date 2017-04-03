@@ -197,7 +197,7 @@ stockOut <- rep(NA, 5)
 
 The reason for using `I\_start <- seq(NA, 6)` and not `I\_start <- seq(NA, 5)` will be explored later on.
 
-Since it was given that $I\_\text{start} = 120$, we have to set `I\_start[1] <- 120`.
+Since it was given that $I\_\text{start} = 120$, we have to set `I_start[1] <- 120`.
 
 The following code calculates the ending inventory level for Day 1:
 
