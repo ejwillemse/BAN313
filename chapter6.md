@@ -7,7 +7,7 @@ description : "In this case study we will analyse how a random order process inf
 ## Background
 
 In the previous case study we modelled a random production process.
-In this chapter we will move to the supply-side of a business and model a random order process for our product.
+In this chapter we will move to the supply-side of our business and model a random order process for our product.
 
 **Before continuing with this chapter, please do the following:**
 
@@ -23,8 +23,7 @@ Each customer is unique and have different requirements, therefore the amount of
 Inventory is used to account for the daily variation.
 
 Each day a fixed amount of products are manufactured and stored as inventory.
-For low-order days, the surplus manufactured products remain in inventory.
-The surplus products can then be used for high-order days.
+For low-order days, the surplus manufactured products are placed in inventory, to be used for high-order days.
 
 As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
 
@@ -40,7 +39,7 @@ Our ending inventory on Day 1 is then 50 products (100 - 50).
 On Day 2 our starting inventory will increase by 150 products (the products manufactured the previous day) and we will thus have 200 products (50 + 150) in inventory.
 
 On Day 2 we again manufactured 150 products since we have a fixed 150-product production run.
-On this our starting inventory level was 200 products, and we received orders for 225 products.
+On this day our starting inventory level was 200 products, and we received orders for 225 products.
 Since we received orders for more products than we have, our ending inventory will be 0 products.
 We sold our available 200 products, and the customers had to purchase 25 products elsewhere.
 This also means that we had a stock-out, since we ran out of inventory.
