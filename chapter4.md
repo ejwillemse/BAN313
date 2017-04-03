@@ -35,7 +35,6 @@ In this lab we will look at the same examples from Case study 6, and do the foll
 3. Analyse the distribution of and estimate confidence intervals for key distribution parameters using the bootstrapping method.
 4. Use the R functions of the distribution to calculate percentiles and probabilities as required.
 
-
 The specific R functions that are applicable to this chapter are:
 
 ```

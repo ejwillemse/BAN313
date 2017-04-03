@@ -81,7 +81,7 @@ This can be done using the following R function
 rnorm()
 ```
 
-You can type `?rnorm` in the console to find out more about the function. 
+You can type `?rnorm` in the console to find out more about the function.
 
 Similar to `pnorm`, it takes as input the mean and standard deviation of a normal distribution. It also takes `n` which is the number of samples that we want to draw from the normal distribution with the specified mean and standard deviation.
 
@@ -189,7 +189,7 @@ Repairing is not always possible, and when it is possible it is not always effec
 For our drill-hole example we have the following repair options.
 If a hole is too big the product is scrapped since we cannot make the hole smaller.
 If a hole is too small, we can attempt to re-drill the hole using a specialized drilling machine.
-With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the product will be scrapped in any-case. 
+With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the product will be scrapped in any-case.
 
 The probability of the rework being successful is known to be **65%**.
 
@@ -521,7 +521,7 @@ for (i in 1:10000)
 
   pFixed <- 0.65
   reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == TRUE))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 
   nScrapTotal = nScrap + nReworkScrap
 
