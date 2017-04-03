@@ -372,7 +372,7 @@ incorrect_msg = "Draw a barplot of `I_start`.")
 test_function("barplot", args = c("x"), not_called_msg = "Draw a barplot of `I_end`.",
 incorrect_msg = "Draw a barplot of `I_end`.")
 
-test_object("I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
+test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
 incorrect_msg = "Something went wrong in calculating `mean_I_end`. It should be the mean ending-inventory level `I_end`.")
 
 test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
