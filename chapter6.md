@@ -234,7 +234,7 @@ I_start[2] <- I_end[1] + P
 ```
 where `P` is the fixed number of products that we produce per day, and which is available for sale the next day.
 
-Instead of hardcoding $t$, we can make our code more generic, to calculate the starting and ending inventory, as well as the probability for a stock-out for day $t$, represented by `t`:
+Instead of hardcoding $t$, we can make our code more generic to calculate the starting and ending inventory, as well as the probability for a stock-out for day $t$:
 
 ```
 if(I_start[t] < O[t])
