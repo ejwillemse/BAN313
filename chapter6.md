@@ -695,7 +695,7 @@ incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and
 
 success_msg("Correct! By converting the simulation model into a function we can now more easily perform the simulation for different inputs. In the next question we will run the simulation model numerous times, and statistically analyse the simulation output.")
 ```
---- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
+--- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
 ## Statistically analysing stock-outs
 
 Now that we have function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
