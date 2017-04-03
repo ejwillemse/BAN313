@@ -537,7 +537,7 @@ incorrect_msg = "Something went wrong in calculating `pStockOut`. It should be t
 success_msg("Correct! We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. Each time we run the simulation, we will get different levels. This is expected since the simulation model mimics a random processes. The question is then, how do we use the model to predict inventory levels and stock-outs? The answer is that we have to run the simulation numerous times, and capture our key measurement with each simulation. We can use our above code to do so, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
 ## A function for simulating the proportion of stock-outs
 
 For this exercise we are going to convert our previous code into a function that can simulate the order process and inventory levels for a specified number of days and return the proportion of stock-outs, which is our main measurement of interest.
