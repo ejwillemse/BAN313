@@ -106,7 +106,7 @@ Let $P$ be the fixed amount of products produced per day, and let $O(t)$ be the 
 
 The starting and ending inventory levels can the be calculated as follow:
 
-$$I\_\text{end}(t) = \max{0, I\_\text{start}(t) - O(t)},$$
+$$I\_\text{end}(t) = \max(0, I\_\text{start}(t) - O(t)),$$
 $$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
 Carefully study the equations above and make sure you understand how inventory levels are calculated. The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered. But the level can never be less than 0. The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products ordered.
