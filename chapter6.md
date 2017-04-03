@@ -195,7 +195,7 @@ I_end <- rep(NA, 5)
 stockOut <- rep(NA, 5)
 ```
 
-The reason for using `I\_start <- seq(NA, 6)` and not `I\_start <- seq(NA, 5)` will be explored later on.
+The reason for using `I_start <- seq(NA, 6)` and not `I_start <- seq(NA, 5)` will be explored later on.
 
 Since it was given that $I\_\text{start} = 120$, we have to set `I_start[1] <- 120`.
 
