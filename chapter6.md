@@ -872,7 +872,7 @@ incorrect_msg = "Something went wrong in calculating the probability of having m
 success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products more halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next question we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
+--- type:NormalExercise lang:r xp:100 skills:1 key:d96b7eb33f
 ## Simulating stock-outs based on random production and random orders
 
 In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
