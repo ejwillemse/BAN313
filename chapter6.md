@@ -113,7 +113,7 @@ Carefully study the equations above and make sure you understand how inventory l
 
 The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered. But the level can never be less than 0. The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products manufactured during the previous day.
 
-For the first question we are going to look at a sequence of product orders for three consecutive days and calculate the starting inventory level for the third day.
+For the first question we are going to look at a sequence of product orders for three consecutive days and calculate the starting inventory level for the *fourth* day.
 
 The number of products ordered for the three days were as follows:
 
