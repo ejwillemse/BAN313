@@ -252,7 +252,7 @@ I_start[t+1] <- I_end[t] + P
 For Day 1, we just need to set `t = 1` and run the above code.
 For Day 2, we will then set `t = 2` and run the above code, and we can continue doing so for `t=3`, `t=4` and lastly for `t=5`.
 
-Note that the last line of the generic code always calculates the starting inventory for the next day $t+1$.
+Note that the last line of the generic code always calculates the starting inventory for the next day, $t+1$.
 We will therefore end up with a calculated starting inventory level for day $t = 6$, even though we are only really interested in five days.
 We can use another `if` statement to not calculate the `I_start[t+1]` if we are at the end of the study period.
 But easier is to just create an additional storage space in `I_start` by initialising it as `I_start <- seq(NA, 5 + 1)`.
