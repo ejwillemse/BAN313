@@ -385,15 +385,16 @@ success_msg("Correct! The given code can be used to calculate the inventory-leve
 --- type:NormalExercise lang:r xp:100 skills:1 key:42987389b3
 ## Simulating inventory levels and stock-outs
 
-With the necessary code in place to calculate inventory levels and stock-outs based on product orders we can now proceed to develop a simulation model.
+With the necessary code in place to calculate inventory levels and stock-outs based on product orders, we can now proceed to develop a simulation model.
 
 The number of products ordered, $O$, on any give day is random but known to follow a uniform distribution with the following parameters:
 
-$$O \sim \mathcal{U}(\min = 100, \max = 200)$$.
+$$O \sim \mathcal{U}(\min = 100, \max = 200).$$
 
 Based on this information we can easily update our previous code to simulate the inventory levels and stock-outs over any study period.
 
-In this exercise our starting inventory for Day 1 will again be 120 units and we manufacture 150 units per day. The only new part is model orders as a random process that follows a uniform distribution.
+In this exercise our starting inventory for Day 1 will again be 120 units and we manufacture 150 units per day. 
+The only new part is to model orders as a random process that follows a uniform distribution.
 
 We can simulate the product orders for a total of `n` days using the following code
 
