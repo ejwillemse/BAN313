@@ -101,13 +101,13 @@ test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a44acfd135
 ## Determining the starting and ending inventory levels after a few days
 
-Let $I_\text{start}(t)$ be the starting inventory-level and let $I_\text{end}(t)$ be the ending inventory-level on day $t$.
+Let $I\_\text{start}(t)$ be the starting inventory-level and let $I\_\text{end}(t)$ be the ending inventory-level on day $t$.
 Let $P$ be the fixed amount of products produced per day, and let $O(t)$ be the number of products ordered on day $t$.
 
 The starting and ending inventory levels can the be calculated as follow:
 
-$$I_\text{end}(t) = \max\{0, I_\text{start}(t) - O(t)\},$$
-$$I_\text{start}(t + 1) = I_\text{end}(t) + P.$$
+$$I_\text{end}(t) = \max\{0, I\_\text{start}(t) - O(t)\},$$
+$$I_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
 Carefully study the equations above and make sure you understand how inventory levels are calculated. The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered. But the level can never be less than 0. The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products ordered.
 
@@ -121,7 +121,7 @@ The number of products ordered for the three days were as follows:
 
 Due to a machine break-down our starting inventory-level for Day 1 was 120 units. It was fixed, and we had a fixed production-run of 150 products for Days 1 to 3, meaning we manufacture 150 products per day.
 
-Based on the above information, what was our **starting** inventory level on Day 4 ($I_\text{start}(4)$)? You may use the console screen on the right to do the necessary calculations.
+Based on the above information, what was our **starting** inventory level on Day 4 ($I\_\text{start}(4)$)? You may use the console screen on the right to do the necessary calculations.
 
 
 *** =instructions
