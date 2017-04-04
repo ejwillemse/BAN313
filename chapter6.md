@@ -1127,7 +1127,7 @@ Increasing the production size from 150 to 160 made less of an impact than previ
 This is expected since some of the 150 or 160 products are scrapped and not available for sale. 
 Using the simulation model we can check what impact a more precise drilling machine will have on orders. 
 We can also check what impact an improved rework process will have. 
-Another factor to analyse is increasing the production size to more than 160 products.\n 
+Another factor to analyse is increasing the production size to more than 160 products.
 The examples used in this chapter were somewhat simplified. 
 The distribution of process outputs are seldom given. 
 Instead we need to infer the outputs using actual data. 
