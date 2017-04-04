@@ -886,7 +886,7 @@ The amount of available products, $P$, will thus be random.
 Luckily we already have simulation to model the amount of available products after scrapping defective products.
 
 In this exercise we will convert the production simulation model into a function and imbed the function into our inventory-level simulation model.
-Thereafter we will repeat run 10000 simulations for the 30 days of of manufacturing and ordering and capture the proportion of stock-outs for each day.
+Thereafter we will repeat run 1000 simulations for the 30 days of of manufacturing and ordering and capture the proportion of stock-outs for each day.
 
 The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products are within specification, `P_inspec`, and can be sold.
 The remaining products are scrapped.
@@ -895,7 +895,7 @@ The remaining products are scrapped.
 
 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
 2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
-3. Calculate and compare the median stock-out rates over 10000 simulations of producing 150 products and 160 products per day over 30 days with random orders and a starting inventory level of 120 products.
+3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and a starting inventory level of 120 products and 1000 simulation of producing 160 products day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
 *** =pre_exercise_code
 ```{r}
@@ -952,18 +952,18 @@ inventorySimulation <- function(n, I_start0, P)
   pStockOut <- nStockOut/n
 }
 
-# 3. Calculate and compare the median stock-out rates over 10000 simulations of producing 150 products and 160 products per day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`
+# 3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and a starting inventory level of 120 products and 1000 simulation of producing 160 products day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
-pStockOutSimulations_150 <- rep(NA, 10000)
-for(i in 1:10000)
+pStockOutSimulations_150 <- rep(NA, 1000)
+for(i in 1:1000)
 {
   pStockOutSimulations_150[i] <- inventorySimulation(...)
 }
 hist(pStockOutSimulations_150)
 pStockoutMedian_150 <-
 
-pStockOutSimulations_160 <- rep(NA, 10000)
-for(i in 1:10000)
+pStockOutSimulations_160 <- rep(NA, 1000)
+for(i in 1:1000)
 {
   pStockOutSimulations_160[i] <- inventorySimulation(...)
 }
@@ -1022,11 +1022,11 @@ inventorySimulation <- function(n, I_start0, P)
   pStockOut <- nStockOut/n
 }
 
-pStockOutSimulations_150 <- replicate(100, inventorySimulation(n = 30, I_start0 = 120, P = 150))
+pStockOutSimulations_150 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
 hist(pStockOutSimulations_150)
 pStockoutMedian_150 <- median(pStockOutSimulations_150)
 
-pStockOutSimulations_160 <- replicate(100, inventorySimulation(n = 30, I_start0 = 120, P = 160))
+pStockOutSimulations_160 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
 hist(pStockOutSimulations_160)
 pStockoutMedian_160 <- median(pStockOutSimulations_160)
 ```
