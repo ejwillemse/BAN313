@@ -212,17 +212,17 @@ O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$ can be retrieved using `O[2]`. 
 Our starting inventory for Day 1 is $I\_\text{start} = 120$, and our production batch size is $P = 150$.
 
-In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day calculate if there was a stock-out.
+In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day determine if there was a stock-out.
 
 To do so we will initialise, populate and analyse the following three vectors:
 
 ```
-I_start <- rep(NA, 6)
-I_end <- rep(NA, 5)
-stockOut <- rep(NA, 5)
+I_start <- rep(NA, 11)
+I_end <- rep(NA, 10)
+stockOut <- rep(NA, 10)
 ```
 
-The reason for using `I_start <- seq(NA, 6)` and not `I_start <- seq(NA, 5)` will be explored later on.
+The reason for using `I_start <- seq(NA, 11)` and not `I_start <- seq(NA, 10)` will be explored later on.
 
 Since it was given that $I\_\text{start} = 120$, we have to set `I_start[1] <- 120`.
 
@@ -232,7 +232,10 @@ The following code calculates the ending inventory level for Day 1:
 I_end[1] <- max(0, I_start[1] - O[1])
 ```
 
-The `max(0,...)` function ensures that inventory is set to 0 when more products are ordered than available. The only problem with the above code is that it does not explicitly take stock-outs into account. If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$. It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
+The `max(0,...)` function ensures that inventory is set to zero when more products are ordered than available. 
+The only problem with the above code is that it does not explicitly take stock-outs into account. 
+If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$. 
+It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
 
 An `if(){}else{}` statement can be used to model stock-outs, and to update the `stockOut` variable:
 
@@ -249,12 +252,14 @@ if(I_start[1] < O[1])
 
 Carefully go through the above code to see how stock-outs are modelled.
 
-If the products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
-We can also choose to set `stockOut[1] <- TRUE`, but using `stockOut[1] <- 1` for a stock-out and `stockOut[1] <- 0` otherwise makes it a bit easier to calculate the number of stock-outs later on. It will simply be `sum(stockOut)`.
+If the number of products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
+We can also choose to set `stockOut[1] <- TRUE`.
+By using `stockOut[1] <- 1` for a stock-out, and `stockOut[1] <- 0` otherwise, it makes it a bit easier to calculate the number of stock-outs later on. 
+It will simply be `sum(stockOut)`.
 If a stockout occurred, our ending inventory is set to 0.
 If a stockout did not occur, meaning we had enough products in inventory, then our ending inventory is equal to our starting inventory minus the number of products ordered.
 
-The last part is then to calculate the starting inventory for the next day $t + 1$:
+The last part is then to calculate the starting inventory for the next day, $t + 1$:
 
 ```
 I_start[2] <- I_end[1] + P
@@ -277,21 +282,21 @@ I_start[t+1] <- I_end[t] + P
 ```
 
 For Day 1, we just need to set `t = 1` and run the above code.
-For Day 2, we will then set `t = 2` and run the above code, and we can continue doing so for `t=3`, `t=4` and lastly for `t=5`.
+For Day 2, we will then set `t = 2` and run the above code, and we can continue doing so for `t=3`, `t=4`, upto `t=10`.
 
 Note that the last line of the generic code always calculates the starting inventory for the next day, $t+1$.
-We will therefore end up with a calculated starting inventory level for day $t = 6$, even though we are only really interested in five days.
+We will therefore end up calculating the starting inventory level for day $t = 11$, even though we are only really interested in the first 1- days.
 We can use another `if` statement to not calculate the `I_start[t+1]` if we are at the end of the study period.
-But easier is to just create an additional storage space in `I_start` by initialising it as `I_start <- seq(NA, 5 + 1)`.
+But easier is to just create an additional storage space in `I_start` by initialising it as `I_start <- seq(NA, 10 + 1)`.
 
-The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop which represents our study-period:
+The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop to automatically do all the calculations over the study period.
 
 *** =instructions
-1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the five-day study period.
+1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
 2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
 3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
 4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
-5. Calculate and view the proportion of stock-outs over the five days and assign your answer to `pStockOut`.
+5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 
 *** =pre_exercise_code
 ```{r}
@@ -300,18 +305,18 @@ The last update in our code is to place the inventory-level and stock-out calcul
 
 *** =sample_code
 ```{r}
-#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the five-day study period.
+#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the 10-day study period.
 
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
 P <- 150
-I_start <- rep(NA, 6)
+I_start <- rep(NA, 11)
 I_end <-
 stockOut <-
 
 I_start[1] <-
 
-for (t in 1:5)
+for (t in 1:10)
 {
   if()
   {
@@ -337,7 +342,7 @@ for (t in 1:5)
 
 
 
-#5. Calculate and view the proportion of stock-outs over the five days and assign your answer to `pStockOut`.
+#5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 
 
 
@@ -350,13 +355,13 @@ O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 startingInventory <- 120
 P <- 150
 
-I_start <- rep(NA, 6)
-I_end <- rep(NA, 5)
-stockOut <- rep(NA, 5)
+I_start <- rep(NA, 11)
+I_end <- rep(NA, 10)
+stockOut <- rep(NA, 10)
 
 I_start[1] <- 120
 
-for (t in 1:5)
+for (t in 1:10)
 {
   if(I_start[t] < O[t])
   {
@@ -381,13 +386,16 @@ pStockOut <- nStockOut/10
 *** =sct
 ```{r}
 test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `stockOut`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `I_start`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `I_end`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
 incorrect_msg = "Draw a barplot of `stockOut`.")
@@ -399,15 +407,23 @@ test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of
 incorrect_msg = "Draw a barplot of `I_end`.")
 
 test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`. It should be the mean ending-inventory level `I_end`.")
+incorrect_msg = "Something went wrong in calculating `mean_I_end`. 
+It should be the mean ending-inventory level `I_end`.")
 
 test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`. It should be the total number of days on which a stock-out occurred. Use `sum` to calculate it.")
+incorrect_msg = "Something went wrong in calculating `nStockOut`. 
+It should be the total number of days on which a stock-out occurred. 
+Use `sum` to calculate it.")
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`. It should be the proportion of days on which a stock-out occurred. Use `nStockOut` and the number of days in our study period to calculate it.")
+incorrect_msg = "Something went wrong in calculating `pStockOut`. 
+It should be the proportion of days on which a stock-out occurred. 
+Use `nStockOut` and the number of days in our study period to calculate it.")
 
-success_msg("Correct! The given code can be used to calculate the inventory-levels for any number of days based on known orders. As mentioned, orders are random. In the next question we are going to take this into account by transforming our code into a simulation model.")
+success_msg("Correct! 
+The given code can be used to calculate the inventory-levels for any number of days based on known orders. 
+As mentioned, orders are random. 
+In the next question we are going to take this into account and transform our code into a simulation model.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:42987389b3
@@ -451,20 +467,20 @@ This will be left as an exercise:
 #1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
 
 n = 30
-O <-
+O <- ...
 
 #2. Update the code below to calculate and view the inventory levels and stock-outs for the 30 days' simulated product orders.
 
 tartingInventory <- 120
 P <- 150
 
-I_start <- rep(NA, 6)
-I_end <- rep(NA, 5)
-stockOut <- rep(NA, 5)
+I_start <- rep(NA, ...)
+I_end <- rep(NA, ...)
+stockOut <- rep(NA, ...)
 
 I_start[1] <- 120
 
-for (t in 1:5)
+for (t in 1:...)
 {
   if(I_start[t] < O[t])
   {
@@ -487,7 +503,7 @@ mean_I_end
 nStockOut <- sum(stockOut)
 nStockOut
 
-pStockOut <- nStockOut/10
+pStockOut <- nStockOut/...
 pStockOut
 
 ```
@@ -534,16 +550,20 @@ pStockOut <- nStockOut/n
 *** =sct
 ```{r}
 test_object("O", undefined_msg = "Make sure to define an object `O`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`. Use the `runif` function for the simulation.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`. 
+Use the `runif` function for the simulation.")
 
 test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `stockOut`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `I_start`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`. Remember that it has to be calculated for each day `t`.")
+incorrect_msg = "Something went wrong in calculating `I_end`. 
+Remember that it has to be calculated for each day `t`.")
 
 test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
 incorrect_msg = "Draw a barplot of `stockOut`.")
@@ -555,15 +575,27 @@ test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of
 incorrect_msg = "Draw a barplot of `I_end`.")
 
 test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`. It should be the mean ending-inventory level `I_end`.")
+incorrect_msg = "Something went wrong in calculating `mean_I_end`. 
+It should be the mean ending-inventory level `I_end`.")
 
 test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`. It should be the total number of days on which a stock-out occurred. Use `sum` to calculate it.")
+incorrect_msg = "Something went wrong in calculating `nStockOut`. 
+It should be the total number of days on which a stock-out occurred. 
+Use `sum` to calculate it.")
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`. It should be the proportion of days on which a stock-out occurred. Use `nStockOut` and the number of days in our study period to calculate it.")
+incorrect_msg = "Something went wrong in calculating `pStockOut`. 
+It should be the proportion of days on which a stock-out occurred. 
+Use `nStockOut` and the number of days in our study period to calculate it.")
 
-success_msg("Correct! We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. Each time we run the simulation, we will get different levels. This is expected since the simulation model mimics a random processes. The question is then, how do we use the model to predict inventory levels and stock-outs? The answer is that we have to run the simulation numerous times, and capture our key measurement with each simulation. We can use our above code to do so, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.")
+success_msg("Correct! 
+We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. 
+Each time we run the simulation, we will get different levels. 
+This is expected since the simulation model mimics a random processes. 
+The question is then, how do we use the model to predict inventory levels and stock-outs? 
+The answer is that we have to run the simulation numerous times, and capture our key measurements with each simulation. 
+We can use our above code to do so by placing it in a `for`-loop, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.
+A more elegent approach is to place the simulation model inside a function, and repeatedly call the function.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
@@ -583,11 +615,11 @@ The function will then return the following:
 
 *** =instructions
 
-1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
+1. Using the provided code, write a function that simulates `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
 2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
 3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
 4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. Hint: if you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
+5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
 
 *** =pre_exercise_code
 ```{r}
@@ -598,7 +630,7 @@ The function will then return the following:
 ```{r}
 #1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`
 
-inventorySimulation <- function( )
+inventorySimulation <- function(...)
 {
 
   O <- round(runif(n, 100, 200), 0)
@@ -637,23 +669,23 @@ invSim1
 
 # 3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
 
-invSim2 <- inventorySimulation(n = , I_start0 = , P = )
+invSim2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim2
 
 # 4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
 
-invSim3 <- inventorySimulation(n = , I_start0 = , P = )
+invSim3 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim3
 
-# 5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. Hint: if you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
+# 5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
 
-invSim1_v2 <- inventorySimulation(n = , I_start0 = , P = )
+invSim1_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim1_v2
 
-invSim2_v2 <- inventorySimulation(n = , I_start0 = , P = )
+invSim2_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim2_v2
 
-invSim3_v2 <- inventorySimulation(n = , I_start0 = , P = )
+invSim3_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim3_v2
 
 ```
@@ -704,43 +736,53 @@ invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 *** =sct
 ```{r}
 test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. 
+Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
 
 test_object("invSim2", undefined_msg = "Make sure to define an object `invSim2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. 
+Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
 
 test_object("invSim3", undefined_msg = "Make sure to define an object `invSim3`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
 
 test_object("invSim1_v2", undefined_msg = "Make sure to define an object `invSim1_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
 
 test_object("invSim2_v2", undefined_msg = "Make sure to define an object `invSim2_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
 
 test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
 
-success_msg("Correct! By converting the simulation model into a function we can now more easily perform the simulation for different inputs. In the next question we will run the simulation model numerous times, and statistically analyse the simulation output.")
+success_msg("Correct! 
+By converting the simulation model into a function we can now more easily perform the simulation for different inputs. 
+In the next exercise we will run the simulation model numerous times, and statistically analyse the simulation output.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
 ## Statistically analysing stock-outs
 
-Now that we have function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
+Now that we have a function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
 
 To do so we will imbed the simulation function within a `for` loop and capture the stock-out proportion for each run.
+
+The simulation model function is already available in the R script as `inventorySimulation(n, I_start0, P)`.
 
 *** =instructions
 
 1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
 2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
 3. Draw a histogram of the 10000 simulation results.
-4. Calculate and view the median stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
+4. Calculate and view the *median* stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
 5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
 6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
 7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
 8. Draw a histogram of the 10000 simulation results.
-9. Calculate and view he median stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
+9. Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
 10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 
 *** =pre_exercise_code
@@ -897,7 +939,7 @@ incorrect_msg = "Something went wrong in calculating the median stock-out propor
 test_object("p10stockouts_160", undefined_msg = "Make sure to define an object `p10stockouts_160`.",
 incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_160`.")
 
-success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products more halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next question we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
+success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next exercise we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:ebdaf87be6
@@ -906,24 +948,25 @@ success_msg("Correct! Using the simulation model we can now run the simulation m
 In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
 In this exercise we will change this assumption, using the simulation model from the previous chapter.
 
-Recall that a hole is drilled in the product during its manufacturing of our product.
+Recall that a hole is drilled in the product during its manufacturing.
 The hole size follows a random distribution and if it is too big the product is scrapped.
 If it is too small the hole is re-drilled, the success of which also follows a random process.
-The result is that if we manufacture $M$ products, then a random fraction of the products will be within specifications an usable.
-The amount of available products, $P$, will thus be random.
-Luckily we already have simulation to model the amount of available products after scrapping defective products.
+The result is that if we manufacture $M$ products, some of the products will be outside specifications and will be scrapped.
+Only the remaning products can be sold.
+The actual amount of available products per day, $P$, will thus be random.
+Luckily we already have simulation to model the amount of available products after scrapping defective ones.
 
 In this exercise we will convert the production simulation model into a function and imbed the function into our inventory-level simulation model.
-Thereafter we will repeat run 1000 simulations for the 30 days of of manufacturing and ordering and capture the proportion of stock-outs for each day.
+Thereafter we will run 1000 simulations for 30-days of random manufacturing and random ordering and capture the proportion of stock-outs for each day.
 
-The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products are within specification, `P_inspec`, and can be sold.
+The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products that are within specification, `P_inspec`, and can be sold.
 The remaining products are scrapped.
 
 *** =instructions
 
 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
-2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
-3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and a starting inventory level of 120 products and 1000 simulation of producing 160 products day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
+2. Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
+3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
 *** =pre_exercise_code
 ```{r}
@@ -1076,5 +1119,17 @@ test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole 
 test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
 incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
 
-success_msg("Correct! We have no developed a simulation model that takes random production and orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to a random production process. The proportion of stock-outs is also much higher and increasing the production size from 150 to 160 made less of an impact than previously. This is expected such some of the products are scrapped. Using the simulation model we can check what impact a more precise machine drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products. The examples used in this chapter were somewhat simplified. The distribution of process outputs are seldom given. Instead we need to infer the outputs using actual data. This can be achieved using the techniques from the previous chapters.")
+success_msg("Correct! 
+We have developed a simulation model that takes random production and random orders into consideration. 
+Note how the distribution of the stock-out proportion changed when moving from a constant to random production process. 
+The proportion of stock-outs is also much higher. 
+Increasing the production size from 150 to 160 made less of an impact than previously. 
+This is expected since some of the 150 or 160 products are scrapped and not available for sale. 
+Using the simulation model we can check what impact a more precise drilling machine will have on orders. 
+We can also check what impact an improved rework process will have. 
+Another factor to analyse is increasing the production size to more than 160 products.\n 
+The examples used in this chapter were somewhat simplified. 
+The distribution of process outputs are seldom given. 
+Instead we need to infer the outputs using actual data. 
+This can be achieved using the techniques from the previous chapters.")
 ```
