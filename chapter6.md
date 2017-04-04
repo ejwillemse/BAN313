@@ -1022,11 +1022,11 @@ inventorySimulation <- function(n, I_start0, P)
   pStockOut <- nStockOut/n
 }
 
-pStockOutSimulations_150 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
+pStockOutSimulations_150 <- replicate(100, inventorySimulation(n = 30, I_start0 = 120, P = 150))
 hist(pStockOutSimulations_150)
 pStockoutMedian_150 <- median(pStockOutSimulations_150)
 
-pStockOutSimulations_160 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
+pStockOutSimulations_160 <- replicate(100, inventorySimulation(n = 30, I_start0 = 120, P = 160))
 hist(pStockOutSimulations_160)
 pStockoutMedian_160 <- median(pStockOutSimulations_160)
 ```
