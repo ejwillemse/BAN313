@@ -14,7 +14,7 @@ In this chapter we will move to the supply-side of our business and model a rand
 1. Complete [Case study 8 - Developing simulation models using probability distributions (introduction)](https://campus.datacamp.com/courses/industrial-analysis-using-r/10739?ex=1) on Datacamp.
 2. Complete [Writing functions in r - A quick refresher](https://www.datacamp.com/courses/writing-functions-in-r) on Datacamp.
 3. Go through the following tutorial on using the [if-else statement in R](https://www.tutorialspoint.com/r/r_if_else_statement.htm).
-3. Review the lecture slides (Lecture_Week8.pdf](TBP), available on [clickUP](https://clickup.up.ac.za) under [Theme 2: Simulation models](https://clickup.up.ac.za/webapps/blackboard/content/listContent.jsp?course_id=_108170_1&content_id=_1016179_1&mode=reset).
+3. Review the lecture slides _Lecture_Week8.pdf_, available on _clickUP_ under _Theme 2: Simulation models_.
 
 **After completing the above, read the below instructions carefully.**
 
@@ -23,12 +23,13 @@ Each customer is unique and have different requirements, therefore the amount of
 Inventory is used to account for the daily variation.
 
 Each day a fixed amount of products are manufactured and stored as inventory.
-For low-order days, the surplus manufactured products are placed in inventory, to be used for high-order days.
+For low-order days, the surplus manufactured products are placed in inventory, which can then be used during high-order days.
 
-As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
+As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is. 
+A stock-out occurres when our clients order more products than what we have available in our inventory.
 
 We have a fixed production-run setup, meaning we produce a fixed number of products each day.
-Each day's manufactured products is moved to inventory the day after its manufactured before the start of business.
+Each day's manufactured products is moved to inventory at the end of the day, meaning it is ready for sale at the start of the next day.
 
 When customers place orders, it is filled form the available inventory on the same day.
 If the day's orders cannot be filled, due to low inventory levels, the customers take the available inventory and purchases the balance elsewhere.
@@ -40,24 +41,23 @@ On Day 2 our starting inventory will increase by 150 products (the products manu
 
 On Day 2 we again manufactured 150 products since we have a fixed 150-product production run.
 On this day our starting inventory level was 200 products, and we received orders for 225 products.
-Since we received orders for more products than we have, our ending inventory will be 0 products.
+Since we received orders for more products than we have available in inventory, our ending inventory will be 0 products.
 We sold our available 200 products, and the customers had to purchase 25 products elsewhere.
-This also means that we had a stock-out, since we ran out of inventory.
+This also means that we had a stock-out on Day 2, since we ran out of inventory.
 On Day 3 our starting inventory will again increase by 150 products and will we will thus have 150 products (0 + 150) in inventory.
 
-From the above example, we want to predict our daily starting and ending inventory levels over a period of 30 days, as well as the proportion of stock-outs over the study period, which is the total number of stock-outs over the period divided by the number of days in the study period.
-
+In this chapter we will predict our daily starting and ending inventory levels over a period of 30 days, as well as the proportion of stock-outs over the study period, which is the total number of stock-outs over the period divided by the number of days in the study period.
 
 In this lab we do the following:
 
 1. Develop a simulation model of our stock-outs and inventory levels based on random orders.
-2. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
-3. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
+2. Predict how larger production runs will influence stock-outs and inventory levels.
+3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
 
 The specific R functions that are applicable to this chapter are:
 
 ```
-runif(), rnorm(), rep(), sample(), function(), round(), for, if
+runif(), rnorm(), rep(), sample(), round(), subset(), length(), median(), mean(), function(), for, if
 ```
 
 To find out more about the functions, type `?` followed by the R-function in the R console.
@@ -69,7 +69,7 @@ Take note that the data used for this chapter is randomly generated and will cha
 
 When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-**DO NOT** jump straight to the instructions and skip the each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
+**DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
 
 To continue with this chapter confirm the following:
 
