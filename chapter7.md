@@ -74,7 +74,7 @@ msg_success <- "Let's get started with the Lab. Note that if you have not comple
 test_mc(correct = 1, feedback_msgs = c(msg_success))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:1a10d56107
 ## Constant arrival and transaction times
 
 Assume that customers arrive at the ATM exactly 1 minute apart and that only one customer arrives at a time.
@@ -95,6 +95,10 @@ Based on these assumptions, what is the mean waiting time of 100 customers over 
 ```
 
 *** =sample_code
+```{r}
+
+```
+
 *** =sct
 ```{r}
 msg_bad <- "Incorrect. Carefully read the description of queuing system and the given information of the question."
@@ -178,7 +182,7 @@ His finishing time is equal to his arrival time, plus waiting time plus the time
 If we know the arrival and transaction time of each customer, we can easily determine if the customers will wait in line, and for how long the customers will wait.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:bb32493aff
 ## Determining how long customers will wait in-line
 
 A customers waiting time depends on his arrival time and the time that the previous customer will leave the ATM.
@@ -288,7 +292,7 @@ All that's left for the simulation model is to randomly sample the arrival and w
 Thereafter we can repeatedly simulate the waiting of 100 customers.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:7981afe651
 ## ATM waiting time simulation
 
 In the previous exercise we wrote all the necessary code to calculate the waiting and leaving time of customers.
@@ -395,7 +399,7 @@ The distribution should be fitted based on data on the actual inter-arrival serv
 The last step is to execute the simulation a large number of times and analyse the distribution of the mean waiting time of 100 customers.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
 ## ATM waiting time analysis
 
 For this question we will repeat the simulation 1000 times and analyse the distribution of the mean waiting time of 100 customers for each simulation.
