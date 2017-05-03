@@ -25,7 +25,7 @@ Inventory is used to account for the daily variation.
 Each day a fixed amount of products are manufactured and stored as inventory.
 For low-order days, the surplus manufactured products are placed in inventory, which can then be used during high-order days.
 
-As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is. 
+As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
 A stock-out occurres when our clients order more products than what we have available in our inventory.
 
 We have a fixed production-run setup, meaning we produce a fixed number of products each day.
@@ -101,11 +101,11 @@ To continue with this chapter confirm the following:
 
 *** =sct
 ```{r}
-msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. 
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
 Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
-msg_success <- "Let's get started with the Lab. 
-Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. 
+msg_success <- "Let's get started with the Lab.
+Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
 Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
@@ -123,8 +123,8 @@ $$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
 Carefully study the equations above and make sure you understand how inventory levels are calculated.
 
-The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered. 
-But the level can never be less than zero. 
+The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered.
+But the level can never be less than zero.
 The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products manufactured during the previous day.
 
 For the first question we are going to look at a sequence of product orders for three consecutive days and calculate the starting inventory level for the *fourth* day.
@@ -135,7 +135,7 @@ The number of products ordered for the three days were as follow:
 * Day 2: 137
 * Day 3: 101
 
-Due to a machine break-down our starting inventory-level for Day 1 was 120 units. 
+Due to a machine break-down our starting inventory-level for Day 1 was 120 units.
 The machine was fixed, and we had a fixed production-run of 150 products for Days 1 to 3, meaning we manufactured 150 products per day on Day 1, 2, and 3.
 
 Based on the above information, what was our **starting** inventory level on Day 4? You may use the console screen on the right to do the necessary calculations.
@@ -169,34 +169,34 @@ Use the given formulas to calculate the starting and ending inventory levels for
 
 *** =sct
 ```{r}
-msg_bad1 <- "That is incorrect. 
-Carefully go through the given formulas. 
-Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day. 
-The given starting inventory for Day 1 thus *includes* the products manufactured on the previous day. 
+msg_bad1 <- "That is incorrect.
+Carefully go through the given formulas.
+Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
+The given starting inventory for Day 1 thus *includes* the products manufactured on the previous day.
 So should the starting inventory for Day 4."
 
-msg_bad2 <- "That is incorrect. 
-Carefully go through the given formulas. 
-We can only sell what we have in-stock, so our ending-inventory level can never be negative. 
+msg_bad2 <- "That is incorrect.
+Carefully go through the given formulas.
+We can only sell what we have in-stock, so our ending-inventory level can never be negative.
 Also, remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day."
 
-msg_success3 <- "Correct. The starting inventory level for Day 4 is 212. 
-Our starting inventory for Day 1 was given as 120 units. 
-The ending inventory level for Day 1 is 0, since we did not have enough inventory to meet the 124 products ordered. 
-Our starting inventory for Day 2 was 150, since the previous day's production was available in our inventory. 
-The ending inventory for Day 2 was then 13 (150 - 137). 
-The starting and ending inventory levels for Day 3 was 163 and 62 products, respectively. 
-Therefore the starting inventory level for Day 4 was 62 + 150 = 212 products. 
+msg_success3 <- "Correct. The starting inventory level for Day 4 is 212.
+Our starting inventory for Day 1 was given as 120 units.
+The ending inventory level for Day 1 is 0, since we did not have enough inventory to meet the 124 products ordered.
+Our starting inventory for Day 2 was 150, since the previous day's production was available in our inventory.
+The ending inventory for Day 2 was then 13 (150 - 137).
+The starting and ending inventory levels for Day 3 was 163 and 62 products, respectively.
+Therefore the starting inventory level for Day 4 was 62 + 150 = 212 products.
 We further know that we had a stock-out on Day 1 since we didn't have enough products to meet the demand for that day."
 
-msg_bad4 <- "That is incorrect. 
-Carefully go through the given formulas. 
-The given starting inventory for Day 1 includes the products manufactured on the previous day. 
+msg_bad4 <- "That is incorrect.
+Carefully go through the given formulas.
+The given starting inventory for Day 1 includes the products manufactured on the previous day.
 It was less than 150 products due to a machine break-down."
 
-msg_bad5 <- "That is incorrect. 
-Carefully go through the given formulas. 
-Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day. 
+msg_bad5 <- "That is incorrect.
+Carefully go through the given formulas.
+Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
 The given starting inventory for Day 1 thus *already* includes the products manufactured on the previous day."
 
 test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad4, msg_bad5))
@@ -212,14 +212,14 @@ $$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
 
 In this exercise we will write an R programme to calculate the inventory levels.
 
-Assume that the setup is the same as before, where we manufacture 150 products per day and our starting inventory for Day 1 was 120 products. 
+Assume that the setup is the same as before, where we manufacture 150 products per day and our starting inventory for Day 1 was 120 products.
 The number of products ordered, $O(t)$, for 10 consecutive days were:
 
 ```
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 ```
 
-In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$ can be retrieved using `O[2]`. 
+In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$ can be retrieved using `O[2]`.
 Our starting inventory for Day 1 is $I\_\text{start} = 120$, and our production batch size is $P = 150$.
 
 In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day determine if there was a stock-out.
@@ -242,9 +242,9 @@ The following code calculates the ending inventory level for Day 1:
 I_end[1] <- max(0, I_start[1] - O[1])
 ```
 
-The `max(0,...)` function ensures that inventory is set to zero when more products are ordered than available. 
-The only problem with the above code is that it does not explicitly take stock-outs into account. 
-If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$. 
+The `max(0,...)` function ensures that inventory is set to zero when more products are ordered than available.
+The only problem with the above code is that it does not explicitly take stock-outs into account.
+If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$.
 It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
 
 An `if(){}else{}` statement can be used to model stock-outs, and to update the `stockOut` variable:
@@ -264,7 +264,7 @@ Carefully go through the above code to see how stock-outs are modelled.
 
 If the number of products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
 We can also choose to set `stockOut[1] <- TRUE`.
-By using `stockOut[1] <- 1` for a stock-out, and `stockOut[1] <- 0` otherwise, it makes it a bit easier to calculate the number of stock-outs later on. 
+By using `stockOut[1] <- 1` for a stock-out, and `stockOut[1] <- 0` otherwise, it makes it a bit easier to calculate the number of stock-outs later on.
 It will simply be `sum(stockOut)`.
 If a stockout occurred, our ending inventory is set to 0.
 If a stockout did not occur, meaning we had enough products in inventory, then our ending inventory is equal to our starting inventory minus the number of products ordered.
@@ -315,11 +315,8 @@ The last update in our code is to place the inventory-level and stock-out calcul
 
 *** =sample_code
 ```{r}
-<<<<<<< HEAD
-#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
-=======
+
 #1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the 10-day study period.
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
 
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
@@ -400,15 +397,15 @@ pStockOut <- nStockOut/10
 *** =sct
 ```{r}
 test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`. 
+incorrect_msg = "Something went wrong in calculating `stockOut`.
 Remember that it has to be calculated for each day `t`.")
 
 test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`. 
+incorrect_msg = "Something went wrong in calculating `I_start`.
 Remember that it has to be calculated for each day `t`.")
 
 test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`. 
+incorrect_msg = "Something went wrong in calculating `I_end`.
 Remember that it has to be calculated for each day `t`.")
 
 test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
@@ -421,22 +418,22 @@ test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of
 incorrect_msg = "Draw a barplot of `I_end`.")
 
 test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`. 
+incorrect_msg = "Something went wrong in calculating `mean_I_end`.
 It should be the mean ending-inventory level `I_end`.")
 
 test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`. 
-It should be the total number of days on which a stock-out occurred. 
+incorrect_msg = "Something went wrong in calculating `nStockOut`.
+It should be the total number of days on which a stock-out occurred.
 Use `sum` to calculate it.")
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`. 
-It should be the proportion of days on which a stock-out occurred. 
+incorrect_msg = "Something went wrong in calculating `pStockOut`.
+It should be the proportion of days on which a stock-out occurred.
 Use `nStockOut` and the number of days in our study period to calculate it.")
 
-success_msg("Correct! 
-The given code can be used to calculate the inventory-levels for any number of days based on known orders. 
-As mentioned, orders are random. 
+success_msg("Correct!
+The given code can be used to calculate the inventory-levels for any number of days based on known orders.
+As mentioned, orders are random.
 In the next question we are going to take this into account and transform our code into a simulation model.")
 ```
 
@@ -463,8 +460,6 @@ O <- runif(n, 100, 200)
 Our previous code can then be used as-is to calculate inventory and stock-out levels after incorporating `n` into the necessary places in our code.
 
 This will be left as an exercise:
-<<<<<<< HEAD
-=======
 
 *** =instructions
 
@@ -564,19 +559,19 @@ pStockOut <- nStockOut/n
 *** =sct
 ```{r}
 test_object("O", undefined_msg = "Make sure to define an object `O`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`.
 Use the `runif` function for the simulation.")
 
 test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`. 
+incorrect_msg = "Something went wrong in calculating `stockOut`.
 Remember that it has to be calculated for each day `t`.")
 
 test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`. 
+incorrect_msg = "Something went wrong in calculating `I_start`.
 Remember that it has to be calculated for each day `t`.")
 
 test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`. 
+incorrect_msg = "Something went wrong in calculating `I_end`.
 Remember that it has to be calculated for each day `t`.")
 
 test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
@@ -589,27 +584,27 @@ test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of
 incorrect_msg = "Draw a barplot of `I_end`.")
 
 test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`. 
+incorrect_msg = "Something went wrong in calculating `mean_I_end`.
 It should be the mean ending-inventory level `I_end`.")
 
 test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`. 
-It should be the total number of days on which a stock-out occurred. 
+incorrect_msg = "Something went wrong in calculating `nStockOut`.
+It should be the total number of days on which a stock-out occurred.
 Use `sum` to calculate it.")
 
 test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`. 
-It should be the proportion of days on which a stock-out occurred. 
+incorrect_msg = "Something went wrong in calculating `pStockOut`.
+It should be the proportion of days on which a stock-out occurred.
 Use `nStockOut` and the number of days in our study period to calculate it.")
 
-success_msg("Correct! 
-We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. 
-Each time we run the simulation, we will get different levels. 
-This is expected since the simulation model mimics a random processes. 
-The question is then, how do we use the model to predict inventory levels and stock-outs? 
-The answer is that we have to run the simulation numerous times, and capture our key measurements with each simulation. 
+success_msg("Correct!
+We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days.
+Each time we run the simulation, we will get different levels.
+This is expected since the simulation model mimics a random processes.
+The question is then, how do we use the model to predict inventory levels and stock-outs?
+The answer is that we have to run the simulation numerous times, and capture our key measurements with each simulation.
 We can use our above code to do so by placing it in a `for`-loop, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.
-A more elegent approach is to place the simulation model inside a function, and repeatedly call the function.")
+A more elegant approach is to place the simulation model inside a function, and repeatedly call the function.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
@@ -750,31 +745,31 @@ invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 *** =sct
 ```{r}
 test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
 Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
 
 test_object("invSim2", undefined_msg = "Make sure to define an object `invSim2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
 Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
 
 test_object("invSim3", undefined_msg = "Make sure to define an object `invSim3`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
 Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
 
 test_object("invSim1_v2", undefined_msg = "Make sure to define an object `invSim1_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
 Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
 
 test_object("invSim2_v2", undefined_msg = "Make sure to define an object `invSim2_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
 Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
 
 test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs. 
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
 Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
 
-success_msg("Correct! 
-By converting the simulation model into a function we can now more easily perform the simulation for different inputs. 
+success_msg("Correct!
+By converting the simulation model into a function we can now more easily perform the simulation for different inputs.
 In the next exercise we will run the simulation model numerous times, and statistically analyse the simulation output.")
 ```
 --- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
@@ -1133,7 +1128,6 @@ test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole 
 test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
 incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
 
-success_msg("Correct! 
+success_msg("Correct!
 We have developed a simulation model that takes random production and random orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to random production process. The proportion of stock-outs is also much higher. Increasing the production size from 150 to 160 made less of an impact than previously. This is expected since some of the 150 or 160 products are scrapped and not available for sale. Using the simulation model we can check what impact a more precise drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products.")
 ```
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
