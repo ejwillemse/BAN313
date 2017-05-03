@@ -36,7 +36,7 @@ In this lab we do the following:
 The specific R functions that are applicable to this chapter are:
 
 ```
-rnorm(), rexp(), sample(), function(), for, if
+rnorm(), rexp(), cumsum(), function(), rep(), for,
 ```
 
 To find out more about the functions, type `?` followed by the R-function in the R console.
