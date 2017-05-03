@@ -509,13 +509,13 @@ Repeating this process will show by how much the simulation output changes with 
 If the output changes by a lot, we know that the simulation is sensitive towards the specific input parameter, and we need to make sure that the parameters are accurate.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:7c846a5f60
+--- type:NormalExercise lang:r xp:100 skills:1 key:c2c29de5b8
 ## Testing the model sensitivity to the arrival rate
 
 In the previous example we assumed that the customer arrival rate is 1 per minute, exponentially distributed, but what if this is not the case?
 What of the actual customer arrival rate is 1.1 per minute?
 Will that significantly increase or decrease customer waiting times.
-Of, what if it is 0.9 per minute?
+Or, what if it is 0.9 per minute?
 
 Since we have a simulation model available, we can easily change the arrival rate and see how the mean waiting time increases or decreases.
 
@@ -526,10 +526,10 @@ The arrival rate levels will be 0.5, 1 and 1.5, thereby representing the assumed
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_05`.
-2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_1`.
-3. Repeat the ATM simulation with an arrival rate of 1.5 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_15`.
-4. View and compare `simWaitingTimes_05`, `simWaitingTimes_1` and `simWaitingTimes_15` and note by how much the mean waiting time increased as the arrival rate increased.
+1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
+2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
+3. Repeat the ATM simulation with an arrival rate of 1.5 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
+4. View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -557,7 +557,7 @@ atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
   return(meanWaitingTime)
 }
 
-# 1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_05`.
+# 1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
 
 simWaitingTimes <- rep(NA, 1000)
 for (i in 1:1000)
@@ -568,15 +568,15 @@ for (i in 1:1000)
 }
 meanSimWaiting_05 <- mean(simWaitingTimes)
 
-# 2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_1`.
+# 2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
 
 
 
-# 3. Repeat the ATM simulation with an arrival rate of 1.5 customer per minute. Assign the mean of the mean waiting times to `simWaitingTimes_15`.
+# 3. Repeat the ATM simulation with an arrival rate of 1.5 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
 
 
 
-# 4. View and compare `simWaitingTimes_05`, `simWaitingTimes_1` and `simWaitingTimes_15` and note by how much the mean waiting time increased as the arrival rate increased.
+# 4. View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
 
 
 
@@ -645,7 +645,7 @@ incorrect_msg = "Something went wrong in calculate `meanSimWaiting_15`. Make sur
 success_msg("Correct! As expected the waiting time increases as the arrival rate increases.
 As more customers arrive per minute, the inter-arrival times between customers decrease.
 It is then more likely that customers will arrive before the previous customers are done with their transactions.
-If interest is the rate by which the waiting time increases.
+Of interest is the rate by which the waiting time increases.
 When the arrival rate is 0.5, customers spend on average less than 0.5 minutes waiting.
 When increased to 1.5, customers spend less than 2.7 minutes waiting.
 But when it is increased by another 0.5, the customer waiting time jumps to over 12 minutes.
@@ -657,7 +657,7 @@ We also need to make sure that arrival rate does not vary during the day as the 
 In the next and last question we are going to look at the mean service time.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:53f13b4076
+--- type:NormalExercise lang:r xp:100 skills:1 key:e36cab65c2
 ## Testing the model sensitivity to the mean service time
 
 In this exercise we will test three levels for the mean service time of customers.
@@ -668,10 +668,10 @@ All other parameters will remain at their default values.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_045`.
-2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_09`.
-3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_135`.
-4. View and compare `simWaitingTimes_045`, `simWaitingTimes_09` and `simWaitingTimes_135` and note by how much the mean waiting time increased as the mean service time increased.
+1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
+2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
+3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
+4. View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -699,7 +699,7 @@ atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
   return(meanWaitingTime)
 }
 
-# 1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_045`.
+# 1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
 
 simWaitingTimes <- rep(NA, 1000)
 for (i in 1:1000)
@@ -708,13 +708,13 @@ for (i in 1:1000)
   serviceTime <- rnorm(100, ..., 0.25)
   simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
 }
-simWaitingTimes_045 <- mean(simWaitingTimes)
+meanSimWaiting_045 <- mean(simWaitingTimes)
 
-# 2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_09`.
+# 2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
 
 
 
-# 3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `simWaitingTimes_135`.
+# 3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
 
 
 
