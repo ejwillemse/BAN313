@@ -509,7 +509,7 @@ Repeating this process will show by how much the simulation output changes with 
 If the output changes by a lot, we know that the simulation is sensitive towards the specific input parameter, and we need to make sure that the parameters are accurate.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
+--- type:NormalExercise lang:r xp:100 skills:1 key:7c846a5f60
 ## Testing the model sensitivity to the arrival rate
 
 In the previous example we assumed that the customer arrival rate is 1 per minute, exponentially distributed, but what if this is not the case?
@@ -657,7 +657,7 @@ We also need to make sure that arrival rate does not vary during the day as the 
 In the next and last question we are going to look at the mean service time.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
+--- type:NormalExercise lang:r xp:100 skills:1 key:53f13b4076
 ## Testing the model sensitivity to the mean service time
 
 In this exercise we will test three levels for the mean service time of customers.
