@@ -718,7 +718,7 @@ meanSimWaiting_045 <- mean(simWaitingTimes)
 
 
 
-# 4. View and compare `simWaitingTimes_045`, `simWaitingTimes_09` and `simWaitingTimes_135` and note by how much the mean waiting time increased as the mean service time increased.
+# 4. View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
 
 
 
@@ -785,9 +785,9 @@ test_object("meanSimWaiting_135", undefined_msg = "Make sure to define an object
 incorrect_msg = "Something went wrong in calculate `meanSimWaiting_135`. Make sure to set the mean service time to the correct value.")
 
 success_msg("Correct! As expected the waiting time increases as the mean service time increases.
-As customers customer take longer to complete their transactions, is more likely that customers will arrive before the previous customers are done with their transactions.
+As customers take longer to complete their transactions, it is more likely that customers will arrive before the previous customers are done with their transactions.
 Similar to the arrival rate, the increase in waiting time is non-linear.
-Form 0.35 to 0.9 minute means service times, the mean waiting time increases from 0.23 to 2.6.
+When the mean service time is increased from 0.35 to 0.9 minutes, the mean waiting time increases from 0.23 to 2.6.
 When the mean service time increases to 1.35 minutes, the mean waiting time jumps to 18 minutes.
 A 50% increase in arrival rate resulted in the mean waiting time to increase to 12 minutes.
 It would therefore seem that waiting time is more sensitive to the mean service time.
