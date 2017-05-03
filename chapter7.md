@@ -309,13 +309,14 @@ Service time follows a normal distribution with a mean of 0.9 minutes and standa
 
 Using this information we can easily simulate the arrival times and service times of 100 customers.
 Service times can be sampled directly from the normal distribution using the `rnorm(100, mean, sd)` function.
+
 Arrival times are a bit more tricky.
-Sampling from the exponential distribution will give us the times that a customer arrived after the customer before her.
+Sampling from the exponential distribution will give us the time that a customer arrived after the previous customer.
 If customer 1 arrived at 0.8 minutes, starting form time 0, and the inter-arrival time of customer 2 is randomly sampled as 0.5 minutes, it means that customer 2 will arrive at time `0.8 + 0.5 = 1.3` minutes.
 The same calculation can be repeated for the arrival time of customer 3, up until customer 100.
 
 To calculate the arrival times we can calculate it per customer, starting with customer two.
-Or the built-in function `cumsum` can be directly used for the purpose.
+Or we can use the built-in function `cumsum`.
 We simply need to sample the inter-arrival times of the 100 customers using the `rexp(100, rate)` function.
 Thereafter `cumsum` will calculate the actual arrival-times.
 
@@ -326,7 +327,7 @@ The waiting time calculations are performed in the provided function, populated 
 
 *** =instructions
 
-1. Randomly sample the arrival times of 100 customers using the `rexp` and `cumsum` functions and assign your answers to `arrivalTime` and `serviceTime`.
+1. Randomly sample the arrival times of 100 customers using the `rexp`, `cumsum` and `rnorm` functions and assign your answers to `arrivalTime` and `serviceTime`.
 2. Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
 
 *** =pre_exercise_code
@@ -393,15 +394,16 @@ test_object("arrivalTime", undefined_msg = "Make sure to define an object `arriv
 incorrect_msg = "Something went wrong in sampling the arrival times of 100 customers. You need to first sample the inter-arrival times of 100 customers from the exponential distribution using the `rexp` function. Thereafter you need to calculate the arrival times using the `cumsum` function.")
 
 test_object("serviceTime", undefined_msg = "Make sure to define an object `arrivalTime`.",
-incorrect_msg = "Something went wrong in sampling the service times of 100 customers. You need to sample the service times of 100 customers from the normal distribution using the `rnorm` function.)
+incorrect_msg = "Something went wrong in sampling the service times of 100 customers. You need to sample the service times of 100 customers from the normal distribution using the `rnorm` function.")
 
 test_object("meanWaitingTime", undefined_msg = "Make sure to define an object `meanWaitingTime`.",
 incorrect_msg = "Use the given function to calculate the mean waiting time of the 100 customers and assign your answer to `meanWaitingTime`.")
 
-success_msg("Correct! The above code can be used to simulate the queueing process. Note that the inter-arrival and service times need not follow an exponential and normal distribution.
+success_msg("Correct! The above code can be used to simulate the queueing process. 
+The last step is to execute the simulation a large number of times and analyse the distribution of the mean waiting time of 100 customers.
+Note that the inter-arrival and service times need not follow an exponential and normal distribution.
 Any distribution can be used with its parameters.
-The distribution should be fitted based on data on the actual inter-arrival service times.
-The last step is to execute the simulation a large number of times and analyse the distribution of the mean waiting time of 100 customers.")
+The distribution should however be fitted based on data on the actual inter-arrival and service times.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
