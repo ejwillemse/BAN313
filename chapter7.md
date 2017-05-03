@@ -116,7 +116,7 @@ Based on this information, answer the following:
 
 *** =instructions
 
-1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM 14:05, then `leave_1 <- 5`. For minute fractions, simply give your answer as a decimal. For example, if the customer is at 14:05:30, then `leave_1 <- 5.5`.
+1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM at 14:05, then `leave_1 <- 5`. For minute fractions, simply give your answer as a decimal. For example, if the customer is done at 14:05:30, then `leave_1 <- 5.5`.
 2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
 3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
 
@@ -149,11 +149,11 @@ leave_1 <- 1 + 1.3
 
 # 2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
 
-wait_2 <- leave_1 - 1.3
+wait_2 <- leave_1 - 2
 
 # 3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
 
-leave_2 <- 1.3 + wait_2 + 0.5
+leave_2 <- 2 + wait_2 + 0.5
 ```
 
 *** =sct
@@ -185,7 +185,7 @@ If we know the arrival and transaction time of each customer, we can easily dete
 --- type:NormalExercise lang:r xp:100 skills:1 key:bb32493aff
 ## Determining how long customers will wait in-line
 
-A customers waiting time depends on his arrival time and the time that the previous customer will leave the ATM.
+A customer's waiting time depends on his arrival time and the time that the previous customer will leave the ATM.
 When determining if customer $i$ will wait, we always need to see when customer $i-1$ is done with his transactions.
 Let $a\_i$ be the arrival time of customer $i$, $w\_i$ be his waiting time, $s\_i$ be his service time, and $l\_i$ the time that he leaves the ATM.
 
@@ -193,30 +193,30 @@ In the model, $a\_i$ and $s\_i$ will be simulated and $w\_i$ and $l\_i$ will be 
 To check if customer $i$ will wait at the ATM we need to compare $a\_i$ against $l\_{i-1}$.
 If $a\_i > l\_{i-1}$, customer $i$ will arrive after customer $i-1$ has left the ATM, and $w\_i = 0$.
 Else, customer $i$ will have to wait until customer $i-1$ has left the ATM.
-The waiting time will then be $w_i = l\_{i-1} - a\_i$.
-The customer will then be done at $l_i = a_i + w_i + s_i$
+The waiting time will then be $w\_i = l\_{i-1} - a\_i$.
+The customer will then be done at $l\_i = a\_i + w\_i + s\_i$
 
 An alternative way to calculate the waiting time is to use the following equation:
 
-$$w_i = \max\{0, l\_{i-1} - a\_i\}.$$
+$$w\_i = \max(0, l\_{i-1} - a\_i).$$
 
 If $l\_{i-1} < a\_i$, then $w\_i$ will take the value of 0, since $0 > l\_{i-1} - a\_i$.
-If not, $a_\i$ will take the value of the waiting time.
+If not, $a\_i$ will take the value of the waiting time.
 
 The above equation can be used to calculate the waiting time for any customer.
 Lastly, $l\_i$ can be calculated as follows:
 
-$$l\_i = a\_i + w\_i + s\_i$$.
+$$l\_i = a\_i + w\_i + s\_i.$$
 
 By manually setting $a_1 = 0$ for the first customer, we can use the above equations to calculate the waiting time for the next $n > 1$ customers.
 
-For this questions we will calculate the waiting times of 100 customers.
+For this question we will calculate the waiting times of 100 customers.
 The arrival times of the customers, starting at time 0 is available in the `arrivalTime` vector, and their service time is available in the `serviceTime` vector.
 
 *** =instructions
 
 1. Initiate two vectors with 100 `NAs` for the waiting time and leaving time of customers. Assign the vectors to `waitingTime` and `leavingTime`.
-2. Using the above equations and the provided `for`-loop code, calculate the waiting and leaving of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
+2. Using the above equations and the provided `for`-loop code, calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
 3. Draw a barplot of the `waitingTime`.
 4. Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
 
@@ -289,7 +289,7 @@ incorrect_msg = "Remember to calculate the mean waiting time of the 100 customer
 success_msg("Correct!
 Taking the arrival and service times of 100 customers, the above code can calculate the waiting time of each customer.
 All that's left for the simulation model is to randomly sample the arrival and waiting times, using specified distributions.
-Thereafter we can repeatedly simulate the waiting of 100 customers.")
+Thereafter we can repeatedly simulate the waiting times of 100 customers.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:7981afe651
@@ -330,6 +330,11 @@ The waiting time calculations are performed in the provided function, populated 
 2. Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
 
 *** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
