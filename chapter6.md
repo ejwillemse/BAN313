@@ -51,13 +51,14 @@ From the above example, we want to predict our daily starting and ending invento
 In this lab we do the following:
 
 1. Develop a simulation model of our stock-outs and inventory levels based on random orders.
-2. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
-3. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
+2. Adapt the simulation model to account for limited inventory space and see how it influences the predicted stock-outs and inventory levels.
+3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
+4. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
 
 The specific R functions that are applicable to this chapter are:
 
 ```
-runif(), rnorm(), rep(), sample(), function(), round(), for, if
+runif(), rnorm(), rep(), sample(), function(), for, if
 ```
 
 To find out more about the functions, type `?` followed by the R-function in the R console.
@@ -259,7 +260,7 @@ But easier is to just create an additional storage space in `I_start` by initial
 The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop which represents our study-period:
 
 *** =instructions
-1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the five-day study period.
+1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
 2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
 3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
 4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
@@ -272,7 +273,7 @@ The last update in our code is to place the inventory-level and stock-out calcul
 
 *** =sample_code
 ```{r}
-#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the five-day study period.
+#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
 
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
@@ -398,277 +399,9 @@ In this exercise our starting inventory for Day 1 will again be 120 units and we
 We can simulate the product orders for a total of `n` days using the following code
 
 ```
-O <- round(runif(n, 100, 200), 0)
+O <- runif(n, 100, 200)
 ```
-
-The `round` function rounds the number of orders to the nearest interger.
 
 Our previous code can then be used as-is to calculate inventory and stock-out levels after incorporating `n` into the necessary places in our code.
 
 This will be left as an exercise:
-
-*** =instructions
-
-1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
-2. Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
-
-*** =pre_exercise_code
-```{r}
-
-```
-
-*** =sample_code
-```{r}
-#1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
-
-n = 30
-O <-
-
-#2. Update the code below to calculate and view the inventory levels and stock-outs for the 30 days' simulated product orders.
-
-tartingInventory <- 120
-P <- 150
-
-I_start <- rep(NA, 6)
-I_end <- rep(NA, 5)
-stockOut <- rep(NA, 5)
-
-I_start[1] <- 120
-
-for (t in 1:5)
-{
-  if(I_start[t] < O[t])
-  {
-    stockOut[t] <- 1
-    I_end[t] <- 0
-  }else{
-    stockOut[t] <- 0
-    I_end[t] <- I_start[t] - O[t]
-  }
-  I_start[t+1] <- I_end[t] + P
-}
-
-barplot(stockOut)
-barplot(I_start)
-barplot(I_end)
-
-mean_I_end <- mean(I_end)
-mean_I_end
-
-nStockOut <- sum(stockOut)
-nStockOut
-
-pStockOut <- nStockOut/10
-pStockOut
-
-```
-
-*** =solution
-```{r}
-n <- 30
-O <- round(runif(n, 100, 200), 0)
-
-P <- 150
-
-I_start <- rep(NA, n + 1)
-I_end <- rep(NA, n)
-stockOut <- rep(NA, n)
-
-I_start[1] <- 120
-
-for (t in 1:n)
-{
-  if(I_start[t] < O[t])
-  {
-    # stock-out occurred, not all order were met
-    stockOut[t] <- 1
-    I_end[t] <- 0
-  }else{
-    # stock-out did not occur, all orders were met
-    stockOut[t] <- 0
-    I_end[t] <- I_start[t] - O[t]
-  }
-
-  # calculate the starting inventory for the next day, t + 1
-  I_start[t+1] <- I_end[t] + P
-}
-
-barplot(stockOut)
-barplot(I_start)
-barplot(I_end)
-
-mean_I_end <- mean(I_end)
-nStockOut <- sum(stockOut)
-pStockOut <- nStockOut/n
-```
-
-*** =sct
-```{r}
-test_object("O", undefined_msg = "Make sure to define an object `O`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`. Use the `runif` function for the simulation.")
-
-test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`. Remember that it has to be calculated for each day `t`.")
-
-test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`. Remember that it has to be calculated for each day `t`.")
-
-test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`. Remember that it has to be calculated for each day `t`.")
-
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
-incorrect_msg = "Draw a barplot of `stockOut`.")
-
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
-incorrect_msg = "Draw a barplot of `I_start`.")
-
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
-incorrect_msg = "Draw a barplot of `I_end`.")
-
-test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`. It should be the mean ending-inventory level `I_end`.")
-
-test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`. It should be the total number of days on which a stock-out occurred. Use `sum` to calculate it.")
-
-test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`. It should be the proportion of days on which a stock-out occurred. Use `nStockOut` and the number of days in our study period to calculate it.")
-
-success_msg("Correct! We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days. Each time we run the simulation, we will get different levels. This is expected since the simulation model mimics a random processes. The question is then, how do we use the model to predict inventory levels and stock-outs? The answer is that we have to run the simulation numerous times, and capture our key measurement with each simulation. We can use our above code to do so, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.")
-```
-
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
-## A function for simulating the proportion of stock-outs
-
-For this exercise we are going to convert our previous code into a function that can simulate the order process and inventory levels for a specified number of days and return the proportion of stock-outs, which is our main measurement of interest.
-
-The function will take the following inputs:
-
-* `n`: the number of days that we wish to simulate.
-* `I_start0`: the starting inventory for Day 1 of our simulation.
-* `P`: the number of products produced per day.
-
-The function will then return the following:
-
-* `pStockOut`: the proportion of days on which a stockout occurred.
-
-*** =instructions
-
-1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
-2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
-3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
-4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. Hint: if you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
-
-*** =pre_exercise_code
-```{r}
-
-```
-
-*** =sample_code
-```{r}
-#1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`
-
-inventorySimulation <- function( )
-{
-
-  O <- round(runif(n, 100, 200), 0)
-
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
-
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
-
-# 2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
-
-invSim1 <- inventorySimulation(n = , I_start0 = 150, P = 150)
-invSim1
-
-# 3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
-
-invSim2 <- inventorySimulation(n = , I_start0 = , P = )
-invSim2
-
-# 4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-
-invSim3 <- inventorySimulation(n = , I_start0 = , P = )
-invSim3
-
-# 5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. Hint: if you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
-
-invSim1_v2 <- inventorySimulation(n = , I_start0 = , P = )
-invSim1_v2
-
-invSim2_v2 <- inventorySimulation(n = , I_start0 = , P = )
-invSim2_v2
-
-invSim3_v2 <- inventorySimulation(n = , I_start0 = , P = )
-invSim3_v2
-
-````
-
-
-*** =solution
-```{r}
-inventorySimulation <- function(n, I_start0, P)
-{
-
-  O <- round(runif(n, 100, 200), 0)
-
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
-
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
-
-invSim1 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
-invSim2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
-invSim3 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
-
-invSim1_v2 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
-invSim2_v2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
-invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
-```
