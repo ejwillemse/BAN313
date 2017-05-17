@@ -500,7 +500,7 @@ meanSdService <- ...
 
 *** =solution
 
-```
+```{r}
 inter_times <- diff(arrivalData$arrivalTime_minFromMidn)
 
 arrivalMean <- rep(NA, 10000)
