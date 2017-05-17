@@ -449,9 +449,106 @@ In the previous chapter we informally tested our model's sensitivity towards its
 For sensitivity analysis we want to get more accurate parameter ranges.
 To do so we can use the bootstrapping.
 
-For this exercise we will use the bootstrapping method to calculate 99% confidence intervals for the distribution parameters, as well the expected values for the intervals. Similar the previous exercises the
+For this exercise we will use the bootstrapping method to calculate 99% confidence intervals for the distribution parameters, as well the expected values for the intervals. Similar the previous exercises the sample data is available from the `arrivalData` and `serviceData` dataframes. Partial bootstrapping code has also been provided.
 
 *** =instructions
 
 1. Use the bootstrapping method to calculate and view a 99% confidence interval and the expected value for the arrival rate of customers. Use 10000 bootstrap simulations and assign the interval to `arrivalInterval` and the expected value to `meanArrival`. Simply assign the results of the `quantile()` function to `arrivalInterval` as follows: `arrivalInterval <- quantile()`.
-2. Use the bootstrapping method to calculate and view 99% confidence intervals the expected values for the mean and standard deviation service times of customers. Use 10000 bootstrap simulations and assign the intervals to `meanServiceInterval` and `sdServiceInterval`, and the expected values to `meanMeanService` and `meanSdService`. Calculate the both the mean and standard deviation using the bootstrapping samples.
+2. Use the bootstrapping method to calculate and view 99% confidence intervals the expected values for the mean and standard deviation service times of customers. Use 10000 bootstrap simulations and assign the intervals to `meanServiceInterval` and `sdServiceInterval`, and the expected values to `meanMeanService` and `meanSdService`. Calculate both the mean and standard deviation using the bootstrapping samples.
+
+*** =pre_exercise_code
+```{r}
+serviceTime_min <- rnorm(100, 1, 0.2)
+serviceData <- data.frame(serviceTime_min)
+
+arrivalTime_minFromMidn <- cumsum(rexp(100, 1.5)) + 60*8
+arrivalData <- data.frame(arrivalTime_minFromMidn)
+```
+
+*** =sample_code
+```{r}
+# Incomplete bootstrapping code
+
+inter_times <- diff(arrivalData$arrivalTime_minFromMidn)
+
+arrivalMean <- rep(NA, 10000)
+for (i in 1:10000)
+{
+    arrivalMean[i] <- 1/mean(sample(...))
+}
+arrivalInterval <- quantile(arrivalMean, p = c(0.005, 0.995))
+meanArrival <- ...
+
+
+meanService <- rep(NA, 10000)
+meanSD <- rep(NA, 10000)
+for (i in 1:10000)
+{
+  s <- sample(...)
+  meanService[i] <- mean(s)
+  meanSD[i] <- sd(s)
+}
+meanServiceInterval <- quantile(meanService, p = c(0.005, 0.995))
+sdServiceInterval <- quantile(meanSD, p = c(0.005, 0.995))
+
+meanMeanService <- ...
+meanSdService <- ...
+
+# View the results here
+
+```
+
+*** =solution
+
+```
+inter_times <- diff(arrivalData$arrivalTime_minFromMidn)
+
+arrivalMean <- rep(NA, 10000)
+for (i in 1:10000)
+{
+  arrivalMean[i] <- 1/mean(sample(inter_times, size = length(inter_times), replace = TRUE))
+}
+arrivalInterval <- quantile(arrivalMean, p = c(0.005, 0.995))
+meanArrival <- mean(arrivalMean)
+
+meanService <- rep(NA, 10000)
+meanSD <- rep(NA, 10000)
+for (i in 1:10000)
+{
+  s <- sample(serviceData$serviceTime_min, size = length(serviceData$serviceTime_min), replace = TRUE)
+  meanService[i] <- mean(s)
+  meanSD[i] <- sd(s)
+}
+meanServiceInterval <- quantile(meanService, p = c(0.005, 0.995))
+sdServiceInterval <- quantile(meanSD, p = c(0.005, 0.995))
+
+meanMeanService <- mean(meanService)
+meanSdService <- mean(meanSD)
+```
+
+*** =sct
+```{r}
+test_object("arrivalInterval", undefined_msg = "Make sure to define an object `arrivalInterval`.",
+incorrect_msg = "Something went wrong in calculating `arrivalInterval`. Make sure that you conducted the bootstrapping correctly and calculated the mean arrival rate for each bootstrap simulation. Also make sure that you assigned `arrivalInterval` as per the instructions.")
+
+test_object("meanArrival", undefined_msg = "Make sure to define an object `meanArrival`.",
+incorrect_msg = "Something went wrong in calculating `meanArrival`. Make sure that you calculated the mean for over all the bootstrap simulation means, and _not_ on the interval.")
+
+test_object("meanServiceInterval", undefined_msg = "Make sure to define an object `meanServiceInterval`.",
+incorrect_msg = "Something went wrong in calculating `meanServiceInterval`. Make sure that you conducted the bootstrapping correctly. Also make sure that you assigned `meanServiceInterval` as per the instructions.")
+
+test_object("sdServiceInterval", undefined_msg = "Make sure to define an object `sdServiceInterval`.",
+incorrect_msg = "Something went wrong in calculating `sdServiceInterval`. Make sure that you conducted the bootstrapping correctly. Also make sure that you assigned `sdServiceInterval` as per the instructions.")
+
+test_object("meanMeanService", undefined_msg = "Make sure to define an object `meanMeanService`.",
+incorrect_msg = "Something went wrong in calculating `meanMeanService`. Make sure that you calculated the mean for over all the bootstrap simulation means, and _not_ on the interval.")
+
+test_object("meanSdService", undefined_msg = "Make sure to define an object `meanSdService`.",
+incorrect_msg = "Something went wrong in calculating `meanSdService`. Make sure that you calculated the mean for over all the bootstrap simulation means, and _not_ on the interval.")
+
+success_msg("Correct!
+By using the bootstrapping method we can calculate intervals for the distribution parameters.
+The intervals give us a more realistic range over which to conduct the sensitivity analysis.
+In the next question we will analyse the simulation model results over the minimum, expected and maximum values calculated using the bootstrapping methods.
+")
+```
