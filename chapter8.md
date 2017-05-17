@@ -122,7 +122,7 @@ null.prob <- diff(pnorm(h1$breaks, mean = mean(serviceData$serviceTime_min), sd 
 fitResults1 <- chisq.test(h1$counts, p = null.prob, rescale.p = TRUE, simulate.p.value = TRUE)
 p_val_service <- fitResults1$p.value
 
-inter_times <- diff(arrivalDataDataCa$arrivalTime_minFromMidn)
+inter_times <- diff(arrivalData$arrivalTime_minFromMidn)
 h2 <- hist(inter_times)
 null.prob <- diff(pexp(h2$breaks, rate = 1/mean(inter_times)))
 fitResults2 <- chisq.test(h2$counts, p = null.prob, rescale.p = TRUE, simulate.p.value = TRUE)
