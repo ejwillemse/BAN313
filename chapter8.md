@@ -147,7 +147,7 @@ success_msg("Correct!
 The service time seems to follow a normal distribution whereas the inter-arrival time seems to follow an exponential distribution.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:aec6c4a986
 ## Calculating the distribution parameters
 
 In the previous question we saw that the service time follows a normal distribution and the inter-arrival time follows an exponential distribution.
@@ -204,7 +204,7 @@ success_msg("Correct!
 We now have all the required parameter values to simulate the queueing model.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:aa396e8332
 ## First simulation
 
 With the `serviceData` and `arrivalData` already available in the workspace, the parameter values for the service time and inter-arrival rate distributions can be calculated using the following code:
@@ -318,7 +318,7 @@ success_msg("Correct!
 By using the estimated distribution parameters we can simulate the queueing process and calculate the expected mean queuing time of 100 customers. The only problem is that we used the estimated distribution parameters, since the actual distribution parameters are unknown. To see what impact that may have, re-run the model as-is a few times and view `meanWaitingSimulated`. To do so simply click on the `submit answers` button again. With the re-run a new sample is loaded, which still comes from the same process. Note how `meanWaitingSimulated` changes each time we run the model. Even if we increased the number of simulation to 100000, the `meanWaitingSimulated` will still change since our sample data changes, and when the sample data changes our distribution parameter estimates change. Given that the distribution parameter estimates are most likely wrong, since they are based on samples, how can we be confident in our model results?")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:c91d7c054c
 ## Simulation using more accurate data
 
 One way to improve our model accuracy is by getting better data.
@@ -442,7 +442,7 @@ meanWaitingSimulated
 success_msg("Run the model a few times, the more the better, and see by how much the model output difference. You'll notice the model output is much more consistent. The lesson is that the more accurate our input data is, the more accurate the model results will be. The opposite also holds, if we give our model garbage data, the model will give is garbage output, aka garbage-in-garbage-out. Unfortunately we don't always have the luxury to get 100000 observations for each variable. Key to model development is to see where our model is weak, and invest effort in improving the data quality of the critical input parameters. We can use sensitivity analysis to do so.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+--- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
 ## Finding distribution parameter ranges
 
 In the previous chapter we informally tested our model's sensitivity towards its distribution input-parameters by varying each by a certain percentage.
