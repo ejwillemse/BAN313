@@ -553,7 +553,7 @@ In the next question we will analyse the simulation model results over the minim
 ")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+--- type:NormalExercise lang:r xp:100 skills:1 key:53546d675a
 ## Single factor sensitivity analysis for the arrival rate
 
 In the previous question we calculated parameter value ranges using the bootstrapping method. In this question we will consider the arrival rate and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
@@ -718,7 +718,7 @@ incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make s
 success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean arrival rate. Note by how much the mean waiting time changed from the low to high values. In the next question we are going to repeat the analysis for the mean service time, and thereafter for the standard deviation of the service time.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+--- type:NormalExercise lang:r xp:100 skills:1 key:cebe14976c
 ## Single factor sensitivity analysis for the mean service time
 
 In this question we will consider the mean service time and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
@@ -883,7 +883,7 @@ incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make s
 success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean service time. Note by how much the mean waiting time changed from the low to high values. In the next question we are going to repeat the analysis for the standard deviation of the service time.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+--- type:NormalExercise lang:r xp:100 skills:1 key:e9409a1d22
 ## Single factor sensitivity analysis for the standard deviation of service time
 
 In this question we will consider the service time standard deviation and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
