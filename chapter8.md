@@ -1138,6 +1138,42 @@ Print the output and answer the following before submitting your answer.
 meanWaitingTimes <- rep(NA, 1000)
 for(i in 1:1000)
 {
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.91, serviceTimeMean = 0.99, serviceTimeSD = 0.22, nCustomers = 100)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_high <- mean(meanWaitingTimes)
+meanSimWaiting_high
+
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+  
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+  
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+  
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
   meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.22, nCustomers = 100)
 }
 base_case_mean <- mean(meanWaitingTimes)
@@ -1168,6 +1204,42 @@ for (arrivalRate in arrivalRateFactors)
 
 *** =solution
 ```{r}
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.91, serviceTimeMean = 0.99, serviceTimeSD = 0.22, nCustomers = 100)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_high <- mean(meanWaitingTimes)
+meanSimWaiting_high
+
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+  
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+  
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+  
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
 meanWaitingTimes <- rep(NA, 1000)
 for(i in 1:1000)
 {
