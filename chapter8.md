@@ -485,7 +485,7 @@ In the previous chapter we informally tested our model's sensitivity towards its
 For sensitivity analysis we want to get more accurate parameter ranges.
 To do so we can use the bootstrapping.
 
-For this exercise we will use the bootstrapping method to calculate 99% confidence intervals for the distribution parameters, as well the expected values for the intervals. Similar the previous exercises the sample data is available from the `arrivalData` and `serviceData` dataframes. Partial bootstrapping code has also been provided.
+For this exercise we will use the bootstrapping method to calculate 99% confidence intervals for the distribution parameters, as well as the expected values for the intervals. Similar to the previous exercises the sample data is available from the `arrivalData` and `serviceData` dataframes. Partial bootstrapping code has also been provided.
 
 *** =instructions
 
