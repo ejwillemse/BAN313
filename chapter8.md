@@ -552,3 +552,498 @@ The intervals give us a more realistic range over which to conduct the sensitivi
 In the next question we will analyse the simulation model results over the minimum, expected and maximum values calculated using the bootstrapping methods.
 ")
 ```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+## Single factor sensitivity analysis for the arrival rate
+
+In the previous question we calculated parameter value ranges using the bootstrapping method. In this question we will consider the arrival rate and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
+
+Assume that the arrival rate interval and expected value are as follow:
+
+* (1.17, 1.47, 1.91)
+
+and that the expected service time and standard deviation are:
+
+* (1.03, 0.21)
+
+The simulation model to calculate the queueing model has been provided.
+
+*** =instructions
+
+1. Use the available code and repeat the ATM simulation with an arrival rate of 1.17 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+2. Repeat the ATM simulation with an arrival rate of 1.47 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+3. Repeat the ATM simulation with an arrival rate of 1.91 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the arrival rate increased.
+
+*** =pre_exercise_code
+```{r}
+
+
+
+```
+
+*** =sample_code
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.17, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_low <- mean(meanWaitingTimes)
+meanSimWaiting_low
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+meanSimWaiting_expected
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_high <- mean(meanWaitingTimes)
+meanSimWaiting_high
+
+```
+
+*** =solution
+
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.17, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_low <- mean(meanWaitingTimes)
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.91, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_high <- mean(meanWaitingTimes)
+```
+
+*** =sct
+```{r}
+test_object("meanSimWaiting_low", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_low`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_expected", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_expected`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_high", undefined_msg = "Make sure to define an object `meanSimWaiting_high`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make sure to set the simulation input parameters to the correct value.")
+
+success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean arrival rate. Note by how much the mean waiting time changed from the low to high values. In the next question we are going to repeat the analysis for the mean service time, and thereafter for the standard deviation of the service time.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+## Single factor sensitivity analysis for the mean service time
+
+In this question we will consider the mean service time and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
+
+Assume that the mean service time interval and expected value are as follow:
+
+* (0.97, 1.03, 1.08)
+
+and that the expected arrival rate and standard deviation of service time are:
+
+* (1.47, 0.21)
+
+The simulation model to calculate the queueing model has been provided.
+
+*** =instructions
+
+1. Use the available code and repeat the ATM simulation with a mean service time of 0.97 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+2. Repeat the ATM simulation with a mean service time of 1.03 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+3. Repeat the ATM simulation with a mean service time of 1.08 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
+
+*** =pre_exercise_code
+```{r}
+
+
+
+```
+
+*** =sample_code
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 0.97, serviceTimeSD = 0.21, nCustomers = 100)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_low <- mean(meanWaitingTimes)
+meanSimWaiting_low
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+meanSimWaiting_expected
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_high <- mean(meanWaitingTimes)
+meanSimWaiting_high
+
+```
+
+*** =solution
+
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 0.97, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_low <- mean(meanWaitingTimes)
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.08, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_high <- mean(meanWaitingTimes)
+```
+
+*** =sct
+```{r}
+test_object("meanSimWaiting_low", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_low`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_expected", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_expected`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_high", undefined_msg = "Make sure to define an object `meanSimWaiting_high`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make sure to set the simulation input parameters to the correct value.")
+
+success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean service time. Note by how much the mean waiting time changed from the low to high values. In the next question we are going to repeat the analysis for the standard deviation of the service time.")
+```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
+## Single factor sensitivity analysis for the standard deviation of service time
+
+In this question we will consider the service time standard deviation and change its values to the minimum range value, the expected value and the maximum range value. We will then see by how much the mean waiting time changes between the values. All other parameter values will be set equal to their expected values from the bootstrapping method of the previous question.
+
+Assume that the service time standard deviation interval and expected value are as follow:
+
+* (0.17, 0.21, 0.24)
+
+and that the expected arrival rate and mean service time are:
+
+* (1.47, 1.03)
+
+The simulation model to calculate the queueing model has been provided.
+
+*** =instructions
+
+1. Use the available code and repeat the ATM simulation with service time standard deviation of 0.17 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+2. Repeat the ATM simulation with service time standard deviation of 0.21 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+3. Repeat the ATM simulation with service time standard deviation of 0.24 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
+
+*** =pre_exercise_code
+```{r}
+
+
+
+```
+
+*** =sample_code
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.17, nCustomers = 100)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_low <- mean(meanWaitingTimes)
+meanSimWaiting_low
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+meanSimWaiting_expected
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(...)
+}
+hist(meanWaitingTimes)
+meanSimWaiting_high <- mean(meanWaitingTimes)
+meanSimWaiting_high
+
+```
+
+*** =solution
+
+```{r}
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.17, nCustomers = 100)
+}
+meanSimWaiting_low <- mean(meanWaitingTimes)
+
+# Part 2
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.21, nCustomers = 100)
+}
+meanSimWaiting_expected <- mean(meanWaitingTimes)
+
+# Part 3
+
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.24, nCustomers = 100)
+}
+meanSimWaiting_high <- mean(meanWaitingTimes)
+```
+
+*** =sct
+```{r}
+test_object("meanSimWaiting_low", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_low`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_expected", undefined_msg = "Make sure to define an object `meanSimWaiting_low`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_expected`. Make sure to set the simulation input parameters to the correct value.")
+
+test_object("meanSimWaiting_high", undefined_msg = "Make sure to define an object `meanSimWaiting_high`.",
+incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make sure to set the simulation input parameters to the correct value.")
+
+success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the service time standard deviation. Note by how much the mean waiting time changed from the low to high values. From the one-factor at a time analysis it would seem that the model is not that sensitive over the standard deviation ranges. The same cannot be said of the arrival rate and mean service time. One short coming of the analysis is that one only consider the case of one variable being under or over estimated. For example, what would the impact be if we under estimated both the arrival rate and mean service time? In the next question we will formally look into this scenario by testing different combination of variables.")
+```
