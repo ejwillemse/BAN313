@@ -1089,8 +1089,42 @@ success_msg("Correct! We have now tested the model's sensitivity over realistic 
 --- type:NormalExercise lang:r xp:100 skills:1 key:a3cdc3e22e
 ## Multiple-factor sensitivity analysis
 
+For the last question we are going to test the sensitivity of our model over different parameter combinations.
+To simplify our analysis we will only consider the lower and upper value for each parameter's bootstrapping interval.
+
+We will therefore have two parameters values to test for each of our three input parameters. To test all combinations of the values we will run the simulation model $2^3 = 8$ times.
+
+The values that we will test are as follow:
+
+```
+arrivalRateFactors <- c(1.17, 1.91)
+serviceTimeMeanFactors <- c(0.97, 1.08)
+serviceTimeSdFactors <- c(0.17, 0.24)
+```
+
+To compare the results of the input factor combinations we first need to setup a base case, and then measure the difference in model output from the changed input parameters to the base case. This will give us a good indication of how sensitive our model is towards the parameter combinations. For the base case we will simply calculate the mean waiting time when all the input parameters are set to their expected values from the bootstrapping method. This part of the code is give.
+
+Incomplete code has been provided to calculate the mean value and print the output to the console screen.
+Note that in the code the for loops are called a bit differently.
+Instead of iteration over the a number from 1 to n, the for code directly retrieves the value in from the arrival factor. To see how it works run the following in the console:
+
+```
+for (arrivalRate in arrivalRateFactors)
+{
+  print(arrivalRate)
+}
+```
+
+For this question, do the following:
 
 *** =instructions
+
+1. Complete the given code and run the model.
+2. Analyse the output and see if the model is still insensitive to the standard deviation.
+3. Analyse the output and determine if the model is sensitive towards the combination of the mean service time and arrival rate.
+4. At the extreme values, which parameter would you consider to be the most critical?
+
+Print the output and answer the following before submitting your answer.
 
 *** =hint
 
@@ -1101,15 +1135,71 @@ success_msg("Correct! We have now tested the model's sensitivity over realistic 
 
 *** =sample_code
 ```{r}
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.22, nCustomers = 100)
+}
+base_case_mean <- mean(meanWaitingTimes)
+base_case_mean
 
+arrivalRateFactors <- c(1.17, 1.91)
+serviceTimeMeanFactors <- c(0.97, 1.08)
+serviceTimeSdFactors <- c(0.17, 0.24)
+
+for (arrivalRate in arrivalRateFactors)
+{
+  for (serviceMean in serviceTimeMeanFactors)
+  {
+    for (serviceSd in serviceTimeSdFactors)
+    {
+      meanWaitingTimes <- rep(NA, 1000)
+      for(i in 1:1000)
+      {
+        meanWaitingTimes[i] <- atmSimulation(arrivalRate = ..., serviceTimeMean = ..., serviceTimeSD = ..., nCustomers = 100)
+      }
+      simulationMean <- mean(meanWaitingTimes)
+      baseCaseDifference <- base_case_mean - simulationMean
+      print(paste(arrivalRate, serviceMean, serviceSd, simulationMean, baseCaseDifference))
+    }
+  }
+}
 ```
 
 *** =solution
 ```{r}
+meanWaitingTimes <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.47, serviceTimeMean = 1.03, serviceTimeSD = 0.22, nCustomers = 100)
+}
+base_case_mean <- mean(meanWaitingTimes)
+base_case_mean
 
+arrivalRateFactors <- c(1.17, 1.91)
+serviceTimeMeanFactors <- c(0.97, 1.08)
+serviceTimeSdFactors <- c(0.17, 0.24)
+
+for (arrivalRate in arrivalRateFactors)
+{
+  for (serviceMean in serviceTimeMeanFactors)
+  {
+    for (serviceSd in serviceTimeSdFactors)
+    {
+      meanWaitingTimes <- rep(NA, 1000)
+      for(i in 1:1000)
+      {
+        meanWaitingTimes[i] <- atmSimulation(arrivalRate = arrivalRate, serviceTimeMean = serviceMean, serviceTimeSD = serviceSd, nCustomers = 100)
+      }
+      simulationMean <- mean(meanWaitingTimes)
+      baseCaseDifference <- base_case_mean - simulationMean
+      print(paste(arrivalRate, serviceMean, serviceSd, simulationMean, baseCaseDifference))
+    }
+  }
+}
 ```
 
 *** =sct
 ```{r}
-
+success_msg("Carefully go through the model output. Note by how much the difference from the base case changes at the different levels of the standard deviation. It differs by very little. Even at the extreme values, changing the standard deviation has little impact on the model output. Our model is therefore not as sensitive towards the standard deviation so we need not worry too much about its accuracy. The same does not hold for the service mean and arrival rate. The waiting time increases by about 5 minutes at the different service times means, whereas it changes by about 15 minutes at the different arrival rates. The combination are also critical, where the waiting time can change by about 20 minutes between different extremes. The changes are therefore quite drastic. This should be taken into account when analysing the model output in that our model output may be wrong by about 10 minutes in either direction.")
 ```
