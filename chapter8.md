@@ -290,6 +290,42 @@ for(i in 1:1000)
 
 *** =solution
 ```{r}
+# Ignore this code
+serviceTime_min <- rnorm(100, 1, 0.2)
+serviceData <- data.frame(serviceTime_min)
+
+arrivalTime_minFromMidn <- cumsum(rexp(100, 1.5)) + 60*8
+arrivalData <- data.frame(arrivalTime_minFromMidn)
+
+# ATM Simulation model, take note of its input parameters
+atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
+{
+  arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
+  serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
+
+  waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
+  leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
+
+  # Service, arrival, and leaving time of first customer
+  waitingTime[1] = 0
+  leaveTime[1] = arrivalTime[1] + serviceTime[1]
+
+  for (i in 2:nCustomers)
+  {
+    if (arrivalTime[i] >= leaveTime[i - 1])
+    {
+      waitingTime[i] = 0
+      leaveTime[i] = arrivalTime[i] + serviceTime[i]
+    }else{
+      waitingTime[i] = leaveTime[i - 1] - arrivalTime[i]
+      leaveTime[i] = leaveTime[i - 1] + serviceTime[i]
+    }
+  }
+  return(mean(waitingTime))
+}
+
+# Part 1
+
 serviceMean <- mean(serviceData$serviceTime_min)
 serviceSD <- sd(serviceData$serviceTime_min)
 arrivalMean <- 1/mean(diff(arrivalData$arrivalTime_minFromMidn))
