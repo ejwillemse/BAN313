@@ -475,7 +475,7 @@ meanWaitingSimulated
 
 *** =sct
 ```{r}
-success_msg("Run the model in _RStudio_ a few times, the more the better, and see by how much the model output difference. You'll notice the model output is much more consistent. The lesson is that the more accurate our input data is, the more accurate the model results will be. The opposite also holds, if we give our model garbage data, the model will give is garbage output, aka garbage-in-garbage-out. Unfortunately we don't always have the luxury to get 100000 observations for each variable. Key to model development is to see where our model is weak, and invest effort in improving the data quality of the critical input parameters. We can use sensitivity analysis to do so.")
+success_msg("Copy and run the model as-is in _RStudio_ a few times, the more the better, and see by how much the model output difference. You'll notice the model output is much more consistent. The lesson is that the more accurate our input data is, the more accurate the model results will be. The opposite also holds, if we give our model garbage data, the model will give is garbage output, aka garbage-in-garbage-out. Unfortunately we don't always have the luxury to get 100000 observations for each variable. Key to model development is to see where our model is weak, and invest effort in improving the data quality of the critical input parameters. We can use sensitivity analysis to do so.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:dec1c30a07
