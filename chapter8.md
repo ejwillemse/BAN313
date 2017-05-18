@@ -1135,15 +1135,6 @@ Print the output and answer the following before submitting your answer.
 
 *** =sample_code
 ```{r}
-meanWaitingTimes <- rep(NA, 1000)
-for(i in 1:1000)
-{
-  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.91, serviceTimeMean = 0.99, serviceTimeSD = 0.22, nCustomers = 100)
-}
-hist(meanWaitingTimes)
-meanSimWaiting_high <- mean(meanWaitingTimes)
-meanSimWaiting_high
-
 # ATM Simulation model, take note of its input parameters
 atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
 {
@@ -1204,15 +1195,6 @@ for (arrivalRate in arrivalRateFactors)
 
 *** =solution
 ```{r}
-meanWaitingTimes <- rep(NA, 1000)
-for(i in 1:1000)
-{
-  meanWaitingTimes[i] <- atmSimulation(arrivalRate = 1.91, serviceTimeMean = 0.99, serviceTimeSD = 0.22, nCustomers = 100)
-}
-hist(meanWaitingTimes)
-meanSimWaiting_high <- mean(meanWaitingTimes)
-meanSimWaiting_high
-
 # ATM Simulation model, take note of its input parameters
 atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomers)
 {
