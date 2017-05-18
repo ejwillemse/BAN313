@@ -1081,5 +1081,35 @@ incorrect_msg = "Something went wrong in calculate `meanSimWaiting_expected`. Ma
 test_object("meanSimWaiting_high", undefined_msg = "Make sure to define an object `meanSimWaiting_high`.",
 incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make sure to set the simulation input parameters to the correct value.")
 
-success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the service time standard deviation. Note by how much the mean waiting time changed from the low to high values. From the one-factor at a time analysis it would seem that the model is not that sensitive over the standard deviation ranges. The same cannot be said of the arrival rate and mean service time. One short coming of the analysis is that one only consider the case of one variable being under or over estimated. For example, what would the impact be if we under estimated both the arrival rate and mean service time? In the next question we will formally look into this scenario by testing different combination of variables.")
+success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the service time standard deviation. Note by how much the mean waiting time changed from the low to high values. From the one-factor at a time analysis it would seem that the model is not that sensitive over the standard deviation ranges. The same cannot be said of the arrival rate and mean service time. One short coming of the analysis is that we only consider the case of one variable being under or over estimated. For example, what would the impact be if we under estimated both the arrival rate and mean service time? In the next question we will formally look into this scenario by testing different combination of variables.")
+```
+
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:a3cdc3e22e
+## Multiple-factor sensitivity analysis
+
+
+*** =instructions
+
+*** =hint
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+
+```
+
+*** =solution
+```{r}
+
+```
+
+*** =sct
+```{r}
+
 ```
