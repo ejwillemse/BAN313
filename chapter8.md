@@ -751,7 +751,7 @@ incorrect_msg = "Something went wrong in calculate `meanSimWaiting_expected`. Ma
 test_object("meanSimWaiting_high", undefined_msg = "Make sure to define an object `meanSimWaiting_high`.",
 incorrect_msg = "Something went wrong in calculate `meanSimWaiting_high`. Make sure to set the simulation input parameters to the correct value.")
 
-success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean arrival rate. Note by how much the mean waiting time changed from the low to high values. In the next question we are going to repeat the analysis for the mean service time, and thereafter for the standard deviation of the service time.")
+success_msg("Correct! We have now tested the model's sensitivity over realistic ranges of the mean arrival rate. Note by how much the mean waiting time changed from the low to high values. The range of the waiting time is about 15 minutes. In the next question we are going to repeat the analysis for the mean service time, and thereafter for the standard deviation of the service time.")
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:cebe14976c
