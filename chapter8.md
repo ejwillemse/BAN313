@@ -1174,6 +1174,8 @@ arrivalRateFactors <- c(1.17, 1.91)
 serviceTimeMeanFactors <- c(0.97, 1.08)
 serviceTimeSdFactors <- c(0.17, 0.24)
 
+baseCaseDifferences <- c()
+
 for (arrivalRate in arrivalRateFactors)
 {
   for (serviceMean in serviceTimeMeanFactors)
@@ -1188,6 +1190,7 @@ for (arrivalRate in arrivalRateFactors)
       simulationMean <- mean(meanWaitingTimes)
       baseCaseDifference <- base_case_mean - simulationMean
       print(paste(arrivalRate, serviceMean, serviceSd, simulationMean, baseCaseDifference))
+      baseCaseDifferences <- c(baseCaseDifferences, baseCaseDifference)
     }
   }
 }
@@ -1234,6 +1237,8 @@ arrivalRateFactors <- c(1.17, 1.91)
 serviceTimeMeanFactors <- c(0.97, 1.08)
 serviceTimeSdFactors <- c(0.17, 0.24)
 
+baseCaseDifferences <- c() # do not edit this
+
 for (arrivalRate in arrivalRateFactors)
 {
   for (serviceMean in serviceTimeMeanFactors)
@@ -1248,6 +1253,7 @@ for (arrivalRate in arrivalRateFactors)
       simulationMean <- mean(meanWaitingTimes)
       baseCaseDifference <- base_case_mean - simulationMean
       print(paste(arrivalRate, serviceMean, serviceSd, simulationMean, baseCaseDifference))
+      baseCaseDifferences <- c(baseCaseDifferences, baseCaseDifference) # do not edit this
     }
   }
 }
@@ -1255,5 +1261,8 @@ for (arrivalRate in arrivalRateFactors)
 
 *** =sct
 ```{r}
+test_object("baseCaseDifferences", undefined_msg = "Make sure to define an object `baseCaseDifferences`. You edited the code.",
+incorrect_msg = "Something went wrong in running the different simulations. The `arrivalRate`, `serviceMean` and `serviceTimeSD` has to be set to a new level each time the simulation is run. You therefore need to use the variables in the `for` loops correctly, and assign the input parameters to the appropriate `for` loop variables. Have a look at the example given in the problem statemen.")
+
 success_msg("Carefully go through the model output. Note by how much the difference from the base case changes at the different levels of the standard deviation. It differs by very little. Even at the extreme values, changing the standard deviation has little impact on the model output. Our model is therefore not as sensitive towards the standard deviation so we need not worry too much about its accuracy. The same does not hold for the service mean and arrival rate. The waiting time increases by about 5 minutes at the different service times means, whereas it changes by about 15 minutes at the different arrival rates. The combination are also critical, where the waiting time can change by about 20 minutes between different extremes. The changes are therefore quite drastic. This should be taken into account when analysing the model output in that our model output may be wrong by about 10 minutes in either direction.")
 ```
