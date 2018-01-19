@@ -24,31 +24,7 @@ When completing the chapter, read all the available information and instructions
 
 **DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
 
-To continue with this chapter confirm the following:
 
-*** =instructions
-
-* I have not completed all the prescribed preparation material or have not read all the instructions on this page.
-
-* I confirm that I have completed the prescribed preparation material and have read **ALL** the instructions on this page carefully.
-
-*** =pre_exercise_code
-```{r}
-
-```
-
-*** =sample_code
-```{r}
-
-```
-
-*** =sct
-```{r}
-msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-
-msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
-```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
 ## Statistical methods to apply
