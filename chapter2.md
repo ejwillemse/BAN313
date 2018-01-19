@@ -46,7 +46,7 @@ To continue with this chapter confirm the following:
 
 *** =instructions
 
-* I have read **ALL** the instructions on this page carefully.
+* I have read **ALL** the instructions on this page carefully and have completed all the prescribed preperation material.
 
 *** =pre_exercise_code
 ```{r}
