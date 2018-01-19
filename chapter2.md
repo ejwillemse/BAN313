@@ -6,7 +6,7 @@ description : In this case study we will try and predict the production time of 
 --- type:NormalExercise lang:r xp:0 skills:1 key:ec139ff825
 ## Background
 
-In this case study we will try and predict the production time of luxury yachts using data on previous productions. 
+In this case study we will try and predict the production time of luxury yachts using data on previous productions.
 Our objective is to develop a predictive model to be used for production planning.
 To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
 
@@ -29,33 +29,29 @@ It is also used to predict when the next built will start, and to schedule its m
 
 In this case study we will develop a simple predictive model, in the form of a linear-regression model, to predict how long a yacht will take to complete based on some of its key specifications.
 
-Please take note that the data used for this chapter is randomly generated and will change:
-
-- each time the chapter is attempted; and
-- when moving from one exercise to the next.
-
-When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
-
 Before continuing, have a quick look at the following tutorial as you may need to refer to it during the course of the chapter:
 
 * Refer to [http://www.cyclismo.org/tutorial/R/linearLeastSquares.html](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html).
 
-After going through the tutorial and to continue with this chapter, hit the 'Submit Answer' button.
+Take note that the data used for this chapter is randomly generated and will change:
+
+- each time the chapter is attempted; and
+- when moving from one exercise to the next.
+
+When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
+
+**DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
+
+To continue with this chapter confirm the following:
 
 *** =instructions
 
-- Hit the 'Submit Answer' button when you're done reading the instructions.
+* I have not completed all the prescribed preparation material or have not read all the instructions on this page.
 
-*** =hint
-Just hit the 'Submit Answer'.
-
-```{r cars}
-summary(cars)
-```
+* I confirm that I have completed the prescribed preparation material and have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
-#none
 
 ```
 
@@ -64,14 +60,12 @@ summary(cars)
 
 ```
 
-*** =solution
-```{r}
-#none
-```
-
 *** =sct
 ```{r}
-success_msg("Let's try and use our knowledge on regression to assist our company.")
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+
+msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:c6773a7f96

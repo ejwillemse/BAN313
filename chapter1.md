@@ -1,7 +1,7 @@
 ---
 title_meta  : Case study 4
 title       : Case study 4 - Choosing the best vendor
-description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. 
+description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with.
 For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other."
 
 --- type:NormalExercise lang:r xp:0 skills:1 key:1c5a628f8f
@@ -15,25 +15,25 @@ For this Case Study we are employed by a manufacturing company and we have to de
 
 Currently there are only two suppliers, referred to as Company A and B (and sometimes just as A and B), that meet our requirements. We have to choose which Company to partner with. To compare the companies we have taken a random sample of our current product components, and asked both companies to provide a unit-price for each of the components. The goal is to use this data to infer if one company is better than the other.
 
-Please take note that the data used for this chapter is randomly generated and will change:
+Take note that the data used for this chapter is randomly generated and will change:
 
 - each time the chapter is attempted; and
 - when moving from one exercise to the next.
 
-When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
+When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
 
-To continue with this chapter, hit the 'Submit Answer' button.
+**DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
+
+To continue with this chapter confirm the following:
 
 *** =instructions
 
-- Hit the 'Submit Answer' button when you're done reading the instructions.
+* I have not completed all the prescribed preparation material or have not read all the instructions on this page.
 
-*** =hint
-Just hit the 'Submit Answer'.
+* I confirm that I have completed the prescribed preparation material and have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
-#none
 
 ```
 
@@ -42,14 +42,12 @@ Just hit the 'Submit Answer'.
 
 ```
 
-*** =solution
-```{r}
-#none
-```
-
 *** =sct
 ```{r}
-success_msg("Let's try and use our knowledge on statistical inference to assist our company.")
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+
+msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7

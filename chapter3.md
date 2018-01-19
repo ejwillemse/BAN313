@@ -39,22 +39,25 @@ Please take note that the data used for this chapter is randomly generated and w
 - each time the chapter is attempted; and
 - when moving from one exercise to the next.
 
-When completing the chapter, read the instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
+Take note that the data used for this chapter is randomly generated and will change:
+
+- each time the chapter is attempted; and
+- when moving from one exercise to the next.
+
+When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
+
+**DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
+
+To continue with this chapter confirm the following:
 
 *** =instructions
 
-- Hit the 'Submit Answer' button when you're done reading the instructions.
+* I have not completed all the prescribed preparation material or have not read all the instructions on this page.
 
-*** =hint
-Just hit the 'Submit Answer'.
-
-```{r cars}
-summary(cars)
-```
+* I confirm that I have completed the prescribed preparation material and have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
-#none
 
 ```
 
@@ -63,14 +66,12 @@ summary(cars)
 
 ```
 
-*** =solution
-```{r}
-#none
-```
-
 *** =sct
 ```{r}
-success_msg("Let's use probability distributions to answer some questions.")
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+
+msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
