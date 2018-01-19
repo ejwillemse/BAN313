@@ -393,7 +393,7 @@ test_object("pScrappedSim", undefined_msg = "Make sure to define an object `pScr
 success_msg("Correct! We can easily simulate 30 products using our previous code. The only question is, does this provide evidence that the manager is somehow resulted in the process performing poorly?")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:00816b640d
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:00816b640d
 
 ## Inference with simulation: scrapping too many parts (Part 2)
 
