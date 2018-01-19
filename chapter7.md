@@ -74,7 +74,7 @@ msg_success <- "Let's get started with the Lab. Note that if you have not comple
 test_mc(correct = 1, feedback_msgs = c(msg_success))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:10 skills:1 key:1a10d56107
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:1a10d56107
 ## Constant arrival and transaction times
 
 Assume that customers arrive at the ATM exactly 1 minute apart and that only one customer arrives at a time.
