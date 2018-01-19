@@ -853,9 +853,6 @@ test_function('sd', args = "x", not_called_msg = "You have to semi-manually do t
 test_object("CI_low", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
 test_object("CI_high", undefined_msg = "Your confidence interval is incorrect.", incorrect_msg = "Your confidence interval is incorrect.")
 
-#test_output_contains("CI_low", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
-#test_output_contains("CI_high", incorrect_msg = "You need to print some of your answers to the console to make a recommendation.")
-
 test_object("chooseCompanyA", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
 test_object("chooseCompanyB", undefined_msg = "Almost there, but your final recommendation on which company to choose is incorrect.", incorrect_msg = "Almost there, but your final recommendation on which company to choose is incorrect.")
 
