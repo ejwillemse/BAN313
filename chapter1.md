@@ -4,7 +4,7 @@ title       : Case study 4 - Choosing the best vendor
 description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with.
 For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other."
 
---- type:NormalExercise lang:r xp:0 skills:1 key:1c5a628f8f
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:1c5a628f8f
 ## Background
 
 In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other.
@@ -28,7 +28,9 @@ To continue with this chapter confirm the following:
 
 *** =instructions
 
-* I have read **ALL** the instructions on this page carefully and have completed all the prescribed preperation material.
+* I have not completed all the prescribed preparation material, as listed above, or have not read all the instructions on this page.
+
+* I confirm that I have completed the prescribed preparation material, as listed iabove, and have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
@@ -45,7 +47,7 @@ To continue with this chapter confirm the following:
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 1, feedback_msgs = c(msg_success))
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7

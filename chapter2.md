@@ -3,7 +3,7 @@ title_meta  : Case study 5
 title       : Case study 5 - Yacht production planning
 description : In this case study we will try and predict the production time of luxury yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
 
---- type:NormalExercise lang:r xp:0 skills:1 key:ec139ff825
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:ec139ff825
 ## Background
 
 In this case study we will try and predict the production time of luxury yachts using data on previous productions.
