@@ -834,9 +834,9 @@ In this exercise we will use a _new_ sample of products and their prices from Co
 For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose.
 Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
 
-Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t\_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
+Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^\*$ or $t\_{df}^\*$ value, calculate the Margin of Error (ME), and then calculate the interval.
 
-Same as before, we would rather want to use R to determine the critical $z^*$ or $t\_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
+Same as before, we would rather want to use R to determine the critical $z^\*$ or $t\_{df}^\*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
 
 The [following web-based tutorial](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) describes in detail and with examples how the confidence intervals can be calculated.
 
@@ -844,11 +844,11 @@ Take special note of the required confidence levels in the examples, and what th
 
 Some things to watch out for.
 
-First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t\_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
+First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^\*$ and $t\_{df}^\*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
 
-Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^*$ plus the area to the right of $z^*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
+Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^\*$ plus the area to the right of $z^\*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
 
-Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t\_{df}^*$ values.
+Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^\*$ and $t\_{df}^\*$ values.
 
 Once you have gone through the tutorial do the following:
 
