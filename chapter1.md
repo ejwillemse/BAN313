@@ -508,10 +508,10 @@ key: 71bd4684d4
 Which is the correct null and alternative hypothesis for the case study problem:
 
 `@instructions`
-- $H\_0$: there is no difference between the prices of Company A and Company B, $H_A$: there is a difference between the prices of Company A and Company B.
-- $H\_0$: there is no difference between the mean prices of Company A and Company B, $H_A$: there is a difference between the average prices of Company A and Company B.
-- $H\_0$: the price differences between Company A and Company B is zero, $H_A$: the price differences between Company A and Company B is not zero.
-- $H\_0$: the mean of price differences between Company A and Company B is zero, $H_A$: the mean of price differences between Company A and Company B is not zero.
+- $H\_0$: there is no difference between the prices of Company A and Company B, $H\_A$: there is a difference between the prices of Company A and Company B.
+- $H\_0$: there is no difference between the mean prices of Company A and Company B, $H\_A$: there is a difference between the average prices of Company A and Company B.
+- $H\_0$: the price differences between Company A and Company B is zero, $H\_A$: the price differences between Company A and Company B is not zero.
+- $H\_0$: the mean of price differences between Company A and Company B is zero, $H\_A$: the mean of price differences between Company A and Company B is not zero.
 
 `@hint`
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
@@ -548,7 +548,7 @@ To conduct the hypothesis test semi-manually we need to do the following:
 
 To find the $p$-value we can use probability tables. The only problem with this approach is that if we were to get a new sample, we will have to manually look-up the $p$-value. An advantage of writing a program for the hypothesis test is that it should automate our calculations. We therefore have to find a better way to determine the $p$-value, ideally using R's built in functions.
 
-The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical $z^{\*}$ or $t^{\*}\_{df}$ value. These values are determined based on the required confidence level, and for the critical $t^{\*}\_{df}$ value, also by the degrees of freedom. Here we also want to automatically get the critical $z^{\*}$ or $t^{\*}\_{df}$ value using R's built in function, instead of relying on distribution tables or external sources.
+The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical $z^{*}$ or $t^{*}\_{df}$ value. These values are determined based on the required confidence level, and for the critical $t^{*}\_{df}$ value, also by the degrees of freedom. Here we also want to automatically get the critical $z^{*}$ or $t^{*}\_{df}$ value using R's built in function, instead of relying on distribution tables or external sources.
 
 To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the $t$-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console and be sure to checkout the tutorial links in the beginning of the chapter.
 
@@ -575,7 +575,7 @@ As an exercise, calculate the $p$-value for the following scenarios:
 `@hint`
 Have a look at the recommended websites.
 
-[This website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) explains the concept in more detail. [This website](http://www.cyclismo.org/tutorial/R/pValues.html) shows how the p-value can be calculated in R.
+[This website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) explains the concept in more detail. [This website](http://www.cyclismo.org/tutorial/R/pValues.html) shows how the $p$-value can be calculated in R.
 
 
 `@sample_code`
@@ -834,9 +834,9 @@ In this exercise we will use a _new_ sample of products and their prices from Co
 For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose.
 Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
 
-Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
+Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t\_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
 
-Same as before, we would rather want to use R to determine the critical $z^*$ or $t_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
+Same as before, we would rather want to use R to determine the critical $z^*$ or $t\_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
 
 The [following web-based tutorial](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) describes in detail and with examples how the confidence intervals can be calculated.
 
@@ -844,11 +844,11 @@ Take special note of the required confidence levels in the examples, and what th
 
 Some things to watch out for.
 
-First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
+First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t\_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
 
 Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^*$ plus the area to the right of $z^*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
 
-Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t_{df}^*$ values.
+Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t\_{df}^*$ values.
 
 Once you have gone through the tutorial do the following:
 
@@ -933,5 +933,3 @@ test_function('t.test', args = c("x", "y", "alternative", "paired", "conf.level"
 
 success_msg("Congratulations! You have successfully completed the chapter by applying inference for paired numerical data. In the last exercise you were able to correctly apply the methods with the minimum amount of guidance, as will be the case in industry. You were also able to use the `t.test` function to perform the analysis. Feel free to retry the chapter for practice.")
 ```
-
-
