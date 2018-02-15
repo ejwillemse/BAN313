@@ -455,10 +455,10 @@ Which is the correct null and alternative hypothesis for the case study problem:
 
 *** =instructions
 
-- $$H_0$$: there is no difference between the prices of Company A and Company B, $H_A$: there is a difference between the prices of Company A and Company B.
-- $$H_0$$: there is no difference between the mean prices of Company A and Company B, $H_A$: there is a difference between the average prices of Company A and Company B.
-- $$H_0$$: the price differences between Company A and Company B is zero, $H_A$: the price differences between Company A and Company B is not zero.
-- $$H_0$$: the mean of price differences between Company A and Company B is zero, $H_A$: the mean of price differences between Company A and Company B is not zero.
+- $H\_0$: there is no difference between the prices of Company A and Company B, $H_A$: there is a difference between the prices of Company A and Company B.
+- $H\_0$: there is no difference between the mean prices of Company A and Company B, $H_A$: there is a difference between the average prices of Company A and Company B.
+- $H\_0$: the price differences between Company A and Company B is zero, $H_A$: the price differences between Company A and Company B is not zero.
+- $H\_0$: the mean of price differences between Company A and Company B is zero, $H_A$: the mean of price differences between Company A and Company B is not zero.
 
 *** =hint
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
