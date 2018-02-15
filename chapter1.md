@@ -45,7 +45,7 @@ To continue with this chapter confirm the following:
 ```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
-msg_success <- "Let's get started with the Lab. Further, you will **NOT** receive any assistance from the lecturer and assistants on any issues covered in the preparation material.""
+msg_success <- "Let's get started with the Lab. Further, you will **NOT** receive any assistance from the lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 1, feedback_msgs = c(msg_bad, msg_success))
 ```
 
