@@ -1,11 +1,19 @@
 ---
-title_meta  : Case study 4
-title       : Case study 4 - Choosing the best vendor
-description : "In this case study we will compare two product suppliers, with the objective to choose the best one to partner with.
-For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other."
+title: Case study 4 - Choosing the best vendor
+description: >-
+  In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other.
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:1c5a628f8f
+
+---
 ## Background
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 0
+skills: 1
+key: 1c5a628f8f
+```
 
 In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other.
 
@@ -26,21 +34,14 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-*** =instructions
-
+`@instructions`
 * I have read **ALL** the instructions on this page carefully.
 
-*** =pre_exercise_code
-```{r}
 
-```
 
-*** =sample_code
-```{r}
 
-```
 
-*** =sct
+`@sct`
 ```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
@@ -48,12 +49,22 @@ msg_success <- "Let's get started with the Lab. Further, you will **NOT** receiv
 test_mc(correct = 1, feedback_msgs = c(msg_bad, msg_success))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
+
+
+---
 ## Statistical methods to apply
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: a9ac72e6f7
+```
 
 Based on the case study description, which do you think is the correct statistical method to apply?
 
-*** =instructions
+`@instructions`
 - Inference for a single proportion.
 - Inference for the difference between two proportions.
 - Goodness-of-fit test.
@@ -62,15 +73,16 @@ Based on the case study description, which do you think is the correct statistic
 - Inference for paired numerical data.
 - Inference for the difference between two means.
 
-*** =hint
+`@hint`
 Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 #none
 ```
 
-*** =sct
+
+`@sct`
 ```{r}
 msg_bad <- "That is not correct. Have a look at the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
 
@@ -78,12 +90,22 @@ msg_success <- "Correct! We want to compare the average unit-price for the two c
 test_mc(correct = 6, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:cd4c8c8aa5
+
+
+---
 ## R functions to apply
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: cd4c8c8aa5
+```
 
 Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through `?function` command.
 
-*** =instructions
+`@instructions`
 - `mean()`
 - `sd()`
 - `nrow()`
@@ -91,39 +113,49 @@ Which built in R function can we use to apply the correct statistical method? Us
 - `t.test()`
 - None of the above, we will have to write our own R code to apply the method.
 
-*** =hint
-
+`@hint`
 Use the `?function` to find out more about each command.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 #none
 ```
 
-*** =sct
+
+`@sct`
 ```{r}
 msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
 msg_success <- "Correct! By setting `paired = TRUE` inside the function call to `t.test(x, y)` we can perform a t-test for paired numerical data. In the next exercises we will first semi-manually perform the test, and in the last exercise we use the `t.test` function."
 test_mc(correct = 5, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:25c0c61261
+
+
+---
 ## Analysing the data
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: 25c0c61261
+```
 
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`). First have a look at the data in the console using the `head(product_comparison)` command, thereafter answer the following:
 
-*** =instructions
+`@instructions`
 1. How many products did we sample to get quotations for?
 2. What is the sample mean for product prices from Company A?
 3. What is the sample standard deviation for products price from Company A?
 4. What is the sample mean for product prices from Company B?
 5. What is the sample standard deviation for products price from Company B?
 
-*** =hint
+`@hint`
 - Use `?nrow`, `?mean` and `?sd` to find out more about the functions that you can apply to answer the question.
 - To isolate and analyse a specific variable, make use of the `data.frame$variableName` command.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 nProducts <- c(100, 200)
 price <- c(100, 10000)
@@ -143,8 +175,7 @@ rm(productCode)
 rm(priceCompA)
 rm(priceCompB)
 ```
-
-*** =sample_code
+`@sample_code`
 ```{r}
 # The product_comparison dataframe is available in your workspace.
 
@@ -177,8 +208,7 @@ sd_price_A
 mean_price_B
 sd_price_B
 ```
-
-*** =solution
+`@solution`
 ```{r}
 # The product_comparison dataframe is available in your workspace.
 # Make sure you get this part right before going to the next section since you will have to reuse the code in the following questions.
@@ -212,10 +242,8 @@ sd_price_A
 mean_price_B
 sd_price_B
 sd_price_B
-
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_object("n_products", undefined_msg = "Make sure to define a variable `n_products`.",
             incorrect_msg = "Make sure that you calculated the number of samples correctly and assigned your answer to `n_products`.")
@@ -237,29 +265,39 @@ test_object("sd_price_B", undefined_msg = "Make sure to define a variable `sd_pr
 success_msg("Good job! By using the `sd()`, `mean()` and `nrow()` commands we can manually calculate the sample statistics necessary to perform inference for numerical data. Although in this case study we can't use them separately on the product prices for each company since we are performing numerical inference for paired data.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:23cc0a8c6e
+
+
+---
 ## Requirements for working with paired data
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: 23cc0a8c6e
+```
 
 For the case study we wish to analyse paired numerical data.
 If we are to do the analyse manually, we will need to perform some calculations on the original data set.
 Which of the following calculations do we need to perform?
 
-*** =instructions
-
+`@instructions`
 - Subtract the price from Company A from the price from Company B for each product.
 - Calculate the mean price for Company A and the mean price for Company B and then calculate the difference between the two.
 - Determine which products from Company A are cheaper than those from Company B and calculate the proportion of cheaper products.
 - Draw a side-by-side boxplot for the product prices from the companies to see which Company is cheaper.
 
-*** =hint
+`@hint`
 Have a look at Chapter 4 of the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 #none
 ```
 
-*** =sct
+
+`@sct`
 ```{r}
 msg_bad <- "That is not correct. Have a look at Chapter 4 on inference for numerical data in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
 
@@ -268,8 +306,17 @@ test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
 ```
 
 
---- type:NormalExercise lang:r xp:100 skills:1 key:19491ec2a5
+
+---
 ## Analysing the difference between product prices
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: 19491ec2a5
+```
 
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. Note that sample is different from the previous question.
 
@@ -282,21 +329,18 @@ We can assume the first condition holds since we took a random sample of product
 
 After checking the conditions we need calculate the necessary sample statistics on the difference in product prices. We will reuse our code for doing so in the following exercises.
 
-*** =instructions
-
+`@instructions`
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
 3. Determine the number of samples and assign the answer to the variable `n`. Calculate the number on the dataframe `product_comparison`, not on `price_diff`.
 4. Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
-*** =hint
-
+`@hint`
 The only new component is to calculate the difference between the price of Company A and Company B per product, and store the result as a newly created vector.
 Recall the function `data.frame$variableName` returns a vector of the values of the `variableName` variable. Have a look at documentation on [vector arithmetics](http://www.r-tutor.com/r-introduction/vector/vector-arithmetics).
 
-
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 nProducts <- c(100, 200)
 price <- c(100, 10000)
@@ -316,8 +360,7 @@ rm(productCode)
 rm(priceCompA)
 rm(priceCompB)
 ```
-
-*** =sample_code
+`@sample_code`
 ```{r}
 # The product_comparison dataframe is available in your workspace.
 
@@ -352,11 +395,8 @@ n
 normalConditionMet
 mean_diff
 s_diff
-
-
 ```
-
-*** =solution
+`@solution`
 ```{r}
 # The product_comparison dataframe is available in your workspace.
 
@@ -392,8 +432,7 @@ normalConditionMet
 mean_diff
 s_diff
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_object("price_diff", undefined_msg = "Make sure to calculate the price difference per product and assigned your answer to `price_diff`. Also make sure that you calculated it as the price from Company A minus the price from Company B, and that you calculated it per product.")
 
@@ -419,28 +458,34 @@ success_msg("Well done! By calculating the price difference per product we can n
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:638c133d39
+
+---
 ## How do we determine which company is better
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: 638c133d39
+```
 
 Recall from the problem description that we have to decide on which company to use to supply parts, and that we wish to use the cheapest company. To compare the companies we took a random sample of products and asked each company to provide a unit price quote for the products. Previously we calculated the difference between unit prices (Company A's price minus Company B's price), and we said the we will use the differences to decide on the best company. How can we decide on the best company?
 
-*** =instructions
-
+`@instructions`
 - Take the mean of the product price differences. If the mean is less than 0 we know that Company A is cheaper. If the mean is more than 0 we know that Company B is cheaper. If the mean is zero we know the Companies are the same.
 - Draw a side-by-side boxplot of the prices of Company A and B and analyse the median price and variance. The company with the lowest medium price and lowest variance is the better company.
 - Calculate summary statistics, using the `summary()` command in R. The company with the lowest mean or median, and lowest 25th and 75th percentile values is the better company.
 - Conduct a hypothesis test using the price differences to determine if there is a significant price difference between the prices of Company A and B.
 - Conduct a hypothesis test using the prices from Company A and B to determine if there is a significant difference in the mean price of Company A and the mean price of Company B.
 
-*** =hint
+`@hint`
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
-*** =pre_exercise_code
-```{r}
 
-```
 
-*** =sct
+
+`@sct`
 ```{r}
 msg_bad <- "That is not correct."
 msg_success <- "Correct! We should do a hypothesis test to see if the sample data provide enough evidence of there being a difference between Company A and B products. Since we are dealing with a sample, we have to apply inference. We are also dealing with paired data, so we will look at the price differences, and not the prices directly. Before conducting the test, let's first setup the hypotheses."
@@ -448,35 +493,51 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success, m
 ```
 
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:71bd4684d4
+
+---
 ## Setting up the hypotheses
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: 71bd4684d4
+```
 
 Which is the correct null and alternative hypothesis for the case study problem:
 
-*** =instructions
-
+`@instructions`
 - $H\_0$: there is no difference between the prices of Company A and Company B, $H_A$: there is a difference between the prices of Company A and Company B.
 - $H\_0$: there is no difference between the mean prices of Company A and Company B, $H_A$: there is a difference between the average prices of Company A and Company B.
 - $H\_0$: the price differences between Company A and Company B is zero, $H_A$: the price differences between Company A and Company B is not zero.
 - $H\_0$: the mean of price differences between Company A and Company B is zero, $H_A$: the mean of price differences between Company A and Company B is not zero.
 
-*** =hint
+`@hint`
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
-*** =pre_exercise_code
-```{r}
 
-```
 
-*** =sct
+
+`@sct`
 ```{r}
 msg_bad <- "That is not correct."
 msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Companies is zero, meaning their prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient evidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:b5c98f6548
+
+
+---
 ## Overview of R's `pnorm` and `pt` functions
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: b5c98f6548
+```
 
 To conduct the hypothesis test semi-manually we need to do the following:
 
@@ -504,27 +565,20 @@ If you still don't quite understand how it works, have a look at:
 
 As an exercise, calculate the $p$-value for the following scenarios:
 
-*** =instructions
-
+`@instructions`
 1. Double-sided hypothesis where the $T$-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
 2. Single-sided hypothesis where the alternative hypothesis is $x < 0.23$, the $T$-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
 3. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
 4. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
 5. Double-sided hypothesis where the $T$-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
-*** =hint
-
+`@hint`
 Have a look at the recommended websites.
 
 [This website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) explains the concept in more detail. [This website](http://www.cyclismo.org/tutorial/R/pValues.html) shows how the p-value can be calculated in R.
 
 
-*** =pre_exercise_code
-```{r}
-
-```
-
-*** =sample_code
+`@sample_code`
 ```{r}
 # Use the pt function to calculate p-values for the following:
 
@@ -547,10 +601,8 @@ p_value_4 <-
 # 5) Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 p_value_5 <-
-
 ```
-
-*** =solution
+`@solution`
 ```{r}
 # Use the pt function to calculate p-values for the following:
 
@@ -573,10 +625,8 @@ p_value_4 <-  1-pt(-1.5, 10)
 # 5) Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 p_value_5 <- 2*pt(-3.3, 23)
-
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_object("p_value_1", undefined_msg = "Make sure to define a variable `p_value_1`.",
             incorrect_msg = "Make sure that you calculated the `p_value_1` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.")
@@ -593,22 +643,33 @@ test_object("p_value_4", undefined_msg = "Make sure to define a variable `p_valu
 test_object("p_value_5", undefined_msg = "Make sure to define a variable `p_value_5`.",
             incorrect_msg = "Make sure that you calculated the `p_value_5` correctly, and take note of the sign of the T-score and that it is a double-sided hypothesis test.")
 ```
---- type:NormalExercise lang:r xp:100 skills:1 key:803d9a69c1
+
+
+
+---
 ## Conducting the hypothesis test
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: 803d9a69c1
+```
 
 Our hypotheses are as follow:
 
-- $H_0$: the mean price difference between Company A and Company B is zero,
-- $H_A$: the mean price difference between Company A and Company B is not zero,
+- $H\_0$: the mean price difference between Company A and Company B is zero,
+- $H\_A$: the mean price difference between Company A and Company B is not zero,
 
 and in symbolic form:
 
-- $H_0: \mu_{\text{diff}} = 0$,
-- $H_A: \mu_{\text{diff}} \neq 0$`.
+- $H\_0: \mu\_{\text{diff}} = 0$,
+- $H\_A: \mu\_{\text{diff}} \neq 0$`.
 
-Where $\mu_{\text{diff}}$ is the mean difference for the of the entire population. In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
+Where $\mu\_{\text{diff}}$ is the mean difference for the of the entire population. In this exercise, ​we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
 
-Since we are dealing with a new sample we will again have to calculate difference in prices per product, get the sample size, and calculate the mean and standard deviation of the sample.
+Since we are dealing with a new sample we will again have to calculate the ​difference in prices per product, get the sample size, and calculate the mean and standard deviation of the sample.
 
 Once we have the required sample statistics we need to determine how likely our observation is in favour of the hypothesis, under the assumption that the null hypothesis is true. This "likely-hood" is our $p$-value which we can compare against a significance level ($\alpha$ value). Since none were supplied we will use $\alpha=0.05$.
 
@@ -618,8 +679,7 @@ To calculate the $p$-value we will be using the `pt()` function, as described in
 
 To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself. Also note that you cannot directly assign a numerical value to your answer. You have to assign the R calculation. For example, say the answer is `p_value = pt(1.1, 5)`, then `p_value = 0.1607254` will be marked as incorrect. Only `p_value = pt(1.1, 5)` will be marked as correct. This only applies to Datacamp.
 
-*** =instructions
-
+`@instructions`
 1. Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. Assign your answers to the `n`, `price_diff`, `mean_diff` and `sd_diff` variables, same as before.
 2. Calculate the Standard Error of our sample mean and assign your answer to the `SE` variable.
 3. Calculate the $T$-score of the sample mean and assign your answer to the `T_score` variable.
@@ -627,8 +687,7 @@ To successfully complete this lab, do the following, and note that you have to d
 5. Calculate the $p$-value of our $T$-score using the `pt()` function and assign your answer to the `p_value` variable. Directly thereafter view the $p$-value.
 6. Lastly, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
-*** =hint
-
+`@hint`
 Go through the previous exercises and carefully look at your calculations. The R formulas for the Standard Error, T-score and Degrees of Freedom are:
 
 ```
@@ -643,7 +702,7 @@ The actual p-value depends on the actual value of `T_score`. We know that `pt(T_
 
 If `T_score > 0` we know that the incorrect area is given, since we need the area to the right of `T_score` in the tail (not the left). To fix this we can either call `pt(T_score, df,  lower.tail = FALSE)` which will then give the upper tail, or we can use `1 - pt(T_score, df)`. After that we still have to multiply the value by two.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 nProducts <- c(100, 200)
 price <- c(100, 10000)
@@ -663,8 +722,7 @@ rm(productCode)
 rm(priceCompA)
 rm(priceCompB)
 ```
-
-*** =sample_code
+`@sample_code`
 ```{r}
 # The product_comparison dataframe is available in your workspace. Remember to create and assign your answers to the correct variables as specified in the instructions. Where necessary, view the outcome of your calculation by printing them to the console. You can also view the values of your variables by typing them in the console and pressing enter.
 
@@ -683,10 +741,8 @@ p_value # leave this as is to view the p_value
 # 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis and the view the results.
 
 rejectH0 # leave this as is to view the result
-
 ```
-
-*** =solution
+`@solution`
 ```{r}
 # Do not just view the answers!!!!!!!
 
@@ -722,10 +778,8 @@ rejectH0 <- p_value < 0.05
 rejectH0
 
 # You can print whatever you need to view here. For advanced users, you can check if the answers make sense by using the t.test function. And nope, the answer the print part is not included in here. You will have to figure it out for yourself.
-
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_object("price_diff", undefined_msg = "Make sure to calculate the price difference per product and assigned your answer to `price_diff`. Also make sure that you calculated it as the price from Company A minus the price from Company B, and that you calculated it per product.")
 
@@ -762,8 +816,18 @@ test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to a
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:de00830dd6
+
+
+---
 ## Methods for calculating a confidence interval
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: de00830dd6
+```
 
 Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
 
@@ -781,13 +845,27 @@ Some pre-calculations are therefore required to figure out what to plug into  `q
 
 Go through the tutorial and then do the following:
 
-*** =instructions
-
+`@instructions`
 1. Assume we want to calculate a 97% confidence interval using the normal model. Calculate the critical $z^*$ value to be used in the ME calculations. Assign your answer to `z_star_1`.
 
 
---- type:NormalExercise lang:r xp:100 skills:1 key:6ba9400447
+
+
+
+
+
+
+
+---
 ## Calculating a confidence interval
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: 6ba9400447
+```
 
 For the last question we are going to calculate a confidence interval, and then use that to determine if one company is better than the other, and if so, which one is better. We will reuse much of our previous calculations. To test whether you know how to apply the methods, available hints, instructions and error messages will be kept to a minimum. You can however consult previous exercises as well as [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), which contains all the formulas that you need to successfully answer this question.
 
@@ -814,18 +892,16 @@ Some pre-calculations are therefore required to figure out what to plug into  `q
 
 Once you have gone through the tutorial do the following:
 
-*** =instructions
-
+`@instructions`
 1. Manually calculate a 98% confidence interval and assign the lower confidence interval value to `CI_low`
 and the higher confidence interval value to `CI_high`. Refer to [this website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) which illustrates how to calculate Confidence Intervals in R.
 2. Use the confidence interval to make a recommendation on which company to choose by setting `chooseCompanyA` AND `chooseCompanyB` to either `TRUE` or `FALSE`, depending on the company to choose. If the sample indicates that there is not a significant difference between the two, set both variables equal to `TRUE`, since we can choose either one.
 3. Conduct a hypothesis test by using the `t.test` function and compare the results to our calculated confidence interval. Remember to set an appropriate confidence interval level. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
 
-*** =hint
-
+`@hint`
 None. You have to figure this one out for yourself.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 nProducts <- c(100, 200)
 price <- c(100, 10000)
@@ -845,15 +921,13 @@ rm(productCode)
 rm(priceCompA)
 rm(priceCompB)
 ```
-
-*** =sample_code
+`@sample_code`
 ```{r}
 # You have a blank canvas, just make sure to assign your final answers to the correct variables.
 
 #Just DON'T overwrite existing functions when creating new variables. For example, mean = mean(x) will basically make the program crash, since you have now over-written R's mean function with the actual mean value of x. Don't do it.
 ```
-
-*** =solution
+`@solution`
 ```{r}
 # Fine, if you want to know the final answer, here it is. Just remember that part of learning and understanding something is to figure out how it works for yourself. And of course, you won't have a show answer option in tests, exams and in industry. Just to be nasty we have calculated most of the stuff in a different way...
 
@@ -883,8 +957,7 @@ if (CI[2] < 0)
 
 t.test(x = product_comparison$priceCompA, y = product_comparison$priceCompB, alternative = "two.sided", paired = TRUE, conf.level = 0.98)
 ```
-
-*** =sct
+`@sct`
 ```{r}
 test_function('nrow', args = "x", not_called_msg = "You have to semi-manually do the calculations. You are missing some function calls to do so.")
 test_function('mean', args = "x", not_called_msg = "You have to semi-manually do the calculations. You are missing some function calls to do so.")
@@ -900,3 +973,5 @@ test_function('t.test', args = c("x", "y", "alternative", "paired", "conf.level"
 
 success_msg("Congratulations! You have successfully completed the chapter by applying inference for paired numerical data. In the last exercise you were able to correctly apply the methods with the minimum amount of guidance, as will be the case in industry. You were also able to use the `t.test` function to perform the analysis. Feel free to retry the chapter for practice.")
 ```
+
+
