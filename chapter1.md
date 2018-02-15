@@ -28,9 +28,7 @@ To continue with this chapter confirm the following:
 
 *** =instructions
 
-* I have not completed all the prescribed preparation material, as listed above, or have not read all the instructions on this page.
-
-* I confirm that I have completed the prescribed preparation material, as listed iabove, and have read **ALL** the instructions on this page carefully.
+* I have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
@@ -46,8 +44,8 @@ To continue with this chapter confirm the following:
 ```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
-msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
+msg_success <- "Let's get started with the Lab. Further, you will **NOT** receive any assistance from the lecturer and assistants on any issues covered in the preparation material.""
+test_mc(correct = 1, feedback_msgs = c(msg_bad, msg_success))
 ```
 
 --- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a9ac72e6f7
@@ -178,7 +176,6 @@ sd_price_A
 
 mean_price_B
 sd_price_B
-sd_price_B
 ```
 
 *** =solution
@@ -281,7 +278,7 @@ Before we can apply inference for paired data, we need to calculate the differen
 - samples should be independent; and
 - the distribution of the variable should be near normal.
 
-We can assume the first condition holds since we took a random sample of product. For the second condition we need to analyse the distribution of the sample and specifically check for skewness, and then look at the number of samples that we have. If we less than 30 samples, then the sample distribution has to be nearly symmetrical. If we have more than 30 but less than 60 samples then moderate skewness can be tolerated, and if we have more then 60 samples then heady skewness can be tolerated.
+We can assume the first condition holds since we took a random sample of products. For the second condition we need to analyse the distribution of the sample and specifically check for skewness, and then look at the number of samples that we have. If we less than 30 samples, then the sample distribution has to be nearly symmetrical. If we have more than 30 but less than 60 samples then moderate skewness can be tolerated, and if we have more then 60 samples then heavy skewness can be tolerated.
 
 After checking the conditions we need calculate the necessary sample statistics on the difference in product prices. We will reuse our code for doing so in the following exercises.
 
@@ -289,7 +286,7 @@ After checking the conditions we need calculate the necessary sample statistics 
 
 1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
 2. Draw a histogram of the price difference to analyse the sample distribution.
-3. Determine the number of samples and assign the answer to the variable `n`.
+3. Determine the number of samples and assign the answer to the variable `n`. Calculate the number on the dataframe `product_comparison`, not on `price_diff`.
 4. Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
 5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
@@ -431,7 +428,7 @@ Recall from the problem description that we have to decide on which company to u
 
 - Take the mean of the product price differences. If the mean is less than 0 we know that Company A is cheaper. If the mean is more than 0 we know that Company B is cheaper. If the mean is zero we know the Companies are the same.
 - Draw a side-by-side boxplot of the prices of Company A and B and analyse the median price and variance. The company with the lowest medium price and lowest variance is the better company.
-- Calculate summary statistics, using the `summary()` command in R. The company with the lowers mean or median, and lowest 25th and 75th percentile values is the better company.
+- Calculate summary statistics, using the `summary()` command in R. The company with the lowest mean or median, and lowest 25th and 75th percentile values is the better company.
 - Conduct a hypothesis test using the price differences to determine if there is a significant price difference between the prices of Company A and B.
 - Conduct a hypothesis test using the prices from Company A and B to determine if there is a significant difference in the mean price of Company A and the mean price of Company B.
 
@@ -458,10 +455,10 @@ Which is the correct null and alternative hypothesis for the case study problem:
 
 *** =instructions
 
-- H0: there is no difference between the prices of Company A and Company B, HA: there is a difference between the prices of Company A and Company B.
-- H0: there is no difference between the mean prices of Company A and Company B, HA: there is a difference between the average prices of Company A and Company B.
-- H0: the price differences between Company A and Company B is zero, HA: the price differences between Company A and Company B is not zero.
-- H0: the mean of price differences between Company A and Company B is zero, HA: the mean of price differences between Company A and Company B is not zero.
+- $H_0$: there is no difference between the prices of Company A and Company B, $H_A$: there is a difference between the prices of Company A and Company B.
+- $H_0$: there is no difference between the mean prices of Company A and Company B, $H_A$: there is a difference between the average prices of Company A and Company B.
+- $H_0$: the price differences between Company A and Company B is zero, $H_A$: the price differences between Company A and Company B is not zero.
+- $H_0$: the mean of price differences between Company A and Company B is zero, $H_A$: the mean of price differences between Company A and Company B is not zero.
 
 *** =hint
 Have a look at the case study background, shown in the first question, and the chapters on inference in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
@@ -474,7 +471,7 @@ Have a look at the case study background, shown in the first question, and the c
 *** =sct
 ```{r}
 msg_bad <- "That is not correct."
-msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Companies is zero, meaning there prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient evidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
+msg_success <- "That is correct! Under the null-hypothesis we will assume that the mean of price differences between the Companies is zero, meaning their prices are the same. We will then look at the actual mean of the price differences and see how likely this value is under the assumption that null hypothesis is true. We will then use the value to decide if it provides sufficient evidence against the null hypothesis, and then decide if we want to reject or not-reject our null hypothesis. Now that we have the hypothesis test setup, let's conduct the test."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
@@ -484,36 +481,36 @@ test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 To conduct the hypothesis test semi-manually we need to do the following:
 
 1. Calculate the Standard Error (SE) of our sample statistics using an appropriate SE formula.
-2. Calculate the T-score for our sample mean when dealing with numerical data, and the Z-score for our proportion when dealing with categorical data.
-3. Find the p-value of the T-score or Z-score.
-4. Compare the p-value to our alpha value and conclude the hypothesis test.
+2. Calculate the $T$-score for our sample mean when dealing with numerical data, and the $Z$-score for our proportion when dealing with categorical data.
+3. Find the $p$-value of the $T$-score or $Z$-score.
+4. Compare the $p$-value to our $\alpha$ value and conclude the hypothesis test.
 
-To find the p-value we can use probability tables. The only problem with this approach is that if we were to get a new sample, we will have to manually look-up the p-value. An advantage of writing a program for the hypothesis test is that it should automate our calculations. We therefore have to find a better way to determine the p-value, ideally using R's built in functions.
+To find the $p$-value we can use probability tables. The only problem with this approach is that if we were to get a new sample, we will have to manually look-up the $p$-value. An advantage of writing a program for the hypothesis test is that it should automate our calculations. We therefore have to find a better way to determine the $p$-value, ideally using R's built in functions.
 
-The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical z or t value. These values are determined based on the required confidence level, and for the critical t value, by the degrees of freedom. Here we also want to automatically get the critical z or t value using R's built in function, instead of relying on distribution tables or external sources.
+The opposite also occurs when we want to calculate a confidence interval. The confidence interval calculations includes a Margin of Error, which, again depends on a critical $z^{*}$ or $t^{*}_{df}$ value. These values are determined based on the required confidence level, and for the critical $t^{*}_{df}$ value, also by the degrees of freedom. Here we also want to automatically get the critical $z^{*}$ or $t^{*}_{df}$ value using R's built in function, instead of relying on distribution tables or external sources.
 
-To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the t-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console.
+To calculate these values we can use R's built in probability distribution functions. For the normal distribution we can use the `dnorm` and `qnorm` functions, and for the $t$-distribution we can use the `pt` and `qt` functions. To find out more about the functions, type `?dt` and `?pt` in the console and be sure to checkout the tutorial links in the beginning of the chapter.
 
-First, we will consider `pnorm` to calculate the p-value. At a minimums, `pnorm(Z_score)` takes the Z-score (`Z_score`) of our observed mean, and returns the probability of obtaining a Z-score of less than that value. It will thus give the area to the left of the Z-score under the curve. If `Z_score <- -1.1` then `pnorm(Z_score) = 0.136`. This means that the probability of obtaining a Z-score of less than -1.1 is about to 0.136.
+First, we will consider `pnorm` to calculate the $p$-value. At a minimum, `pnorm(Z_score)` takes the $Z$-score (`Z_score`) of our observed mean, and returns the probability of obtaining a $Z$-score of less than that value. It will thus give the area to the left of the $Z$-score under the curve. If `Z_score <- -1.1` then `pnorm(Z_score) = 0.136`. This means that the probability of obtaining a $Z$-score of less than -1.1 is about to 0.136.
 
-Will `pnorm(Z_score)` always give us our p-value for our hypothesis test? No it won't. It depends on our hypothesis test and which area under the normal curve we are interested in. For a double-sided hypothesis test it becomes a bit more tricky. Here we are interested in observing a similar difference from the assumed mean under H0, and we don't care if the difference is positive or negative. We therefore have to look at both the left and right tail areas of our Z-score. If `Z_score <- -1.1`, then `pnorm(Z_score) = 0.136`. But we also want to find the probability of having a Z-score of _greater_ than 1.1 and add this to the previous value. Since the normal distribution is symmetrical we know that P(Z-score < -1.1) = P(Z-score > 1.1), so the p-value is going to be equal to `2*pnorm(Z_score) = 0.272`. But what happens if `Z_score <- 2.1`? Now `2*pnorm(Z_score) = 1.964`, which means our p-value is greater than 1, _which is impossible_! So why is this calculation wrong?
+Will `pnorm(Z_score)` always give us our $p$-value for our hypothesis test? No it won't. It depends on our hypothesis test and which area under the normal curve we are interested in. For a double-sided hypothesis test it becomes a bit more tricky. Here we are interested in observing a similar difference from the assumed mean under $H_0$, and we don't care if the difference is positive or negative. We therefore have to look at both the left and right tail areas of our $Z$-score. If `Z_score <- -1.1`, then `pnorm(Z_score) = 0.136`. But we also want to find the probability of having a $Z$-score of _greater_ than 1.1 and add this to the previous value. Since the normal distribution is symmetrical we know that $P(Z\text{-score} < -1.1) = P(Z\text{-score} > 1.1)$, so the $p$-value is going to be equal to `2*pnorm(Z_score) = 0.272`. But what happens if `Z_score <- 2.1`? Now `2*pnorm(Z_score) = 1.964`, which means our $p$-value is greater than 1, _which is impossible_! So why is this calculation wrong?
 
-Remember that `pnorm(Z_score)` returns the probability of obtaining a Z-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the p-value. To get the right-tail area under the normal curve for a positive Z-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the p-value depends on whether our Z-score is positive or negative. For a single-sided hypothesis test it will depend on whether our HA states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the t-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the critical T-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual p-value depends on the hypotheses.
+Remember that `pnorm(Z_score)` returns the probability of obtaining a $Z$-score of less than `Z_score` value, hence the area to the left of `Z_score` under the normal curve. For a double-sided hypothesis we are _always_ interested in the tail areas, that is the area to the right of the positive Z-score value, and to the left of the negative Z-score value. We have to consider this when calculating the $p$-value. To get the right-tail area under the normal curve for a positive $Z$-score we can, use `1-pnorm(Z_score)`, which is simply the full area under the normal curve, minus the area to the left. Now that we have to correct area under the curve we just need to multiply it by 2. For a double-sided hypothesis test, how we calculate the $p$-value depends on whether our $Z$-score is positive or negative. For a single-sided hypothesis test it will depend on whether our $H_A$ states that the population mean is less than a certain value (meaning we need to calculate the area to the left) and we can use `pnorm(Z_score)` as-is, or whether the population mean is more than a certain value (meaning we need to calculate the area to the right) and have to use `1-pnorm(Z_score)`. The same principles apply to to `pq` function for the $t$-distribution. The only difference is that we always have to specify the degrees of freedom when calling the function. So if our degrees of freedom is say 10, and the $T$-score is 2.5, then the function should be called as `pt(-2.5, 10) = 0.016`. Whether this is our actual $p$-value depends on the hypotheses.
 
 If you still don't quite understand how it works, have a look at:
 
 - [this website](http://www.dummies.com/education/math/statistics/how-to-determine-a-p-value-when-testing-a-null-hypothesis/) that explains the concept of calculating the `p-value`
-- [this website](http://www.cyclismo.org/tutorial/R/pValues.html) which shows how the p-value can be calculated in R.
+- [this website](http://www.cyclismo.org/tutorial/R/pValues.html) which shows how the $p$-value can be calculated in R.
 
-As an exercise, calculate the p-value for the following scenarios:
+As an exercise, calculate the $p$-value for the following scenarios:
 
 *** =instructions
 
-1. Double-sided hypothesis where the T-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
-2. Single-sided hypothesis where the alternative hypothesis is x < 0.23, the T-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
-3. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
-4. Single-sided hypothesis where the alternative hypothesis is x > 0.86, the T-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
-5. Double-sided hypothesis where the T-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+1. Double-sided hypothesis where the $T$-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
+2. Single-sided hypothesis where the alternative hypothesis is $x < 0.23$, the $T$-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
+3. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
+4. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
+5. Double-sided hypothesis where the $T$-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 *** =hint
 
@@ -601,33 +598,33 @@ test_object("p_value_5", undefined_msg = "Make sure to define a variable `p_valu
 
 Our hypotheses are as follow:
 
-- H0: the mean price difference between Company A and Company B is zero,
-- HA: the mean price difference between Company A and Company B is not zero,
+- $H_0$: the mean price difference between Company A and Company B is zero,
+- $H_A$: the mean price difference between Company A and Company B is not zero,
 
 and in symbolic form:
 
-- H0: `mu_diff = 0`,
-- HA: `mu_diff != 0`.
+- $H_0: \mu_{\text{diff}} = 0$,
+- $H_A: \mu_{\text{diff}} \neq 0$`.
 
-Where `mu_diff` is the mean difference for the of the entire population. In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
+Where $\mu_{\text{diff}}$ is the mean difference for the of the entire population. In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
 
-Since we are dealing with a new sample we will again have to calculate difference in prices per product, get the sample size, and calculate the mean and standard deviation of sample.
+Since we are dealing with a new sample we will again have to calculate difference in prices per product, get the sample size, and calculate the mean and standard deviation of the sample.
 
-Once we have the required sample statistics we need to determine how likely our observation or more in favour of the hypothesis is, under the assumption that the null hypothesis is true. This "likely-hood" is our p-value which we can compare against a significance level (alpha value). Since none were supplied we will use an alpha value of 0.05.
+Once we have the required sample statistics we need to determine how likely our observation is in favour of the hypothesis, under the assumption that the null hypothesis is true. This "likely-hood" is our $p$-value which we can compare against a significance level ($\alpha$ value). Since none were supplied we will use $\alpha=0.05$.
 
-Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the T-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the t-distribution. The t-distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
+Recall from [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), Chapter 4 that to conduct a hypothesis test for a single numerical variable we need to calculate the Standard Error for the sample, calculate the number of SEs that our observation is away from the assumed mean under the null hypothesis (this will be the $T$-score for our observation), and then calculate the probability of observing the value or in favour of the alternative hypothesis using the $t$-distribution. The t$-$distribution also requires us to calculate the degrees of freedom (df). All the formulas required for the calculations can be found in the [textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
-To calculate the p-value we will be using the `pt()` function, as described in the previous exercise.
+To calculate the $p$-value we will be using the `pt()` function, as described in the previous exercise.
 
-To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself:
+To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself. Also note that you cannot directly assign a numerical value to your answer. You have to assign the R calculation. For example, say the answer is `p_value = pt(1.1, 5)`, then `p_value = 0.1607254` will be marked as incorrect. Only `p_value = pt(1.1, 5)` will be marked as correct. This only applies to Datacamp.
 
 *** =instructions
 
 1. Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. Assign your answers to the `n`, `price_diff`, `mean_diff` and `sd_diff` variables, same as before.
 2. Calculate the Standard Error of our sample mean and assign your answer to the `SE` variable.
-3. Calculate the T-score of the sample mean and assign your answer to the `T_score` variable.
+3. Calculate the $T$-score of the sample mean and assign your answer to the `T_score` variable.
 4. Calculate the degrees of freedom associated with our hypothesis test and assign your answer to the `df` variable.
-5. Calculate the p-value of our T-score using the `pt()` function and assign your answer to the `p_value` variable.
+5. Calculate the $p$-value of our $T$-score using the `pt()` function and assign your answer to the `p_value` variable. Directly thereafter view the $p$-value.
 6. Lastly, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
 *** =hint
@@ -679,11 +676,13 @@ rm(priceCompB)
 
 # 4) Calculate the degrees of freedom associated with our hypothesis test.
 
-# 5) Calculate the p-value of our T-score using the `pt()` function.
+# 5) Calculate and view the p-value of our T-score using the `pt()` function.
 
-# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis.
+p_value # leave this as is to view the p_value
 
-# You can print whatever you need to view here. For advanced users, you can check if the answers make sense by using the t.test function.
+# 6) Use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis and the view the results.
+
+rejectH0 # leave this as is to view the result
 
 ```
 
@@ -712,7 +711,7 @@ T_score <- mean_diff/SE
 
 df = n - 1
 
-# 5) Calculate the p-value of our T-score using the `pt()` function.
+# 5) Calculate and view the p-value of our T-score using the `pt()` function.
 
 if(T_score < 0){p_value = 2*pt(T_score, df)}else{p_value = 2*(1-pt(T_score, df))}
 p_value
@@ -763,6 +762,28 @@ test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to a
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
 ```
 
+--- type:NormalExercise lang:r xp:100 skills:1 key:de00830dd6
+## Methods for calculating a confidence interval
+
+Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
+
+Same as before, we would rather want to use R to determine the critical $z^*$ or $t_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
+
+The [following web-based tutorial](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) describes in detail and with examples how the confidence intervals can be calculated.
+
+Some things to watch out for.
+
+First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
+
+Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^*$ plus the area to the right of $z^*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
+
+Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t_{df}^*$ values.
+
+Go through the tutorial and then do the following:
+
+*** =instructions
+
+1. Assume we want to calculate a 97% confidence interval using the normal model. Calculate the critical $z^*$ value to be used in the ME calculations. Assign your answer to `z_star_1`.
 
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:de00830dd6
@@ -772,9 +793,26 @@ For the last question we are going to calculate a confidence interval, and then 
 
 In this exercise we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
 
-For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose. Note that the you have to use R's built in functions to calculate the critical t-value for the margin of error. You cannot use the probability tables. [This website](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) illustrates how to do so in R. Take special note of the required confidence levels in the examples, and what they then put into the R functions. There is some manipulation that takes place first.
-
+For this question, you need to semi-manually calculate a 98% confidence interval to compare Company A and B, and then make a final recommendation on which company to choose.
 Thereafter you have to use the built in function, `t.test` to check if your answer makes sense. See [this website](http://www.cyclismo.org/tutorial/R/pValues.html) for more information on using the function, and remember that we are dealing with paired data.
+
+Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
+
+Same as before, we would rather want to use R to determine the critical $z^*$ or $t_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
+
+The [following web-based tutorial](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) describes in detail and with examples how the confidence intervals can be calculated.
+
+Take special note of the required confidence levels in the examples, and what they then put into the R functions. There is some manipulation that takes place first.
+
+Some things to watch out for.
+
+First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
+
+Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^*$ plus the area to the right of $z^*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
+
+Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t_{df}^*$ values.
+
+Once you have gone through the tutorial do the following:
 
 *** =instructions
 
