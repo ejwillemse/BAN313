@@ -786,7 +786,7 @@ Go through the tutorial and then do the following:
 1. Assume we want to calculate a 97% confidence interval using the normal model. Calculate the critical $z^*$ value to be used in the ME calculations. Assign your answer to `z_star_1`.
 
 
---- type:NormalExercise lang:r xp:100 skills:1 key:de00830dd6
+--- type:NormalExercise lang:r xp:100 skills:1 key:6ba9400447
 ## Calculating a confidence interval
 
 For the last question we are going to calculate a confidence interval, and then use that to determine if one company is better than the other, and if so, which one is better. We will reuse much of our previous calculations. To test whether you know how to apply the methods, available hints, instructions and error messages will be kept to a minimum. You can however consult previous exercises as well as [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs), which contains all the formulas that you need to successfully answer this question.
