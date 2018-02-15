@@ -665,7 +665,7 @@ Our hypotheses are as follow:
 and in symbolic form:
 
 - $H\_0: \mu\_{\text{diff}} = 0$,
-- $H\_A: \mu\_{\text{diff}} = 0$.
+- $H\_A: \mu\_{\text{diff}} \neq 0$.
 
 Where $\mu\_{\text{diff}}$ is the mean difference for the of the entire population. In this exercise, ​we will use a _new_ sample of products and their prices from Company A and B and conduct the hypothesis. The new sample is available in the `product_comparison` dataframe.
 
