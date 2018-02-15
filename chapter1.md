@@ -816,46 +816,6 @@ test_output_contains("rejectH0", incorrect_msg = "It's probably a good idea to a
 success_msg("Congrats! You have successfully completed the hypothesis test using actual data. The last part is to make a recommendation in terms of which supplier to use. If we could not reject H0, then we can choose either supplier or use other criteria to make a decision. If we could reject H0, then we can take a new sample of products, and do a one sided hypothesis test to see if the suspected cheaper company is indeed significantly cheaper. Alternatively we can calculate a confidence interval on the mean difference and use that to decide on whether one company is cheaper. In the last question, coming up next, we will (again) look at a new sample and compute a confidence interval for the true mean difference. Thereafter we will make a final recommendation on whether we should choose one company over the other, and if so which company to choose. We will do this with minimal instructions, hints and error messages. Instead we will use the built in function `t.test` to check if our answers make sense.")
 ```
 
-
-
----
-## Methods for calculating a confidence interval
-
-```yaml
-type: NormalExercise
-lang: r
-xp: 100
-skills: 1
-key: de00830dd6
-```
-
-Part of statistical inference is determining confidence intervals for population parameters. To do so, we would first decide on a confidence level, then determine the associated critical $z^*$ or $t_{df}^*$ value, calculate the Margin of Error (ME), and then calculate the interval.
-
-Same as before, we would rather want to use R to determine the critical $z^*$ or $t_{df}^*$ values, instead of reading it from probability tables. To do so, we can use the `qt` (for the normal distribution) and `qnorm` (for the $t$ distribution). Thereafter we can use the ME and confidence interval formulas.
-
-The [following web-based tutorial](http://www.cyclismo.org/tutorial/R/confidence.html?highlight=confidence%20interval) describes in detail and with examples how the confidence intervals can be calculated.
-
-Some things to watch out for.
-
-First, when using `qt` and `qnorm`, does it return a positive or negative value? There are different ways of calculating the critical value, but make sure that $z^*$ and $t_{df}^*$ is ultimately positive, otherwise your confidence interval will be the wrong way around, i.e. (upper value, lower value) instead of (lower value, upper value).
-
-Second, you have to carefully decide on the value to use in the `qt` and `qnorm` functions. Similar to the probability tables, the `qt` and `qnorm` functions return the $Z$ and $T$ values that gives the area to the _left_ of these values equal to a specified probability. For a 95% confidence interval, we need the area to the left of $-z^*$ plus the area to the right of $z^*$ in the normal distribution to be equal to 5%. Therefore the area to the left should be equal to 2.5%, and the area to the right also equal to 2.5%.
-
-Some pre-calculations are therefore required to figure out what to plug into  `qt` and `qnorm` to get the right $z^*$ and $t_{df}^*$ values.
-
-Go through the tutorial and then do the following:
-
-`@instructions`
-1. Assume we want to calculate a 97% confidence interval using the normal model. Calculate the critical $z^*$ value to be used in the ME calculations. Assign your answer to `z_star_1`.
-
-
-
-
-
-
-
-
-
 ---
 ## Calculating a confidence interval
 
