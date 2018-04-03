@@ -699,7 +699,7 @@ test_object("arriveRate", undefined_msg = "Make sure to define an object `arrive
 test_function("chisq.test", args = c("x", "p", "rescale.p"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
               incorrect_msg = "Make sure to use the `chisq.test` function. Refer to the previous questions on instructions.")  
 
-test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `rejectExp`.",
+test_object("rejectExp", undefined_msg = "Make sure to define a variable `rejectExp`.",
             incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectExp`. View the p-value from the chi-square test and then decide for yourself if `rejectExp<-TRUE` or `rejectExp<-FALSE`.")
 
 success_msg("Correct! The chi-squared test result shows that we cannot discard the exponential distribution.")
