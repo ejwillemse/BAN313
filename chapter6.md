@@ -1,312 +1,119 @@
 ---
-title_meta  : Case study 9
-title       : Case study 9 - Developing simulation models using probability distributions (advanced)
-description : "In this case study we will analyse how a random order process influences inventory levels and stock-outs of our product. We will further analyse the impact of a random production process, identical to the one from the previous chapter, on inventory levels."
+title_meta  : Case study 8
+title       : Case study 8 - Developing simulation models using probability distributions (introduction)
+description : "In this case study we will revisit the drilling hole example and see what influence re-work will have on our process output. First we will analyse the process output and do a goodness-of-fit test to see which distribution hole-sizes follow. Thereafter we will perform bootstrap analysis on the key parameters of the distribution. We will then use the distribution and parameters to simulate the process to answer a few basic questions."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
 ## Background
 
-In the previous case study we modelled a random production process.
-In this chapter we will move to the supply-side of our business and model a random order process for our product.
+In this case study we will revisit the drilling hole example where we are investigating the production of a product.
+During the product's manufacturing process, a hole with a diameter of 10cm has to be drilled into the product by a drill-press.
+Due to process randomness, such as vibrations, the product moving around in the drill-clamp, defects in the product material, etc. the drill-hole is not always the same diameter.
+It differs from hole to hole, and thus represents a random process.
 
-**Before continuing with this chapter, please do the following:**
+An imperfect hole is expected and the product is designed to account for this. The hole has a 0.25cm tolerance limit.
+If a hole diameter is within [9.75cm, 10.25cm] the product will work according to specifications, otherwise it is defective.
 
-1. Complete [Case study 8 - Developing simulation models using probability distributions (introduction)](https://campus.datacamp.com/courses/industrial-analysis-using-r/10739?ex=1) on Datacamp.
-2. Complete [Writing functions in r - A quick refresher](https://www.datacamp.com/courses/writing-functions-in-r) on Datacamp.
-3. Go through the following tutorial on using the [if-else statement in R](https://www.tutorialspoint.com/r/r_if_else_statement.htm).
-3. Review the lecture slides _Lecture_Week8.pdf_, available on _clickUP_ under _Theme 2: Simulation models_.
+As the production planner we want to answer the following simple question.
+If we manufacture 1000 products, how many will be defective because of the drill hole-size being either too large or too small?
 
-**After completing the above, read the below instructions carefully.**
-
-Each day, customers place orders for our product.
-Each customer is unique and have different requirements, therefore the amount of products ordered differs from day-to-day.
-Inventory is used to account for the daily variation.
-
-Each day a fixed amount of products are manufactured and stored as inventory.
-For low-order days, the surplus manufactured products are placed in inventory, which can then be used during high-order days.
-
-As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
-A stock-out occurres when our clients order more products than what we have available in our inventory.
-
-We have a fixed production-run setup, meaning we produce a fixed number of products each day.
-Each day's manufactured products is moved to inventory at the end of the day, meaning it is ready for sale at the start of the next day.
-
-When customers place orders, it is filled form the available inventory on the same day.
-If the day's orders cannot be filled, due to low inventory levels, the customers take the available inventory and purchases the balance elsewhere.
-
-*For example*, on Day 1 we manufactured 150 products.
-On the same day our starting inventory level was 100 products, and we received orders for 50 products.
-Our ending inventory on Day 1 is then 50 products (100 - 50).
-On Day 2 our starting inventory will increase by 150 products (the products manufactured the previous day) and we will thus have 200 products (50 + 150) in inventory.
-
-On Day 2 we again manufactured 150 products since we have a fixed 150-product production run.
-On this day our starting inventory level was 200 products, and we received orders for 225 products.
-Since we received orders for more products than we have available in inventory, our ending inventory will be 0 products.
-We sold our available 200 products, and the customers had to purchase 25 products elsewhere.
-This also means that we had a stock-out on Day 2, since we ran out of inventory.
-On Day 3 our starting inventory will again increase by 150 products and will we will thus have 150 products (0 + 150) in inventory.
-
-In this chapter we will predict our daily starting and ending inventory levels over a period of 30 days, as well as the proportion of stock-outs over the study period, which is the total number of stock-outs over the period divided by the number of days in the study period.
-
-In this lab we do the following:
-
-1. Develop a simulation model of our stock-outs and inventory levels based on random orders.
-<<<<<<< HEAD
-2. Adapt the simulation model to account for limited inventory space and see how it influences the predicted stock-outs and inventory levels.
-3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
-4. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
-=======
-2. Predict how larger production runs will influence stock-outs and inventory levels.
-3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
+**Before continuing with this chapter**, complete [Case study 7 - Fitting probability distributions and estimating distribution parameters](https://campus.datacamp.com/courses/industrial-analysis-using-r/10364?ex=1)
 
 The specific R functions that are applicable to this chapter are:
 
 ```
-<<<<<<< HEAD
-runif(), rnorm(), rep(), sample(), function(), for, if
-=======
-runif(), rnorm(), rep(), sample(), round(), subset(), length(), median(), mean(), function(), for, if
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
+rnorm(), seq(), for
 ```
-
-To find out more about the functions, type `?` followed by the R-function in the R console.
-
-Take note that the data used for this chapter is randomly generated and will change:
-
-- each time the chapter is attempted; and
-- when moving from one exercise to the next.
-
-When completing the chapter, read all the available information and instructions _carefully_, and if necessary, review the applicable engineering statistics methods.
-
-**DO NOT** jump straight to the instructions and skip each questions' background information. The question backgrounds contain valuable information to assist you in completing the questions.
-
-To continue with this chapter confirm the following:
 
 *** =instructions
 
-* I have not completed all the prescribed preparation material, as listed above, or have not read all the instructions on this page.
+- Hit the 'Submit Answer' button when you're done reading the instructions.
 
-* I confirm that I have completed the prescribed preparation material, as listed above, and have read **ALL** the instructions on this page carefully.
+*** =hint
+Just hit the 'Submit Answer'.
 
 *** =pre_exercise_code
 ```{r}
+#none
 
 ```
 
 *** =sample_code
 ```{r}
 
+```
+
+*** =solution
+```{r}
+#none
 ```
 
 *** =sct
 ```{r}
-msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
-Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-
-msg_success <- "Let's get started with the Lab.
-Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
-Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
+success_msg("Let's complete the questions.")
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a44acfd135
-## Determining the starting and ending inventory levels after a few days
+--- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+## Simulating the drilling process
 
-Let $I\_\text{start}(t)$ be the starting inventory-level and let $I\_\text{end}(t)$ be the ending inventory-level on day $t$.
-Let $P$ be the fixed amount of products produced per day, and let $O(t)$ be the number of products ordered on day $t$.
+From a previous exercise we know the diameter of the drill holes, $X$, follows a normal distribution with the following parameters:
 
-The starting and ending inventory levels can be calculated as follow:
+$$X \sim \mathcal{N}(\mu = 10, \sigma = 0.2)$$
 
-$$I\_\text{end}(t) = \max(0, I\_\text{start}(t) - O(t)),$$
-$$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
+The upper and lower tolerance limits for the hole are:
 
-Carefully study the equations above and make sure you understand how inventory levels are calculated.
+* $X\_{low} = 10 - 0.25 = 9.75$
+* $X\_{up} = 10 + 0.25 = 10.25$
 
-The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered.
-But the level can never be less than zero.
-The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products manufactured during the previous day.
+The probability, $p$, of a drill-hole falling outside the tolerances can be easily calculated using the following code:
 
-For the first question we are going to look at a sequence of product orders for three consecutive days and calculate the starting inventory level for the *fourth* day.
+```
+p <- pnorm(9.75, 10, 0.2) + pnorm(10.25, 10, 0.2, lower.tail = FALSE)
+```
 
-The number of products ordered for the three days were as follow:
+If were were to manufacture 1000 products, we would expect $1000 \times p$ products to be defective.
 
-* Day 1: 124
-* Day 2: 137
-* Day 3: 101
+An alternative way to answer the question to simulate the drilling process. We can artificially produce drill-holes and then check the number of drillholes that fall outside the specification limits.
 
-Due to a machine break-down our starting inventory-level for Day 1 was 120 units.
-The machine was fixed, and we had a fixed production-run of 150 products for Days 1 to 3, meaning we manufactured 150 products per day on Day 1, 2, and 3.
+This can be done using the following R function
 
-Based on the above information, what was our **starting** inventory level on Day 4? You may use the console screen on the right to do the necessary calculations.
+```
+rnorm()
+```
 
+You can type `?rnorm` in the console to find out more about the function.
+
+Similar to `pnorm`, it takes as input the mean and standard deviation of a normal distribution. It also takes `n` which is the number of samples that we want to draw from the normal distribution with the specified mean and standard deviation.
+
+To simulate 1000 drill-holes we can use the function as follows:
+
+```
+drillHoleDiameters <- rnorm(n=1000, mean = 10, sd = 0.2)
+```
+
+To simulate a single drill-hole we can use the function as follows:
+
+```
+drillHoleDiameters <- rnorm(n=1, mean = 10, sd = 0.2)
+```
+
+Note that the same structure can be used to simulate any of R's built in distribution.
+
+To complete this question answer the following:
 
 *** =instructions
 
-* 62
-
-* 205
-
-* 212
-
-* 235
-
-* 355
-
-*** =pre_exercise_code
-```{r}
-
-```
-
-*** =sample_code
-```{r}
-
-```
+1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+2. View a histogram of the simulated drill-holes.
+3. Calculate and view the mean and standard deviation of the simulated drill-holes. You only have to view the two values.
+4. Calculate the number of simulated drill-holes that fall outside the specification limits and assign your answer to `nOutsideSpec`. Hint: since `drillHoleDiameters` is a vector, we need to use the `length` function instead of `nrows`.
+5. Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the $1000 \times p$ calculation as given in the question background. You just have to view the two numbers.
+6. Simulate and view a single drill-hole size and assign your answer to `singleDrillHole`.
+7. What is the probability of get the single drill-hole size or _smaller_? Assign your answer to `pSmaller` and view the result. Hint: use the `pnorm` function.
 
 *** =hint
 
-Use the given formulas to calculate the starting and ending inventory levels for the first three days, thereafter you the ending inventory level of Day 3 to calculate the starting inventory level for Day 4.
-
-*** =sct
-```{r}
-msg_bad1 <- "That is incorrect.
-Carefully go through the given formulas.
-Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
-The given starting inventory for Day 1 thus *includes* the products manufactured on the previous day.
-So should the starting inventory for Day 4."
-
-msg_bad2 <- "That is incorrect.
-Carefully go through the given formulas.
-We can only sell what we have in-stock, so our ending-inventory level can never be negative.
-Also, remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day."
-
-msg_success3 <- "Correct. The starting inventory level for Day 4 is 212.
-Our starting inventory for Day 1 was given as 120 units.
-The ending inventory level for Day 1 is 0, since we did not have enough inventory to meet the 124 products ordered.
-Our starting inventory for Day 2 was 150, since the previous day's production was available in our inventory.
-The ending inventory for Day 2 was then 13 (150 - 137).
-The starting and ending inventory levels for Day 3 was 163 and 62 products, respectively.
-Therefore the starting inventory level for Day 4 was 62 + 150 = 212 products.
-We further know that we had a stock-out on Day 1 since we didn't have enough products to meet the demand for that day."
-
-msg_bad4 <- "That is incorrect.
-Carefully go through the given formulas.
-The given starting inventory for Day 1 includes the products manufactured on the previous day.
-It was less than 150 products due to a machine break-down."
-
-msg_bad5 <- "That is incorrect.
-Carefully go through the given formulas.
-Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
-The given starting inventory for Day 1 thus *already* includes the products manufactured on the previous day."
-
-test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad4, msg_bad5))
-```
-
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
-## Calculating starting and ending inventory levels and stock-outs
-
-Using the following formulas we can calculate the starting and ending inventory levels for consecutive days:
-
-$$I\_\text{end}(t) = \max\(0, I\_\text{start}(t) - O(t)),$$
-$$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
-
-In this exercise we will write an R programme to calculate the inventory levels.
-
-Assume that the setup is the same as before, where we manufacture 150 products per day and our starting inventory for Day 1 was 120 products.
-The number of products ordered, $O(t)$, for 10 consecutive days were:
-
-```
-O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
-```
-
-In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$ can be retrieved using `O[2]`.
-Our starting inventory for Day 1 is $I\_\text{start} = 120$, and our production batch size is $P = 150$.
-
-In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day determine if there was a stock-out.
-
-To do so we will initialise, populate and analyse the following three vectors:
-
-```
-I_start <- rep(NA, 11)
-I_end <- rep(NA, 10)
-stockOut <- rep(NA, 10)
-```
-
-The reason for using `I_start <- seq(NA, 11)` and not `I_start <- seq(NA, 10)` will be explored later on.
-
-Since it was given that $I\_\text{start} = 120$, we have to set `I_start[1] <- 120`.
-
-The following code calculates the ending inventory level for Day 1:
-
-```
-I_end[1] <- max(0, I_start[1] - O[1])
-```
-
-The `max(0,...)` function ensures that inventory is set to zero when more products are ordered than available.
-The only problem with the above code is that it does not explicitly take stock-outs into account.
-If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$.
-It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
-
-An `if(){}else{}` statement can be used to model stock-outs, and to update the `stockOut` variable:
-
-```
-if(I_start[1] < O[1])
-{
-  stockOut[1] <- 1
-  I_end[1] <- 0
-}else{
-  stockOut[1] <- 0
-  I_end[1] <- I_start[1] - O[1]
-}
-```
-
-Carefully go through the above code to see how stock-outs are modelled.
-
-If the number of products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
-We can also choose to set `stockOut[1] <- TRUE`.
-By using `stockOut[1] <- 1` for a stock-out, and `stockOut[1] <- 0` otherwise, it makes it a bit easier to calculate the number of stock-outs later on.
-It will simply be `sum(stockOut)`.
-If a stockout occurred, our ending inventory is set to 0.
-If a stockout did not occur, meaning we had enough products in inventory, then our ending inventory is equal to our starting inventory minus the number of products ordered.
-
-The last part is then to calculate the starting inventory for the next day, $t + 1$:
-
-```
-I_start[2] <- I_end[1] + P
-```
-where `P` is the fixed number of products that we produce per day, and which is available for sale the next day.
-
-Instead of hardcoding $t$, we can make our code more generic to calculate the starting and ending inventory, as well as the probability for a stock-out for day $t$:
-
-```
-if(I_start[t] < O[t])
-{
-  stockOut[t] <- 1
-  I_end[t] <- 0
-}else{
-  stockOut[t] <- 0
-  I_end[t] <- I_start[t] - O[t]
-}
-
-I_start[t+1] <- I_end[t] + P
-```
-
-For Day 1, we just need to set `t = 1` and run the above code.
-For Day 2, we will then set `t = 2` and run the above code, and we can continue doing so for `t=3`, `t=4`, upto `t=10`.
-
-Note that the last line of the generic code always calculates the starting inventory for the next day, $t+1$.
-We will therefore end up calculating the starting inventory level for day $t = 11$, even though we are only really interested in the first 1- days.
-We can use another `if` statement to not calculate the `I_start[t+1]` if we are at the end of the study period.
-But easier is to just create an additional storage space in `I_start` by initialising it as `I_start <- seq(NA, 10 + 1)`.
-
-The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop to automatically do all the calculations over the study period.
-
-*** =instructions
-1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
-2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
-3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
-4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
-5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
+Use `drillHoleDiameters <- rnorm(n=1000, mean = 10, sd = 0.2)` to simulate a 1000 holes, and `singleDrillHole <- rnorm(n=1, mean = 10, sd = 0.2)` to simulate one hole. Use the subset operator with R's or command `|` to return drill holes that are outside specification. Use the `length` command to count the number of observations outside specification. The `hist` function can be used to view the distribution of the 1000 holes. To calculate `pSmaller` use `pnorm(singleDrillHole, mean = , sd = )`.
 
 *** =pre_exercise_code
 ```{r}
@@ -315,45 +122,31 @@ The last update in our code is to place the inventory-level and stock-out calcul
 
 *** =sample_code
 ```{r}
-
-#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the 10-day study period.
-
-O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
-
-P <- 150
-I_start <- rep(NA, 11)
-I_end <-
-stockOut <-
-
-I_start[1] <-
-
-for (t in 1:10)
-{
-  if()
-  {
-    # stock-out occurred, not all order were met
-
-  }else{
-    # stock-out did not occur, all orders were met
-
-  }
-  # calculate the starting inventory for the next day, t + 1
-
-}
-
-#2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
+#1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
 
 
 
-#3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
+#2. View a histogram of the simulated drill-holes.
 
 
 
-#4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
+#3. Calculate and view the mean and standard deviation of the simulated drill-holes. You only have to view the two values.
 
 
 
-#5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
+#4. Calculate the number of simulated drill-holes that fall outside the specification limits and assign your answer to `nOutsideSpec`. Hint: since `drillHoleDiameters` is a vector, we need to use the `length` function instead of `nrows`.
+
+
+
+#5. Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the 1000 x p calculation as given in the question background. You just have to view the two numbers.
+
+
+
+#6. Simulate and view a single drill-hole size and assign your answer to `singleDrillHole`.
+
+
+
+#7. What is the probability of get the single drill-hole size or _smaller_? Assign your answer to `pSmaller` and view the result. Hint: use the `pnorm` function.
 
 
 
@@ -361,110 +154,92 @@ for (t in 1:10)
 
 *** =solution
 ```{r}
-O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
-
-startingInventory <- 120
-P <- 150
-
-I_start <- rep(NA, 11)
-I_end <- rep(NA, 10)
-stockOut <- rep(NA, 10)
-
-I_start[1] <- 120
-
-for (t in 1:10)
-{
-  if(I_start[t] < O[t])
-  {
-    stockOut[t] <- 1
-    I_end[t] <- 0
-  }else{
-    stockOut[t] <- 0
-    I_end[t] <- I_start[t] - O[t]
-  }
-  I_start[t+1] <- I_end[t] + P
-}
-
-barplot(stockOut)
-barplot(I_start)
-barplot(I_end)
-
-mean_I_end <- mean(I_end)
-nStockOut <- sum(stockOut)
-pStockOut <- nStockOut/10
+drillHoleDiameters <- rnorm(n=1000, mean = 10, sd = 0.2)
+hist(drillHoleDiameters)
+nOutsideSpec <- length(subset(drillHoleDiameters, drillHoleDiameters < 10-0.25 | drillHoleDiameters > 10+0.25))
+singleDrillHole <- rnorm(n=1, mean = 10, sd = 0.2)
+pSmaller <- pnorm(singleDrillHole, 10, 0.2)
 ```
 
 *** =sct
 ```{r}
-test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`.
-Remember that it has to be calculated for each day `t`.")
+test_object("drillHoleDiameters", undefined_msg = "Make sure to define an object `drillHoleDiameters`.", incorrect_msg = "Make sure that you sampled 1000 drill-holes using the `rnorm` function and assigned your answer to `drillHoleDiameters`")       
 
-test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`.
-Remember that it has to be calculated for each day `t`.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `drillHoleDiameters`.", incorrect_msg = "Draw a histogram of `drillHoleDiameters`.")
 
-test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`.
-Remember that it has to be calculated for each day `t`.")
+test_object("nOutsideSpec", undefined_msg = "Make sure to define an object `nOutsideSpec`.",
+incorrect_msg = "Make sure that you calculated the number of simulated drill-holes that fall outside the hole-specifications correctly and assigned your answer to `nOutsideSpec`.")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
-incorrect_msg = "Draw a barplot of `stockOut`.")
+test_object("singleDrillHole", undefined_msg = "Make sure to define an object `singleDrillHole`.", incorrect_msg = "Make sure that you sampled one drill-hole using the `rnorm` function and assigned your answer to `singleDrillHole`")  
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
-incorrect_msg = "Draw a barplot of `I_start`.")
+test_object("pSmaller", undefined_msg = "Make sure to define an object `pSmaller`.", incorrect_msg = "Make sure that you calculated the probability of getting a smaller drill-hole than the one just sampled correctly using the `pnorm` function and assigned your answer to `pSmaller`")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
-incorrect_msg = "Draw a barplot of `I_end`.")
-
-test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`.
-It should be the mean ending-inventory level `I_end`.")
-
-test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`.
-It should be the total number of days on which a stock-out occurred.
-Use `sum` to calculate it.")
-
-test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`.
-It should be the proportion of days on which a stock-out occurred.
-Use `nStockOut` and the number of days in our study period to calculate it.")
-
-success_msg("Correct!
-The given code can be used to calculate the inventory-levels for any number of days based on known orders.
-As mentioned, orders are random.
-In the next question we are going to take this into account and transform our code into a simulation model.")
+success_msg("Correct! By using R's built-in sampling functions we can simulate processes by randomly sampling from the process' distribution. In the next question we will look at a more complex version of the drill-hole example.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:42987389b3
-## Simulating inventory levels and stock-outs
+--- type:NormalExercise lang:r xp:100 skills:1 key:21188c8230
+## Simulating the drilling process with rework
 
-With the necessary code in place to calculate inventory levels and stock-outs based on product orders, we can now proceed to develop a simulation model.
+We know the diameter of the drill-holes is $X \sim \mathcal{N}(\mu = 10, \sigma = 0.2)$, and that the drill-hole should have a diameter of 10cm with a tolerance of 0.25cm.
 
-The number of products ordered, $O$, on any give day is random but known to follow a uniform distribution with the following parameters:
+In practice we have an option to rework defective products.
+Basically we can try to repair the defective product so that it meets specification.
+Repairing is not always possible, and when it is possible it is not always effective.
 
-$$O \sim \mathcal{U}(\min = 100, \max = 200).$$
+For our drill-hole example we have the following repair options.
+If a hole is too big the product is scrapped since we cannot make the hole smaller.
+If a hole is too small, we can attempt to re-drill the hole using a specialized drilling machine.
+With this second attempt, much can go wrong. The part might crack or the resulting hole may be too big, in which case the product will be scrapped in any-case.
 
-Based on this information we can easily update our previous code to simulate the inventory levels and stock-outs over any study period.
+The probability of the rework being successful is known to be **65%**.
 
-In this exercise our starting inventory for Day 1 will again be 120 units and we manufacture 150 units per day.
-The only new part is to model orders as a random process that follows a uniform distribution.
 
-We can simulate the product orders for a total of `n` days using the following code
+To simulate the rework process we can use the `sample` function with replacement.
+First we need to determine the number of products that we will rework, `nRework`, and then use the probability of a rework being successful, `pFixed = 0.65`.
+Thereafter we can simulate which products are reworked successfully and which are note using the following code:
 
 ```
-O <- runif(n, 100, 200)
+outcomes <- c(TRUE, FALSE) # rework can either be successful or not
+pOutcome <- c(pFixed, 1 - pFixed) # probability of TRUE and FALSE
+reworkSimulation <- sample(x = outcomes, size = nRework, replace = TRUE, pOutcome)
 ```
 
-Our previous code can then be used as-is to calculate inventory and stock-out levels after incorporating `n` into the necessary places in our code.
+To see how many parts were unsucssessfully scrapped, we just need to count the number `FALSEs` in `reworkSimulation`. This can be done using the `table` command, or by using:
 
-This will be left as an exercise:
+```
+length(subset(reworkSimulation, reworkSimulation == FALSE))
+```
+
+To simulate the number of products that are defective out of a production batch of 1000 we need to determine the number of products that will be immediately scrapped plus the number of products that will be scrapped after rework.
+
+We can actually calculate the proportion of scrapped products analytically using the following formulas:
+
+$$p_\text{scrap} = P(X > 10.25) + P(X < 9.75)\times (1-0.65),$$
+
+where $P(X > 10.25)$ is the probability of a hole being larger than 10.25cm and $P(X < 10.25)$ is the probability of a hole being smaller than 9.75cm. The second term is multiplied by 1-0.65 = 0.35, which is the probability of a reworked product being unsuccessfully repaired, and therefore scrapped.
+
+The formula thus means:
+
+_The probability of a product being scrapped is equal to the probability of its hole being larger than 10.25cm **or** being smaller than 9.75cm **and** being unsuccessfully reworked_.
+
+To calculate $P(X > 10.25)$ and $P(X < 9.75)$ we can use the provided information that hole-size follows a normal distribution, and R's `pnorm` function. For example: `pnorm(9.75, 10, 0.2)` gives us the probability that the hole will be smaller than 9.75 and will be reworked.
+
+To complete the question do the following:
 
 *** =instructions
 
-1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
-2. Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
+1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+2. Calculate and view the number of simulated drill-holes that are too big and will immediately be scrapped. Assign your answer to `nScrap`.
+3. Calculate and view the number of simulated drill-holes that are too small and will be reworked. Assign your answer to `nRework`.
+4. Simulate the rework process using the `sample` function and assign your results to `reworkSimulation`.
+5. Calculate and view the number of reworked products that were unsuccessfully repaired and scrapped. Assign your answer to `nReworkScrap`.
+6. Calculate and view the total number of products, out of the 1000 simulated products, that were scrapped. Assign your answer to `nScrapTotal`.
+7. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim`.
+8. Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
+
+*** =hint
+
+Refer to the previous question on how to simulate drill-hole sizes. To simulate the rework, refer to the question background information. To count the number of successful reworks, either use the `subset` or `table` command, similar to how it was used for `pFixed`.
 
 *** =pre_exercise_code
 ```{r}
@@ -473,162 +248,105 @@ This will be left as an exercise:
 
 *** =sample_code
 ```{r}
-#1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
+#1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
 
-n = 30
-O <- ...
 
-#2. Update the code below to calculate and view the inventory levels and stock-outs for the 30 days' simulated product orders.
 
-tartingInventory <- 120
-P <- 150
+#2. Calculate and view the number of simulated drill-holes that are too big and will immediately be scrapped. Assign your answer to `nScrap`.
 
-I_start <- rep(NA, ...)
-I_end <- rep(NA, ...)
-stockOut <- rep(NA, ...)
 
-I_start[1] <- 120
 
-for (t in 1:...)
-{
-  if(I_start[t] < O[t])
-  {
-    stockOut[t] <- 1
-    I_end[t] <- 0
-  }else{
-    stockOut[t] <- 0
-    I_end[t] <- I_start[t] - O[t]
-  }
-  I_start[t+1] <- I_end[t] + P
-}
+#3. Calculate and view the number of simulated drill-holes that are too small and will be reworked. Assign your answer to `nRework`.
 
-barplot(stockOut)
-barplot(I_start)
-barplot(I_end)
 
-mean_I_end <- mean(I_end)
-mean_I_end
 
-nStockOut <- sum(stockOut)
-nStockOut
+#4. Simulate the rework process using the `sample` function and assign your results to `reworkSimulation`.
 
-pStockOut <- nStockOut/...
-pStockOut
+
+
+#5. Calculate and view the number of reworked products that were unsuccessfully repaired and scrapped. Assign your answer to `nReworkScrap`.
+
+
+
+#6. Calculate and view the total number of products, out of the 1000 simulated products, that were scrapped. Assign your answer to `nScrapTotal`.
+
+
+
+#7. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim`.
+
+
+
+#8. Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
+
+
+
 
 ```
 
 *** =solution
 ```{r}
-n <- 30
-O <- round(runif(n, 100, 200), 0)
-
-P <- 150
-
-I_start <- rep(NA, n + 1)
-I_end <- rep(NA, n)
-stockOut <- rep(NA, n)
-
-I_start[1] <- 120
-
-for (t in 1:n)
-{
-  if(I_start[t] < O[t])
-  {
-    # stock-out occurred, not all order were met
-    stockOut[t] <- 1
-    I_end[t] <- 0
-  }else{
-    # stock-out did not occur, all orders were met
-    stockOut[t] <- 0
-    I_end[t] <- I_start[t] - O[t]
-  }
-
-  # calculate the starting inventory for the next day, t + 1
-  I_start[t+1] <- I_end[t] + P
-}
-
-barplot(stockOut)
-barplot(I_start)
-barplot(I_end)
-
-mean_I_end <- mean(I_end)
-nStockOut <- sum(stockOut)
-pStockOut <- nStockOut/n
+drillHoleDiameters <- rnorm(1000, 10, 0.2)
+nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
+pFixed <- 0.65
+reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
+nScrapTotal = nScrap + nReworkScrap
+pScrappedSim <- nScrapTotal/1000
+pScrappedAct <- pnorm(10 + 0.25, 10, 0.2, lower.tail = FALSE) + 0.35*pnorm(10 - 0.25, 10, 0.2, lower.tail = TRUE)
 ```
 
 *** =sct
 ```{r}
-test_object("O", undefined_msg = "Make sure to define an object `O`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`.
-Use the `runif` function for the simulation.")
+test_object("drillHoleDiameters", undefined_msg = "Make sure to define an object `drillHoleDiameters`.", incorrect_msg = "Make sure that you sampled 1000 drill-holes using the `rnorm` function and assigned your answer to `drillHoleDiameters`")       
 
-test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
-incorrect_msg = "Something went wrong in calculating `stockOut`.
-Remember that it has to be calculated for each day `t`.")
+test_object("nScrap", undefined_msg = "Make sure to define an object `nScrap`.", incorrect_msg = "Make sure that you calculated the number of products that will be scrapped immediately correctly and assign your answer to `nScrap`.")
 
-test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
-incorrect_msg = "Something went wrong in calculating `I_start`.
-Remember that it has to be calculated for each day `t`.")
+test_object("nRework", undefined_msg = "Make sure to define an object `nRework`.", incorrect_msg = "Make sure that you calculated the number of products that will be reworked correctly and assign your answer to `nRework`.")
 
-test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
-incorrect_msg = "Something went wrong in calculating `I_end`.
-Remember that it has to be calculated for each day `t`.")
+test_object("reworkSimulation", undefined_msg = "Make sure to define an object `reworkSimulation`.", incorrect_msg = "Make sure that you simulated the rework process by using the `sample` function and the given probability of a rework being successful and assign your answer to `reworkSimulation`. You have to take `nRework` samples.")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
-incorrect_msg = "Draw a barplot of `stockOut`.")
+test_object("nReworkScrap", undefined_msg = "Make sure to define an object `nReworkScrap`.", incorrect_msg = "Make sure that you calculated the number of reworked products that were unsuccessfully repaired and scrapped correctly and assign your answer to `nReworkScrap`.")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
-incorrect_msg = "Draw a barplot of `I_start`.")
+test_object("nScrapTotal", undefined_msg = "Make sure to define an object `nScrapTotal`.", incorrect_msg = "Make sure that you calculated the total number of scrapped correctly and assign your answer to `nScrapTotal`.")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
-incorrect_msg = "Draw a barplot of `I_end`.")
+test_object("pScrappedSim", undefined_msg = "Make sure to define an object `pScrappedSim`.", incorrect_msg = "Make sure that you calculated the proportion of scrapped products correctly and assign your answer to `pScrapped`. The proportion can be calculated using `nScrapTotal` and the number of holes drilled in the simulation.")
 
-test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
-incorrect_msg = "Something went wrong in calculating `mean_I_end`.
-It should be the mean ending-inventory level `I_end`.")
+test_object("pScrappedAct", undefined_msg = "Make sure to define an object `pScrappedAct`.", incorrect_msg = "Make sure that you calculated the analytical proportion of scrapped products correctly and assign your answer to `pScrappedAct`. The proportion should be calculated using the given formulas and the `pnorm` function.")
 
-test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
-incorrect_msg = "Something went wrong in calculating `nStockOut`.
-It should be the total number of days on which a stock-out occurred.
-Use `sum` to calculate it.")
-
-test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
-incorrect_msg = "Something went wrong in calculating `pStockOut`.
-It should be the proportion of days on which a stock-out occurred.
-Use `nStockOut` and the number of days in our study period to calculate it.")
-
-success_msg("Correct!
-We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days.
-Each time we run the simulation, we will get different levels.
-This is expected since the simulation model mimics a random processes.
-The question is then, how do we use the model to predict inventory levels and stock-outs?
-The answer is that we have to run the simulation numerous times, and capture our key measurements with each simulation.
-We can use our above code to do so by placing it in a `for`-loop, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.
-A more elegant approach is to place the simulation model inside a function, and repeatedly call the function.")
+success_msg("Correct! By using R's built in functions we simulated the drilling process with rework, which is a bit more complex than the previous example. The simulated proportion is different from the actual proportion since the simulated proportion presents one random instance of manufacturing a 1000 product batch. Should we simulate another batch we will get a different proportion. It's not always easy, or even possible, to calculate the true proportion analytically. Sometimes we have to develop a simulation model to analyse process output. Having the simulation also allows us to use it for inference. This will be illustrated in the next question.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
-## A function for simulating the proportion of stock-outs
+--- type:NormalExercise lang:r xp:100 skills:1 key:99f60f5510
 
-For this exercise we are going to convert our previous code into a function that can simulate the order process and inventory levels for a specified number of days and return the proportion of stock-outs, which is our main measurement of interest.
+## Inference with simulation: scrapping too many parts (Part 1)
 
-The function will take the following inputs:
+A production manager was recently appointed to oversee the production line that includes the drill-press process. In the first day of his appointed a small production run was completed of 30 products. Of the 30 products, 8 had to be scrapped due to the hole size.
 
-* `n`: the number of days that we wish to simulate.
-* `I_start0`: the starting inventory for Day 1 of our simulation.
-* `P`: the number of products produced per day.
+Management is very concerned about the high-scrap proportion of 27%, especially since we indicated to Management that the probability of a product been scrapped is only 14%. Management is considering firing the production line manager.
 
-The function will then return the following:
+Is there sufficient evidence to do so?
 
-* `pStockOut`: the proportion of days on which a stockout occurred.
+We wish to determine if the process is producing the same outputs as before, or whether the process has somehow worsen under his supervision.
+
+We can formally investigate the issue using inference for proportion. The two competing hypotheses that we can test are:
+
+* $H_0$: The true proportion of defective products manufactured under the new supervisor is 14%;
+* $H_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 14%.
+
+Consistent with a hypothesis test we will assume that $H_0$ is true, and then calculate the probability of getting a defect-proportion from a batch of 30 products of 27% or more. To calculate the probability we will simulate $H_0$ using the code from our previous example.
+
+To complete the question do the following:
 
 *** =instructions
 
-1. Using the provided code, write a function that simulates `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
-2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
-3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
-4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
+1. Simulate 30 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+2. Calculate the total number of products, out of the 30 simulated products, that were scrapped. Assign your answer to `nScrapTotal`. This will include the products that were immediately scrapped and that were scrapped after rework.
+3. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim` and view the result and compare it against the 27% scrap-proportion of the production manager.
+
+*** =hint
+
+This is a repeat of the previous exercise. Set the number of drill-holes equal to 30 instead of 1000.
 
 *** =pre_exercise_code
 ```{r}
@@ -637,162 +355,59 @@ The function will then return the following:
 
 *** =sample_code
 ```{r}
-#1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`
+# 1. Simulate 30 drill-holes sizes and assign your answer to `drillHoleDiameters`.
 
-inventorySimulation <- function(...)
-{
 
-  O <- round(runif(n, 100, 200), 0)
 
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
+# 2. Calculate the total number of products, out of the 30 simulated products, that were scrapped. Assign your answer to `nScrapTotal`. This will include the products that were immediately scrapped and that were scrapped after rework.
 
-  I_start[1] <- I_start0
 
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
 
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
+# 3. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim` and view the result and compare it against the 27% scrap-proportion of the production manager.
 
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
 
-# 2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
-
-invSim1 <- inventorySimulation(n = , I_start0 = 150, P = 150)
-invSim1
-
-# 3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
-
-invSim2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
-invSim2
-
-# 4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-
-invSim3 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
-invSim3
-
-# 5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
-
-invSim1_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
-invSim1_v2
-
-invSim2_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
-invSim2_v2
-
-invSim3_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
-invSim3_v2
 
 ```
 
 *** =solution
 ```{r}
-inventorySimulation <- function(n, I_start0, P)
-{
-
-  O <- round(runif(n, 100, 200), 0)
-
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
-
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
-
-invSim1 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
-invSim2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
-invSim3 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
-
-invSim1_v2 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
-invSim2_v2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
-invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
+batchSize = 30
+drillHoleDiameters <- rnorm(batchSize, 10, 0.2)
+nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
+pFixed <- 0.65
+reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
+nScrapTotal = nScrap + nReworkScrap
+pScrappedSim <- nScrapTotal/batchSize
 ```
 
 *** =sct
 ```{r}
-test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
-Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
+test_object("drillHoleDiameters", undefined_msg = "Make sure to define an object `drillHoleDiameters`.", incorrect_msg = "Make sure that you sampled 30 drill-holes using the `rnorm` function and assigned your answer to `drillHoleDiameters`")       
 
-test_object("invSim2", undefined_msg = "Make sure to define an object `invSim2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
-Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
+test_object("nScrapTotal", undefined_msg = "Make sure to define an object `nScrapTotal`.", incorrect_msg = "Make sure that you calculated the total number of scrapped correctly and assign your answer to `nScrapTotal`.")
 
-test_object("invSim3", undefined_msg = "Make sure to define an object `invSim3`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
-Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
+test_object("pScrappedSim", undefined_msg = "Make sure to define an object `pScrappedSim`.", incorrect_msg = "Make sure that you calculated the proportion of scrapped products correctly and assign your answer to `pScrapped`. The proportion can be calculated using `nScrapTotal` and the number of holes drilled in the simulation.")
 
-test_object("invSim1_v2", undefined_msg = "Make sure to define an object `invSim1_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
-Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
-
-test_object("invSim2_v2", undefined_msg = "Make sure to define an object `invSim2_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
-Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
-
-test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
-Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
-
-success_msg("Correct!
-By converting the simulation model into a function we can now more easily perform the simulation for different inputs.
-In the next exercise we will run the simulation model numerous times, and statistically analyse the simulation output.")
+success_msg("Correct! We can easily simulate 30 products using our previous code. The only question is, does this provide evidence that the manager is somehow resulted in the process performing poorly?")
 ```
---- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
-## Statistically analysing stock-outs
 
-Now that we have a function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:00816b640d
 
-To do so we will imbed the simulation function within a `for` loop and capture the stock-out proportion for each run.
+## Inference with simulation: scrapping too many parts (Part 2)
 
-The simulation model function is already available in the R script as `inventorySimulation(n, I_start0, P)`.
+Comparing the simulated 30 product scrap-proportion against the manager's 30 product scrap-proportion, do you believe that the new manager should be fired?
 
 *** =instructions
 
-1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
-2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
-3. Draw a histogram of the 10000 simulation results.
-4. Calculate and view the *median* stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
-5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
-6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
-7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
-8. Draw a histogram of the 10000 simulation results.
-9. Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
-10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
+* Yes, he should be fired.
+
+* No, he should not be fired.
+
+* Cannot say, we have to perform additional analysis.
+
+*** =hint
 
 *** =pre_exercise_code
 ```{r}
@@ -801,181 +416,157 @@ The simulation model function is already available in the R script as `inventory
 
 *** =sample_code
 ```{r}
-# simulation model (do not change)
-inventorySimulation <- function(n, I_start0, P)
-{
 
-  O <- round(runif(n, 100, 200), 0)
+```
 
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
+*** =sct
+```{r}
+msg_bad <- "That is incorrect."
 
-  I_start[1] <- I_start0
+msg_success <- "Correct. It may be tempting to make a decision using the manager's actual proportion and the simulated proportion, but we only performed one-simulation. We know the process is random so using one simulation doesn't prove anything. It's similar to management firing the manager based on one production run of 30 products. Ideally management should evaluate the manager over thousands of production runs, and thereby see if the bad production run was just due to bad-luck, or if it happens consistently. The same principle applies to the simulation. We need to perform multiple simulations and look at the distribution of the simulation results. Only then can we see how rare the manager's proportion is. This is easy to do with computers and R."
+test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
+```
 
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
+--- type:NormalExercise lang:r xp:100 skills:1 key:06ab68ef37
 
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
+## Inference with simulation: scrapping too many parts (Part 3)
 
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
+Recall that we wish to determine if the process is producing the same outputs as before, or whether the process has somehow worsen under his supervision.
 
-# 1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
+The two competing hypotheses that we can test are:
 
+* $H\_0$: The true proportion of defective products manufactured under the new supervisor is 14%;
+* $H\_A$: The true proportion of defective products manufacture under the new supervisor is **more** than 14%.
 
+Consistent with a hypothesis test we will assume that $H\_0$ is true, and then calculate the probability of getting a defect-proportion from a batch of 30 products of 27% or more. To calculate the probability we will simulate $H\_0$ using the code from our previous example.
 
-# 2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
+This requires us to perform thousands of simulations and capture the scrap-proportion of each. Thereafter we can analyse the distribution of the scrapping-proportion, and lastly calculate the number of simulations which had a scrapping-proportion of more than 27%. This number can then be used to calculate the probability of having his scrapping-proportion or higher, thus representing our $p$-value. If the value is small we can conclude that there is sufficient evidence that the manager did indeed have an influence on the scrapping-proportion. The issue can then be investigate further.
+
+To calculate the probability, which is basically just our $p\text{-value}$, we need to run our simulation numerous times (thousands if it runs quick enough), and capture the proportion for each run. Thereafter we can analyse the simulated proportions statistically and find the number of simulations that produced a scrapping-proportion that was similar or higher. This value can then be used to calculate the $p\text{-value}$ which is the probability of observing the a 27% scrapping-proportion or higher when the drilling-process is still the same and the manager did not influence it.
+
+A `for` loop is required for this question, as well as initiating an empty vector, using the `rep` command, to store the simulation results into. We simply need to place the previous simulation code inside the `for` the loop. We will then repeat the simulation 10000 times and analyse the results.
+
+To complete the question do the following:
+
+*** =instructions
+
+1. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `propSimulated`.
+2. Simulate the 30 batch drilling-process 10000 times, calculate each simulation's scrapping-proportion and store the results in the appropriate `i` position of `propSimulated`.
+3. Draw a histogram of `propSimulated`.
+4. Calculate the **number** of simulations which had a scrapping-proportion of 27% or more and assign your answer to `nScrap27`.
+5. Using `nScrap27`, calculate the $p\text{-value}$ for the hypothesis test and assign your answer to `p_value`.
+6. Assuming a significance level of $\alpha = 0.05$, decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+
+*** =hint
+```{r}
+
+```
+
+*** =pre_exercise_code
+```{r}
+
+```
+
+*** =sample_code
+```{r}
+#1. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `propSimulated`.
+
+propSimulated <- rep(
+
+#2. Simulate the 30 batch drilling-process 10000 times, calculate each simulation's scrapping-proportion and store the results in the appropriate `i` position of `propSimulated`.
 
 for (i in 1:10000)
 {
-  pStockOutSimulations_150[i] <- inventorySimulation(
+  drillHoleDiameters <- rnorm(
+  nScrap <-
+  nRework <-
+
+  pFixed <- 0.65
+  reworkSimulation <- sample(
+  nReworkScrap <-
+
+  nScrapTotal = nScrap + nReworkScrap
+
+  pScrappedSim <-
+  propSimulated[i] <- pScrappedSim
 }
 
-# 3. Draw a histogram of the 10000 simulation results.
+#3. Draw a histogram of `propSimulated`.
+
+hist(propSimulated)
+
+#4. Calculate the **number** of simulations which had a scrapping-proportion of 27% or more and assign your answer to `nScrap27`.
 
 
 
-# 4. Calculate and view the median stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
+#5. Using `nScrap27`, calculate the p-value for the hypothesis test and assign your answer to `p_value`.
 
 
 
-# 5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
-
-
-
-# 6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
-
-
-
-# 7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
-
-
-
-# 8. Draw a histogram of the 10000 simulation results.
-
-
-
-# 9. Calculate and view he median stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
-
-
-
-# 10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
+#6. Assuming a significance level of alpha = 0.05, decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
 
 
 ```
 
 *** =solution
+
 ```{r}
-inventorySimulation <- function(n, I_start0, P)
+propSimulated <- rep(NA, 10000)
+for (i in 1:10000)
 {
+  drillHoleDiameters <- rnorm(30, 10, 0.2)
+  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 
-  O <- round(runif(n, 100, 200), 0)
+  pFixed <- 0.65
+  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
+  nScrapTotal = nScrap + nReworkScrap
 
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + P
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
+  pScrappedSim <- nScrapTotal/30
+  propSimulated[i] <- pScrappedSim
 }
 
-pStockOutSimulations_150 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
-hist(pStockOutSimulations_150)
-pStockoutMedian_150 <- median(pStockOutSimulations_150)
-p10stockouts_150 <- length(subset(pStockOutSimulations_150, pStockOutSimulations_150 > 10/30))/10000
+hist(propSimulated)
+nScrap27 <- length(subset(propSimulated, propSimulated >= 0.27))
 
-pStockOutSimulations_160 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
-hist(pStockOutSimulations_160)
-pStockoutMedian_160 <- median(pStockOutSimulations_160)
-p10stockouts_160 <- length(subset(pStockOutSimulations_160, pStockOutSimulations_160 > 10/30))/10000
+p_value <- nScrap27/10000
+
+if(p_value < 0.05){rejectH0 <- TRUE}else{rejectH0 <- FALSE}
 ```
 
 *** =sct
 ```{r}
-test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
+test_object("propSimulated", undefined_msg = "Make sure to define an object `propSimulated`.", incorrect_msg = "Make sure that you stored the scrapping-proportion of each of the 10000 30-drill-holes simulations in `propSimulated`.")       
 
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `propSimulated`.", incorrect_msg = "Draw a histogram of `propSimulated`.")
 
-test_object("pStockoutMedian_150", undefined_msg = "Make sure to define an object `pStockoutMedian_150`.",
-incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_150`.")
 
-test_object("p10stockouts_150", undefined_msg = "Make sure to define an object `p10stockouts_150`.",
-incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_150`.")
+test_object("nScrap27", undefined_msg = "Make sure to define an object `nScrap27`.", incorrect_msg = "Make sure that you calculated the total number of simulations which had a scrapping-proportion of 27% or higher correctly and assign your answer to `nScrap27`.")
 
-test_object("pStockOutSimulations_160", undefined_msg = "Make sure to define an object `pStockOutSimulations_160`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_160` and that you specified the input parameters correctly.")
+test_object("p_value", undefined_msg = "Make sure to define an object `p_value`.", incorrect_msg = "Make sure that you calculated the probability of having a scrapping-proportion of 27% or higher correctly and assign your answer to `nScrap27`.")
 
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_160`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_160`.")
+test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH0`.",
+            incorrect_msg = "Based on `p_value`, make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectH0`.")
 
-test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
-incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
-
-test_object("p10stockouts_160", undefined_msg = "Make sure to define an object `p10stockouts_160`.",
-incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_160`.")
-
-success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next exercise we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
+success_msg("Correct! We have now used the simulation model to perform a hypothesis test. The last question is then, how do we use the model results to assist management in their decision the production manager.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:ebdaf87be6
-## Simulating stock-outs based on random production and random orders
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:698fda148f
 
-In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
-In this exercise we will change this assumption, using the simulation model from the previous chapter.
+## Inference with simulation: scrapping too many parts (Part 4)
 
-Recall that a hole is drilled in the product during its manufacturing.
-The hole size follows a random distribution and if it is too big the product is scrapped.
-If it is too small the hole is re-drilled, the success of which also follows a random process.
-The result is that if we manufacture $M$ products, some of the products will be outside specifications and will be scrapped.
-Only the remaning products can be sold.
-The actual amount of available products per day, $P$, will thus be random.
-Luckily we already have simulation to model the amount of available products after scrapping defective ones.
-
-In this exercise we will convert the production simulation model into a function and imbed the function into our inventory-level simulation model.
-Thereafter we will run 1000 simulations for 30-days of random manufacturing and random ordering and capture the proportion of stock-outs for each day.
-
-The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products that are within specification, `P_inspec`, and can be sold.
-The remaining products are scrapped.
+Based on the hypothesis, should the new manager should be fired?
 
 *** =instructions
 
-1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
-2. Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
-3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
+* Yes, there is enough evidence that he had a negative effect on the process.
+
+* No, there is not enough evidence that he had a negative effect on the process.
+
+*** =hint
 
 *** =pre_exercise_code
 ```{r}
@@ -984,150 +575,13 @@ The remaining products are scrapped.
 
 *** =sample_code
 ```{r}
-# 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
-productionSimulation <- function(P)
-{
-  drillHoleDiameters <- rnorm(P, 10, 0.2)
-  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
-  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 
-  pFixed <- 0.65
-  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
-
-  nScrapTotal = nScrap + nReworkScrap
-  P_inspec <- ...
-}
-
-# 2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...`
-inventorySimulation <- function(n, I_start0, P)
-{
-
-  O <- round(runif(n, 100, 200), 0)
-
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
-
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + ...
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
-
-# 3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and a starting inventory level of 120 products and 1000 simulation of producing 160 products day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
-
-pStockOutSimulations_150 <- rep(NA, 1000)
-for(i in 1:1000)
-{
-  pStockOutSimulations_150[i] <- inventorySimulation(...)
-}
-hist(pStockOutSimulations_150)
-pStockoutMedian_150 <-
-
-pStockOutSimulations_160 <- rep(NA, 1000)
-for(i in 1:1000)
-{
-  pStockOutSimulations_160[i] <- inventorySimulation(...)
-}
-hist(pStockOutSimulations_160)
-pStockoutMedian_160 <-
-
-pStockoutMedian_150
-pStockoutMedian_160
 ```
 
-*** =solution
-```{r}
-productionSimulation <- function(P)
-{
-  drillHoleDiameters <- rnorm(P, 10, 0.2)
-  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
-  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
-
-  pFixed <- 0.65
-  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
-  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
-
-  nScrapTotal = nScrap + nReworkScrap
-  P_inspec <- P - nScrapTotal
-}
-
-inventorySimulation <- function(n, I_start0, P)
-{
-
-  O <- round(runif(n, 100, 200), 0)
-
-  I_start <- rep(NA, n + 1)
-  I_end <- rep(NA, n)
-  stockOut <- rep(NA, n)
-
-  I_start[1] <- I_start0
-
-  for (t in 1:n)
-  {
-    if(I_start[t] < O[t])
-    {
-      # stock-out occurred, not all order were met
-      stockOut[t] <- 1
-      I_end[t] <- 0
-    }else{
-      # stock-out did not occur, all orders were met
-      stockOut[t] <- 0
-      I_end[t] <- I_start[t] - O[t]
-    }
-
-    # calculate the starting inventory for the next day, t + 1
-    I_start[t+1] <- I_end[t] + productionSimulation(P)
-  }
-
-  nStockOut <- sum(stockOut)
-  pStockOut <- nStockOut/n
-}
-
-pStockOutSimulations_150 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
-hist(pStockOutSimulations_150)
-pStockoutMedian_150 <- median(pStockOutSimulations_150)
-
-pStockOutSimulations_160 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
-hist(pStockOutSimulations_160)
-pStockoutMedian_160 <- median(pStockOutSimulations_160)
-```
 *** =sct
 ```{r}
-test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
+msg_bad <- "That is incorrect."
 
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
-
-test_object("pStockoutMedian_150", undefined_msg = "Make sure to define an object `pStockoutMedian_150`.",
-incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_150`.")
-
-test_object("pStockOutSimulations_160", undefined_msg = "Make sure to define an object `pStockOutSimulations_160`.",
-incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_160` and that you specified the input parameters correctly.")
-
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_160`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_160`.")
-
-test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
-incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
-
-success_msg("Correct!
-We have developed a simulation model that takes random production and random orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to random production process. The proportion of stock-outs is also much higher. Increasing the production size from 150 to 160 made less of an impact than previously. This is expected since some of the 150 or 160 products are scrapped and not available for sale. Using the simulation model we can check what impact a more precise drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products.")
+msg_success <- "Correct. There is not enough evidence to reject the null-hypothesis. Therefore we tell management there is not enough evidence to infer that he had a negative effect on the process. He may have just been unlucky overseeing a _bad_ production batch, which happens by chance. On another day, a good production batch may happen whereby very few products are scrapped. This is just part of the randomness of the process."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```

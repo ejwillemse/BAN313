@@ -1,44 +1,73 @@
 ---
-title_meta  : Case study 10
-title       : Case study 10 - Sensitivity analysis on queueing models
-description : "In this case study we will first develop a basic queueing model
-that models how customers arrive at an ATM and perform transactions.
-Thereafter we will test the sensitivity of our model to model parameters."
+title_meta  : Case study 9
+title       : Case study 9 - Developing simulation models using probability distributions (advanced)
+description : "In this case study we will analyse how a random order process influences inventory levels and stock-outs of our product. We will further analyse the impact of a random production process, identical to the one from the previous chapter, on inventory levels."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
 ## Background
 
-**Read the below instructions carefully.**
+In the previous case study we modelled a random production process.
+In this chapter we will move to the supply-side of our business and model a random order process for our product.
 
-In this case study we will model a simple queuing system that represents customers arriving at and using an ATM.
-Customers arrive at an ATM and perform a number of ATM transactions.
-One customer can the use ATM at a time.
-After completing their transactions, the customer takes their card and leaves.
-The next customer can then use the ATM.
-When the ATM is in use, the next customers have to wait in-line until it is their turn to use the ATM.
+**Before continuing with this chapter, please do the following:**
 
-A key measurement of such a queueing system is how long customers wait in-line, before it is their turn to use the ATM.
-If customers wait too long, the system should be improved, either be reducing the time that customers spend completing transactions or by increasing the number of ATMs.
+1. Complete [Case study 8 - Developing simulation models using probability distributions (introduction)](https://campus.datacamp.com/courses/industrial-analysis-using-r/10739?ex=1) on Datacamp.
+2. Complete [Writing functions in r - A quick refresher](https://www.datacamp.com/courses/writing-functions-in-r) on Datacamp.
+3. Go through the following tutorial on using the [if-else statement in R](https://www.tutorialspoint.com/r/r_if_else_statement.htm).
+3. Review the lecture slides _Lecture_Week8.pdf_, available on _clickUP_ under _Theme 2: Simulation models_.
 
-In this chapter we will develop a simulation model for this simple process and measure the average waiting time of customers.
-When developing the model, we need to make certain assumptions, such as the arrival time and time required by customers to complete the transactions.
+**After completing the above, read the below instructions carefully.**
 
-Critical to model development is to test the impact of our assumptions on the model output and to see how sensitive the model is to a change in any of the assumptions.
+Each day, customers place orders for our product.
+Each customer is unique and have different requirements, therefore the amount of products ordered differs from day-to-day.
+Inventory is used to account for the daily variation.
 
-After developing the queueing model we will conduct informal sensitivity analysis.
-We will sequentially change the model input parameters and see how it influences the customer queuing times.
-By doing so we can see which input parameters are critical for our analysis, and spend extra effort to ensure that they are accurate, such as obtaining more data for the sensitive random variables.
+Each day a fixed amount of products are manufactured and stored as inventory.
+For low-order days, the surplus manufactured products are placed in inventory, which can then be used during high-order days.
 
-In this lab we will do the following:
+As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
+A stock-out occurres when our clients order more products than what we have available in our inventory.
 
-1. Develop a simulation model of the ATM system.
-2. Run the simulation model, measure and analyse mean customer waiting times.
-3. Perform sensitivity to determine which model parameters, if changed, will have the biggest influence on mean customer waiting time.
+We have a fixed production-run setup, meaning we produce a fixed number of products each day.
+Each day's manufactured products is moved to inventory at the end of the day, meaning it is ready for sale at the start of the next day.
+
+When customers place orders, it is filled form the available inventory on the same day.
+If the day's orders cannot be filled, due to low inventory levels, the customers take the available inventory and purchases the balance elsewhere.
+
+*For example*, on Day 1 we manufactured 150 products.
+On the same day our starting inventory level was 100 products, and we received orders for 50 products.
+Our ending inventory on Day 1 is then 50 products (100 - 50).
+On Day 2 our starting inventory will increase by 150 products (the products manufactured the previous day) and we will thus have 200 products (50 + 150) in inventory.
+
+On Day 2 we again manufactured 150 products since we have a fixed 150-product production run.
+On this day our starting inventory level was 200 products, and we received orders for 225 products.
+Since we received orders for more products than we have available in inventory, our ending inventory will be 0 products.
+We sold our available 200 products, and the customers had to purchase 25 products elsewhere.
+This also means that we had a stock-out on Day 2, since we ran out of inventory.
+On Day 3 our starting inventory will again increase by 150 products and will we will thus have 150 products (0 + 150) in inventory.
+
+In this chapter we will predict our daily starting and ending inventory levels over a period of 30 days, as well as the proportion of stock-outs over the study period, which is the total number of stock-outs over the period divided by the number of days in the study period.
+
+In this lab we do the following:
+
+1. Develop a simulation model of our stock-outs and inventory levels based on random orders.
+<<<<<<< HEAD
+2. Adapt the simulation model to account for limited inventory space and see how it influences the predicted stock-outs and inventory levels.
+3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
+4. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
+=======
+2. Predict how larger production runs will influence stock-outs and inventory levels.
+3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
+>>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
 
 The specific R functions that are applicable to this chapter are:
 
 ```
-rnorm(), rexp(), cumsum(), function(), rep(), for,
+<<<<<<< HEAD
+runif(), rnorm(), rep(), sample(), function(), for, if
+=======
+runif(), rnorm(), rep(), sample(), round(), subset(), length(), median(), mean(), function(), for, if
+>>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
 ```
 
 To find out more about the functions, type `?` followed by the R-function in the R console.
@@ -56,7 +85,9 @@ To continue with this chapter confirm the following:
 
 *** =instructions
 
-* I have read **ALL** the instructions on this page carefully.
+* I have not completed all the prescribed preparation material, as listed above, or have not read all the instructions on this page.
+
+* I confirm that I have completed the prescribed preparation material, as listed above, and have read **ALL** the instructions on this page carefully.
 
 *** =pre_exercise_code
 ```{r}
@@ -70,24 +101,57 @@ To continue with this chapter confirm the following:
 
 *** =sct
 ```{r}
-msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
-test_mc(correct = 1, feedback_msgs = c(msg_success))
+msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
+Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+
+msg_success <- "Let's get started with the Lab.
+Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
+Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
+test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:1a10d56107
-## Constant arrival and transaction times
+--- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:a44acfd135
+## Determining the starting and ending inventory levels after a few days
 
-Assume that customers arrive at the ATM exactly 1 minute apart and that only one customer arrives at a time.
-Further assume that a customer takes exactly 0.9 minutes to complete his transactions.
-Based on these assumptions, what is the mean waiting time of 100 customers over the course of a single day?
+Let $I\_\text{start}(t)$ be the starting inventory-level and let $I\_\text{end}(t)$ be the ending inventory-level on day $t$.
+Let $P$ be the fixed amount of products produced per day, and let $O(t)$ be the number of products ordered on day $t$.
+
+The starting and ending inventory levels can be calculated as follow:
+
+$$I\_\text{end}(t) = \max(0, I\_\text{start}(t) - O(t)),$$
+$$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
+
+Carefully study the equations above and make sure you understand how inventory levels are calculated.
+
+The ending inventory for a specific day is equal to the starting inventory for that day minus the number of products ordered.
+But the level can never be less than zero.
+The starting inventory for the next day is then equal to the ending inventory of the previous day plus the number of products manufactured during the previous day.
+
+For the first question we are going to look at a sequence of product orders for three consecutive days and calculate the starting inventory level for the *fourth* day.
+
+The number of products ordered for the three days were as follow:
+
+* Day 1: 124
+* Day 2: 137
+* Day 3: 101
+
+Due to a machine break-down our starting inventory-level for Day 1 was 120 units.
+The machine was fixed, and we had a fixed production-run of 150 products for Days 1 to 3, meaning we manufactured 150 products per day on Day 1, 2, and 3.
+
+Based on the above information, what was our **starting** inventory level on Day 4? You may use the console screen on the right to do the necessary calculations.
+
 
 *** =instructions
 
-* 0 minutes;
-* between 1 and 5 minutes;
-* between 5 and 10 minutes;
-* more than 10 minutes;
-* not enough information is available to answer the question.
+* 62
+
+* 205
+
+* 212
+
+* 235
+
+* 355
 
 *** =pre_exercise_code
 ```{r}
@@ -99,26 +163,150 @@ Based on these assumptions, what is the mean waiting time of 100 customers over 
 
 ```
 
+*** =hint
+
+Use the given formulas to calculate the starting and ending inventory levels for the first three days, thereafter you the ending inventory level of Day 3 to calculate the starting inventory level for Day 4.
+
 *** =sct
 ```{r}
-msg_bad <- "Incorrect. Carefully read the description of the ATN system and the given information of the question."
-msg_success <- "Correct. Customers arrive exactly 1 minute apart. A new customer will arrive exactly 60 seconds after the previous one. A customer arriving at the ATM will only spend 0.9 minutes at the ATM and then leave. Each customer will therefore leave 0.1 minutes before the next customer arrives. The ATM will be idle for 0.1 minutes, and no customer has to wait in-line since the ATM will always be idle by the time they arrive."
-test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad, msg_bad))
+msg_bad1 <- "That is incorrect.
+Carefully go through the given formulas.
+Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
+The given starting inventory for Day 1 thus *includes* the products manufactured on the previous day.
+So should the starting inventory for Day 4."
+
+msg_bad2 <- "That is incorrect.
+Carefully go through the given formulas.
+We can only sell what we have in-stock, so our ending-inventory level can never be negative.
+Also, remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day."
+
+msg_success3 <- "Correct. The starting inventory level for Day 4 is 212.
+Our starting inventory for Day 1 was given as 120 units.
+The ending inventory level for Day 1 is 0, since we did not have enough inventory to meet the 124 products ordered.
+Our starting inventory for Day 2 was 150, since the previous day's production was available in our inventory.
+The ending inventory for Day 2 was then 13 (150 - 137).
+The starting and ending inventory levels for Day 3 was 163 and 62 products, respectively.
+Therefore the starting inventory level for Day 4 was 62 + 150 = 212 products.
+We further know that we had a stock-out on Day 1 since we didn't have enough products to meet the demand for that day."
+
+msg_bad4 <- "That is incorrect.
+Carefully go through the given formulas.
+The given starting inventory for Day 1 includes the products manufactured on the previous day.
+It was less than 150 products due to a machine break-down."
+
+msg_bad5 <- "That is incorrect.
+Carefully go through the given formulas.
+Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
+The given starting inventory for Day 1 thus *already* includes the products manufactured on the previous day."
+
+test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad4, msg_bad5))
 ```
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
-## Calculating arrival-time, waiting time and completing time of two customers
+## Calculating starting and ending inventory levels and stock-outs
 
-Considering the following case.
-A customer arrives at the ATM at 14:01 and takes 1.3 minutes to complete his transactions.
-A second customer arrives at time 14:02 and takes 0.5 minutes to complete his transactions.
-Based on this information, answer the following:
+Using the following formulas we can calculate the starting and ending inventory levels for consecutive days:
+
+$$I\_\text{end}(t) = \max\(0, I\_\text{start}(t) - O(t)),$$
+$$I\_\text{start}(t + 1) = I\_\text{end}(t) + P.$$
+
+In this exercise we will write an R programme to calculate the inventory levels.
+
+Assume that the setup is the same as before, where we manufacture 150 products per day and our starting inventory for Day 1 was 120 products.
+The number of products ordered, $O(t)$, for 10 consecutive days were:
+
+```
+O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
+```
+
+In the above code we have stored the number of products ordered in the vector `O`. Day's 2 orders, $O(t=2)$ can be retrieved using `O[2]`.
+Our starting inventory for Day 1 is $I\_\text{start} = 120$, and our production batch size is $P = 150$.
+
+In this exercise we will track our starting and ending inventory-levels from Days 1 to 10, and for each day determine if there was a stock-out.
+
+To do so we will initialise, populate and analyse the following three vectors:
+
+```
+I_start <- rep(NA, 11)
+I_end <- rep(NA, 10)
+stockOut <- rep(NA, 10)
+```
+
+The reason for using `I_start <- seq(NA, 11)` and not `I_start <- seq(NA, 10)` will be explored later on.
+
+Since it was given that $I\_\text{start} = 120$, we have to set `I_start[1] <- 120`.
+
+The following code calculates the ending inventory level for Day 1:
+
+```
+I_end[1] <- max(0, I_start[1] - O[1])
+```
+
+The `max(0,...)` function ensures that inventory is set to zero when more products are ordered than available.
+The only problem with the above code is that it does not explicitly take stock-outs into account.
+If $I\_\text{end}(t) = 0$ it does not always mean a stock-out occurred on day $t$.
+It is possible that the number of products ordered was exactly equal to the number of products in our inventory.
+
+An `if(){}else{}` statement can be used to model stock-outs, and to update the `stockOut` variable:
+
+```
+if(I_start[1] < O[1])
+{
+  stockOut[1] <- 1
+  I_end[1] <- 0
+}else{
+  stockOut[1] <- 0
+  I_end[1] <- I_start[1] - O[1]
+}
+```
+
+Carefully go through the above code to see how stock-outs are modelled.
+
+If the number of products ordered on Day 1 is more than the available products then we say that a stock-out occurred on that day by setting `stockOut[1] <- 1`.
+We can also choose to set `stockOut[1] <- TRUE`.
+By using `stockOut[1] <- 1` for a stock-out, and `stockOut[1] <- 0` otherwise, it makes it a bit easier to calculate the number of stock-outs later on.
+It will simply be `sum(stockOut)`.
+If a stockout occurred, our ending inventory is set to 0.
+If a stockout did not occur, meaning we had enough products in inventory, then our ending inventory is equal to our starting inventory minus the number of products ordered.
+
+The last part is then to calculate the starting inventory for the next day, $t + 1$:
+
+```
+I_start[2] <- I_end[1] + P
+```
+where `P` is the fixed number of products that we produce per day, and which is available for sale the next day.
+
+Instead of hardcoding $t$, we can make our code more generic to calculate the starting and ending inventory, as well as the probability for a stock-out for day $t$:
+
+```
+if(I_start[t] < O[t])
+{
+  stockOut[t] <- 1
+  I_end[t] <- 0
+}else{
+  stockOut[t] <- 0
+  I_end[t] <- I_start[t] - O[t]
+}
+
+I_start[t+1] <- I_end[t] + P
+```
+
+For Day 1, we just need to set `t = 1` and run the above code.
+For Day 2, we will then set `t = 2` and run the above code, and we can continue doing so for `t=3`, `t=4`, upto `t=10`.
+
+Note that the last line of the generic code always calculates the starting inventory for the next day, $t+1$.
+We will therefore end up calculating the starting inventory level for day $t = 11$, even though we are only really interested in the first 1- days.
+We can use another `if` statement to not calculate the `I_start[t+1]` if we are at the end of the study period.
+But easier is to just create an additional storage space in `I_start` by initialising it as `I_start <- seq(NA, 10 + 1)`.
+
+The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop to automatically do all the calculations over the study period.
 
 *** =instructions
-
-1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM at 14:05, then `leave_1 <- 5`. For seconds, simply give your answer as a decimal. For example, if the customer is done at 14:05:30, then `leave_1 <- 5.5`.
-2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
-3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
+1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
+2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
+3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
+4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
+5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 
 *** =pre_exercise_code
 ```{r}
@@ -127,15 +315,45 @@ Based on this information, answer the following:
 
 *** =sample_code
 ```{r}
-# 1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`.
+
+#1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the 10-day study period.
+
+O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
+
+P <- 150
+I_start <- rep(NA, 11)
+I_end <-
+stockOut <-
+
+I_start[1] <-
+
+for (t in 1:10)
+{
+  if()
+  {
+    # stock-out occurred, not all order were met
+
+  }else{
+    # stock-out did not occur, all orders were met
+
+  }
+  # calculate the starting inventory for the next day, t + 1
+
+}
+
+#2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
 
 
 
-# 2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
+#3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
 
 
 
-# 3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
+#4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
+
+
+
+#5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 
 
 
@@ -143,195 +361,274 @@ Based on this information, answer the following:
 
 *** =solution
 ```{r}
-# 1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`.
+O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
-leave_1 <- 1 + 1.3
+startingInventory <- 120
+P <- 150
 
-# 2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
+I_start <- rep(NA, 11)
+I_end <- rep(NA, 10)
+stockOut <- rep(NA, 10)
 
-wait_2 <- leave_1 - 2
+I_start[1] <- 120
 
-# 3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
+for (t in 1:10)
+{
+  if(I_start[t] < O[t])
+  {
+    stockOut[t] <- 1
+    I_end[t] <- 0
+  }else{
+    stockOut[t] <- 0
+    I_end[t] <- I_start[t] - O[t]
+  }
+  I_start[t+1] <- I_end[t] + P
+}
 
-leave_2 <- 2 + wait_2 + 0.5
+barplot(stockOut)
+barplot(I_start)
+barplot(I_end)
+
+mean_I_end <- mean(I_end)
+nStockOut <- sum(stockOut)
+pStockOut <- nStockOut/10
 ```
 
 *** =sct
 ```{r}
-test_object("leave_1", undefined_msg = "Make sure to define an object `leave_1`.",
-incorrect_msg = "Something went wrong in calculating `leave_1`.
-Make sure to give your answer as the minutes after 14:00 that customer 1 will be done with the ATM.
-Give your answer as a number, not a string.")
+test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
+incorrect_msg = "Something went wrong in calculating `stockOut`.
+Remember that it has to be calculated for each day `t`.")
 
-test_object("wait_2", undefined_msg = "Make sure to define an object `wait_2`.",
-incorrect_msg = "Something went wrong in calculating `wait_2`.
-The time that customer 2 has to wait is equal to the time from his arrival at the ATM until customer 1 is done with the ATM.")
+test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
+incorrect_msg = "Something went wrong in calculating `I_start`.
+Remember that it has to be calculated for each day `t`.")
 
-test_object("leave_2", undefined_msg = "Make sure to define an object `leave_2`.",
-incorrect_msg = "Something went wrong in calculating `leave_2`.
-Make sure to give your answer as the minutes after 14:00 that customer 2 will be done with the ATM.
-Give your answer as a number, not a string.
-The time that customer 2 is done will depend on the time that he arrived, his waiting time, and his transaction time.")
+test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
+incorrect_msg = "Something went wrong in calculating `I_end`.
+Remember that it has to be calculated for each day `t`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
+incorrect_msg = "Draw a barplot of `stockOut`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
+incorrect_msg = "Draw a barplot of `I_start`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
+incorrect_msg = "Draw a barplot of `I_end`.")
+
+test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
+incorrect_msg = "Something went wrong in calculating `mean_I_end`.
+It should be the mean ending-inventory level `I_end`.")
+
+test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
+incorrect_msg = "Something went wrong in calculating `nStockOut`.
+It should be the total number of days on which a stock-out occurred.
+Use `sum` to calculate it.")
+
+test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
+incorrect_msg = "Something went wrong in calculating `pStockOut`.
+It should be the proportion of days on which a stock-out occurred.
+Use `nStockOut` and the number of days in our study period to calculate it.")
 
 success_msg("Correct!
-The time that customer 1 will leave the ATM is equal to his arrival time plus his transaction time.
-Since customer 2 will arrive while customer 1 is still busy at the ATM, he first has to wait until customer 1 is done.
-Thereafter he will use the ATM and leave after completing his transactions.
-His waiting time is equal to the time since his arrival until customer 1 is finished.
-His finishing time is equal to his arrival time, plus waiting time plus the time required to complete his transaction.
-If we know the arrival and transaction time of each customer, we can easily determine if the customers will wait in line, and for how long the customers will wait.")
+The given code can be used to calculate the inventory-levels for any number of days based on known orders.
+As mentioned, orders are random.
+In the next question we are going to take this into account and transform our code into a simulation model.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:bb32493aff
-## Determining how long customers will wait in-line
+--- type:NormalExercise lang:r xp:100 skills:1 key:42987389b3
+## Simulating inventory levels and stock-outs
 
-A customer's waiting time depends on his arrival time and the time at which the previous customer will leave the ATM.
-When determining if customer $i$ will wait, we always need to see when customer $i-1$ is done with his transactions.
-Let $a\_i$ be the arrival time of customer $i$, $w\_i$ be his waiting time, $s\_i$ be his service time, and $l\_i$ the time that he leaves the ATM.
+With the necessary code in place to calculate inventory levels and stock-outs based on product orders, we can now proceed to develop a simulation model.
 
-In the model, $a\_i$ and $s\_i$ will be simulated and $w\_i$ and $l\_i$ will be calculated.
-To check if customer $i$ will wait at the ATM we need to compare $a\_i$ against $l\_{i-1}$.
-If $a\_i > l\_{i-1}$, customer $i$ will arrive after customer $i-1$ has left the ATM, and $w\_i = 0$.
-Else, customer $i$ will have to wait until customer $i-1$ has left the ATM.
-The waiting time will then be $w\_i = l\_{i-1} - a\_i$.
-The customer will then be done at $l\_i = a\_i + w\_i + s\_i$
+The number of products ordered, $O$, on any give day is random but known to follow a uniform distribution with the following parameters:
 
-An alternative way to calculate the waiting time is to use the following equation:
+$$O \sim \mathcal{U}(\min = 100, \max = 200).$$
 
-$$w\_i = \max(0, l\_{i-1} - a\_i).$$
+Based on this information we can easily update our previous code to simulate the inventory levels and stock-outs over any study period.
 
-If $l\_{i-1} < a\_i$, then $w\_i$ will take the value of 0, since $0 > l\_{i-1} - a\_i$.
-If not, $a\_i$ will take the value of the waiting time.
+In this exercise our starting inventory for Day 1 will again be 120 units and we manufacture 150 units per day.
+The only new part is to model orders as a random process that follows a uniform distribution.
 
-The above equation can be used to calculate the waiting time for any customer.
-Lastly, $l\_i$ can be calculated as follows:
+We can simulate the product orders for a total of `n` days using the following code
 
-$$l\_i = a\_i + w\_i + s\_i.$$
+```
+O <- runif(n, 100, 200)
+```
 
-By manually setting $a_1 = 0$ for the first customer, we can use the above equations to calculate the waiting times for the next $n > 1$ customers.
+Our previous code can then be used as-is to calculate inventory and stock-out levels after incorporating `n` into the necessary places in our code.
 
-For this question we will calculate the waiting times of 100 customers.
-The arrival times of the customers, starting at time 0 is available in the `arrivalTime` vector, and their service time is available in the `serviceTime` vector.
+This will be left as an exercise:
 
 *** =instructions
 
-1. Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
-2. Using the above equations and complete the provided `for` code to calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
-3. Draw a barplot of `waitingTime`.
-4. Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
+1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
+2. Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
 
 *** =pre_exercise_code
 ```{r}
-arrivalTime <- cumsum(rexp(100, 1))
-serviceTime <- rnorm(100, 0.9, 0.25)
+
 ```
 
 *** =sample_code
 ```{r}
-# 1. Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
+#1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
 
+n = 30
+O <- ...
 
+#2. Update the code below to calculate and view the inventory levels and stock-outs for the 30 days' simulated product orders.
 
-# 2. Using the above equations and complete the provided `for` code to calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
+tartingInventory <- 120
+P <- 150
 
-waitingTime[1] <- 0
-leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+I_start <- rep(NA, ...)
+I_end <- rep(NA, ...)
+stockOut <- rep(NA, ...)
 
-for(i in 2:100)
+I_start[1] <- 120
+
+for (t in 1:...)
 {
-  waitingTime[i] <-
-  leavingTime[i] <-
+  if(I_start[t] < O[t])
+  {
+    stockOut[t] <- 1
+    I_end[t] <- 0
+  }else{
+    stockOut[t] <- 0
+    I_end[t] <- I_start[t] - O[t]
+  }
+  I_start[t+1] <- I_end[t] + P
 }
 
-# 3. Draw a barplot of `waitingTime`.
+barplot(stockOut)
+barplot(I_start)
+barplot(I_end)
 
+mean_I_end <- mean(I_end)
+mean_I_end
 
+nStockOut <- sum(stockOut)
+nStockOut
 
-# 4. Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
-
-
-
+pStockOut <- nStockOut/...
+pStockOut
 
 ```
 
 *** =solution
 ```{r}
-waitingTime <- rep(NA, 100)
-leavingTime <- rep(NA, 100)
+n <- 30
+O <- round(runif(n, 100, 200), 0)
 
-waitingTime[1] <- 0
-leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+P <- 150
 
-for (i in 2:100)
+I_start <- rep(NA, n + 1)
+I_end <- rep(NA, n)
+stockOut <- rep(NA, n)
+
+I_start[1] <- 120
+
+for (t in 1:n)
 {
-  waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-  leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+  if(I_start[t] < O[t])
+  {
+    # stock-out occurred, not all order were met
+    stockOut[t] <- 1
+    I_end[t] <- 0
+  }else{
+    # stock-out did not occur, all orders were met
+    stockOut[t] <- 0
+    I_end[t] <- I_start[t] - O[t]
+  }
+
+  # calculate the starting inventory for the next day, t + 1
+  I_start[t+1] <- I_end[t] + P
 }
-barplot(waitingTime)
-meanWaitingTime <- mean(waitingTime)
+
+barplot(stockOut)
+barplot(I_start)
+barplot(I_end)
+
+mean_I_end <- mean(I_end)
+nStockOut <- sum(stockOut)
+pStockOut <- nStockOut/n
 ```
 
 *** =sct
 ```{r}
-test_object("waitingTime", undefined_msg = "Make sure to define an object `waitingTime`.",
-incorrect_msg = "Something went wrong in calculating the waiting times of the 100 customers.
-Use the given equations and make sure to assign the waiting times to the vector `waitingTime`.")
+test_object("O", undefined_msg = "Make sure to define an object `O`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`.
+Use the `runif` function for the simulation.")
 
-test_object("leavingTime", undefined_msg = "Make sure to define an object `leavingTime`.",
-incorrect_msg = "Something went wrong in calculating the leaving times of the 100 customers.
-Use the given equations and make sure to assign the waiting times to the vector `leavingTime`.")
+test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
+incorrect_msg = "Something went wrong in calculating `stockOut`.
+Remember that it has to be calculated for each day `t`.")
 
-test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `waitingTime`.",
-incorrect_msg = "Draw a barplot of `waitingTime`.")
+test_object("I_start", undefined_msg = "Make sure to define an object `I_start`.",
+incorrect_msg = "Something went wrong in calculating `I_start`.
+Remember that it has to be calculated for each day `t`.")
 
-test_object("meanWaitingTime", undefined_msg = "Make sure to define an object `meanWaitingTime`.",
-incorrect_msg = "Remember to calculate the mean waiting time of the 100 customers and assign your answer to `meanWaitingTime`.")
+test_object("I_end", undefined_msg = "Make sure to define an object `I_end`.",
+incorrect_msg = "Something went wrong in calculating `I_end`.
+Remember that it has to be calculated for each day `t`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `stockOut`.",
+incorrect_msg = "Draw a barplot of `stockOut`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_start`.",
+incorrect_msg = "Draw a barplot of `I_start`.")
+
+test_function("barplot", args = c("height"), not_called_msg = "Draw a barplot of `I_end`.",
+incorrect_msg = "Draw a barplot of `I_end`.")
+
+test_object("mean_I_end", undefined_msg = "Make sure to define an object `mean_I_end`.",
+incorrect_msg = "Something went wrong in calculating `mean_I_end`.
+It should be the mean ending-inventory level `I_end`.")
+
+test_object("nStockOut", undefined_msg = "Make sure to define an object `nStockOut`.",
+incorrect_msg = "Something went wrong in calculating `nStockOut`.
+It should be the total number of days on which a stock-out occurred.
+Use `sum` to calculate it.")
+
+test_object("pStockOut", undefined_msg = "Make sure to define an object `pStockOut`.",
+incorrect_msg = "Something went wrong in calculating `pStockOut`.
+It should be the proportion of days on which a stock-out occurred.
+Use `nStockOut` and the number of days in our study period to calculate it.")
 
 success_msg("Correct!
-Taking the arrival and service times of 100 customers, the above code can calculate the waiting time of each customer.
-All that's left for the simulation model is to randomly sample the arrival and waiting times, using specified distributions.
-Thereafter we can repeatedly simulate the waiting times of 100 customers.")
+We now have a simulation model that can be used to predict inventory levels and stock-outs for any given number of days.
+Each time we run the simulation, we will get different levels.
+This is expected since the simulation model mimics a random processes.
+The question is then, how do we use the model to predict inventory levels and stock-outs?
+The answer is that we have to run the simulation numerous times, and capture our key measurements with each simulation.
+We can use our above code to do so by placing it in a `for`-loop, but it will become messy since it already has a `for` loop to simulate days and an `if` statement for the stock-outs.
+A more elegant approach is to place the simulation model inside a function, and repeatedly call the function.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:7981afe651
-## ATM waiting time simulation
+--- type:NormalExercise lang:r xp:100 skills:1 key:1968bf3b5b
+## A function for simulating the proportion of stock-outs
 
-In the previous exercise we wrote all the necessary code to calculate the waiting and leaving time of customers.
-All that is left is to simulate customer arrivals and transaction (serivce) times.
+For this exercise we are going to convert our previous code into a function that can simulate the order process and inventory levels for a specified number of days and return the proportion of stock-outs, which is our main measurement of interest.
 
-There are two methods to do so.
-First, we can simulate it for each customer prior to calculating the waiting and leaving time of the customer.
-Alternatively we can simulate it for all the customers and generate the `arrivalTime` and `serviceTime` vectors, and then use the previous code as-is.
+The function will take the following inputs:
 
-In this question we will follow the second approach.
+* `n`: the number of days that we wish to simulate.
+* `I_start0`: the starting inventory for Day 1 of our simulation.
+* `P`: the number of products produced per day.
 
-Assume that:
+The function will then return the following:
 
-* the inter-arrival time of customers follow an **exponential distribution** with a **rate of 1 customer per minute**; and
-* service time follows a **normal distribution** with a **mean of 0.9 minutes** and **standard deviation of 0.25 minutes**.
-
-Using this information we can easily simulate the arrival and service times of 100 customers.
-Service times can be sampled directly from the normal distribution using the `rnorm(100, mean, sd)` function.
-
-Arrival times are a bit more tricky.
-Sampling from the exponential distribution will give us the time that a customer arrived after the previous customer.
-If customer 1 arrived at 0.8 minutes, starting form time 0, and the inter-arrival time of customer 2 is randomly sampled as 0.5 minutes, it means that customer 2 will arrive at time `0.8 + 0.5 = 1.3` minutes.
-The same calculation can be repeated for the arrival time of customer 3, up until customer 100.
-
-To calculate the arrival times we can calculate it per customer, starting with customer two.
-Or we can use the built-in function `cumsum`.
-We simply need to sample the inter-arrival times of the 100 customers using the `x <- rexp(100, rate)` function.
-Thereafter `cumsum(x)` will calculate the actual arrival-times for the 100 customers.
-
-To find out more about the function, type `?cumsum` in the terminal.
-
-For this question we will complete the simulation model of the ATM process by randomly sampling the arrival and service times of 100 customers.
-The waiting time calculations are performed in the provided function, already populated with the code from the previous question.
+* `pStockOut`: the proportion of days on which a stockout occurred.
 
 *** =instructions
 
-1. Randomly sample the arrival times of 100 customers using the `rexp`, `cumsum` and `rnorm` functions and assign your answers to `arrivalTime` and `serviceTime`.
-2. Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
+1. Using the provided code, write a function that simulates `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
+2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
+3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
+4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
+5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
 
 *** =pre_exercise_code
 ```{r}
@@ -340,86 +637,162 @@ The waiting time calculations are performed in the provided function, already po
 
 *** =sample_code
 ```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+#1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`
+
+inventorySimulation <- function(...)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  O <- round(runif(n, 100, 200), 0)
 
-  for (i in 2:100)
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + P
   }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-# 1. Randomly sample the arrival times of 100 customers using the `rexp` and `cumsum` functions and assign your answers to `arrivalTime` and `serviceTime`.
+# 2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
 
+invSim1 <- inventorySimulation(n = , I_start0 = 150, P = 150)
+invSim1
 
+# 3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
 
-# 2. Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
+invSim2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
+invSim2
 
+# 4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
 
+invSim3 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
+invSim3
+
+# 5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
+
+invSim1_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
+invSim1_v2
+
+invSim2_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
+invSim2_v2
+
+invSim3_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
+invSim3_v2
 
 ```
 
 *** =solution
 ```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+inventorySimulation <- function(n, I_start0, P)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  O <- round(runif(n, 100, 200), 0)
 
-  for (i in 2:100)
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + P
   }
-  meanWaitingTime <- mean(waitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-arrivalTime <- cumsum(rexp(100, 1))
-serviceTime <- rnorm(100, 0.9, 0.25)
+invSim1 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
+invSim2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
+invSim3 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 
-meanWaitingTime <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
+invSim1_v2 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
+invSim2_v2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
+invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 ```
 
 *** =sct
 ```{r}
-test_object("arrivalTime", undefined_msg = "Make sure to define an object `arrivalTime`.",
-incorrect_msg = "Something went wrong in sampling the arrival times of 100 customers. You need to first sample the inter-arrival times of 100 customers from the exponential distribution using the `rexp` function. Thereafter you need to calculate the arrival times using the `cumsum` function.")
+test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
+Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
 
-test_object("serviceTime", undefined_msg = "Make sure to define an object `arrivalTime`.",
-incorrect_msg = "Something went wrong in sampling the service times of 100 customers. You need to sample the service times of 100 customers from the normal distribution using the `rnorm` function.")
+test_object("invSim2", undefined_msg = "Make sure to define an object `invSim2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
+Make sure to assign the output of the simulation to `invSim2` and that you specified the input parameters correctly.")
 
-test_object("meanWaitingTime", undefined_msg = "Make sure to define an object `meanWaitingTime`.",
-incorrect_msg = "Use the given function to calculate the mean waiting time of the 100 customers and assign your answer to `meanWaitingTime`.")
+test_object("invSim3", undefined_msg = "Make sure to define an object `invSim3`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
+Make sure to assign the output of the simulation to `invSim3` and that you specified the input parameters correctly.")
 
-success_msg("Correct! The above code can be used to simulate the queueing process.
-The last step is to execute the simulation a large number of times and analyse the distribution of the mean waiting time of 100 customers.
-Note that the inter-arrival and service times need not follow an exponential and normal distributions.
-Any distribution can be used.
-The distribution should however be fitted based on data on the actual inter-arrival and service times.")
+test_object("invSim1_v2", undefined_msg = "Make sure to define an object `invSim1_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
+Make sure to assign the output of the simulation to `invSim1_v2` and that you specified the input parameters correctly.")
+
+test_object("invSim2_v2", undefined_msg = "Make sure to define an object `invSim2_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
+Make sure to assign the output of the simulation to `invSim2_v2` and that you specified the input parameters correctly.")
+
+test_object("invSim3_v2", undefined_msg = "Make sure to define an object `invSim3_v2`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs.
+Make sure to assign the output of the simulation to `invSim3_v2` and that you specified the input parameters correctly.")
+
+success_msg("Correct!
+By converting the simulation model into a function we can now more easily perform the simulation for different inputs.
+In the next exercise we will run the simulation model numerous times, and statistically analyse the simulation output.")
 ```
+--- type:NormalExercise lang:r xp:100 skills:1 key:f77e2b84d5
+## Statistically analysing stock-outs
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
-## ATM waiting time analysis
+Now that we have a function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
 
-For this question we will repeat the simulation 1000 times and analyse the distribution of the mean waiting time of 100 customers for each simulation.
+To do so we will imbed the simulation function within a `for` loop and capture the stock-out proportion for each run.
+
+The simulation model function is already available in the R script as `inventorySimulation(n, I_start0, P)`.
 
 *** =instructions
 
-1. Initiate a vector with 1000 `NAs` for the mean waiting times of the simulations. Assign the vector to `simWaitingTimes`.
-2. Using a `for` loop, repeat the simulation 1000 times and store the simulation results in the appropriate place in `simWaitingTimes`. Remember that the arrival and service time sampling has to be done in-side the `for` loop, otherwise we will end-up calculating the same mean waiting time 1000 times, instead of a new simulated waiting time.
-3. Draw a histogram of `simWaitingTimes`.
-4. Calculate and view the mean of the mean waiting times of the simulations, that is, calculate the mean of `simWaitingTimes`. Assign your answer to `meanSimWaiting`.
+1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
+2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
+3. Draw a histogram of the 10000 simulation results.
+4. Calculate and view the *median* stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
+5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
+6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
+7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
+8. Draw a histogram of the 10000 simulation results.
+9. Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
+10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 
 *** =pre_exercise_code
 ```{r}
@@ -428,38 +801,79 @@ For this question we will repeat the simulation 1000 times and analyse the distr
 
 *** =sample_code
 ```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+# simulation model (do not change)
+inventorySimulation <- function(n, I_start0, P)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  O <- round(runif(n, 100, 200), 0)
 
-  for (i in 2:100)
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + P
   }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-# 1. Initiate a vector with 1000 `NAs` for the mean waiting times of the simulations. Assign the vector to `simWaitingTimes`.
-
-arrivalTime <-
-serviceTime <-
-simWaitingTimes <-
-
-# 2. Using a `for` loop, repeat the simulation 1000 times and store the simulation results in the appropriate place in `simWaitingTimes`. Remember that the arrival and service time sampling has to be done in-side the `for` loop, otherwise we will simply calculate the same mean waiting time 1000 times, instead of a new simulated waiting time.
+# 1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
 
 
 
-# 3. Draw a histogram of `simWaitingTimes`.
+# 2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
+
+for (i in 1:10000)
+{
+  pStockOutSimulations_150[i] <- inventorySimulation(
+}
+
+# 3. Draw a histogram of the 10000 simulation results.
 
 
 
-# 4. Calculate and view the mean of the mean waiting times of the simulations, that is, calculate the mean of `simWaitingTimes`. Assign your answer to `meanSimWaiting`.
+# 4. Calculate and view the median stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
+
+
+
+# 5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
+
+
+
+# 6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
+
+
+
+# 7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
+
+
+
+# 8. Draw a histogram of the 10000 simulation results.
+
+
+
+# 9. Calculate and view he median stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
+
+
+
+# 10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 
 
 
@@ -467,337 +881,253 @@ simWaitingTimes <-
 
 *** =solution
 ```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+inventorySimulation <- function(n, I_start0, P)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  O <- round(runif(n, 100, 200), 0)
 
-  for (i in 2:100)
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + P
   }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
+pStockOutSimulations_150 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
+hist(pStockOutSimulations_150)
+pStockoutMedian_150 <- median(pStockOutSimulations_150)
+p10stockouts_150 <- length(subset(pStockOutSimulations_150, pStockOutSimulations_150 > 10/30))/10000
 
-hist(simWaitingTimes)
-meanSimWaiting <- mean(simWaitingTimes)
+pStockOutSimulations_160 <- replicate(10000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
+hist(pStockOutSimulations_160)
+pStockoutMedian_160 <- median(pStockOutSimulations_160)
+p10stockouts_160 <- length(subset(pStockOutSimulations_160, pStockOutSimulations_160 > 10/30))/10000
 ```
 
 *** =sct
 ```{r}
-test_object("simWaitingTimes", undefined_msg = "Make sure to define an object `simWaitingTimes`.",
-incorrect_msg = "Something went wrong in simulating the mean waiting time 1000 times. Use a `for`-loop to repeatedly call the arrival and service time sampling, and the mean waiting time calculation function. Assign each simulation's output to the appropriate place in `simWaitingTimes`.")
+test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
 
-test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of `simWaitingTimes`.",
-incorrect_msg = "Draw a histogram of `simWaitingTimes`.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
 
-test_object("meanSimWaiting", undefined_msg = "Make sure to define an object `meanSimWaiting`.",
-incorrect_msg = "Calculate the mean of the mean waiting time over all 1000 simulations and assign your answer to `meanSimWaiting`.")
+test_object("pStockoutMedian_150", undefined_msg = "Make sure to define an object `pStockoutMedian_150`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_150`.")
 
-success_msg("Correct! We now have a fully functional simulation model of the ATM system.
-All that's left is to test our assumptions and see how sensitive the model output is to changes in the model's input parameters.
-To do so we will change an input parameter, redo the 1000 simulations and capture the final output at the parameter value.
-Repeating this process will show us by how much the simulation output changes with changes in the input parameters.
-If the output changes by a lot, we know that the simulation is sensitive towards the specific input parameter. We then need to make sure that the parameters are accurate.")
+test_object("p10stockouts_150", undefined_msg = "Make sure to define an object `p10stockouts_150`.",
+incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_150`.")
+
+test_object("pStockOutSimulations_160", undefined_msg = "Make sure to define an object `pStockOutSimulations_160`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_160` and that you specified the input parameters correctly.")
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_160`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_160`.")
+
+test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
+
+test_object("p10stockouts_160", undefined_msg = "Make sure to define an object `p10stockouts_160`.",
+incorrect_msg = "Something went wrong in calculating the probability of having more than 10 stock-outs over a 30 day period. Make sure to assign the answer to `p10stockouts_160`.")
+
+success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next exercise we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:c2c29de5b8
-## Testing the model sensitivity to the arrival rate
+--- type:NormalExercise lang:r xp:100 skills:1 key:ebdaf87be6
+## Simulating stock-outs based on random production and random orders
 
-In the previous example we assumed that the customer arrivals are exponentially distributed at a rate of 1 per minute, but what if this is not the case?
-What if the actual customer arrival rate is 1.1 per minute?
-Will that significantly increase or decrease customer waiting times?
-Or, what if it is 0.9 per minute?
+In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
+In this exercise we will change this assumption, using the simulation model from the previous chapter.
 
-Since we have a simulation model available, we can easily change the arrival rate and see how the mean waiting time increases or decreases.
+Recall that a hole is drilled in the product during its manufacturing.
+The hole size follows a random distribution and if it is too big the product is scrapped.
+If it is too small the hole is re-drilled, the success of which also follows a random process.
+The result is that if we manufacture $M$ products, some of the products will be outside specifications and will be scrapped.
+Only the remaning products can be sold.
+The actual amount of available products per day, $P$, will thus be random.
+Luckily we already have simulation to model the amount of available products after scrapping defective ones.
 
-In this exercise we will test three levels for the arrival rate and measure the mean waiting time at the different levels.
-By comparing the waiting times at the arrival rates we can get a sense of how sensitive our model is to changes in the arrival rate.
+In this exercise we will convert the production simulation model into a function and imbed the function into our inventory-level simulation model.
+Thereafter we will run 1000 simulations for 30-days of random manufacturing and random ordering and capture the proportion of stock-outs for each day.
 
-The arrival rate levels will be 0.5, 1 and 1.5, thereby representing the assumed parameter value, the value decreased by 50%, and the value increased by 50%.
+The production simulation is called `productionSimulation` and takes as input the number of products that will be manufactured `P`, and returns the number of products that are within specification, `P_inspec`, and can be sold.
+The remaining products are scrapped.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
-2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
-3. Repeat the ATM simulation with an arrival rate of 1.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
-4. View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
+1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
+2. Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
+3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
 *** =pre_exercise_code
 ```{r}
-
-
 
 ```
 
 *** =sample_code
 ```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+# 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
+productionSimulation <- function(P)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
+  drillHoleDiameters <- rnorm(P, 10, 0.2)
+  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  pFixed <- 0.65
+  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 
-  for (i in 2:100)
+  nScrapTotal = nScrap + nReworkScrap
+  P_inspec <- ...
+}
+
+# 2. Carefully go through the provided code and compete `inventorySimulation` function. An update is required at the place of the `...`
+inventorySimulation <- function(n, I_start0, P)
+{
+
+  O <- round(runif(n, 100, 200), 0)
+
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + ...
   }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-# 1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
+# 3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and a starting inventory level of 120 products and 1000 simulation of producing 160 products day over 30 days with random orders and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
+pStockOutSimulations_150 <- rep(NA, 1000)
+for(i in 1:1000)
 {
-  arrivalTime <- cumsum(rexp(100, ...))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
+  pStockOutSimulations_150[i] <- inventorySimulation(...)
 }
-meanSimWaiting_05 <- mean(simWaitingTimes)
+hist(pStockOutSimulations_150)
+pStockoutMedian_150 <-
 
-# 2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
+pStockOutSimulations_160 <- rep(NA, 1000)
+for(i in 1:1000)
+{
+  pStockOutSimulations_160[i] <- inventorySimulation(...)
+}
+hist(pStockOutSimulations_160)
+pStockoutMedian_160 <-
 
-
-
-# 3. Repeat the ATM simulation with an arrival rate of 1.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
-
-
-
-# 4. View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting times increased as the arrival rate increased.
-
-
-
+pStockoutMedian_150
+pStockoutMedian_160
 ```
 
 *** =solution
 ```{r}
-
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
+productionSimulation <- function(P)
 {
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
+  drillHoleDiameters <- rnorm(P, 10, 0.2)
+  nScrap <- length(subset(drillHoleDiameters, drillHoleDiameters > 10 + 0.25))
+  nRework <- length(subset(drillHoleDiameters, drillHoleDiameters < 10 - 0.25))
 
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
+  pFixed <- 0.65
+  reworkSimulation <- sample(c(TRUE, FALSE), nRework, replace = TRUE, prob = c(pFixed, 1-pFixed))
+  nReworkScrap <- length(subset(reworkSimulation, reworkSimulation == FALSE))
 
-  for (i in 2:100)
+  nScrapTotal = nScrap + nReworkScrap
+  P_inspec <- P - nScrapTotal
+}
+
+inventorySimulation <- function(n, I_start0, P)
+{
+
+  O <- round(runif(n, 100, 200), 0)
+
+  I_start <- rep(NA, n + 1)
+  I_end <- rep(NA, n)
+  stockOut <- rep(NA, n)
+
+  I_start[1] <- I_start0
+
+  for (t in 1:n)
   {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
+    if(I_start[t] < O[t])
+    {
+      # stock-out occurred, not all order were met
+      stockOut[t] <- 1
+      I_end[t] <- 0
+    }else{
+      # stock-out did not occur, all orders were met
+      stockOut[t] <- 0
+      I_end[t] <- I_start[t] - O[t]
+    }
+
+    # calculate the starting inventory for the next day, t + 1
+    I_start[t+1] <- I_end[t] + productionSimulation(P)
   }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
+
+  nStockOut <- sum(stockOut)
+  pStockOut <- nStockOut/n
 }
 
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 0.5))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_05 <- mean(simWaitingTimes)
+pStockOutSimulations_150 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 150))
+hist(pStockOutSimulations_150)
+pStockoutMedian_150 <- median(pStockOutSimulations_150)
 
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_1 <- mean(simWaitingTimes)
-
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1.5))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_15 <- mean(simWaitingTimes)
-
+pStockOutSimulations_160 <- replicate(1000, inventorySimulation(n = 30, I_start0 = 120, P = 160))
+hist(pStockOutSimulations_160)
+pStockoutMedian_160 <- median(pStockOutSimulations_160)
 ```
-
 *** =sct
 ```{r}
-test_object("meanSimWaiting_05", undefined_msg = "Make sure to define an object `meanSimWaiting_05`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_05`. Make sure to set the arrival rate to the correct value.")
+test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
 
-test_object("meanSimWaiting_1", undefined_msg = "Make sure to define an object `meanSimWaiting_1`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_1`. Make sure to set the arrival rate to the correct value.")
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_150`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_150`.")
 
-test_object("meanSimWaiting_15", undefined_msg = "Make sure to define an object `meanSimWaiting_15`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_15`. Make sure to set the arrival rate to the correct value.")
+test_object("pStockoutMedian_150", undefined_msg = "Make sure to define an object `pStockoutMedian_150`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_150`.")
 
-success_msg("Correct! As expected the waiting time increases as the arrival rate increases.
-As more customers arrive per minute, the inter-arrival times between customers decrease.
-It is then more likely that customers will arrive before the previous customers are done with their transactions.
-Note the rate by which the waiting time increased.
-When the arrival rate is 0.5, customers spend on average less than 0.5 minutes waiting.
-When increased to 1.5, customers spend less than 2.7 minutes waiting.
-But when it is increased by another 0.5, the customer waiting time jumps to over 12 minutes.
-This indicates that the model output is non-linearly effected by the arrival rate.
-At low arrival rates our models is insensitive to changes.
-As the arrival rate increases, our model becomes more sensitive.
-We therefore have to make sure that our arrival rate is indeed low, preferably by gathering additional data.
-We also need to make sure that arrival rate does not vary during the day as the waiting time will be very long if there are peak periods with high arrival rates.
-In the next and last question we are going to look at the mean service time.")
-```
+test_object("pStockOutSimulations_160", undefined_msg = "Make sure to define an object `pStockOutSimulations_160`.",
+incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_160` and that you specified the input parameters correctly.")
 
---- type:NormalExercise lang:r xp:100 skills:1 key:e36cab65c2
-## Testing the model sensitivity to the mean service time
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of hole `pStockOutSimulations_160`.", incorrect_msg = "Draw a histogram of `pStockOutSimulations_160`.")
 
-In this exercise we will test three levels for the mean service time of customers.
-We will then make an early judgement on which parameter is more critical to model output, the arrival rate or mean service time.
+test_object("pStockoutMedian_160", undefined_msg = "Make sure to define an object `pStockoutMedian_160`.",
+incorrect_msg = "Something went wrong in calculating the median stock-out proportion over 30 days. Make sure to assign the median (not the mean) to `pStockoutMedian_160`.")
 
-The service time levels will be 0.45, 0.9 and 1.35, thereby representing the assumed parameter value, the value decreased by 50%, and the value increased by 50%.
-All other parameters will remain at their default values.
-
-*** =instructions
-
-1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
-2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
-3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
-4. View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
-
-*** =pre_exercise_code
-```{r}
-
-
-
-```
-
-*** =sample_code
-```{r}
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
-{
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
-
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
-
-  for (i in 2:100)
-  {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
-  }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
-}
-
-# 1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
-
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, ..., 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_045 <- mean(simWaitingTimes)
-
-# 2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
-
-
-
-# 3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
-
-
-
-# 4. View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
-
-
-
-```
-
-*** =solution
-```{r}
-
-atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
-{
-  waitingTime <- rep(NA, 100)
-  leavingTime <- rep(NA, 100)
-
-  waitingTime[1] <- 0
-  leavingTime[1] <- arrivalTime[1] + waitingTime[1] + serviceTime[1]
-
-  for (i in 2:100)
-  {
-    waitingTime[i] <- max(0, leavingTime[i - 1] - arrivalTime[i])
-    leavingTime[i] <- arrivalTime[i] + waitingTime[i] + serviceTime[i]
-  }
-  meanWaitingTime <- mean(waitingTime)
-  return(meanWaitingTime)
-}
-
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, 0.45, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_045 <- mean(simWaitingTimes)
-
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, 0.9, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_09 <- mean(simWaitingTimes)
-
-simWaitingTimes <- rep(NA, 1000)
-for (i in 1:1000)
-{
-  arrivalTime <- cumsum(rexp(100, 1))
-  serviceTime <- rnorm(100, 1.35, 0.25)
-  simWaitingTimes[i] <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
-}
-meanSimWaiting_135 <- mean(simWaitingTimes)
-
-```
-
-*** =sct
-```{r}
-test_object("meanSimWaiting_045", undefined_msg = "Make sure to define an object `meanSimWaiting_045`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_045`. Make sure to set the mean service time to the correct value.")
-
-test_object("meanSimWaiting_09", undefined_msg = "Make sure to define an object `meanSimWaiting_09`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_09`. Make sure to set the mean service time to the correct value.")
-
-test_object("meanSimWaiting_135", undefined_msg = "Make sure to define an object `meanSimWaiting_135`.",
-incorrect_msg = "Something went wrong in calculate `meanSimWaiting_135`. Make sure to set the mean service time to the correct value.")
-
-success_msg("Correct! As expected the waiting time increases as the mean service time increases.
-As customers take longer to complete their transactions, it is more likely that customers will arrive before the previous customers are done with their transactions.
-Similar to the arrival rate, the increase in waiting time is non-linear.
-When the mean service time is increased from 0.35 to 0.9 minutes, the mean waiting time increases from 0.23 to 2.6.
-When the mean service time increases to 1.35 minutes, the mean waiting time jumps to 18 minutes.
-A 50% increase in arrival rate resulted in the mean waiting time to increase to 12 minutes.
-It would therefore seem that waiting time is more sensitive to the mean service time.
-The above analysis can be repeated for the standard deviation of the service time, as well as the number of customers that we are simulating.
-We can also repeat the analysis for different distributions, if there are other distributions that could reasonably represent the random variables.
-We can also look at variable combinations, for example, what would happen if both the mean service time and standard deviation changed?
-In the next chapter we will look at more formal methods to conduct such analysis.")
+success_msg("Correct!
+We have developed a simulation model that takes random production and random orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to random production process. The proportion of stock-outs is also much higher. Increasing the production size from 150 to 160 made less of an impact than previously. This is expected since some of the 150 or 160 products are scrapped and not available for sale. Using the simulation model we can check what impact a more precise drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products.")
 ```
