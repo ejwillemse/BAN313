@@ -533,7 +533,7 @@ In this question we are going to fit a distribution to the arrivals per minute.
 1. Draw a histogram of the arrivals per minute and check if it follows a poisson distribution.
 2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
 3. Perform a $\chi^2$ goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(ppois(...))` correctly.
-4. Based on the output of the test decide for yourself whether the data do no follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow a poisson distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
+4. Based on the output of the test decide for yourself whether the data do not follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow a poisson distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
 
 *** =hint
 
