@@ -621,12 +621,11 @@ In this question we are first going to calculate the inter-arrival time of custo
 
 *** =instructions
 
-1. Draw a histogram of `arrivalTimeSec` and note how it does not say much, the reason being that it gives the arrival time since the station opened.
-2. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
-3. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
-2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
-3. Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
-4. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
+1. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
+2. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
+3. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
+4. Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
+5. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
 
 *** =hint
 
@@ -642,23 +641,19 @@ arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
 ```{r}
 # The inter-arrival times are available in the `arrivalTimeSec` vector.
 
-#1. Draw a histogram of ``arrivalTimeSec`.
+#1. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
 
 
 
-#2. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
+#2. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
 
 
 
-#3. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
+#3. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
 
 
 
-#4. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
-
-
-
-#5. Perform a chi^2 goodness-of-fit test for exponential distribution, similar to performing the test for the poisson distribution. The steps to do this include:
+#4. Perform a chi^2 goodness-of-fit test for exponential distribution, similar to performing the test for the poisson distribution. The steps to do this include:
 
 #assigning a histogram to `h` (do not manually specify the number of breaks);
 
@@ -672,7 +667,7 @@ arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
 
 
 
-#4. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
+#5. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
 
 
 
@@ -680,7 +675,6 @@ arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
 
 *** =solution
 ```{r}
-hist(arrivalTimeSec)
 interArriveSec <- diff(arrivalTimeSec)
 hist(interArriveSec)
 arriveRate <- 1/mean(interArriveSec)
