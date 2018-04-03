@@ -604,3 +604,109 @@ test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `re
 
 success_msg("Correct! The chi-squared test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejecting H0. The chi-squared test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the chi-squared test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the chi-squared test are met.")
 ```
+
+--- type:NormalExercise lang:r xp:100 skills:1 key:8baad0d53c
+## Gautrain inter-arrival time: fitting the exponential distribution
+
+Another distribution often used to model arrivals is the exponential distribution. In this case, instead of modelling the number of arrivals per time-interval, we measure the inter-arrival time between two consecutive arrivals. This is simply the time that we expect will elapse after a customer arrives, until the next customer arrive. For example, assume that the first customer one arrives at 60 seconds after the station opens, the second customer 98 seconds after the station opens, and the third customer 145 seconds after the station opens. The inter-arrival time between customer two and customer one is `98-60=38` seconds, and between the second and third customer is `145-98=47`.
+
+Importantly, inter-arrival time is ALWAYS measured between two consecutive customers.
+
+There is a direct link between arrival rate and the inter-arrival time. If, on average there 15 customers per minute (the arrival rate), then the average inter-arrival time of customers will be `15/60=0.25` minutes. This simply means that on average 0.25 minutes will pass after a customer arrives before the next customer will arrive. Often, the arrival rate can be modelled as a poisson distribution, in which case the inter-arrival time can be modelled as an exponential distribution. The exponential distribution is simply the inverse of the poisson distribution. In fact, its key parameter is the mean arrival rate, as calculated for the poisson distribution. This implies that $\lambda = \frac{1}{X}$ where $X$ is the mean inter-arrival time.
+
+When building simulation models, it is important to be able to use both the poisson and exponential distributions to model arrivals. In this exercise we will repeat the previous exercise, this time working with the inter-arrival time of customers.
+
+The arrival time in seconds for 120 customers, starting at time zero when the station opened, can be found in the `arrivalTimeSec` vector.
+In this question we are first going to calculate the inter-arrival time of customers using the `diff()` function and the fit the exponential distribution to the inter-arrival time.
+
+*** =instructions
+
+1. Draw a histogram of `arrivalTimeSec` and note how it does not say much, the reason being that it gives the arrival time since the station opened.
+2. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
+3. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
+2. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
+3. Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
+4. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
+
+*** =hint
+
+The steps required to complete this question is the same as the previous questions.
+
+*** =pre_exercise_code
+```{r}
+set.seed(31)
+arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
+```
+
+*** =sample_code
+```{r}
+# The inter-arrival times are available in the `arrivalTimeSec` vector.
+
+#1. Draw a histogram of ``arrivalTimeSec`.
+
+
+
+#2. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
+
+
+
+#3. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
+
+
+
+#4. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
+
+
+
+#5. Perform a chi^2 goodness-of-fit test for exponential distribution, similar to performing the test for the poisson distribution. The steps to do this include:
+
+#assigning a histogram to `h` (do not manually specify the number of breaks);
+
+
+
+#determine the expected probability, `null.probs`, for each bin of the exponential distribution using `diff(pexp(...))`;
+
+
+
+#perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
+
+
+
+#4. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
+
+
+
+```
+
+*** =solution
+```{r}
+hist(arrivalTimeSec)
+interArriveSec <- diff(arrivalTimeSec)
+hist(interArriveSec)
+arriveRate <- 1/mean(interArriveSec)
+h <- hist(interArriveSec)
+null.probs <- diff(pexp(h$breaks, arriveRate))
+chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE)
+chiTestResults <- chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE)
+if (chiTestResults$p.value < 0.05){rejectExp <- TRUE}else{rejectExp <- FALSE}
+```
+
+*** =sct
+```{r}
+test_object("interArriveSec", undefined_msg = "Make sure to define an object `interArriveSec`.",
+              incorrect_msg = "Make sure that you calculated the inter-arrival times correctly using the `diff` function and assigned your answer to `interArriveSec`.")  
+
+test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of inter-arrival times `interArriveSec`.",
+              incorrect_msg = "Draw a histogram of the number of inter-arrival times `interArriveSec`.")
+
+test_object("arriveRate", undefined_msg = "Make sure to define an object `arriveRate`.",
+            incorrect_msg = "Make sure that you calculated the mean arrival rate correctly and assigned your answer to `arriveRate`.")     
+
+test_function("chisq.test", args = c("x", "p", "rescale.p"), not_called_msg = "Use the built-in function `chisq.test` to perform the goodness-of-fit test.",
+              incorrect_msg = "Make sure to use the `chisq.test` function. Refer to the previous questions on instructions.")  
+
+test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `rejectExp`.",
+            incorrect_msg = "Make sure that you correctly assigned the `TRUE` or `FALSE` value to `rejectExp`. View the p-value from the chi-square test and then decide for yourself if `rejectExp<-TRUE` or `rejectExp<-FALSE`.")
+
+success_msg("Correct! The chi-squared test result shows that we cannot discard the exponential distribution.")
+```
