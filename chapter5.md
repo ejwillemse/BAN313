@@ -701,11 +701,11 @@ This information is necessary to determine the number of outbound access gates t
 Recall that the Gautrain can easily switch  an access gate from inbound to outbound.
 Approximately _two_ passengers can go through the gate per minute, and the station is considering having only _two_ outbound access-gates open during the peak-time.
 The question that we need to answer is what is the probability of the two outbound access-gates being insufficient?
-Insufficient means that the number of passengers arriving during the minute will be more than the access gates can process.
+Insufficient means that the number of passengers arriving during the minute will be more than what the access gates can process.
 
 The arrival rate per minute of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `nArrivePerMin` vector.
 
-In this question we are going to fit a distribution to the arrivals per minute.
+In this question we are going to fit a distribution to the number of arrivals per minute.
 
 *** =instructions
 
