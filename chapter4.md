@@ -696,7 +696,7 @@ if (chiTestResults$p.value < 0.05){rejectExp <- TRUE}else{rejectExp <- FALSE}
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of arrival times `arrivalTimeSec`.",
               incorrect_msg = "Draw a histogram of arrival times `arrivalTimeSec`.")
 
-test_object("arriveRate", undefined_msg = "Make sure to define an object `interArriveSec`.",
+test_object("interArriveSec", undefined_msg = "Make sure to define an object `interArriveSec`.",
               incorrect_msg = "Make sure that calculated the inter-arrival times correctly using the `diff` function and assigned your answer to `interArriveSec`.")  
 
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of inter-arrival times `interArriveSec`.",
