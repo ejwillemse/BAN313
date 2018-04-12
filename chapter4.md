@@ -10,11 +10,9 @@ In this case study we will revisit the examples of [Case study 6: Different appl
 
 **Before continuing with this chapter, please do the following:**
 
-1. Complete [Case study 6: Different applications of probability distributions](https://campus.datacamp.com/courses/industrial-analysis-using-r/10161) on Datacamp.
-2. Make sure you understand how the `sample` function works in R. Review the [Probability](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-2-probability?ex=1) datacamp chapter if necessary.
-3. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014).
-4. Go through the goodness-of-fit using R tutorial, available from [this link](https://www.r-bloggers.com/goodness-of-fit-test-in-r/).
-5. Review the lecture slides `Lecture_Week8.pdf`.
+1. Complete all previous chapters in this datacamp course.
+2. Review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014).
+3. Go through the goodness-of-fit using R tutorial, available from [this link](https://www.r-bloggers.com/goodness-of-fit-test-in-r/).
 
 The prescribed textbook is:
 

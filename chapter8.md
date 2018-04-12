@@ -10,6 +10,8 @@ Thereafter we will test the sensitivity of our model to model parameters."
 
 **Read the below instructions carefully.**
 
+**Before continuing with this chapter, complete all previous chapters in this datacamp course.**
+
 In this case study we will model a simple queuing system that represents customers arriving at and using an ATM.
 Customers arrive at an ATM and perform a number of ATM transactions.
 One customer can the use ATM at a time.

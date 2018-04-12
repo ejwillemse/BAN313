@@ -6,6 +6,8 @@ description : "In this case study we will analyse data for different processes, 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:4fdf3ba090
 ## Background
 
+**Before continuing with this chapter, complete all previous chapters in this datacamp course.**
+
 In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions.
 The distributions that we will look at are:
 

@@ -11,10 +11,9 @@ In this chapter we will move to the supply-side of our business and model a rand
 
 **Before continuing with this chapter, please do the following:**
 
-1. Complete [Case study 8 - Developing simulation models using probability distributions (introduction)](https://campus.datacamp.com/courses/industrial-analysis-using-r/10739?ex=1) on Datacamp.
+1. Complete all previous chapters in this datacamp course.
 2. Complete [Writing functions in r - A quick refresher](https://www.datacamp.com/courses/writing-functions-in-r) on Datacamp.
 3. Go through the following tutorial on using the [if-else statement in R](https://www.tutorialspoint.com/r/r_if_else_statement.htm).
-3. Review the lecture slides _Lecture_Week8.pdf_, available on _clickUP_ under _Theme 2: Simulation models_.
 
 **After completing the above, read the below instructions carefully.**
 
@@ -26,7 +25,7 @@ Each day a fixed amount of products are manufactured and stored as inventory.
 For low-order days, the surplus manufactured products are placed in inventory, which can then be used during high-order days.
 
 As the inventory manager we wish to predict our inventory levels for the coming month and see how likely a stock-out is.
-A stock-out occurres when our clients order more products than what we have available in our inventory.
+A stock-out occurs when our clients order more products than what we have available in our inventory.
 
 We have a fixed production-run setup, meaning we produce a fixed number of products each day.
 Each day's manufactured products is moved to inventory at the end of the day, meaning it is ready for sale at the start of the next day.

@@ -12,7 +12,7 @@ on the basic ATM queueing model."
 In this case study we will do formal sensitivity analysis on the ATM queueing
 model of Case study 10.
 
-Before continuing with the case study, first complete [Case study 10 - Sensitivity analysis on queueing models (Part I)](https://campus.datacamp.com/courses/industrial-analysis-using-r/11779?ex=1).
+**Before continuing with this chapter, complete all previous chapters in this datacamp course.**
 
 Recall that for the case customers arrive at an ATM and perform a number of ATM
 transactions. After completing their transactions, the customer takes their card

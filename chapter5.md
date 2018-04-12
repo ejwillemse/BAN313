@@ -10,7 +10,7 @@ In this case study we will revisit the examples of [Case study 7 - Fitting proba
 
 **Before continuing with this chapter, please do the following:**
 
-1. Complete [Case study 7 - Fitting probability distributions using chi-squared goodness-of-fit test](https://campus.datacamp.com/courses/industrial-analysis-using-r/) on Datacamp.
+1. Complete all previous chapters in this datacamp course.
 2. Make sure you understand how the `sample` function works in R. Review the [Probability](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-2-probability?ex=1) datacamp chapter if necessary.
 3. Make sure you understand how the `for` function works in R, and how it is used to store simulation run outputs in a vector. Review the [Foundations for inference: Sampling distributions](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-3a-foundations-for-inference-sampling-distributions?ex=1) datacamp chapter if necessary.
 4. Go through _Section 4.5: Bootstrapping for the standard deviation (p.195)_ of the prescribed textbook by Diez et al (2014).
@@ -30,7 +30,7 @@ In this lab we will look at the same examples from Case study 6, and do the foll
 1. Estimate confidence intervals for key distribution parameters using the bootstrapping method.
 2. Use the R functions of the distribution to calculate percentiles and probabilities as required.
 
-The specific R functions that are applicable to this chapter are:
+Some of R functions that are applicable to this chapter are:
 
 ```
 dnorm(), pnorm(), qnorm(), dpois(), ppois(), qpois(), dexp(), pexp(), qexp(), dunif(), punif(), qunif(), dt(), pt(), qt()
@@ -114,7 +114,7 @@ To complete the question, do the following:
 3. View the mean and standard deviation of `holeDiameter_boot` by printing their values to the console. You do not need to assign the values to anything. Just print and view it and compare it to the mean and standard deviation of the original sample.
 4. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `holeMeans`.
 5. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `holeSD`.
-6. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the hole-size samples 10000 times. In each execution of the `for` loop you can assign the results to `holeDiameter_boot_test`. Calculate the mean and standard deviation of `holeDiameter_boot` and store the results in the appropriate `i` position of `holeMeans` and `holeSD`. Hint: if you are unsure how to do this, have a look at the previous datacamp courses.
+6. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the hole-size samples 10000 times. In each execution of the `for` loop you can assign the results to `holeDiameter_boot_test`. Calculate the mean and standard deviation of `holeDiameter_boot` and store the results in the appropriate `i` position of `holeMeans` and `holeSD`. Hint: if you are unsure how to do this, have a look at the [Probability](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-2-probability?ex=1) and [Foundations for inference: Sampling distributions](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-3a-foundations-for-inference-sampling-distributions?ex=1) datacamp chapters.
 7. Draw histograms of `holeMeans` and `holeSD`.
 8. Use the `quantile` function to calculate 95% confidence intervals for `holeMeans` and `holeSD` using the `quantile` function and assign the results to `meanInter` and `sdInter`. Hint: for the mean hole-size the code will be `meansInter <- quantile(holeMeans, prob = c(0.025, 0.975))`
 9. View `meanInter` and `sdInter` by printing their values to the console.
