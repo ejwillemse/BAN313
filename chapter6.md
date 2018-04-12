@@ -1,6 +1,6 @@
 ---
 title_meta  : Case study 8
-title       : Case study 8 - Developing simulation models using probability distributions (introduction)
+title       : Case study 8 - Introduction to developing simulation models using probability distributions
 description : "In this case study we will revisit the drilling hole example and see what influence re-work will have on our process output. First we will analyse the process output and do a goodness-of-fit test to see which distribution hole-sizes follow. Thereafter we will perform bootstrap analysis on the key parameters of the distribution. We will then use the distribution and parameters to simulate the process to answer a few basic questions."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd

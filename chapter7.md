@@ -1,6 +1,6 @@
 ---
 title_meta  : Case study 9
-title       : Case study 9 - Developing simulation models using probability distributions (advanced)
+title       : Case study 9 - Developing simulation models using probability distributions
 description : "In this case study we will analyse how a random order process influences inventory levels and stock-outs of our product. We will further analyse the impact of a random production process, identical to the one from the previous chapter, on inventory levels."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd

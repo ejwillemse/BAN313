@@ -2,7 +2,7 @@
 title_meta  : Case study 11
 title       : Case study 11 - Sensitivity analysis on queueing models (Part II)
 description : "In this case study we will do more formal sensitivity analysis
-the basic ATM queueing model."
+on the basic ATM queueing model."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
 ## Background
@@ -1140,14 +1140,14 @@ atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomer
 {
   arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
   serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
-  
+
   waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
   leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
-  
+
   # Service, arrival, and leaving time of first customer
   waitingTime[1] = 0
   leaveTime[1] = arrivalTime[1] + serviceTime[1]
-  
+
   for (i in 2:nCustomers)
   {
     if (arrivalTime[i] >= leaveTime[i - 1])
@@ -1203,14 +1203,14 @@ atmSimulation <- function(arrivalRate, serviceTimeMean, serviceTimeSD, nCustomer
 {
   arrivalTime <- cumsum(rexp(nCustomers, arrivalRate))
   serviceTime <- rnorm(nCustomers, serviceTimeMean, serviceTimeSD)
-  
+
   waitingTime = rep(NA, nCustomers) # time that customer waited in-line for the ATM
   leaveTime = rep(NA, nCustomers) # time that customer is done at ATM
-  
+
   # Service, arrival, and leaving time of first customer
   waitingTime[1] = 0
   leaveTime[1] = arrivalTime[1] + serviceTime[1]
-  
+
   for (i in 2:nCustomers)
   {
     if (arrivalTime[i] >= leaveTime[i - 1])
