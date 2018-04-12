@@ -17,7 +17,7 @@ If a hole diameter is within [9.75cm, 10.25cm] the product will work according t
 As the production planner we want to answer the following simple question.
 If we manufacture 1000 products, how many will be defective because of the drill hole-size being either too large or too small?
 
-**Before continuing with this chapter**, complete all previous chapters in this datacamp course.**
+**Before continuing with this chapter, complete all previous chapters in this datacamp course.**
 
 The specific R functions that are applicable to this chapter are:
 

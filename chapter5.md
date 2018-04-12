@@ -1,6 +1,6 @@
 ---
-title_meta  : Case study 8
-title       : Case study 8 - Estimating distribution parameters using bootstrapping
+title_meta  : Case study 7b
+title       : Case study 7b - Estimating distribution parameters using bootstrapping
 description : "In this case study, we will revisit the examples from Case study 7, where we analysed data for different processes. We will use boot-strapping methods to estimate model parameters."
 
 --- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd

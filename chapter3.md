@@ -34,8 +34,6 @@ pnorm(), qnorm(), ppois(), qpois(), pexp(), qexp(), punif(), qunif()
 
 To find out more about the functions, type `?function` in the R console. The basic usage of the functions is described in [this page](http://www.cyclismo.org/tutorial/R/probability.html).
 
-Consult the accompanying lecture slides, `Lecture_Week6.pdf`, available on _clickUP_ under `Theme 2: Simulation models/Week 6 Introduction to key statistical distributions: lecture material`, or by clicking [on this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
-
 Please take note that the data used for this chapter is randomly generated and will change:
 
 - each time the chapter is attempted; and
