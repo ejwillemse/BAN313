@@ -1267,7 +1267,7 @@ test_object("interArrive", undefined_msg = "Make sure to define an object `inter
             incorrect_msg = "Make sure that you calculated the time between all consecutive arrivals correct, using the function given in the instructions, and assign your answer to `interArrive`")    
 
 test_object("interArriveClean", undefined_msg = "Make sure to define an object `interArriveClean`.",
-            incorrect_msg = "Make sure that you removed negative inter arrival times and assigned the resulting vector to `interArriveClean`. You can use the `subset(vector, vector > value)` command.")
+            incorrect_msg = "Make sure that you removed negative inter arrival times and assigned the resulting vector to `interArriveClean`. You can use the `subset(vector, vector >= value)` command.")
 
 test_object("arriveRate", undefined_msg = "Make sure to define an object `arriveRate`.",
             incorrect_msg = "Make sure that you calculated the arrival rate customers correctly, using the formula given in the notes and in the instructions, and assigned your answer to `arriveRate`.")
