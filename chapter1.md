@@ -37,6 +37,8 @@ To continue with this chapter confirm the following:
 `@instructions`
 * I have read **ALL** the instructions on this page carefully.
 
+`@hint`
+
 
 
 
