@@ -619,11 +619,11 @@ In this question we are first going to calculate the inter-arrival time of custo
 
 *** =instructions
 
-1. Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
-2. Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
-3. Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
-4. Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
-5. Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
+- Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
+- Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
+- Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
+- Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
+- Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
 
 *** =hint
 
