@@ -294,17 +294,17 @@ The arrival rate per minute of passengers between 16:00 and 18:00PM for the prev
 The instructions for the question are as follow:
 
 `@instructions`
-1. View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
-2. Using the `sample` function take a random sample with replacement from the nArrivePerMin samples and assign the results to `nArrivePerMin_boot_test`.
-3. View the mean number of arrivals of `nArrivePerMin_boot_test` by printing the value to the console. You do not need to assign the value to anything. Just print and view it and compare it to the mean of the original sample.
-4. Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `meanArrivePerMin`.
-5. Use a `for` loop and repeat the `sample` function to take a sample with replacement from the `nArrivePerMin` samples 10000 times. In each execution of the `for` loop you can assign the results to `nArrivePerMin_boot`. Calculate the mean of `nArrivePerMin_boot` and store the results in the appropriate `i` position of `meanArrivePerMin`. Hint: if you are unsure how to do this, have a look at the previous questions and deatacamp courses.
-6. Draw histograms of `meanArrivePerMin`.
-7. Use the `quantile` function to calculate 99% confidence interval for `meanArrivePerMin` using the `quantile` function and assign the results to `meanInter`. Hint: if you are unsure how to do this, have a look at the previous question.`
-8. View `meanInter` by printing its value to the console.
-9. Use the upper-value of `meanInter` for $\lambda$ and calculate the 95$^\text{th}$ percentile of the number of customers arriving per minute. Hint: use the `qpois(p=0.95, lambda)` function. Assign your answer to `nArrive95`.
-10. Calculate the minimum number of gates required using the 95$^\text{th}$ percentile and the information that a single gate can process _three_ customers per minute. Remember to round your final answer-up. Assign your final answer to `nGates`.
-11. View your final answer by printing `nGates` to the console.
+- View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
+- Using the `sample` function take a random sample with replacement from the nArrivePerMin samples and assign the results to `nArrivePerMin_boot_test`.
+- View the mean number of arrivals of `nArrivePerMin_boot_test` by printing the value to the console. You do not need to assign the value to anything. Just print and view it and compare it to the mean of the original sample.
+- Use the `rep` function to initiate a vector consisting 10000 `NAs` and assign it to `meanArrivePerMin`.
+- Use a `for` loop and repeat the `sample` function to take a sample with replacement from the `nArrivePerMin` samples 10000 times. In each execution of the `for` loop you can assign the results to `nArrivePerMin_boot`. Calculate the mean of `nArrivePerMin_boot` and store the results in the appropriate `i` position of `meanArrivePerMin`. Hint: if you are unsure how to do this, have a look at the previous questions and deatacamp courses.
+- Draw histograms of `meanArrivePerMin`.
+- Use the `quantile` function to calculate 99% confidence interval for `meanArrivePerMin` using the `quantile` function and assign the results to `meanInter`. Hint: if you are unsure how to do this, have a look at the previous question.`
+- View `meanInter` by printing its value to the console.
+- Use the upper-value of `meanInter` for $\lambda$ and calculate the 95$^\text{th}$ percentile of the number of customers arriving per minute. Hint: use the `qpois(p=0.95, lambda)` function. Assign your answer to `nArrive95`.
+- Calculate the minimum number of gates required using the 95$^\text{th}$ percentile and the information that a single gate can process _three_ customers per minute. Remember to round your final answer-up. Assign your final answer to `nGates`.
+- View your final answer by printing `nGates` to the console.
 
 `@hint`
 Refer to the previous question on bootstrapping and the previous BAN313 chapter.
