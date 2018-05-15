@@ -381,12 +381,12 @@ Typically a correlation can be defined as positive, negative, weak, moderate and
 To complete the exercise, do the following:
 
 `@instructions`
-1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
-2. Calculate the correlation between `length_m` and `time_hr` and assign your answer to `cor_length`.
-3. Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
-4. Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
-5. Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
-6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
+- Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
+- Calculate the correlation between `length_m` and `time_hr` and assign your answer to `cor_length`.
+- Calculate the correlation between `width_m` and `time_hr` and assign your answer to `cor_width`.
+- Calculate the correlation between `speed_knots` and `time_hr` and assign your answer to `cor_speed`.
+- Calculate the correlation between `price_ZAR` and `time_hr` and assign your answer to `cor_price`.
+- Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
 
 `@hint`
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
