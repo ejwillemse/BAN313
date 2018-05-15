@@ -698,12 +698,12 @@ To calculate the $p$-value we will be using the `pt()` function, as described in
 To successfully complete this lab, do the following, and note that you have to define the appropriate answer variables yourself. Also note that you cannot directly assign a numerical value to your answer. You have to assign the R calculation. For example, say the answer is `p_value = pt(1.1, 5)`, then `p_value = 0.1607254` will be marked as incorrect. Only `p_value = pt(1.1, 5)` will be marked as correct. This only applies to Datacamp.
 
 `@instructions`
-1. Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. Assign your answers to the `n`, `price_diff`, `mean_diff` and `sd_diff` variables, same as before.
-2. Calculate the Standard Error of our sample mean and assign your answer to the `SE` variable.
-3. Calculate the $T$-score of the sample mean and assign your answer to the `T_score` variable.
-4. Calculate the degrees of freedom associated with our hypothesis test and assign your answer to the `df` variable.
-5. Calculate the $p$-value of our $T$-score using the `pt()` function and assign your answer to the `p_value` variable. Directly thereafter view the $p$-value.
-6. Lastly, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+- Determine the number of samples and calculate the difference in prices per product, as well as the mean and standard deviation of the sample. Assign your answers to the `n`, `price_diff`, `mean_diff` and `sd_diff` variables, same as before.
+- Calculate the Standard Error of our sample mean and assign your answer to the `SE` variable.
+- Calculate the $T$-score of the sample mean and assign your answer to the `T_score` variable.
+- Calculate the degrees of freedom associated with our hypothesis test and assign your answer to the `df` variable.
+- Calculate the $p$-value of our $T$-score using the `pt()` function and assign your answer to the `p_value` variable. Directly thereafter view the $p$-value.
+- Lastly, use an alpha value of 0.05 and decide if there is sufficient evidence to reject the null hypothesis. Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
 `@hint`
 Go through the previous exercises and carefully look at your calculations. The R formulas for the Standard Error, T-score and Degrees of Freedom are:
