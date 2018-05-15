@@ -5,7 +5,7 @@ description : "In this case study we will first develop a basic queueing model
 that models how customers arrive at an ATM and perform transactions.
 Thereafter we will test the sensitivity of our model to model parameters."
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd5
 ## Background
 
 **Read the below instructions carefully.**

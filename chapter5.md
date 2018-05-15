@@ -3,7 +3,7 @@ title_meta  : Case study 7b
 title       : Case study 7b - Estimating distribution parameters using bootstrapping
 description : "In this case study, we will revisit the examples from Case study 7, where we analysed data for different processes. We will use boot-strapping methods to estimate model parameters."
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd2
 ## Background
 
 In this case study we will revisit the examples of [Case study 7 - Fitting probability distributions using chi-squared goodness-of-fit test](https://campus.datacamp.com/courses/industrial-analysis-using-r/) and use bootstrapping techniques to estimate model parameters.

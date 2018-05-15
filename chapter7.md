@@ -12,7 +12,7 @@ type: MultipleChoiceExercise
 lang: r
 xp: 50
 skills: 1
-key: 8eaf7b9ebd
+key: 8eaf7b9ebd4
 ```
 
 In the previous case study we modelled a random production process.

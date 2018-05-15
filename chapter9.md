@@ -4,7 +4,7 @@ title       : Case study 11 - Sensitivity analysis on queueing models (Part II)
 description : "In this case study we will do more formal sensitivity analysis
 on the basic ATM queueing model."
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd
+--- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd6
 ## Background
 
 **Read the below instructions carefully.**
