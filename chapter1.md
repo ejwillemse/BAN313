@@ -582,11 +582,11 @@ If you still don't quite understand how it works, have a look at:
 As an exercise, calculate the $p$-value for the following scenarios:
 
 `@instructions`
-1. Double-sided hypothesis where the $T$-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
-2. Single-sided hypothesis where the alternative hypothesis is $x < 0.23$, the $T$-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
-3. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
-4. Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
-5. Double-sided hypothesis where the $T$-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
+- Double-sided hypothesis where the $T$-score is 2.3 and the degrees of freedom is 15. Assign your answer to `p_value_1`.
+- Single-sided hypothesis where the alternative hypothesis is $x < 0.23$, the $T$-score is -1.1 and the degrees of freedom is 23. Assign your answer to `p_value_2`.
+- Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is 2.4 and the degrees of freedom is 89. Assign your answer to `p_value_3`.
+- Single-sided hypothesis where the alternative hypothesis is $x > 0.86$, the $T$-score is -1.5 and the degrees of freedom is 10. Assign your answer to `p_value_4`.
+- Double-sided hypothesis where the $T$-score is -3.3 and the degrees of freedom is 23. Assign your answer to `p_value_5`.
 
 `@hint`
 Have a look at the recommended websites.
