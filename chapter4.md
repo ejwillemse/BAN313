@@ -197,16 +197,16 @@ Using the data available in the `holeSize` dataframe, complete this question by 
 
 *** =instructions
 
-1. Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
-2. Redraw the histogram bust this time assign it to the object `h`.
-3. View the object `h` to make sure that it is the histogram with 10 bins.
-4. View the number of observations in each bin of the histogram by printing `h$counts` to the console.
-5. Assign the number of observations in each bin to `hCounts`.
-6. Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Assign your answer to `expectedCount`. Do not round your answer. Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins.
-7. Using `hCounts` and `expectedCount`, calculate the $\chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
-8. Calculate the degrees-of-freedom for the test and assign your answer to `df`.
-9. Calculate the $p$-value for the test and assign you answer to `p`.
-10. View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+- Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
+- Redraw the histogram bust this time assign it to the object `h`.
+- View the object `h` to make sure that it is the histogram with 10 bins.
+- View the number of observations in each bin of the histogram by printing `h$counts` to the console.
+- Assign the number of observations in each bin to `hCounts`.
+- Since we assume that hole size will follow a uniform distribution, how many cases do we expect in each bin? Assign your answer to `expectedCount`. Do not round your answer. Hint: first determine the total number of cases, then calculate how many cases do we expect to be in each of the 10 bins.
+- Using `hCounts` and `expectedCount`, calculate the $\chi^2$ value and assign your answer to `chiSqr`. Hint: the following R formulate can be used `sum((hCounts - expectedCount)^2/expectedCount).`
+- Calculate the degrees-of-freedom for the test and assign your answer to `df`.
+- Calculate the $p$-value for the test and assign you answer to `p`.
+- View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
 *** =hint
 
