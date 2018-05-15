@@ -403,15 +403,15 @@ To complete the question, do the following:
 
 *** =instructions
 
-1. Calculate the mean and standard deviation for the drill-hole size and assign your answer to `meanHoleSize` and `sdHoleSize`.
-2. Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
-3. Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))`.
-4. Draw a barplot of the probabilities, using `barplot(null.probs1)`, to see that the bin probabilities follow a normal distribution.
-5. Draw a histogram of the hole-size variable with *9* breaks and assign the histogram to `h2`.
-6. Calculate the bin probabilities for 9 bins by calling `null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))`.
-7. Perform the goodness-of-fit test by calling `chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE)` and view the results.
-8. Based on the output of the test decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
-9. Perform the goodness-of-fit test this time using the 100 bin histogram by calling `chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE, simulate.p.value=TRUE)` and note the difference in the results.
+- Calculate the mean and standard deviation for the drill-hole size and assign your answer to `meanHoleSize` and `sdHoleSize`.
+- Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
+- Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))`.
+- Draw a barplot of the probabilities, using `barplot(null.probs1)`, to see that the bin probabilities follow a normal distribution.
+- Draw a histogram of the hole-size variable with *9* breaks and assign the histogram to `h2`.
+- Calculate the bin probabilities for 9 bins by calling `null.probs2 <- diff(pnorm(h2$breaks, meanHoleSize, sdHoleSize))`.
+- Perform the goodness-of-fit test by calling `chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE)` and view the results.
+- Based on the output of the test decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
+- Perform the goodness-of-fit test this time using the 100 bin histogram by calling `chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE, simulate.p.value=TRUE)` and note the difference in the results.
 
 *** =hint
 
