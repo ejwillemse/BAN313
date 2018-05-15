@@ -323,9 +323,9 @@ For this question we are going to perform the $\chi^2$ goodness-of-fit test usin
 
 *** =instructions
 
-1. Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
-2. Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
-3. Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
+- Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
+- Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
+- Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
 *** =hint
 
