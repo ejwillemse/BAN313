@@ -865,9 +865,9 @@ For now we will ignore the knock-on effect that insufficient or excess resources
 The data that we will use to estimate the key parameters are available in the `gauArrive` dataframe. The number of customers that arrived within each minute interval has been pre-calculated and is available as the `nArrivePerMin` object.
 
 `@instructions`
-1. Estimate $\lambda$ for the poisson distribution and assign your answer to `arrivalRate`.
-2. Use the poisson distribution probability function and determine the probability that the two outbound access-gates will be insufficient during any minute interval and assign your answer to `pInsufficent`.
-3. View the above values by printing them to the console output via the `script.R` file.
+- Estimate $\lambda$ for the poisson distribution and assign your answer to `arrivalRate`.
+- Use the poisson distribution probability function and determine the probability that the two outbound access-gates will be insufficient during any minute interval and assign your answer to `pInsufficent`.
+- View the above values by printing them to the console output via the `script.R` file.
 
 `@hint`
 To calculate $arrivalRate$ simply calculate the mean number of arrivals over all the minute-intervals.
