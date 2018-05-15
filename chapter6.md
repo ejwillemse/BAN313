@@ -103,13 +103,13 @@ To complete this question answer the following:
 
 *** =instructions
 
-1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
-2. View a histogram of the simulated drill-holes.
-3. Calculate and view the mean and standard deviation of the simulated drill-holes. You only have to view the two values.
-4. Calculate the number of simulated drill-holes that fall outside the specification limits and assign your answer to `nOutsideSpec`. Hint: since `drillHoleDiameters` is a vector, we need to use the `length` function instead of `nrows`.
-5. Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the $1000 \times p$ calculation as given in the question background. You just have to view the two numbers.
-6. Simulate and view a single drill-hole size and assign your answer to `singleDrillHole`.
-7. What is the probability of get the single drill-hole size or _smaller_? Assign your answer to `pSmaller` and view the result. Hint: use the `pnorm` function.
+- Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+- View a histogram of the simulated drill-holes.
+- Calculate and view the mean and standard deviation of the simulated drill-holes. You only have to view the two values.
+- Calculate the number of simulated drill-holes that fall outside the specification limits and assign your answer to `nOutsideSpec`. Hint: since `drillHoleDiameters` is a vector, we need to use the `length` function instead of `nrows`.
+- Is this number higher or lower than the expected number of holes out of 1000 that fall outside the specification limit? Use the $1000 \times p$ calculation as given in the question background. You just have to view the two numbers.
+- Simulate and view a single drill-hole size and assign your answer to `singleDrillHole`.
+- What is the probability of get the single drill-hole size or _smaller_? Assign your answer to `pSmaller` and view the result. Hint: use the `pnorm` function.
 
 *** =hint
 
