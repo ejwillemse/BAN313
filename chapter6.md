@@ -204,7 +204,7 @@ pOutcome <- c(pFixed, 1 - pFixed) # probability of TRUE and FALSE
 reworkSimulation <- sample(x = outcomes, size = nRework, replace = TRUE, pOutcome)
 ```
 
-To see how many parts were unsucssessfully scrapped, we just need to count the number `FALSEs` in `reworkSimulation`. This can be done using the `table` command, or by using:
+To see how many parts were unsucssessfully reworked, we just need to count the number `FALSEs` in `reworkSimulation`. This can be done using the `table` command, or by using:
 
 ```
 length(subset(reworkSimulation, reworkSimulation == FALSE))
@@ -228,14 +228,14 @@ To complete the question do the following:
 
 *** =instructions
 
-1. Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
-2. Calculate and view the number of simulated drill-holes that are too big and will immediately be scrapped. Assign your answer to `nScrap`.
-3. Calculate and view the number of simulated drill-holes that are too small and will be reworked. Assign your answer to `nRework`.
-4. Simulate the rework process using the `sample` function and assign your results to `reworkSimulation`.
-5. Calculate and view the number of reworked products that were unsuccessfully repaired and scrapped. Assign your answer to `nReworkScrap`.
-6. Calculate and view the total number of products, out of the 1000 simulated products, that were scrapped. Assign your answer to `nScrapTotal`.
-7. From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim`.
-8. Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
+- Simulate 1000 drill-holes sizes and assign your answer to `drillHoleDiameters`.
+- Calculate and view the number of simulated drill-holes that are too big and will immediately be scrapped. Assign your answer to `nScrap`.
+- Calculate and view the number of simulated drill-holes that are too small and will be reworked. Assign your answer to `nRework`.
+- Simulate the rework process using the `sample` function and assign your results to `reworkSimulation`.
+- Calculate and view the number of reworked products that were unsuccessfully repaired and scrapped. Assign your answer to `nReworkScrap`.
+- Calculate and view the total number of products, out of the 1000 simulated products, that were scrapped. Assign your answer to `nScrapTotal`.
+- From the simulation results, what proportion of products were scrapped? Assign your answer to `pScrappedSim`.
+- Calculate the analytical proportion of scrapped using the given formula and and assign your answer to `pScrappedAct`. See how it compares the simulated proportion
 
 *** =hint
 
