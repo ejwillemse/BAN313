@@ -1206,12 +1206,12 @@ Once we have the inter-arrival time between consecutive visits we can use the di
 Thereafter we can empirically calculate the probability of the next passenger arriving within 0.5 minutes after the current one arrived. To do so we can use the `pexp` function.
 
 `@instructions`
-1. Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
-2. Calculate the inter-arrival time between consecutive arrivals and assign the result to the vector `interArrive`.
-3. Remove all negative inter arrival times from `interArrive` and assign the result to `interArriveClean`.
-4. Calculate the arrival rate for the exponential distribution using `interArriveClean` and assign your answer to `arriveRate`.
-5. Calculate the probability of a customer arriving within 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
-6. View the above values by printing them to the console output via the `script.R` file.
+- Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
+- Calculate the inter-arrival time between consecutive arrivals and assign the result to the vector `interArrive`.
+- Remove all negative inter arrival times from `interArrive` and assign the result to `interArriveClean`.
+- Calculate the arrival rate for the exponential distribution using `interArriveClean` and assign your answer to `arriveRate`.
+- Calculate the probability of a customer arriving within 0.5 minutes (30 seconds) after the current one arrived and assign your answer to `pWithin30sec`.
+- View the above values by printing them to the console output via the `script.R` file.
 
 `@hint`
 TBC
