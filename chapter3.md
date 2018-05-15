@@ -536,8 +536,7 @@ The data that we will use to estimate the key parameters are available in the `c
 - Estimate $\min$ for the uniform distribution and assign your answer to `minOrders`.
 - Estimate $\max$ for the uniform distribution and assign your answer to `maxOrders`.
 - Use the uniform distribution probability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
-
-View all the above values by printing them to the console output via the `script.R` file.
+- View all the above values by printing them to the console output via the `script.R` file.
 
 `@hint`
 To calculate $\min_{x}$ and $\max_{x}$, simply use `min` and `max` on `clienOrders$ordersPerDay`.
@@ -632,8 +631,8 @@ For the first part of this question, analyse the distribution of the number of p
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer some basic planning support questions.
 
 `@instructions`
-1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
-2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter.
+- Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
+- Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter.
 
 `@hint`
 First calculate the number of customers that arrived within each minute interval using the `table()` command.
