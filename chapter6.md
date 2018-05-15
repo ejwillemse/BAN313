@@ -561,7 +561,6 @@ Based on the hypothesis, should the new manager should be fired?
 *** =instructions
 
 * Yes, there is enough evidence that he had a negative effect on the process.
-
 * No, there is not enough evidence that he had a negative effect on the process.
 
 *** =hint
