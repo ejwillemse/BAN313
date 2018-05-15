@@ -151,11 +151,11 @@ key: 25c0c61261
 The component price data has been loaded in the workspace as the `product_comparison` dataframe. It consists of three variables. The product code (`ProductCode`), the quoted unit-price for the component from Company A (`priceCompA`) and the quoted unit-price for the component from Company B (`priceCompB`). First have a look at the data in the console using the `head(product_comparison)` command, thereafter answer the following:
 
 `@instructions`
-1. How many products did we sample to get quotations for?
-2. What is the sample mean for product prices from Company A?
-3. What is the sample standard deviation for products price from Company A?
-4. What is the sample mean for product prices from Company B?
-5. What is the sample standard deviation for products price from Company B?
+How many products did we sample to get quotations for?
+What is the sample mean for product prices from Company A?
+What is the sample standard deviation for products price from Company A?
+What is the sample mean for product prices from Company B?
+What is the sample standard deviation for products price from Company B?
 
 `@hint`
 - Use `?nrow`, `?mean` and `?sd` to find out more about the functions that you can apply to answer the question.
