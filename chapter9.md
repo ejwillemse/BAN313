@@ -85,9 +85,9 @@ To complete this question.
 
 *** =instructions
 
-1. View the `serviceData` and decide which distribution the variable follows. Thereafter conduct a $\chi^2$ goodness of fit test and report on the $p$-value of the test. Assign your answer to `p_val_service`. Hint: assign the $\chi^2$ goodness of fit test to a variable, for example `fitResults <- chisq.test(...)`. View the results of the test by typing `fitResults` in the console. The $p$-value can then be retrieved as `p_val_service <- fitResults$p.value`
-2. For the arrival, calculate the inter-arrival time of customers, which is the variable that we are after. Use the `diff` command to calculate the inter-arrival times and assign your answer to `inter_times`.
-3. View `inter_times` and decide which distribution the variable follows. Thereafter conduct a $\chi^2$ goodness of fit test and report on the $p$-value of the test. Assign your answer to `p_val_arrive`. Hint: the $p$-value can be obtained using the same method as Part 1.
+- View the `serviceData` and decide which distribution the variable follows. Thereafter conduct a $\chi^2$ goodness of fit test and report on the $p$-value of the test. Assign your answer to `p_val_service`. Hint: assign the $\chi^2$ goodness of fit test to a variable, for example `fitResults <- chisq.test(...)`. View the results of the test by typing `fitResults` in the console. The $p$-value can then be retrieved as `p_val_service <- fitResults$p.value`
+- For the arrival, calculate the inter-arrival time of customers, which is the variable that we are after. Use the `diff` command to calculate the inter-arrival times and assign your answer to `inter_times`.
+- View `inter_times` and decide which distribution the variable follows. Thereafter conduct a $\chi^2$ goodness of fit test and report on the $p$-value of the test. Assign your answer to `p_val_arrive`. Hint: the $p$-value can be obtained using the same method as Part 1.
 
 *** =pre_exercise_code
 ```{r}
@@ -157,8 +157,8 @@ Although we have already done so for the goodness-of-fit test we will redo the c
 
 *** =instructions
 
-1. Using the available `serviceData` data.frame, calculate and view the sample mean and standard deviation of the service time and assign your answer to `serviceMean` and `serviceSD`.
-2. Using the available `arrivalData` data.frame, calculate and view the mean arrival rate and assign your answer to `arrivalMean`. Remember to first calculate the inter-arrival times.
+- Using the available `serviceData` data.frame, calculate and view the sample mean and standard deviation of the service time and assign your answer to `serviceMean` and `serviceSD`.
+- Using the available `arrivalData` data.frame, calculate and view the mean arrival rate and assign your answer to `arrivalMean`. Remember to first calculate the inter-arrival times.
 
 *** =pre_exercise_code
 ```{r}
@@ -221,9 +221,9 @@ Use the above parameters and the provided simulation to conduct 1000 simulations
 
 *** =instructions
 
-1. For each simulation, assign the mean service time to `meanWaitingTimes`.
-2. View a histogram of the `meanWaitingTimes`.
-3. Calculate and view the mean of the mean waiting of the 1000 simulations and assign your answer to `meanWaitingSimulated`.
+- For each simulation, assign the mean service time to `meanWaitingTimes`.
+- View a histogram of the `meanWaitingTimes`.
+- Calculate and view the mean of the mean waiting of the 1000 simulations and assign your answer to `meanWaitingSimulated`.
 
 *** =pre_exercise_code
 ```{r}
@@ -363,7 +363,7 @@ You don't have to code anything. Simply run the model a few times and note by ho
 
 *** =instructions
 
-1. Run the model a few times and note how the simulation results change.
+- Run the model a few times and note how the simulation results change.
 
 *** =pre_exercise_code
 ```{r}
@@ -489,8 +489,8 @@ For this exercise we will use the bootstrapping method to calculate 99% confiden
 
 *** =instructions
 
-1. Use the bootstrapping method to calculate and view a 99% confidence interval and the expected value for the arrival rate of customers. Use 10000 bootstrap simulations and assign the interval to `arrivalInterval` and the expected value to `meanArrival`. Simply assign the results of the `quantile()` function to `arrivalInterval` as follows: `arrivalInterval <- quantile()`.
-2. Use the bootstrapping method to calculate and view 99% confidence intervals the expected values for the mean and standard deviation service times of customers. Use 10000 bootstrap simulations and assign the intervals to `meanServiceInterval` and `sdServiceInterval`, and the expected values to `meanMeanService` and `meanSdService`. Calculate both the mean and standard deviation using the bootstrapping samples.
+- Use the bootstrapping method to calculate and view a 99% confidence interval and the expected value for the arrival rate of customers. Use 10000 bootstrap simulations and assign the interval to `arrivalInterval` and the expected value to `meanArrival`. Simply assign the results of the `quantile()` function to `arrivalInterval` as follows: `arrivalInterval <- quantile()`.
+- Use the bootstrapping method to calculate and view 99% confidence intervals the expected values for the mean and standard deviation service times of customers. Use 10000 bootstrap simulations and assign the intervals to `meanServiceInterval` and `sdServiceInterval`, and the expected values to `meanMeanService` and `meanSdService`. Calculate both the mean and standard deviation using the bootstrapping samples.
 
 *** =pre_exercise_code
 ```{r}
@@ -606,10 +606,10 @@ The simulation model to calculate the queueing model has been provided.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with an arrival rate of 1.17 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
-2. Repeat the ATM simulation with an arrival rate of 1.47 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
-3. Repeat the ATM simulation with an arrival rate of 1.91 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
-4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the arrival rate increased.
+- Use the available code and repeat the ATM simulation with an arrival rate of 1.17 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+- Repeat the ATM simulation with an arrival rate of 1.47 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+- Repeat the ATM simulation with an arrival rate of 1.91 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+- View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the arrival rate increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -771,10 +771,10 @@ The simulation model to calculate the queueing model has been provided.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with a mean service time of 0.97 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
-2. Repeat the ATM simulation with a mean service time of 1.03 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
-3. Repeat the ATM simulation with a mean service time of 1.08 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
-4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
+- Use the available code and repeat the ATM simulation with a mean service time of 0.97 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+- Repeat the ATM simulation with a mean service time of 1.03 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+- Repeat the ATM simulation with a mean service time of 1.08 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+- View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -936,10 +936,10 @@ The simulation model to calculate the queueing model has been provided.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with service time standard deviation of 0.17 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
-2. Repeat the ATM simulation with service time standard deviation of 0.21 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
-3. Repeat the ATM simulation with service time standard deviation of 0.24 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
-4. View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
+- Use the available code and repeat the ATM simulation with service time standard deviation of 0.17 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_low`.
+- Repeat the ATM simulation with service time standard deviation of 0.21 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_expected`.
+- Repeat the ATM simulation with service time standard deviation of 0.24 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_high`.
+- View and compare `meanSimWaiting_low`, `meanSimWaiting_expected` and `meanSimWaiting_high` and note by how much the mean waiting time increased as the mean service time increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -1119,10 +1119,10 @@ For this question, do the following:
 
 *** =instructions
 
-1. Complete the given code and run the model.
-2. Analyse the output and see if the model is still insensitive to the standard deviation.
-3. Analyse the output and determine if the model is sensitive towards the combination of the mean service time and arrival rate.
-4. At the extreme values, which parameter would you consider to be the most critical?
+- Complete the given code and run the model.
+- Analyse the output and see if the model is still insensitive to the standard deviation.
+- Analyse the output and determine if the model is sensitive towards the combination of the mean service time and arrival rate.
+- At the extreme values, which parameter would you consider to be the most critical?
 
 Print the output and answer the following before submitting your answer.
 
