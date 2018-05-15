@@ -402,9 +402,7 @@ Comparing the simulated 30 product scrap-proportion against the manager's 30 pro
 *** =instructions
 
 * Yes, he should be fired.
-
 * No, he should not be fired.
-
 * Cannot say, we have to perform additional analysis.
 
 *** =hint
