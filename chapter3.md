@@ -1029,8 +1029,8 @@ What is the minimum number of access-gates required to ensure that this is the c
 The number of customers that arrived within each minute interval has again been pre-calculated and is available as the `nArrivePerMin` object.
 
 `@instructions`
-1. Determine the minimum number of access-gates required to ensure that the probability of the gates being insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`.
-2. View the above value by printing it to the console output via the `script.R` file.
+- Determine the minimum number of access-gates required to ensure that the probability of the gates being insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`.
+- View the above value by printing it to the console output via the `script.R` file.
 
 `@hint`
 use the `qnorm` function to determine the 95th percentile point, which represents the number of passenger arrivals, or more, that will occur with a probability of 0.05.
