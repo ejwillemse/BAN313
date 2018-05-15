@@ -502,9 +502,9 @@ Data on all the previous productions of the company can be found in the `boatMan
 Now that we know that `length_m` has the strongest relationship with `time_hr` we can fit and plot a linear regression line on our data and use the coefficients of the line to predict how long a boat will take to manufacture, based on its length. To fit a model we will use the `lm` command. Type `?lm` in the console to see how the function works, and thereafter complete the following:
 
 `@instructions`
-1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. The correct way to use the function is `lm(y ~ x)` which can be read as `y` is a function of `x`. Do not specify `data=` in the function, instead call the `x` and `y` variables directly, as in `lm(data.frame$y ~ data.frame$x)`.
-2. View the output of the model in the console.
-3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
+- Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. The correct way to use the function is `lm(y ~ x)` which can be read as `y` is a function of `x`. Do not specify `data=` in the function, instead call the `x` and `y` variables directly, as in `lm(data.frame$y ~ data.frame$x)`.
+- View the output of the model in the console.
+- Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 
 `@hint`
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
