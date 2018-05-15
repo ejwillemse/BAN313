@@ -217,10 +217,10 @@ The arrival times of the customers, starting at time 0 is available in the `arri
 
 *** =instructions
 
-1. Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
-2. Using the above equations and complete the provided `for` code to calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
-3. Draw a barplot of `waitingTime`.
-4. Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
+- Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
+- Using the above equations and complete the provided `for` code to calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
+- Draw a barplot of `waitingTime`.
+- Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
 
 *** =pre_exercise_code
 ```{r}
@@ -332,8 +332,8 @@ The waiting time calculations are performed in the provided function, already po
 
 *** =instructions
 
-1. Randomly sample the arrival times of 100 customers using the `rexp`, `cumsum` and `rnorm` functions and assign your answers to `arrivalTime` and `serviceTime`.
-2. Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
+- Randomly sample the arrival times of 100 customers using the `rexp`, `cumsum` and `rnorm` functions and assign your answers to `arrivalTime` and `serviceTime`.
+- Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
 
 *** =pre_exercise_code
 ```{r}
@@ -418,10 +418,10 @@ For this question we will repeat the simulation 1000 times and analyse the distr
 
 *** =instructions
 
-1. Initiate a vector with 1000 `NAs` for the mean waiting times of the simulations. Assign the vector to `simWaitingTimes`.
-2. Using a `for` loop, repeat the simulation 1000 times and store the simulation results in the appropriate place in `simWaitingTimes`. Remember that the arrival and service time sampling has to be done in-side the `for` loop, otherwise we will end-up calculating the same mean waiting time 1000 times, instead of a new simulated waiting time.
-3. Draw a histogram of `simWaitingTimes`.
-4. Calculate and view the mean of the mean waiting times of the simulations, that is, calculate the mean of `simWaitingTimes`. Assign your answer to `meanSimWaiting`.
+- Initiate a vector with 1000 `NAs` for the mean waiting times of the simulations. Assign the vector to `simWaitingTimes`.
+- Using a `for` loop, repeat the simulation 1000 times and store the simulation results in the appropriate place in `simWaitingTimes`. Remember that the arrival and service time sampling has to be done in-side the `for` loop, otherwise we will end-up calculating the same mean waiting time 1000 times, instead of a new simulated waiting time.
+- Draw a histogram of `simWaitingTimes`.
+- Calculate and view the mean of the mean waiting times of the simulations, that is, calculate the mean of `simWaitingTimes`. Assign your answer to `meanSimWaiting`.
 
 *** =pre_exercise_code
 ```{r}
@@ -533,10 +533,10 @@ The arrival rate levels will be 0.5, 1 and 1.5, thereby representing the assumed
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
-2. Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
-3. Repeat the ATM simulation with an arrival rate of 1.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
-4. View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
+- Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
+- Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
+- Repeat the ATM simulation with an arrival rate of 1.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
+- View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
 
 *** =pre_exercise_code
 ```{r}
@@ -675,10 +675,10 @@ All other parameters will remain at their default values.
 
 *** =instructions
 
-1. Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
-2. Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
-3. Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
-4. View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
+- Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
+- Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
+- Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
+- View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
 
 *** =pre_exercise_code
 ```{r}
