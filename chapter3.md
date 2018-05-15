@@ -281,11 +281,11 @@ The data that we will use to estimate the key parameters are available in the `h
 To assist in answering the question, on a piece of paper draw a figure of the normal distribution of the hole-size and check where the lower and upper tolerance limits lie. Pay special attention that the tolerance limits may not necessarily be symmetrically around the mean, in which case you need to calculate the probability for each tolerance limit, and calculate the area between the upper and lowered limit. This is covered in Example 2.49 on page 93 in the [prescribed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
 `@instructions`
-1. Estimate $\mu$ for the normal distribution and assign your answer to `meanHoleSize`.
-2. Estimate $\sigma$ for the normal distribution and assign your answer to `sdHoleSize`.
-3. Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.5cm_ tolerance limit and assign your answer to `fWork05`.
-4. Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.75cm_ tolerance limit and assign your answer to `fWork075`.
-5. View all the above values by printing them to the console output via the `script.R` file.
+- Estimate $\mu$ for the normal distribution and assign your answer to `meanHoleSize`.
+- Estimate $\sigma$ for the normal distribution and assign your answer to `sdHoleSize`.
+- Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.5cm_ tolerance limit and assign your answer to `fWork05`.
+- Use the normal distribution probability function and determine the fraction of holes that will fall within a _0.75cm_ tolerance limit and assign your answer to `fWork075`.
+- View all the above values by printing them to the console output via the `script.R` file.
 
 `@hint`
 To calculate $\mu$ and $\sigma$, simply use `mean` and `sd` on `holeSize$holeDiameter_cm`.
@@ -387,23 +387,21 @@ For the first part of this question, analyse the distribution of the number of u
 In the following parts we will find the key parameters of the distribution and use the distribution function to answer the above question.
 
 `@instructions`
-1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter.
-2. How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
-3. View the values by printing them to the console output via the `script.R` file.
+- Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter.
+- How many times over the last 30 days did customers order _less_ than 210 units: assign your answer to `less210`.
+- View the values by printing them to the console output via the `script.R` file.
 
-  *** =hint
-
+`@hint`
 Use `hist(clienOrders$ordersPerDay)` to analyse the distribution and see which of the four distributions
 
-* normal,
-* poisson and exponential,
-* power-law, or
-* uniform,
+- normal,
+- poisson and exponential,
+- power-law, or
+- uniform,
 
 that it most closely represents.
 
 Use `less210 <- nrow(subset(clienOrders, ordersPerDay < lower_limit))` to find the number of days that less than the specified number of products were ordered.
-
 
 `@pre_exercise_code`
 ```{undefined}
