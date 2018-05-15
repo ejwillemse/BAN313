@@ -536,7 +536,7 @@ The data that we will use to estimate the key parameters are available in the `c
 - Estimate $\min$ for the uniform distribution and assign your answer to `minOrders`.
 - Estimate $\max$ for the uniform distribution and assign your answer to `maxOrders`.
 - Use the uniform distribution probability function and determine the probability that more than 210 units will be ordered to tomorrow and assign your answer to `pStockOut`.
--  View all the above values by printing them to the console output via the `script.R` file.
+- View all the above values by printing them to the console output via the `script.R` file.
 
 `@hint`
 To calculate $\min_{x}$ and $\max_{x}$, simply use `min` and `max` on `clienOrders$ordersPerDay`.
