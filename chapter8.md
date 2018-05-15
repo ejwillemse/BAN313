@@ -118,9 +118,9 @@ Based on this information, answer the following:
 
 *** =instructions
 
-1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM at 14:05, then `leave_1 <- 5`. For seconds, simply give your answer as a decimal. For example, if the customer is done at 14:05:30, then `leave_1 <- 5.5`.
-2. How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
-3. At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
+- At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM at 14:05, then `leave_1 <- 5`. For seconds, simply give your answer as a decimal. For example, if the customer is done at 14:05:30, then `leave_1 <- 5.5`.
+- How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
+- At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
 
 *** =pre_exercise_code
 ```{r}
