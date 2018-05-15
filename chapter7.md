@@ -296,11 +296,11 @@ But easier is to just create an additional storage space in `I_start` by initial
 The last update in our code is to place the inventory-level and stock-out calculations in a `for` loop to automatically do all the calculations over the study period.
 
 `@instructions`
-1. Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
-2. Draw a barplot of `stockOut`, `I_start` and `I_end`.
-3. Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
-4. Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
-5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
+- Complete the given code in the R script file to right to calculate `stockOut`, `I_start` and `I_end` for the ten-day study period.
+- Draw a barplot of `stockOut`, `I_start` and `I_end`.
+- Calculate and view the mean ending inventory-level and assign your answer to `mean_I_end`.
+- Calculate and view the total number of stock-outs during the study period and assign your answer to `nStockOut`.
+- Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 
 `@hint`
 
@@ -461,8 +461,8 @@ Our previous code can then be used as-is to calculate inventory and stock-out le
 This will be left as an exercise:
 
 `@instructions`
-1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
-2. Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
+- Generate random product orders for `n=30` days and assign the daily orders to `O`.
+- Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
 
 
 
@@ -627,11 +627,11 @@ The function will then return the following:
 * `pStockOut`: the proportion of days on which a stockout occurred.
 
 `@instructions`
-1. Using the provided code, write a function that simulates `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
-2. Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
-3. Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
-4. Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
-5. Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
+- Using the provided code, write a function that simulates `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`. Do not provide default values for function inputs.
+- Simulate and view `pStockOut` for a 30-day study period with 150 products produced per day and with 150 products available at the start of Day 1. Assign the result of the simulation to `invSim1`.
+- Simulate and view `pStockOut` for a 30-day study period with 175 products produced per day and with 100 products available at the start of Day 1. Assign the result of the simulation to `invSim2`.
+- Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
+- Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
 
 
 
@@ -792,16 +792,16 @@ To do so we will imbed the simulation function within a `for` loop and capture t
 The simulation model function is already available in the R script as `inventorySimulation(n, I_start0, P)`.
 
 `@instructions`
-1. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
-2. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
-3. Draw a histogram of the 10000 simulation results.
-4. Calculate and view the *median* stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
-5. What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
-6. Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
-7. Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
-8. Draw a histogram of the 10000 simulation results.
-9. Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
-10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
+- Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_150`.
+- Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 150 units. Store the results of each run in `pStockOutSimulations_150`.
+- Draw a histogram of the 10000 simulation results.
+- Calculate and view the *median* stockout proportion from the simulation results and assign your answer to `pStockoutMedian_150`.
+- What is the probability of having more than 10 stock-outs during a 30 day period for the 150 unit production setup? Assign your answer to `p10stockouts_150`.
+- Initiate a vector with 10000 `NAs` to store the simulation results in, and assign the vector to `pStockOutSimulations_160`.
+- Run 10000 simulations of the order process for 30 days with an initial inventory level of 120 units, and a fixed production of 160 units. Store the results of each run in `pStockOutSimulations_160`.
+- Draw a histogram of the 10000 simulation results.
+- Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
+- What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 
 
 
@@ -985,9 +985,9 @@ The production simulation is called `productionSimulation` and takes as input th
 The remaining products are scrapped.
 
 `@instructions`
-1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
-2. Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
-3. Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
+- Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
+- Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
+- Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
 
 
