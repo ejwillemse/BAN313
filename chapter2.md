@@ -707,9 +707,9 @@ For the last question we are going to predict how long a 340m length yacht is go
 Similar to the previous questions we will do the following:
 
 `@instructions`
-1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
-2. Convert the line into a regression line equation and use the equation to predict how long a 340m boat will take to manufacture. Assign your answer to `y_340m`.
-3. Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated`.
+- Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
+- Convert the line into a regression line equation and use the equation to predict how long a 340m boat will take to manufacture. Assign your answer to `y_340m`.
+- Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated`.
 
 `@hint`
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help and look at what we've done in the previous exercises.
