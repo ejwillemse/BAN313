@@ -340,11 +340,11 @@ We can assume the first condition holds since we took a random sample of product
 After checking the conditions we need calculate the necessary sample statistics on the difference in product prices. We will reuse our code for doing so in the following exercises.
 
 `@instructions`
-1. Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
-2. Draw a histogram of the price difference to analyse the sample distribution.
-3. Determine the number of samples and assign the answer to the variable `n`. Calculate the number on the dataframe `product_comparison`, not on `price_diff`.
-4. Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
-5. Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
+- Calculate the difference between Company A's price and that of Company B for each product (price of A - price of B), and assign the answer to the vector `price_diff`.
+- Draw a histogram of the price difference to analyse the sample distribution.
+- Determine the number of samples and assign the answer to the variable `n`. Calculate the number on the dataframe `product_comparison`, not on `price_diff`.
+- Look at the number of samples in conjunction with the histogram and decide if the distribution of the variable is near normal. If you decide it is near-normal set `normalConditionMet <- TRUE`, if not set `normalConditionMet <- FALSE`.
+- Calculate the sample mean and standard deviation of the price differences and assign the answers to `mean_diff` and `s_diff`.
 
 `@hint`
 The only new component is to calculate the difference between the price of Company A and Company B per product, and store the result as a newly created vector.
