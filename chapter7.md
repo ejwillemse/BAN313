@@ -56,26 +56,10 @@ On Day 3 our starting inventory will again increase by 150 products and will we 
 
 In this chapter we will predict our daily starting and ending inventory levels over a period of 30 days, as well as the proportion of stock-outs over the study period, which is the total number of stock-outs over the period divided by the number of days in the study period.
 
-In this lab we do the following:
-
-1. Develop a simulation model of our stock-outs and inventory levels based on random orders.
-<<<<<<< HEAD
-2. Adapt the simulation model to account for limited inventory space and see how it influences the predicted stock-outs and inventory levels.
-3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
-4. Predict how increased inventory space and larger production runs will influence stock-outs and inventory levels.
-=======
-2. Predict how larger production runs will influence stock-outs and inventory levels.
-3. Incorporate the drilling-process simulation model from our previous chapter to account for defective products and random orders, and predict stock-outs and inventory levels.
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
-
 The specific R functions that are applicable to this chapter are:
 
 ```
-<<<<<<< HEAD
 runif(), rnorm(), rep(), sample(), function(), for, if
-=======
-runif(), rnorm(), rep(), sample(), round(), subset(), length(), median(), mean(), function(), for, if
->>>>>>> 15147a08c558d9b4102ba0462788773496f9c86f
 ```
 
 To find out more about the functions, type `?` followed by the R-function in the R console.
