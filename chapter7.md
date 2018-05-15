@@ -138,13 +138,9 @@ Based on the above information, what was our **starting** inventory level on Day
 
 `@instructions`
 * 62
-
 * 205
-
 * 212
-
 * 235
-
 * 355
 
 `@hint`
