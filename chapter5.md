@@ -60,7 +60,6 @@ To continue with this chapter confirm the following:
 
 `@instructions`
 * I have not completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
-
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
 `@hint`
