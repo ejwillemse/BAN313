@@ -90,10 +90,10 @@ For the first part of this question, analyse the distribution of hole sizes from
 
 *** =instructions
 
-1. Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
-2. Determine the key parameters of the distribution (note that this part is not checked for correctness).
-3. Using the distribution (not the sample data), calculate the **probability** of a hole drilled by the machine to fall **outside** a 0.30cm tolerance limit, and will therefore be defective. Assign your answer to `pDefective03`.
-4. View the value of `pDefective03` by printing it to the console output via the `script.R` file.
+- Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
+- Determine the key parameters of the distribution (note that this part is not checked for correctness).
+- Using the distribution (not the sample data), calculate the **probability** of a hole drilled by the machine to fall **outside** a 0.30cm tolerance limit, and will therefore be defective. Assign your answer to `pDefective03`.
+- View the value of `pDefective03` by printing it to the console output via the `script.R` file.
 
 *** =hint
 

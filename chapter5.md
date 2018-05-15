@@ -1,10 +1,19 @@
 ---
-title_meta  : Case study 7b
-title       : Case study 7b - Estimating distribution parameters using bootstrapping
-description : "In this case study, we will revisit the examples from Case study 7, where we analysed data for different processes. We will use boot-strapping methods to estimate model parameters."
+title: Case study 7b - Estimating distribution parameters using bootstrapping
+description: >-
+  In this case study, we will revisit the examples from Case study 7, where we analysed data for different processes. We will use boot-strapping methods to estimate model parameters.
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd2
+
+---
 ## Background
+
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 50
+skills: 1
+key: 8eaf7b9ebd2
+```
 
 In this case study we will revisit the examples of [Case study 7 - Fitting probability distributions using chi-squared goodness-of-fit test](https://campus.datacamp.com/courses/industrial-analysis-using-r/) and use bootstrapping techniques to estimate model parameters.
 
@@ -49,32 +58,39 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-*** =instructions
-
+`@instructions`
 * I have not completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
 
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
-*** =pre_exercise_code
-```{r}
+`@hint`
 
-```
 
-*** =sample_code
-```{r}
 
-```
 
-*** =sct
-```{r}
+
+`@sct`
+```{undefined}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+
+
+
+
+---
 ## Estimating key parameters for Drill-hole size distribution
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: a44acfd135
+```
 
 We wish to replace our current very old drilling machine.
 The machine is required to drill a hole with a diameter of 10cm within a 0.5cm tolerance.
@@ -107,8 +123,7 @@ For this question we will perform 1000 simulations (bootstraps) and analyse the 
 
 To complete the question, do the following:
 
-*** =instructions
-
+`@instructions`
 1. View the mean and standard deviation of `holeDiameter` by printing their values to the console. You do not need to assign the values to anything. Just print and view it.
 2. Using the `sample` function take a random sample with replacement from the hole-size samples and assign the results to `holeDiameter_boot`.
 3. View the mean and standard deviation of `holeDiameter_boot` by printing their values to the console. You do not need to assign the values to anything. Just print and view it and compare it to the mean and standard deviation of the original sample.
@@ -121,21 +136,19 @@ To complete the question, do the following:
 10. For a worst-case scenario we can use the `holeMeansInter` value that is the furthest away from the required drill hole size of 10cm, and the `sdInter` value that is the largest. Using the appropriate two values, calculate the probability of a hole falling *outside* a tolerance limit of 0.5cm. For the calculations, use `holeMeansInter` and `sdInter` directly by calling either `holeMeansInter[1]` or `holeMeansInter[2]`, depending on which can be considered as the worst-case option, and the same with `sdInter`. Assign your answer to `pDefective05`. Do not use the values displayed in the terminal. They are not accurate enough. Hint: use the `pnorm` function and remember that you will have to call it twice.
 11. View the value of `pDefective05` by printing it to the console.
 
-*** =hint
-
+`@hint`
 * Make sure you understand how the `sample` function works in R. Review the [Probability](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-2-probability?ex=1) datacamp chapter if necessary.
 * Make sure you understand how the `for` function works in R, and how it is used to store simulation run outputs in a vector. Review the [Foundations for inference: Sampling distributions](https://campus.datacamp.com/courses/statistical-inference-and-data-analysis/lab-3a-foundations-for-inference-sampling-distributions?ex=1) datacamp chapter if necessary.
 * Go through _Section 4.5: Bootstrapping for the standard deviation (p.195)_ of the prescribed textbook by Diez et al (2014).
 
-*** =pre_exercise_code
-```{r}
+`@pre_exercise_code`
+```{undefined}
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
 ```
-
-*** =sample_code
-```{r}
+`@sample_code`
+```{undefined}
 # The data are available in the holeSize dataframe.
 
 #1. View the mean and standard deviation of `holeDiameter` by printing their values to the console. You do not need to assign the values to anything. Just print and view it.
@@ -189,11 +202,9 @@ sdInter
 #11. View the value of `pDefective05` by printing it to the console.
 
 pDefective05
-
 ```
-
-*** =solution
-```{r}
+`@solution`
+```{undefined}
 holeDiameter_boot_test <- sample(holeSize$holeDiameter_cm, size = nrow(holeSize), replace = TRUE)
 holeMeans <- rep(NA, 10000)
 holeSD <- rep(NA, 10000)
@@ -218,9 +229,8 @@ worstSD <- sdInter[2]
 pDefective05 <- pnorm(10 - 0.5, worstMean, worstSD) + pnorm(10 + 0.5, worstMean, worstSD, lower.tail = FALSE)
 pDefective05
 ```
-
-*** =sct
-```{r}
+`@sct`
+```{undefined}
 test_object("holeDiameter_boot_test", undefined_msg = "Make sure to define an object `holeDiameter_boot_test`.",
             incorrect_msg = "Make sure that you took a sample from `holeSize$holeDiameter` with replacement and assigned the result to `holeDiameter_boot_test`")       
 
@@ -248,8 +258,20 @@ test_object("pDefective05", undefined_msg = "Make sure to define a variable `pDe
 success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for any parameter, including the mean and the standard deviation. The confidence intervals can then be used to get a conservative estimate of the process output.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:26ce6147d6
+
+
+
+
+---
 ## Gautrain arrival rate: parameter estimation using bootstrapping
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+key: 26ce6147d6
+```
 
 In the previous chapter we analysed Guatrain arrival rate per minute. We formally tested the goodness-of-fit for the poisson distribution and found that we cannot reject $H_0$. We can therefore model the number passenger arrivals per minute, $X$, using a poisson distribution, such that:
 
@@ -271,8 +293,7 @@ The arrival rate per minute of passengers between 16:00 and 18:00PM for the prev
 
 The instructions for the question are as follow:
 
-*** =instructions
-
+`@instructions`
 1. View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
 2. Using the `sample` function take a random sample with replacement from the nArrivePerMin samples and assign the results to `nArrivePerMin_boot_test`.
 3. View the mean number of arrivals of `nArrivePerMin_boot_test` by printing the value to the console. You do not need to assign the value to anything. Just print and view it and compare it to the mean of the original sample.
@@ -285,18 +306,16 @@ The instructions for the question are as follow:
 10. Calculate the minimum number of gates required using the 95$^\text{th}$ percentile and the information that a single gate can process _three_ customers per minute. Remember to round your final answer-up. Assign your final answer to `nGates`.
 11. View your final answer by printing `nGates` to the console.
 
-*** =hint
-
+`@hint`
 Refer to the previous question on bootstrapping and the previous BAN313 chapter.
 
-*** =pre_exercise_code
-```{r}
+`@pre_exercise_code`
+```{undefined}
 set.seed(31)
 nArrivePerMin <- rpois(30*120, 5)
 ```
-
-*** =sample_code
-```{r}
+`@sample_code`
+```{undefined}
 # The arrivals per minute are available in the `nArrivePerMin` vector.
 
 #1. View the mean number of arrivals of `nArrivePerMin` by printing the values to the console. You do not need to assign the value to anything. Just print and view it.
@@ -340,13 +359,9 @@ nArrivePerMin <- rpois(30*120, 5)
 
 
 #11. View your final answer by printing `nGates` to the console.
-
-
-
 ```
-
-*** =solution
-```{r}
+`@solution`
+```{undefined}
 mean(nArrivePerMin)
 nArrivePerMin_boot_test <- sample(nArrivePerMin, size = length(nArrivePerMin), replace = TRUE)
 mean(nArrivePerMin_boot_test)
@@ -364,9 +379,8 @@ nArrive95 <- qpois(p=0.95, meanInter[2])
 nGates <- ceiling(nArrive95/3)
 nGates
 ```
-
-*** =sct
-```{r}
+`@sct`
+```{undefined}
 test_object("nArrivePerMin_boot_test", undefined_msg = "Make sure to define an object `nArrivePerMin_boot_test`.",
             incorrect_msg = "Make sure that you took a sample from `nArrivePerMin` with replacement and assigned the result to `nArrivePerMin_boot_test`")     
 
@@ -387,3 +401,6 @@ test_object("nGates", undefined_msg = "Make sure to define a variable `nGates`."
 
 success_msg("Correct! By using the bootstrap method we can calculate a confidence interval for the arrival rate. The confidence intervals can then be used to get a conservative estimate of the number of arrivals which can then be used to determine the resource requirements.")
 ```
+
+
+
