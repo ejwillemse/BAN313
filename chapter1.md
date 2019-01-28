@@ -229,7 +229,7 @@ sd_price_A <- sd(product_comparison$priceCompA)
 
 mean_price_B <- mean(product_comparison$priceCompB)
 
-# 4) Calculate the sample standard deviation for product prices from Company B and assign your answer to: sd_price_B
+# 5) Calculate the sample standard deviation for product prices from Company B and assign your answer to: sd_price_B
 
 sd_price_B <- sd(product_comparison$priceCompB)
 
