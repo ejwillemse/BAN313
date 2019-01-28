@@ -1,12 +1,18 @@
 ---
-title_meta  : Case study 10
-title       : Case study 10 - Sensitivity analysis on queueing models
-description : "In this case study we will first develop a basic queueing model
-that models how customers arrive at an ATM and perform transactions.
-Thereafter we will test the sensitivity of our model to model parameters."
+title_meta: 'Case study 10'
+title: 'Case study 10 - Sensitivity analysis on queueing models'
+description: 'In this case study we will first develop a basic queueing model that models how customers arrive at an ATM and perform transactions. Thereafter we will test the sensitivity of our model to model parameters.'
+---
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd5
 ## Background
+
+```yaml
+type: MultipleChoiceExercise
+key: 8eaf7b9ebd5
+lang: r
+xp: 50
+skills: 1
+```
 
 **Read the below instructions carefully.**
 
@@ -56,78 +62,92 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-*** =instructions
-
+`@possible_answers`
 * I have read **ALL** the instructions on this page carefully.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
-```{r}
-
-```
-
-*** =sct
+`@sct`
 ```{r}
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 1, feedback_msgs = c(msg_success))
 ```
 
---- type:MultipleChoiceExercise lang:r xp:50 skills:1 key:1a10d56107
+---
+
 ## Constant arrival and transaction times
+
+```yaml
+type: MultipleChoiceExercise
+key: 1a10d56107
+lang: r
+xp: 50
+skills: 1
+```
 
 Assume that customers arrive at the ATM exactly 1 minute apart and that only one customer arrives at a time.
 Further assume that a customer takes exactly 0.9 minutes to complete his transactions.
 Based on these assumptions, what is the mean waiting time of 100 customers over the course of a single day?
 
-*** =instructions
-
+`@possible_answers`
 * 0 minutes;
 * between 1 and 5 minutes;
 * between 5 and 10 minutes;
 * more than 10 minutes;
 * not enough information is available to answer the question.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
-```{r}
-
-```
-
-*** =sct
+`@sct`
 ```{r}
 msg_bad <- "Incorrect. Carefully read the description of the ATN system and the given information of the question."
 msg_success <- "Correct. Customers arrive exactly 1 minute apart. A new customer will arrive exactly 60 seconds after the previous one. A customer arriving at the ATM will only spend 0.9 minutes at the ATM and then leave. Each customer will therefore leave 0.1 minutes before the next customer arrives. The ATM will be idle for 0.1 minutes, and no customer has to wait in-line since the ATM will always be idle by the time they arrive."
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad, msg_bad))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:592f5b5fae
+---
+
 ## Calculating arrival-time, waiting time and completing time of two customers
+
+```yaml
+type: NormalExercise
+key: 592f5b5fae
+lang: r
+xp: 100
+skills: 1
+```
 
 Considering the following case.
 A customer arrives at the ATM at 14:01 and takes 1.3 minutes to complete his transactions.
 A second customer arrives at time 14:02 and takes 0.5 minutes to complete his transactions.
 Based on this information, answer the following:
 
-*** =instructions
-
+`@instructions`
 - At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`. For example, if the customer is done with the ATM at 14:05, then `leave_1 <- 5`. For seconds, simply give your answer as a decimal. For example, if the customer is done at 14:05:30, then `leave_1 <- 5.5`.
 - How long will the second customer wait before he can use the ATM? Give your answer in minutes after 14:00 and assign your answer to `wait_2`.
 - At what time will the second customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_2`.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # 1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`.
 
@@ -143,7 +163,7 @@ Based on this information, answer the following:
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 # 1. At what time will the first customer be done with the ATM? Give your answer in minutes after 14:00 and assign your answer to `leave_1`.
 
@@ -158,7 +178,7 @@ wait_2 <- leave_1 - 2
 leave_2 <- 2 + wait_2 + 0.5
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("leave_1", undefined_msg = "Make sure to define an object `leave_1`.",
 incorrect_msg = "Something went wrong in calculating `leave_1`.
@@ -184,8 +204,17 @@ His finishing time is equal to his arrival time, plus waiting time plus the time
 If we know the arrival and transaction time of each customer, we can easily determine if the customers will wait in line, and for how long the customers will wait.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:bb32493aff
+---
+
 ## Determining how long customers will wait in-line
+
+```yaml
+type: NormalExercise
+key: bb32493aff
+lang: r
+xp: 100
+skills: 1
+```
 
 A customer's waiting time depends on his arrival time and the time at which the previous customer will leave the ATM.
 When determining if customer $i$ will wait, we always need to see when customer $i-1$ is done with his transactions.
@@ -215,20 +244,22 @@ By manually setting $a_1 = 0$ for the first customer, we can use the above equat
 For this question we will calculate the waiting times of 100 customers.
 The arrival times of the customers, starting at time 0 is available in the `arrivalTime` vector, and their service time is available in the `serviceTime` vector.
 
-*** =instructions
-
+`@instructions`
 - Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
 - Using the above equations and complete the provided `for` code to calculate the waiting and leaving times of the 100 customers and assign the times to `waitingTime` and `leavingTime`. Remember that the times of the first customer has to be calculated outside the for loop, as shown.
 - Draw a barplot of `waitingTime`.
 - Calculate and view the mean waiting time for the 100 customers and assign your answer to `meanWaitingTime`.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 arrivalTime <- cumsum(rexp(100, 1))
 serviceTime <- rnorm(100, 0.9, 0.25)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # 1. Initiate two vectors with 100 `NAs` for the waiting time and leaving time of the 100 customers. Assign the vectors to `waitingTime` and `leavingTime`.
 
@@ -256,7 +287,7 @@ for(i in 2:100)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 waitingTime <- rep(NA, 100)
 leavingTime <- rep(NA, 100)
@@ -273,7 +304,7 @@ barplot(waitingTime)
 meanWaitingTime <- mean(waitingTime)
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("waitingTime", undefined_msg = "Make sure to define an object `waitingTime`.",
 incorrect_msg = "Something went wrong in calculating the waiting times of the 100 customers.
@@ -295,8 +326,17 @@ All that's left for the simulation model is to randomly sample the arrival and w
 Thereafter we can repeatedly simulate the waiting times of 100 customers.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:7981afe651
+---
+
 ## ATM waiting time simulation
+
+```yaml
+type: NormalExercise
+key: 7981afe651
+lang: r
+xp: 100
+skills: 1
+```
 
 In the previous exercise we wrote all the necessary code to calculate the waiting and leaving time of customers.
 All that is left is to simulate customer arrivals and transaction (serivce) times.
@@ -330,17 +370,19 @@ To find out more about the function, type `?cumsum` in the terminal.
 For this question we will complete the simulation model of the ATM process by randomly sampling the arrival and service times of 100 customers.
 The waiting time calculations are performed in the provided function, already populated with the code from the previous question.
 
-*** =instructions
-
+`@instructions`
 - Randomly sample the arrival times of 100 customers using the `rexp`, `cumsum` and `rnorm` functions and assign your answers to `arrivalTime` and `serviceTime`.
 - Use the provided function to calculate the mean waiting time of the 100 customers. Assign your answer to `meanWaitingTime`.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -369,7 +411,7 @@ atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -393,7 +435,7 @@ serviceTime <- rnorm(100, 0.9, 0.25)
 meanWaitingTime <- atmMeanWaitingTimeSim(arrivalTime, serviceTime)
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("arrivalTime", undefined_msg = "Make sure to define an object `arrivalTime`.",
 incorrect_msg = "Something went wrong in sampling the arrival times of 100 customers. You need to first sample the inter-arrival times of 100 customers from the exponential distribution using the `rexp` function. Thereafter you need to calculate the arrival times using the `cumsum` function.")
@@ -411,24 +453,35 @@ Any distribution can be used.
 The distribution should however be fitted based on data on the actual inter-arrival and service times.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8c2a4ef510
+---
+
 ## ATM waiting time analysis
+
+```yaml
+type: NormalExercise
+key: 8c2a4ef510
+lang: r
+xp: 100
+skills: 1
+```
 
 For this question we will repeat the simulation 1000 times and analyse the distribution of the mean waiting time of 100 customers for each simulation.
 
-*** =instructions
-
+`@instructions`
 - Initiate a vector with 1000 `NAs` for the mean waiting times of the simulations. Assign the vector to `simWaitingTimes`.
 - Using a `for` loop, repeat the simulation 1000 times and store the simulation results in the appropriate place in `simWaitingTimes`. Remember that the arrival and service time sampling has to be done in-side the `for` loop, otherwise we will end-up calculating the same mean waiting time 1000 times, instead of a new simulated waiting time.
 - Draw a histogram of `simWaitingTimes`.
 - Calculate and view the mean of the mean waiting times of the simulations, that is, calculate the mean of `simWaitingTimes`. Assign your answer to `meanSimWaiting`.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -467,7 +520,7 @@ simWaitingTimes <-
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -498,7 +551,7 @@ hist(simWaitingTimes)
 meanSimWaiting <- mean(simWaitingTimes)
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("simWaitingTimes", undefined_msg = "Make sure to define an object `simWaitingTimes`.",
 incorrect_msg = "Something went wrong in simulating the mean waiting time 1000 times. Use a `for`-loop to repeatedly call the arrival and service time sampling, and the mean waiting time calculation function. Assign each simulation's output to the appropriate place in `simWaitingTimes`.")
@@ -516,8 +569,17 @@ Repeating this process will show us by how much the simulation output changes wi
 If the output changes by a lot, we know that the simulation is sensitive towards the specific input parameter. We then need to make sure that the parameters are accurate.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:c2c29de5b8
+---
+
 ## Testing the model sensitivity to the arrival rate
+
+```yaml
+type: NormalExercise
+key: c2c29de5b8
+lang: r
+xp: 100
+skills: 1
+```
 
 In the previous example we assumed that the customer arrivals are exponentially distributed at a rate of 1 per minute, but what if this is not the case?
 What if the actual customer arrival rate is 1.1 per minute?
@@ -531,21 +593,23 @@ By comparing the waiting times at the arrival rates we can get a sense of how se
 
 The arrival rate levels will be 0.5, 1 and 1.5, thereby representing the assumed parameter value, the value decreased by 50%, and the value increased by 50%.
 
-*** =instructions
-
+`@instructions`
 - Use the available code and repeat the ATM simulation with an arrival rate of 0.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_05`.
 - Repeat the ATM simulation with an arrival rate of 1 customer per minute. Assign the mean of the mean waiting times to `meanSimWaiting_1`.
 - Repeat the ATM simulation with an arrival rate of 1.5 customers per minute. Assign the mean of the mean waiting times to `meanSimWaiting_15`.
 - View and compare `meanSimWaiting_05`, `meanSimWaiting_1` and `meanSimWaiting_15` and note by how much the mean waiting time increased as the arrival rate increased.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 
 
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -589,7 +653,7 @@ meanSimWaiting_05 <- mean(simWaitingTimes)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
@@ -638,7 +702,7 @@ meanSimWaiting_15 <- mean(simWaitingTimes)
 
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("meanSimWaiting_05", undefined_msg = "Make sure to define an object `meanSimWaiting_05`.",
 incorrect_msg = "Something went wrong in calculate `meanSimWaiting_05`. Make sure to set the arrival rate to the correct value.")
@@ -664,8 +728,17 @@ We also need to make sure that arrival rate does not vary during the day as the 
 In the next and last question we are going to look at the mean service time.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:e36cab65c2
+---
+
 ## Testing the model sensitivity to the mean service time
+
+```yaml
+type: NormalExercise
+key: e36cab65c2
+lang: r
+xp: 100
+skills: 1
+```
 
 In this exercise we will test three levels for the mean service time of customers.
 We will then make an early judgement on which parameter is more critical to model output, the arrival rate or mean service time.
@@ -673,21 +746,23 @@ We will then make an early judgement on which parameter is more critical to mode
 The service time levels will be 0.45, 0.9 and 1.35, thereby representing the assumed parameter value, the value decreased by 50%, and the value increased by 50%.
 All other parameters will remain at their default values.
 
-*** =instructions
-
+`@instructions`
 - Use the available code and repeat the ATM simulation with a mean service time of 0.45 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_045`.
 - Use the available code and repeat the ATM simulation with a mean service time of 0.9 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_09`.
 - Use the available code and repeat the ATM simulation with a mean service time of 1.35 minutes. Assign the mean of the mean waiting times to `meanSimWaiting_135`.
 - View and compare `meanSimWaiting_045`, `meanSimWaiting_09` and `meanSimWaiting_135` and note by how much the mean waiting time increased as the mean service time increased.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 
 
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
 {
@@ -731,7 +806,7 @@ meanSimWaiting_045 <- mean(simWaitingTimes)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 
 atmMeanWaitingTimeSim <- function(arrivalTime, serviceTime)
@@ -780,7 +855,7 @@ meanSimWaiting_135 <- mean(simWaitingTimes)
 
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("meanSimWaiting_045", undefined_msg = "Make sure to define an object `meanSimWaiting_045`.",
 incorrect_msg = "Something went wrong in calculate `meanSimWaiting_045`. Make sure to set the mean service time to the correct value.")

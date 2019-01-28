@@ -1,18 +1,16 @@
 ---
-title: Case study 6 - Different applications of probability distributions
-description: >-
-  In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. The distributions that we will look at are normal, poisson and exponential and uniform distributions. After eye-balling the applicable distribution we will find the appropriate distribution parameters, using the data, and then empirically answer some basic planning decisions using the appropriate distribution with its parameters.
-
-
+title: 'Case study 6 - Different applications of probability distributions'
+description: 'In this case study we will analyse data for different processes, and see whether the processes can be modelled using specific probability distribution functions. The distributions that we will look at are normal, poisson and exponential and uniform distributions. After eye-balling the applicable distribution we will find the appropriate distribution parameters, using the data, and then empirically answer some basic planning decisions using the appropriate distribution with its parameters.'
 ---
+
 ## Background
 
 ```yaml
 type: MultipleChoiceExercise
+key: 4fdf3ba090
 lang: r
 xp: 50
 skills: 1
-key: 4fdf3ba090
 ```
 
 **Before continuing with this chapter, complete all previous chapters in this datacamp course.**
@@ -59,34 +57,35 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-`@instructions`
+`@possible_answers`
 * I have read **ALL** the instructions on this page carefully and have completed all the prescribed preperation material.
 
+`@hint`
 
 
+`@pre_exercise_code`
+```{r}
 
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 1, feedback_msgs = c(msg_success))
 ```
 
-
-
-
-
 ---
+
 ## Drill-hole sizes
 
 ```yaml
 type: NormalExercise
+key: a44acfd135
 lang: r
 xp: 100
 skills: 1
-key: a44acfd135
 ```
 
 We wish to replace our current very old drilling machine.
@@ -127,13 +126,14 @@ it most closely represents.
 Use `nDefective <- nrow(subset(holeSize, holeDiameter_cm < lower_limit | holeDiameter_cm > upper_limit))` to find the number of effective products for different tolerance limits.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the holeSize dataframe.
 
 # 1. Analyse the distribution of the hole-sizes using the `hist()` function, and by playing around with `breaks` parameter.
@@ -154,8 +154,9 @@ rm(n)
 
 # 5. View the values by printing them to the console output via the `script.R` file. Print the values here:
 ```
+
 `@solution`
-```{undefined}
+```{r}
 hist(holeSize$holeDiameter_cm)
 nDefective05 <- nrow(subset(holeSize, holeDiameter_cm > 10.5 | holeDiameter_cm < 9.5 ))
 nDefective025 <- nrow(subset(holeSize, holeDiameter_cm > 10.25 | holeDiameter_cm < 9.75 ))
@@ -164,8 +165,9 @@ nDefective05
 nDefective025
 nDefective1
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the hole diameters of the samples to see what the distribution looks like.",
               incorrect_msg = "Make sure to draw the histogram for the hole diameters. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
 
@@ -185,24 +187,21 @@ test_output_contains("nDefective1", incorrect_msg = "You did not view the actual
 success_msg("Correct! Now that we looked at the distribution of hole-sizes, and have an idea of the number of products that are not according to specification, we can decide which distribution best represent the hole-sizes resulting from the drilling machine.")
 ```
 
-
-
-
-
 ---
+
 ## Choosing the best distribution for the drill-hole sizes
 
 ```yaml
 type: MultipleChoiceExercise
+key: 8eaf7b9ebd
 lang: r
 xp: 50
 skills: 1
-key: 8eaf7b9ebd
 ```
 
 Based on the histogram of the drill-hole sizes, which of the following distributions best represent this random variable?
 
-`@instructions`
+`@possible_answers`
 * normal,
 * poisson and exponential,
 * power-law, or
@@ -211,34 +210,33 @@ Based on the histogram of the drill-hole sizes, which of the following distribut
 `@hint`
 Have a look at the distribution that you generated in the previous exercise.
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
 msg_success <- "That is correct! The distribution that best describes the resulting hole-size is the normal distribution. Next we need to find the key parameters for the distribution."
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad, msg_bad))
 ```
 
-
-
-
-
 ---
+
 ## Drill-hole size distribution parameters.
 
 ```yaml
 type: MultipleChoiceExercise
+key: f49344f14e
 lang: r
 xp: 50
 skills: 1
-key: f49344f14e
 ```
 
 Which distribution parameters do we need to determine to model the hole-size as a normal distribution?
 
-`@instructions`
+`@possible_answers`
 * min and max,
 * mean or arrival rate, or
 * mean and standard deviation.
@@ -246,29 +244,28 @@ Which distribution parameters do we need to determine to model the hole-size as 
 `@hint`
 Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. That is not the necessary parameters for the normal distribution."
 msg_success <- "That is correct! For a normal distribution we need the mean and standard deviation of the random variable"
 test_mc(correct = 3, feedback_msgs = c(msg_bad, msg_bad, msg_success))
 ```
 
-
-
-
-
 ---
+
 ## Using the best distribution for the drill-hole sizes
 
 ```yaml
 type: NormalExercise
+key: 54412012be
 lang: r
 xp: 100
 skills: 1
-key: 54412012be
 ```
 
 To use the distribution, $X \sim \mathcal{N}(\mu, \sigma)$ we first need to estimate its key parameters, namely the mean, $\mu$, and standard deviation, $\sigma$, of the drill-hole sizes.
@@ -293,13 +290,14 @@ Visit [this page](http://www.cyclismo.org/tutorial/R/probability.html) to find o
 The `pnorm` function has three inputs, `q`, $\mu$ and $\sigma$. To calculate the fraction of products that fall within a lower and upper limit, you need to call `pnorm` twice: once by setting `q = lower_limit` and once by setting `q = upper_limit`. The function gives the probability of getting a value lower than `q`, so you have to then figure you which probability value to subtract from which to get the area between two limits. This is covered in Example 2.49 on page 93 in the [prescribed textbook](https://www.openintro.org/stat/textbook.php?stat_book=isrs).
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the holeSize dataframe.
 
 # 1. Estimate mu for the normal distribution and assign your answer to `meanHoleSize`.
@@ -320,8 +318,9 @@ rm(n)
 
 # 5. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
 ```
+
 `@solution`
-```{undefined}
+```{r}
 meanHoleSize <- mean(holeSize$holeDiameter_cm)
 sdHoleSize <- sd(holeSize$holeDiameter_cm)
 fWork05 <- pnorm(10+0.5, mean = meanHoleSize, sd = sdHoleSize) - pnorm(10-0.5, mean = meanHoleSize, sd = sdHoleSize)
@@ -331,8 +330,9 @@ sdHoleSize
 fWork05
 fWork075
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("meanHoleSize", undefined_msg = "Make sure to define an object `meanHoleSize`.",
             incorrect_msg = "Make sure that you calculated the mean hole size correctly and assigned your answer to `meanHoleSize`")     
 
@@ -353,19 +353,16 @@ test_output_contains("fWork075", incorrect_msg = "You did not view the actual va
 success_msg("Correct! We have successfully fitted a normal distribution to the hole size variable and used the distribution to empirically calculate the fraction of products that are within specification.")
 ```
 
-
-
-
-
 ---
+
 ## Predicting soft-drink orders for the next day
 
 ```yaml
 type: NormalExercise
+key: acbbc34771
 lang: r
 xp: 100
 skills: 1
-key: acbbc34771
 ```
 
 We are responsible for the inventory management for a soft-drink company.
@@ -402,11 +399,12 @@ that it most closely represents.
 Use `less210 <- nrow(subset(clienOrders, ordersPerDay < lower_limit))` to find the number of days that less than the specified number of products were ordered.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 0))
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the clienOrders dataframe.
 
 # 1. Analyse the distribution of the number of units ordered per day using the `hist()` function and by playing around with `breaks` parameter.
@@ -419,14 +417,16 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 
 # 3. View the values by printing them to the console output via the `script.R` file. Print the values here:
 ```
+
 `@solution`
-```{undefined}
+```{r}
 hist(clienOrders$ordersPerDay)
 less210 <- nrow(subset(clienOrders, ordersPerDay < 210))
 less210
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of units ordered per day to see what the distribution looks like.",
               incorrect_msg = "Make sure to draw the histogram for the number of units ordered per day. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
 
@@ -438,24 +438,21 @@ test_output_contains("less210", incorrect_msg = "You did not view the actual val
 success_msg("Correct! Now that we looked at the distribution of the number of units ordered per day, and have an idea of the number of times that our clients ordered less units than what is in our inventory, we can decide which distribution best represents the number of units ordered per day and predict the probability of running out of stock tomorrow.")
 ```
 
-
-
-
-
 ---
+
 ## Choosing the best distribution for soft-drink orders
 
 ```yaml
 type: MultipleChoiceExercise
+key: 83144b0372
 lang: r
 xp: 50
 skills: 1
-key: 83144b0372
 ```
 
 Based on the histogram of the number of units ordered per day, which of the following distributions best represent the variable?
 
-`@instructions`
+`@possible_answers`
 * normal,
 * poisson and exponential,
 * power-law, or
@@ -464,34 +461,33 @@ Based on the histogram of the number of units ordered per day, which of the foll
 `@hint`
 Have a look at the distribution that you generated in the previous exercise.
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. You may need to redo the previous exercise. The data is randomly generated, so there may be chance that the distribution looks like something else by accident."
 msg_success <- "That is correct! The distribution that best describes the number of units ordered per day is the uniform distribution. Next we need to find the key parameters for the distribution."
 test_mc(correct = 4, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
-
-
-
-
 ---
+
 ## Soft-drink orders distribution parameters.
 
 ```yaml
 type: MultipleChoiceExercise
+key: 4085ce9982
 lang: r
 xp: 50
 skills: 1
-key: 4085ce9982
 ```
 
 Which distribution parameters do we need to determine to model the number of units ordered per day as a uniform distribution?
 
-`@instructions`
+`@possible_answers`
 * min and max,
 * mean or arrival rate, or
 * mean and standard deviation.
@@ -499,29 +495,28 @@ Which distribution parameters do we need to determine to model the number of uni
 `@hint`
 Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. That is not the necessary parameters for the uniform distribution."
 msg_success <- "That is correct! For a uniform distribution we need the minimum and maximum value for the random variable"
 test_mc(correct = 1, feedback_msgs = c(msg_success, msg_bad, msg_bad))
 ```
 
-
-
-
-
 ---
+
 ## Using the best distribution for soft-drink orders
 
 ```yaml
 type: NormalExercise
+key: 91698a409b
 lang: r
 xp: 100
 skills: 1
-key: 91698a409b
 ```
 
 To use the distribution, $X \sim \mathcal{U}(\min, \max)$ we first need to estimate its key parameters, namely the minimum and maximum value for the number of units ordered per day.
@@ -542,11 +537,12 @@ To calculate $\min_{x}$ and $\max_{x}$, simply use `min` and `max` on `clienOrde
 The `punif` function has three inputs, `q`, `min` and `max`. Remember to check whether it returns the probability of having a value less than `q` or more than `q`.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 0))
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the clienOrders dataframe.
 
 # 1. Estimate min_x for the uniform distribution and assign your answer to `minOrders`.
@@ -563,8 +559,9 @@ clienOrders <- data.frame(day = 1:30, ordersPerDay = round(runif(30, 150, 250), 
 
 # 4. View all the above values by printing them to the console output via the `script.R` file.  Print the values here:
 ```
+
 `@solution`
-```{undefined}
+```{r}
 minOrders <- min(clienOrders$ordersPerDay)
 maxOrders <- max(clienOrders$ordersPerDay)
 pStockOut <- punif(q = 210, min = minOrders, max = maxOrders, lower.tail = FALSE)
@@ -572,8 +569,9 @@ minOrders
 maxOrders
 pStockOut
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("minOrders", undefined_msg = "Make sure to define an object `minOrders`.",
             incorrect_msg = "Make sure that you calculated the minimum number of units ordered per day correctly and assigned your answer to `minOrders`")     
 
@@ -590,19 +588,16 @@ test_output_contains("pStockOut", incorrect_msg = "You did not view the actual v
 success_msg("Correct! We have successfully fitted a uniform distribution to the number of units ordered per day and used the distribution to empirically calculate the probability of a stockout.")
 ```
 
-
-
-
-
 ---
+
 ## Gautrain arrival rate
 
 ```yaml
 type: NormalExercise
+key: 8baad0d53b
 lang: r
 xp: 100
 skills: 1
-key: 8baad0d53b
 ```
 
 We wish to determine the number of passengers arriving _per minute_ from the Gautrain between 16:00 and 18:00PM.
@@ -647,7 +642,7 @@ uniform,
 best describe the variable.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 tod <- function(x, h)
 {
   mints = floor(x/60)
@@ -742,8 +737,9 @@ rm(tod)
 rm(tomns)
 rm(tosecs)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the gauArrive dataframe.
 
 # 1. Determine the number of customers that arrived within each minute interval and assign your answer to `nArrivePerMin`. Note that you have to calculate the number of customers that arrived during each minute interval in the dataset. This can be done using the `table` command, but take care to calculate it over each unique day, hour and minute combination, otherwise the command will sum the number of arrivals within the minute interval over different hours and days. To do so use `table(factor1, factor2, factor3)`. You do not have to use subset.
@@ -752,13 +748,15 @@ rm(tosecs)
 
 # 2. Analyse the distribution of the number of passengers arriving per minute using the `hist()` function and by playing around with `breaks` parameter.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 hist(nArrivePerMin)
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("nArrivePerMin", undefined_msg = "Make sure to define an object `nArrivePerMin`.",
             incorrect_msg = "Make sure that you calculated the number of customers that arrived during each minute interval and assigned your answer to `nArrivePerMin`")     
 
@@ -768,24 +766,21 @@ test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the n
 success_msg("Correct! Now that we looked at the distribution of the number of customers that arrive per minute, we can decide which distribution best represent this variable.")
 ```
 
-
-
-
-
 ---
+
 ## Choosing the best distribution for passenger arrivals
 
 ```yaml
 type: MultipleChoiceExercise
+key: 1c8e286d4a
 lang: r
 xp: 50
 skills: 1
-key: 1c8e286d4a
 ```
 
 Based on the histogram of the number of passengers arriving per minute, which of the following distributions best represent this random variable?
 
-`@instructions`
+`@possible_answers`
 * normal,
 * poisson and exponential,
 * power-law, or
@@ -794,34 +789,33 @@ Based on the histogram of the number of passengers arriving per minute, which of
 `@hint`
 Have a look at the distribution that you generated in the previous exercise.
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. You may need to redo the previous exercise and increase or reduce the number of breaks."
 msg_success <- "That is correct! The distribution that best describes the number of passenger arrivals per minute is the poisson or exponential distribution. Next we need to find the key parameters for the distribution."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
 ```
 
-
-
-
-
 ---
+
 ## Passenger arrival distribution parameter.
 
 ```yaml
 type: MultipleChoiceExercise
+key: 13682c55f6
 lang: r
 xp: 50
 skills: 1
-key: 13682c55f6
 ```
 
 Which distribution parameter(s) do we need to determine to model the number of passenger arrivals?
 
-`@instructions`
+`@possible_answers`
 * min and max,
 * mean or arrival rate, or
 * mean and standard deviation.
@@ -829,29 +823,28 @@ Which distribution parameter(s) do we need to determine to model the number of p
 `@hint`
 Have a look at the class slides available from [this link](https://clickup.up.ac.za/bbcswebdav/pid-1016180-dt-content-rid-11418452_1/courses/ban313_s1_2017/Lecture_Week6.pdf).
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Incorrect. That is not the necessary parameter for the poisson distribution."
 msg_success <- "That is correct! For a poisson distribution we need the arrival rate of the random variable."
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad))
 ```
 
-
-
-
-
 ---
+
 ## Using the best distribution for passenger arrivals
 
 ```yaml
 type: NormalExercise
+key: 97f9e17aa1
 lang: r
 xp: 100
 skills: 1
-key: 97f9e17aa1
 ```
 
 To use the distribution, $X \sim \text{Poisson}(\lambda)$, we first need to estimate its key parameter, namely the expected number of customers that arrive per minute, $\lambda$.
@@ -873,7 +866,7 @@ To calculate $arrivalRate$ simply calculate the mean number of arrivals over all
 To calculate the probability of the two-access gates being insufficient we first need to establish the maximum number of customers that two gates can cope with within a minute, which in this case is $2 \times 2 = 4$ and then calculate the probability of more than 4 customers arriving during a minute interval.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 tod <- function(x, h)
 {
   mints = floor(x/60)
@@ -970,8 +963,9 @@ rm(tosecs)
 
 nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The number of customers that arrived within each minute interval has been pre-calculated and is available as the `nArrivePerMin` object.
 
 # 1. Estimate lambda for the poisson distribution and assign your answer to `arrivalRate`.
@@ -984,15 +978,17 @@ nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 
 # 3. View the above values by printing them to the console output via the `script.R` file.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 arrivalRate <- mean(nArrivePerMin)
 pInsufficent <- ppois(2*2, arrivalRate, lower.tail = FALSE)
 arrivalRate
 pInsufficent
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("arrivalRate", undefined_msg = "Make sure to define an object `arrivalRate`.",
             incorrect_msg = "Make sure that you calculated lambda correctly and assigned your answer to `arrivalRate`")     
 
@@ -1005,19 +1001,16 @@ test_output_contains("pInsufficent", incorrect_msg = "You did not view the actua
 success_msg("Correct! We have now successfully fitted a poisson distribution to number of customers that arrive within a one-minute interval and used the distribution to empirically calculate the probability of two access-gates being insufficient.")
 ```
 
-
-
-
-
 ---
+
 ## Using the best distribution to determine the number of access gates
 
 ```yaml
 type: NormalExercise
+key: 3c7b8033f9
 lang: r
 xp: 100
 skills: 1
-key: 3c7b8033f9
 ```
 
 The station wants the probability of their access-gates being insufficient to be less than 0.05.
@@ -1035,7 +1028,7 @@ use the `qnorm` function to determine the 95th percentile point, which represent
 Thereafter use this number to determine the minimum number of access-gates.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 tod <- function(x, h)
 {
   mints = floor(x/60)
@@ -1132,8 +1125,9 @@ rm(tosecs)
 
 nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The number of customers that arrived within each minute interval has been pre-calculated and is available as the `nArrivePerMin` object.
 
 #1. Determine the minimum number of access-gates required to ensure that the probability of the gates be insufficient is less than 0.05. For this question, use the `qpois` function. Assign your answer to `minGates`
@@ -1142,15 +1136,17 @@ nArrivePerMin <- table(gauArrive$day, gauArrive$hour, gauArrive$minute)
 
 #2. View the above value by printing it to the console output via the `script.R` file.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 arrivalRate <- mean(nArrivePerMin)
 qInsufficent <- qpois(0.05, arrivalRate, lower.tail = FALSE)
 minGates <- ceiling(qInsufficent/2)
 minGates
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("minGates", undefined_msg = "Make sure to define an object `minGates`.",
             incorrect_msg = "Make sure that you calculated the minimum number of access-gates correctly and assigned your answer to `minGates`")     
 
@@ -1159,19 +1155,16 @@ test_output_contains("minGates", incorrect_msg = "You did not view the actual va
 success_msg("Correct! We have now successfully used a poisson distribution to calculate the minimum number of access-gates that will ensure that the probability of the gates being insufficient for customer arrivals is less than 0.05.")
 ```
 
-
-
-
-
 ---
+
 ## Using the best distribution for passenger inter-arrival times
 
 ```yaml
 type: NormalExercise
+key: 957fe3a04a
 lang: r
 xp: 100
 skills: 1
-key: 957fe3a04a
 ```
 
 In this question we are again going to focus on passenger-arrivals at the Gautrain, but this time we will analyse the inter-arrival times of customers. That is the time between the arrivals of two consecutive passengers.
@@ -1215,7 +1208,7 @@ Thereafter we can empirically calculate the probability of the next passenger ar
 TBC
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 tod <- function(x, h)
 {
   mints = floor(x/60)
@@ -1310,8 +1303,9 @@ rm(tod)
 rm(tomns)
 rm(tosecs)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The data are available in the gauArrive dataframe.
 
 #1. Calculate the minutes since the start of day that each customer arrived at and assign your answer to the vector `minuteArrived`.
@@ -1336,8 +1330,9 @@ rm(tosecs)
 
 #6. View the above values by printing them to the console output via the `script.R` file.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 minuteArrived = gauArrive$hour*60 + gauArrive$minute + gauArrive$second/60
 interArrive = diff(minuteArrived)
 interArriveClean = subset(interArrive, interArrive >= 0)
@@ -1345,8 +1340,9 @@ arriveRate = 1/(mean(interArriveClean))
 pWithin30sec = pexp(0.5, arriveRate)
 pWithin30sec
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("minuteArrived", undefined_msg = "Make sure to define an object `minuteArrived`.",
             incorrect_msg = "Make sure that you calculated the minute of each customer's arrival correctly, using the formula given in the instructions and assign your answer to the vector `minuteArrived`")     
 
@@ -1366,6 +1362,3 @@ test_output_contains("pWithin30sec", incorrect_msg = "You did not view the actua
 
 success_msg("Correct! That's it for this chapter.")
 ```
-
-
-

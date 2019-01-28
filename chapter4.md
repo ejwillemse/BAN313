@@ -1,10 +1,18 @@
 ---
-title_meta  : Case study 7a
-title       : Case study 7a - Fitting probability distributions using chi-squared goodness-of-fit test
-description : "In this case study we revisit the examples from Case study 6, where we analysed data for different processes, and eyeballed the data to see if the processes can be modelled using specific probability distribution functions. In this case study we will use formal methods to test if a distribution is appropriate, using the chi-squared goodness-of-fit test."
+title_meta: 'Case study 7a'
+title: 'Case study 7a - Fitting probability distributions using chi-squared goodness-of-fit test'
+description: 'In this case study we revisit the examples from Case study 6, where we analysed data for different processes, and eyeballed the data to see if the processes can be modelled using specific probability distribution functions. In this case study we will use formal methods to test if a distribution is appropriate, using the chi-squared goodness-of-fit test.'
+---
 
---- type:MultipleChoiceExercise lang:r xp:0 skills:1 key:8eaf7b9ebd1
 ## Background
+
+```yaml
+type: MultipleChoiceExercise
+key: 8eaf7b9ebd1
+lang: r
+xp: 50
+skills: 1
+```
 
 In this case study we will revisit the examples of [Case study 6: Different applications of probability distributions](https://campus.datacamp.com/courses/industrial-analysis-using-r/10161) and use formal methods to test whether the processes can be modelled using specific probability distribution functions.
 
@@ -44,22 +52,19 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-*** =instructions
-
+`@possible_answers`
 * I have not completed all the prescribed preparation material, as listed in the 7 tasks above, or have not read all the instructions on this page.
 * I confirm that I have completed the prescribed preparation material, as listed in the 7 tasks above, and have read **ALL** the instructions on this page carefully.
 
-*** =pre_exercise_code
+`@hint`
+
+
+`@pre_exercise_code`
 ```{r}
 
 ```
 
-*** =sample_code
-```{r}
-
-```
-
-*** =sct
+`@sct`
 ```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
@@ -67,8 +72,17 @@ msg_success <- "Let's get started with the Lab. Note that if you have not comple
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:a44acfd135
+---
+
 ## Drill-hole sizes
+
+```yaml
+type: NormalExercise
+key: a44acfd135
+lang: r
+xp: 100
+skills: 1
+```
 
 We wish to replace our current very old drilling machine.
 The machine is required to drill a hole with a diameter of 10cm within a 0.5cm tolerance.
@@ -87,15 +101,13 @@ The data is available in the `holeSize` dataframe.
 
 For the first part of this question, analyse the distribution of hole sizes from the machine and identify the distribution that best describes the hole-sizes. Find the key parameters from the sample for the distribution. Use R's built-in function and the _distribution_ (not the sample data) to find the probability of a hole drilled by the machine to fall outside a **0.30cm** tolerance limit.
 
-*** =instructions
-
+`@instructions`
 - Analyse the distribution of the hole-sizes using the `hist()` function and by playing around with the `breaks` parameter.
 - Determine the key parameters of the distribution (note that this part is not checked for correctness).
 - Using the distribution (not the sample data), calculate the **probability** of a hole drilled by the machine to fall **outside** a 0.30cm tolerance limit, and will therefore be defective. Assign your answer to `pDefective03`.
 - View the value of `pDefective03` by printing it to the console output via the `script.R` file.
 
-*** =hint
-
+`@hint`
 Use `hist(holeSize$holeDiameter_cm)` to analyse the distribution and see which of the four distributions
 
 * normal,
@@ -113,14 +125,14 @@ pnorm, ppois, pexp, punif, pt.
 ```
 Remember that outside the tolerance means the hole is either smaller than 10 - 0.3cm **or** bigger than 10 + 0.3cm.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 n <- runif(1, 300, 400)
 holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 10.1, 0.35), 2))
 rm(n)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The data are available in the holeSize dataframe.
 
@@ -143,7 +155,7 @@ rm(n)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 hist(holeSize$holeDiameter_cm)
 meanHole <- mean(holeSize$holeDiameter_cm)
@@ -152,7 +164,7 @@ pDefective03 <- pnorm(10-0.3, meanHole, sdHole, lower.tail = TRUE) + pnorm(10+0.
 pDefective03
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the hole diameters of the samples to see what the distribution looks like.",
               incorrect_msg = "Make sure to draw the histogram for the hole diameters. If you used the `breaks` command, it's good that you played around with it, but to go past this answer you have to call `hist()` without it.")
@@ -165,8 +177,17 @@ test_output_contains("pDefective03", incorrect_msg = "You did not view the actua
 success_msg("Correct! The data seems to follow a normal distribution, but there are other distributions that also have the same shape. In the next questions we are going to perform a goodness-of-fit test to see if the normal or uniform distributions are good representations of hole-size.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:91698a409b
+---
+
 ## Drill-hole: goodness-of-fit for the uniform distribution part 1
+
+```yaml
+type: NormalExercise
+key: 91698a409b
+lang: r
+xp: 100
+skills: 1
+```
 
 The first distribution that we are going to test is the uniform distribution, even though we are certain that the drilling holes do not follow this distribution. Knowing the answer in advance is useful when mastering new techniques since we can easily check if the answer from our techniques make sense.
 
@@ -194,8 +215,7 @@ If the probability of getting the $\chi^2$ value is very small, we conclude that
 
 Using the data available in the `holeSize` dataframe, complete this question by doing the following:
 
-*** =instructions
-
+`@instructions`
 - Draw a histogram of the hole-size and set the number of breaks to 9 (this should give you a histogram with 10 bins).
 - Redraw the histogram bust this time assign it to the object `h`.
 - View the object `h` to make sure that it is the histogram with 10 bins.
@@ -207,11 +227,10 @@ Using the data available in the `holeSize` dataframe, complete this question by 
 - Calculate the $p$-value for the test and assign you answer to `p`.
 - View the `p` value and decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 
-*** =hint
-
+`@hint`
 If you don't know how to calculate the chi-squared value or the degrees-of-freedom, review _Section 3.3: Testing of goodness of fit using chi-square (p.134)_ of the prescribed textbook by Diez et al (2014). Thereafter carefully go through all the background information and instructions.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 set.seed(35)
 n <- runif(1, 300, 400)
@@ -219,7 +238,7 @@ holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 1
 rm(n)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The data are available in the holeSize dataframe.
 
@@ -265,7 +284,7 @@ h <-
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 hist(holeSize$holeDiameter_cm, breaks = 9)
 h <- hist(holeSize$holeDiameter_cm, breaks = 9)
@@ -280,7 +299,7 @@ p
 if(p < 0.05){rejectH0 <- TRUE}else{rejectH0 <- FALSE}
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_function("hist", args = c("x", "breaks"), not_called_msg = "Draw a histogram with 9 breaks of the hole diameters of the samples to see what the distribution looks like.",
               incorrect_msg = "Make sure to draw the histogram with 9 breaks for the hole diameters.")
@@ -315,22 +334,29 @@ test_object("rejectH0", undefined_msg = "Make sure to define a variable `rejectH
 success_msg("Correct! As expected the uniform distribution is not a good fit for hole-size, resulting in a very small $p$-value that allows us to reject $H_0$ for the goodness-of-fit hypothesis test. In the next section we are quickly going to redo the question using R's built in functions.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:2056a3af3a
+---
+
 ## Drill-hole: goodness-of-fit for the uniform distribution part 2
+
+```yaml
+type: NormalExercise
+key: 2056a3af3a
+lang: r
+xp: 100
+skills: 1
+```
 
 For this question we are going to perform the $\chi^2$ goodness-of-fit test using R's built in function `chisq.test`. At a minimum the function requires `x` which is the observed counts per bin. If nothing else is supplied, the function assumes that the expected distribution is uniform , which in this case, is exactly what we want to test. To perform the test and view it's outputs we will simply determine the number of observations per bin in the histogram, and then perform the test and view it's outputs by calling the `chisq.test` function.
 
-*** =instructions
-
+`@instructions`
 - Draw a histogram of of the hole-size variable with 9 breaks and assign the histogram to `h`.
 - Using `h$counts`, determine the number of counts per bin and assign the result to `hCounts`.
 - Perform the goodness-of-fit test by calling `chisq.test(hCounts)` and view the results.
 
-*** =hint
-
+`@hint`
 Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 set.seed(35)
 n <- runif(1, 300, 400)
@@ -338,7 +364,7 @@ holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 1
 rm(n)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The data are available in the holeSize dataframe.
 
@@ -356,14 +382,14 @@ rm(n)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 h <- hist(holeSize$holeDiameter_cm, breaks = 9)
 hCounts <- h$counts
 chisq.test(hCounts)
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("h", undefined_msg = "Make sure to define an object `h`.",
             incorrect_msg = "Make sure that you assigned the histogram with 9 breaks to the object `h`. Note that you have to call `hist` twice, once to view the histogram and the second time to assign it to `h`")
@@ -377,8 +403,17 @@ test_function("chisq.test", args = c("x"), not_called_msg = "Use the built-in fu
 success_msg("Correct! By using the `chisq.test` we can easily perform the Goodness-of-fit test. In the next question we are going to repeat the test for the normal distribution.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:5df974f21f
+---
+
 ## Drill-hole: goodness-of-fit for the normal distribution
+
+```yaml
+type: NormalExercise
+key: 5df974f21f
+lang: r
+xp: 100
+skills: 1
+```
 
 Since we expect hole-size to follow a normal distribution, it makes sense to do a $\chi^2$ goodness-of-fit test using this distribution. To do so we can use the `chisq.test`, but in this case we have to supply more than the observed cases per bin. We also need to find the expected number of cases per bin should the variable follow a normal distribution. To do so is not trivial, but fortunately there are pre-existing code that we can use for this purpose.
 
@@ -400,8 +435,7 @@ Note that in the above `simulate.p.value=FALSE`. In practice, we would call `chi
 
 To complete the question, do the following:
 
-*** =instructions
-
+`@instructions`
 - Calculate the mean and standard deviation for the drill-hole size and assign your answer to `meanHoleSize` and `sdHoleSize`.
 - Draw a histogram of the hole-size variable with *100* breaks and assign the histogram to `h1`.
 - Calculate the bin probabilities for 100 bins by calling `null.probs1 <- diff(pnorm(h1$breaks, meanHoleSize, sdHoleSize))`.
@@ -412,11 +446,10 @@ To complete the question, do the following:
 - Based on the output of the test decide for yourself whether the null-hypothesis for the test should be rejected.  Your answer should be either `TRUE` for _we reject the null hypothesis_ or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectH0` variable.
 - Perform the goodness-of-fit test this time using the 100 bin histogram by calling `chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE, simulate.p.value=TRUE)` and note the difference in the results.
 
-*** =hint
-
+`@hint`
 Go through the previous exercise to see how `hCounts` can be calculated. Use `?chisq.test` to find out more about the function. Refer to the class slides.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 set.seed(35)
 n <- runif(1, 300, 400)
@@ -424,7 +457,7 @@ holeSize <- data.frame(sampleNumber = c(1:n), holeDiameter_cm = round(rnorm(n, 1
 rm(n)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The data are available in the holeSize dataframe.
 
@@ -466,7 +499,7 @@ rm(n)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 meanHoleSize <- mean(holeSize$holeDiameter_cm)
 sdHoleSize <- sd(holeSize$holeDiameter_cm)
@@ -485,7 +518,7 @@ rejectH0 <- chisq.test(x = h2$counts, p = null.probs2, rescale.p=TRUE)$p.value <
 chisq.test(x = h1$counts, p = null.probs1, rescale.p=TRUE)
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("meanHoleSize", undefined_msg = "Make sure to define an object `meanHoleSize`.",
             incorrect_msg = "Make sure that you calculated the mean hole size correctly and assigned your answer to `meanHoleSize`")     
@@ -517,32 +550,38 @@ test_function("chisq.test", args = c("x", "p", "rescale.p"), not_called_msg = "U
 success_msg("Correct! Using the built in functions and given code we can easily perform the Goodness-of-fit test for any of R's built in distributions. But note how our choice of bin size influences the results. Care has to be taken to set the bin-size appropriately. If there are too many bins, all distributions may be rejected. If there are too few, say two bins, then we aren't really checking for a continuous distribution anymore.")
 ```
 
+---
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8baad0d53b
 ## Gautrain arrival rate: fitting the poisson distribution
+
+```yaml
+type: NormalExercise
+key: 8baad0d53b
+lang: r
+xp: 100
+skills: 1
+```
 
 In the last questions we are going to analyse the number of passengers arriving _per minute_ from the Gautrain between 16:00 and 18:00PM.
 The arrival rate per minute of passengers between 16:00 and 18:00PM for the previous 30 working days can be found in the `nArrivePerMin` vector.
 In this question we are going to fit a distribution to the arrivals per minute.
 
-*** =instructions
-
+`@instructions`
 - Draw a histogram of the arrivals per minute and check if it follows a poisson distribution.
 - Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.`
 - Perform a $\chi^2$ goodness-of-fit test for poisson distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a poisson distribution using `diff(ppois(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(ppois(...))` correctly.
 - Based on the output of the test decide for yourself whether the data do not follow a poisson distribution with rate equal to $\lambda$ .  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow a poisson distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectPoisson` variable.
 
-*** =hint
-
+`@hint`
 The steps required to complete this question is the same as the previous questions.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 set.seed(31)
 nArrivePerMin <- rpois(30*120, 5)
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The arrivals per minute are available in the `nArrivePerMin` vector.
 
@@ -574,7 +613,7 @@ nArrivePerMin <- rpois(30*120, 5)
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 hist(nArrivePerMin)
 arriveRate <- mean(nArrivePerMin)
@@ -585,7 +624,7 @@ chiTestResults <- chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE)
 if (chiTestResults$p.value < 0.05){rejectPoisson <- TRUE}else{rejectPoisson <- FALSE}
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the number of arrivals per minute `nArrivePerMin`.",
               incorrect_msg = "Draw a histogram of the number of arrivals per minute `nArrivePerMin`.")
@@ -602,8 +641,17 @@ test_object("rejectPoisson", undefined_msg = "Make sure to define a variable `re
 success_msg("Correct! The chi-squared test result shows that we cannot discard the poisson distribution, but note that our p-value was quite small. If we altered the number of bins of our original histogram we may have ended up rejecting H0. The chi-squared test can be a bit unreliable when dealing with the poisson distribution, especially if the arrival rate is low. For larger arrival rates the test is more robust. This may have to do with the long tail of the normal distribution. Recall that for the chi-squared test there has to be at least 5 expected cases per bin, which does not always hold for the right tail of the poisson distribution. We have to be careful when choosing our number of bins to make sure that all the conditions for the chi-squared test are met.")
 ```
 
---- type:NormalExercise lang:r xp:100 skills:1 key:8baad0d53c
+---
+
 ## Gautrain inter-arrival time: fitting the exponential distribution
+
+```yaml
+type: NormalExercise
+key: 8baad0d53c
+lang: r
+xp: 100
+skills: 1
+```
 
 Another distribution often used to model arrivals is the exponential distribution. In this case, instead of modelling the number of arrivals per time-interval, we measure the inter-arrival time between two consecutive arrivals. This is simply the time that we expect will elapse after a customer arrives, until the next customer arrive. For example, assume that the first customer one arrives at 60 seconds after the station opens, the second customer 98 seconds after the station opens, and the third customer 145 seconds after the station opens. The inter-arrival time between customer two and customer one is `98-60=38` seconds, and between the second and third customer is `145-98=47`.
 
@@ -616,25 +664,23 @@ When building simulation models, it is important to be able to use both the pois
 The arrival time in seconds for 120 customers, starting at time zero when the station opened, can be found in the `arrivalTimeSec` vector.
 In this question we are first going to calculate the inter-arrival time of customers using the `diff()` function and the fit the exponential distribution to the inter-arrival time.
 
-*** =instructions
-
+`@instructions`
 - Calculate the inter-arrival of customers using the `diff()` function and assign your answer to `interArriveSec`.
 - Draw a histogram of `interArriveSec` to confirm that it follows an exponential distribution.
 - Calculate the mean arrival rate, $\lambda$, and assign your answer to `arriveRate.` Hint: to do so, calculate the mean inter-arrival time, and use that to calculate the mean arrival rate. You will use this value in `pexp(...)`
 - Perform a $\chi^2$ goodness-of-fit test for exponential distribution, similar to performing the test for the normal distribution. The steps to do this include: assigning a histogram to `h` (do not manually specify the number of breaks); determine the expected probability, `null.probs`, for each bin of a exponential distribution using `diff(pexp(...))`; perform the test using `chisq.test(...)` function and view the results. It should also help to draw a barplot of `null.probs` to see if you used `diff(pexp(...))` correctly.
 - Based on the output of the test decide for yourself whether the data do not follow an exponential distribution with rate equal to $\lambda$.  Your answer should be either `TRUE` for _we reject the null hypothesis_, therefore the data do not follow an exponential distribution, or `FALSE` for _we do not have enough evidence to reject the null hypothesis_. Assign your `TRUE` or `FALSE` answer to the `rejectExp` variable.
 
-*** =hint
-
+`@hint`
 The steps required to complete this question is the same as the previous questions.
 
-*** =pre_exercise_code
+`@pre_exercise_code`
 ```{r}
 set.seed(31)
 arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
 ```
 
-*** =sample_code
+`@sample_code`
 ```{r}
 # The inter-arrival times are available in the `arrivalTimeSec` vector.
 
@@ -670,7 +716,7 @@ arrivalTimeSec <- cumsum(round(rexp(120, 5/60), 0))
 
 ```
 
-*** =solution
+`@solution`
 ```{r}
 interArriveSec <- diff(arrivalTimeSec)
 hist(interArriveSec)
@@ -682,7 +728,7 @@ chiTestResults <- chisq.test(x = h$counts, p = null.probs, rescale.p = TRUE)
 if (chiTestResults$p.value < 0.05){rejectExp <- TRUE}else{rejectExp <- FALSE}
 ```
 
-*** =sct
+`@sct`
 ```{r}
 test_object("interArriveSec", undefined_msg = "Make sure to define an object `interArriveSec`.",
               incorrect_msg = "Make sure that you calculated the inter-arrival times correctly using the `diff` function and assigned your answer to `interArriveSec`.")  

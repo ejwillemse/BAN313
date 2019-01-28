@@ -1,18 +1,16 @@
 ---
-title: Case study 9 - Developing simulation models using probability distributions
-description: >-
-  In this case study we will analyse how a random order process influences inventory levels and stock-outs of our product. We will further analyse the impact of a random production process, identical to the one from the previous chapter, on inventory levels.
-
-
+title: 'Case study 9 - Developing simulation models using probability distributions'
+description: 'In this case study we will analyse how a random order process influences inventory levels and stock-outs of our product. We will further analyse the impact of a random production process, identical to the one from the previous chapter, on inventory levels.'
 ---
+
 ## Background
 
 ```yaml
 type: MultipleChoiceExercise
+key: 8eaf7b9ebd4
 lang: r
 xp: 50
 skills: 1
-key: 8eaf7b9ebd4
 ```
 
 In the previous case study we modelled a random production process.
@@ -75,16 +73,20 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-`@instructions`
+`@possible_answers`
 * I have not completed all the prescribed preparation material, as listed above, or have not read all the instructions on this page.
 * I confirm that I have completed the prescribed preparation material, as listed above, and have read **ALL** the instructions on this page carefully.
 
+`@hint`
 
 
+`@pre_exercise_code`
+```{r}
 
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter.
 Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
@@ -94,19 +96,16 @@ Further, you will **NOT** receive any assistance from the lab lecturer and assis
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success))
 ```
 
-
-
-
-
 ---
+
 ## Determining the starting and ending inventory levels after a few days
 
 ```yaml
 type: MultipleChoiceExercise
+key: a44acfd135
 lang: r
 xp: 50
 skills: 1
-key: a44acfd135
 ```
 
 Let $I\_\text{start}(t)$ be the starting inventory-level and let $I\_\text{end}(t)$ be the ending inventory-level on day $t$.
@@ -136,7 +135,7 @@ The machine was fixed, and we had a fixed production-run of 150 products for Day
 
 Based on the above information, what was our **starting** inventory level on Day 4? You may use the console screen on the right to do the necessary calculations.
 
-`@instructions`
+`@possible_answers`
 * 62
 * 205
 * 212
@@ -146,11 +145,13 @@ Based on the above information, what was our **starting** inventory level on Day
 `@hint`
 Use the given formulas to calculate the starting and ending inventory levels for the first three days, thereafter you the ending inventory level of Day 3 to calculate the starting inventory level for Day 4.
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad1 <- "That is incorrect.
 Carefully go through the given formulas.
 Remember that the starting inventory for a specific day includes the number of products that we manufactured the previous day.
@@ -184,19 +185,16 @@ The given starting inventory for Day 1 thus *already* includes the products manu
 test_mc(correct = 3, feedback_msgs = c(msg_bad1, msg_bad2, msg_success3, msg_bad4, msg_bad5))
 ```
 
-
-
-
-
 ---
+
 ## Calculating starting and ending inventory levels and stock-outs
 
 ```yaml
 type: NormalExercise
+key: 592f5b5fae
 lang: r
 xp: 100
 skills: 1
-key: 592f5b5fae
 ```
 
 Using the following formulas we can calculate the starting and ending inventory levels for consecutive days:
@@ -305,9 +303,13 @@ The last update in our code is to place the inventory-level and stock-out calcul
 `@hint`
 
 
+`@pre_exercise_code`
+```{r}
+
+```
 
 `@sample_code`
-```{undefined}
+```{r}
 #1. Complete the following code to calculate `stockOut`, `I_start` and `I_end` for the 10-day study period.
 
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
@@ -347,8 +349,9 @@ for (t in 1:10)
 
 #5. Calculate and view the proportion of stock-outs over the 10 days and assign your answer to `pStockOut`.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 O <- c(148, 195, 140, 147, 193, 104, 159, 144, 107, 137)
 
 startingInventory <- 120
@@ -381,8 +384,9 @@ mean_I_end <- mean(I_end)
 nStockOut <- sum(stockOut)
 pStockOut <- nStockOut/10
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("stockOut", undefined_msg = "Make sure to define an object `stockOut`.",
 incorrect_msg = "Something went wrong in calculating `stockOut`.
 Remember that it has to be calculated for each day `t`.")
@@ -424,19 +428,16 @@ As mentioned, orders are random.
 In the next question we are going to take this into account and transform our code into a simulation model.")
 ```
 
-
-
-
-
 ---
+
 ## Simulating inventory levels and stock-outs
 
 ```yaml
 type: NormalExercise
+key: 42987389b3
 lang: r
 xp: 100
 skills: 1
-key: 42987389b3
 ```
 
 With the necessary code in place to calculate inventory levels and stock-outs based on product orders, we can now proceed to develop a simulation model.
@@ -464,10 +465,16 @@ This will be left as an exercise:
 - Generate random product orders for `n=30` days and assign the daily orders to `O`.
 - Update the previous code to calculate and view the inventory levels and stock-outs for the 30 days' product orders.
 
+`@hint`
 
+
+`@pre_exercise_code`
+```{r}
+
+```
 
 `@sample_code`
-```{undefined}
+```{r}
 #1. Generate random product orders for `n=30` days and assign the daily orders to `O`.
 
 n = 30
@@ -510,8 +517,9 @@ nStockOut
 pStockOut <- nStockOut/...
 pStockOut
 ```
+
 `@solution`
-```{undefined}
+```{r}
 n <- 30
 O <- round(runif(n, 100, 200), 0)
 
@@ -548,8 +556,9 @@ mean_I_end <- mean(I_end)
 nStockOut <- sum(stockOut)
 pStockOut <- nStockOut/n
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("O", undefined_msg = "Make sure to define an object `O`.",
 incorrect_msg = "Something went wrong in simulating 30 days' worth of orders, `O`.
 Use the `runif` function for the simulation.")
@@ -599,19 +608,16 @@ We can use our above code to do so by placing it in a `for`-loop, but it will be
 A more elegant approach is to place the simulation model inside a function, and repeatedly call the function.")
 ```
 
-
-
-
-
 ---
+
 ## A function for simulating the proportion of stock-outs
 
 ```yaml
 type: NormalExercise
+key: 1968bf3b5b
 lang: r
 xp: 100
 skills: 1
-key: 1968bf3b5b
 ```
 
 For this exercise we are going to convert our previous code into a function that can simulate the order process and inventory levels for a specified number of days and return the proportion of stock-outs, which is our main measurement of interest.
@@ -633,10 +639,16 @@ The function will then return the following:
 - Simulate and view `pStockOut` for a 30-day study period with 125 products produced per day and with 400 products available at the start of Day 1. Assign the result of the simulation to `invSim3`.
 - Run the three simulations again and view the results and note how it is different from the previous simulations. Assign the result of the second simulations to  `invSim1_v2`,  `invSim2_v2` and `invSim3_v2`. If you do not give the simulation output a different name, in this case `..._vs` it will overwrite the results of the previous ones and will be flagged as incorrect.
 
+`@hint`
 
+
+`@pre_exercise_code`
+```{r}
+
+```
 
 `@sample_code`
-```{undefined}
+```{r}
 #1. Using the provided code, write a function that simulates the `pStockOut` and takes as input `n`, `I_start0` and `P`, in that order. Call this function `inventorySimulation`
 
 inventorySimulation <- function(...)
@@ -697,8 +709,9 @@ invSim2_v2
 invSim3_v2 <- inventorySimulation(n = ..., I_start0 = ..., P = ...)
 invSim3_v2
 ```
+
 `@solution`
-```{undefined}
+```{r}
 inventorySimulation <- function(n, I_start0, P)
 {
 
@@ -739,8 +752,9 @@ invSim1_v2 <- inventorySimulation(n = 30, I_start0 = 150, P = 150)
 invSim2_v2 <- inventorySimulation(n = 30, I_start0 = 100, P = 175)
 invSim3_v2 <- inventorySimulation(n = 30, I_start0 = 400, P = 125)
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("invSim1", undefined_msg = "Make sure to define an object `invSim1`.",
 incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stockouts.
 Make sure to assign the output of the simulation to `invSim1` and that you specified the input parameters correctly.")
@@ -770,19 +784,16 @@ By converting the simulation model into a function we can now more easily perfor
 In the next exercise we will run the simulation model numerous times, and statistically analyse the simulation output.")
 ```
 
-
-
-
-
 ---
+
 ## Statistically analysing stock-outs
 
 ```yaml
 type: NormalExercise
+key: f77e2b84d5
 lang: r
 xp: 100
 skills: 1
-key: f77e2b84d5
 ```
 
 Now that we have a function to calculate the proportion of stock-outs we can repeat the simulation a number of times and look at the distribution of the proportion of stock-out days.
@@ -803,10 +814,16 @@ The simulation model function is already available in the R script as `inventory
 - Calculate and view he *median* stockout proportion from the simulation results  and assign your answer to `pStockoutMedian_160`.
 - What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 
+`@hint`
 
+
+`@pre_exercise_code`
+```{r}
+
+```
 
 `@sample_code`
-```{undefined}
+```{r}
 # simulation model (do not change)
 inventorySimulation <- function(n, I_start0, P)
 {
@@ -881,8 +898,9 @@ for (i in 1:10000)
 
 # 10. What is the probability of having more than 10 stock-outs during a 30 day period for the 160 unit production setup? Assign your answer to `p10stockouts_160` and compare this value against `p10stockouts_150`. You just have to view both values.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 inventorySimulation <- function(n, I_start0, P)
 {
 
@@ -925,8 +943,9 @@ hist(pStockOutSimulations_160)
 pStockoutMedian_160 <- median(pStockOutSimulations_160)
 p10stockouts_160 <- length(subset(pStockOutSimulations_160, pStockOutSimulations_160 > 10/30))/10000
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
 incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
 
@@ -952,19 +971,16 @@ incorrect_msg = "Something went wrong in calculating the probability of having m
 success_msg("Correct! Using the simulation model we can now run the simulation model multiple times, and statistically analyse its outputs. We can also see the effect of the production size. Note how a small increase from 150 to 160 products halved the median stock-out proportion. The last thing to consider in this lab is that production is also random. In the next exercise we are going to update the simulation model to account for product defects, as modelled in the previous chapter.")
 ```
 
-
-
-
-
 ---
+
 ## Simulating stock-outs based on random production and random orders
 
 ```yaml
 type: NormalExercise
+key: ebdaf87be6
 lang: r
 xp: 100
 skills: 1
-key: ebdaf87be6
 ```
 
 In the previous exercises we have assumed that production is fixed, and that we will have exactly $P$ new products available at the start of each day.
@@ -989,10 +1005,16 @@ The remaining products are scrapped.
 - Carefully go through the provided code and complete `inventorySimulation` function. An update is required at the place of the `...` The idea is to call `productionSimulation` from within `inventorySimulation`.
 - Calculate and compare the median stock-out rates over 1000 simulations of producing 150 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products, and 1000 simulation of producing 160 products day over 30 days with random orders and random manufacturing and a starting inventory level of 120 products. Assign your answers to `pStockoutMedian_150` and `pStockoutMedian_160`.
 
+`@hint`
 
+
+`@pre_exercise_code`
+```{r}
+
+```
 
 `@sample_code`
-```{undefined}
+```{r}
 # 1. Carefully go through the provided code and complete the `productionSimulation` function. An update is required at the place of the `...`
 productionSimulation <- function(P)
 {
@@ -1062,8 +1084,9 @@ pStockoutMedian_160 <-
 pStockoutMedian_150
 pStockoutMedian_160
 ```
+
 `@solution`
-```{undefined}
+```{r}
 productionSimulation <- function(P)
 {
   drillHoleDiameters <- rnorm(P, 10, 0.2)
@@ -1118,8 +1141,9 @@ pStockOutSimulations_160 <- replicate(1000, inventorySimulation(n = 30, I_start0
 hist(pStockOutSimulations_160)
 pStockoutMedian_160 <- median(pStockOutSimulations_160)
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("pStockOutSimulations_150", undefined_msg = "Make sure to define an object `pStockOutSimulations_150`.",
 incorrect_msg = "Something went wrong in simulating 30 days' worth of orders and calculating the proportion of days with stock-outs for 10000 simulations. Carefully go through the provided code and make sure that the two simulation models are integrated correctly. Note that we can call another function from within a function. Make sure to assign the output of each simulation to `pStockOutSimulations_150` and that you specified the input parameters correctly.")
 
@@ -1139,6 +1163,3 @@ incorrect_msg = "Something went wrong in calculating the median stock-out propor
 success_msg("Correct!
 We have developed a simulation model that takes random production and random orders into consideration. Note how the distribution of the stock-out proportion changed when moving from a constant to random production process. The proportion of stock-outs is also much higher. Increasing the production size from 150 to 160 made less of an impact than previously. This is expected since some of the 150 or 160 products are scrapped and not available for sale. Using the simulation model we can check what impact a more precise drilling machine will have on orders. We can also check what impact an improved rework process will have. Another factor to analyse is increasing the production size to more than 160 products.")
 ```
-
-
-

@@ -1,18 +1,16 @@
 ---
-title: Case study 5 - Yacht production planning
-description: >-
-  In this case study we will try and predict the production time of luxury yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.
-
-
+title: 'Case study 5 - Yacht production planning'
+description: 'In this case study we will try and predict the production time of luxury yachts using data on previous productions. Our objective is to develop a predictive model to be used for production planning. To develop the model we will analyse different variables from previous productions to identify the best predictor, and thereafter use linear-regression to fit a least-squared regression line, to be used for predicting the manufacturing time of our yachts.'
 ---
+
 ## Background
 
 ```yaml
 type: MultipleChoiceExercise
+key: ec139ff825
 lang: r
 xp: 50
 skills: 1
-key: ec139ff825
 ```
 
 **Before continuing with this chapter, complete all previous chapters in this datacamp course.**
@@ -55,41 +53,40 @@ When completing the chapter, read all the available information and instructions
 
 To continue with this chapter confirm the following:
 
-`@instructions`
+`@possible_answers`
 * I have read **ALL** the instructions on this page carefully and have completed all the prescribed preperation material.
 
 `@hint`
 
 
+`@pre_exercise_code`
+```{r}
 
-
+```
 
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 
 msg_success <- "Let's get started with the Lab. Note that if you have not completed the prescribed preparation material you may not be able to complete this Chapter. Further, you will **NOT** receive any assistance from the lab lecturer and assistants on any issues covered in the preparation material."
 test_mc(correct = 1, feedback_msgs = c(msg_success))
 ```
 
-
-
-
-
 ---
+
 ## Statistical methods to apply
 
 ```yaml
 type: MultipleChoiceExercise
+key: c6773a7f96
 lang: r
 xp: 50
 skills: 1
-key: c6773a7f96
 ```
 
 Based on the case study description, which do you think is the correct statistical method to apply?
 
-`@instructions`
+`@possible_answers`
 - Inference for a single proportion.
 - Inference for the difference between two proportions.
 - Goodness-of-fit test.
@@ -103,37 +100,33 @@ Based on the case study description, which do you think is the correct statistic
 Have a look at the chapters on regression in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 #none
 ```
 
-
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "That is not correct. Have a look at the chapters on regression in the [Introductory Statistics with Randomization and Simulation](https://www.openintro.org/stat/textbook.php?stat_book=isrs) textbook."
 
 msg_success <- "Correct! We want to predict how long a yacht will take to manufacture, based on its features. To do so we need to identify appropriate explanatory variables that best predict our response variable, which in this case, is the time required to complete the production of a yacht. The explanatory variables are features of the yacht. Using data on previous productions we need to first identify which explanatory variables to use, and thereafter fit a linear-model using the existing data. The linear-model can thereafter be used to predict the time required to complete an order based on its key features."
 test_mc(correct = 8, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success))
 ```
 
-
-
-
-
 ---
+
 ## R functions to apply
 
 ```yaml
 type: MultipleChoiceExercise
+key: b2d2f1b742
 lang: r
 xp: 50
 skills: 1
-key: b2d2f1b742
 ```
 
 Which built in R function can we use to apply the correct statistical method? Use the console screen on the right to investigate the different functions through the `?function` command.
 
-`@instructions`
+`@possible_answers`
 - `plot()`
 - `mean()`
 - `sd()`
@@ -150,31 +143,27 @@ Which built in R function can we use to apply the correct statistical method? Us
 Use the `?function` to find out more about each command.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 #none
 ```
 
-
 `@sct`
-```{undefined}
+```{r}
 msg_bad <- "That is not correct. Remember that you can use the `?function` to find out more about each function."
 msg_success <- "Correct! By assigning a explanatory variable to `x` and the response variable to `y`, based on data of previous orders, we can call the function `lm(y~x)` to fit the least-squared regression line to the data points. We can also use `summary(lm(y~x))` to view its outputs."
 test_mc(correct = 7, feedback_msgs = c(msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_bad, msg_success, msg_bad, msg_bad, msg_bad, msg_bad))
 ```
 
-
-
-
-
 ---
+
 ## Analysing the data
 
 ```yaml
 type: NormalExercise
+key: 59933cccde
 lang: r
 xp: 100
 skills: 1
-key: 59933cccde
 ```
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
@@ -203,7 +192,7 @@ First have a look at the data in the console using the `head(boatManufacturing)`
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
 nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
 length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
@@ -221,8 +210,9 @@ rm(speed_knots)
 rm(price_ZAR)
 rm(time_hr)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # The boatManufacturing dataframe is available in your workspace.
 
 # 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
@@ -265,8 +255,9 @@ bestPredictor
 secondBestPredictor
 worstPredictor
 ```
+
 `@solution`
-```{undefined}
+```{r}
 # The boatManufacturing dataframe is available in your workspace.
 
 # 1. Calculate the number of yachts that we have manufactured and assign your answer to `nYachts`.
@@ -320,8 +311,9 @@ bestPredictor
 secondBestPredictor
 worstPredictor
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("nYachts", undefined_msg = "Make sure to define a variable `nYachts`.",
             incorrect_msg = "Make sure that you calculated the number of yachts manufactured correctly and assigned your answer to `nYachts`.")
 
@@ -354,19 +346,16 @@ test_object("worstPredictor", undefined_msg = "Make sure to define a variable `w
 success_msg("Good job! By looking at the scatter plots we can get a sense of how good certain variables are at predicting others. Ideally we want ato nalyse this in a more quantitative way. In the next exercise we will calculate and compare the correlation coefficients between of variables to see exactly how strong the descriptive variables correlate to our response variable.")
 ```
 
-
-
-
-
 ---
+
 ## Quantifying the relationship
 
 ```yaml
 type: NormalExercise
+key: 073be0f413
 lang: r
 xp: 100
 skills: 1
-key: 073be0f413
 ```
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
@@ -392,7 +381,7 @@ To complete the exercise, do the following:
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
 nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
 length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
@@ -410,8 +399,9 @@ rm(speed_knots)
 rm(price_ZAR)
 rm(time_hr)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # 1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
 
 
@@ -434,8 +424,9 @@ rm(time_hr)
 
 # 6. Print the values to the console and check if all the correlations are positive and assign your answer, which can either be `TRUE` or `FALSE` to `allPositive`
 ```
+
 `@solution`
-```{undefined}
+```{r}
 # 1. Calculate the correlation between `nComplications` and `time_hr` and assign your answer to `cor_nComplications`.
 
 cor_nComplications <- cor(boatManufacturing$nComplications, boatManufacturing$time_hr)
@@ -460,8 +451,9 @@ cor_price <- cor(boatManufacturing$price_ZAR, boatManufacturing$time_hr)
 
 if (min(cor_nComplications, cor_length, cor_width, cor_speed, cor_price) < 0){allPositive <- FALSE}else{allPositive <- TRUE}
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("cor_nComplications", undefined_msg = "Make sure to define a variable `cor_nComplications`.",
             incorrect_msg = "Make sure that you calculated the correlation between `nComplications` and `time_hr` correctly.")
 
@@ -482,19 +474,16 @@ test_object("allPositive", undefined_msg = "Make sure to define a variable `allP
 success_msg("Correct! The correlation coefficient allows us to quantify the strength of a relationship between two variables. Thereby we can easily identify the descriptive variable with the strongest correlation to the response variable, and use that to fit a linear regression line, which is what we will do next.")
 ```
 
-
-
-
-
 ---
+
 ## Fitting a linear regression line
 
 ```yaml
 type: NormalExercise
+key: d275dff6e3
 lang: r
 xp: 100
 skills: 1
-key: d275dff6e3
 ```
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
@@ -510,7 +499,7 @@ Now that we know that `length_m` has the strongest relationship with `time_hr` w
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
 nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
 length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
@@ -528,8 +517,9 @@ rm(speed_knots)
 rm(price_ZAR)
 rm(time_hr)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`. Do not specify `data=` in the function, instead call the `x` and `y` variables directly, as in `lm(data.frame$y ~ data.frame$x)`.
 
 
@@ -540,8 +530,9 @@ rm(time_hr)
 
 #3. Generate a scatter plot of the `length_m` and `time_hr` variables and add the linear-regression line to the plot using the `abline()` plot function. Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help on doing so.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 # 1. Fit a linear regression line to the `length_m` and `time_hr` variables using the `lm` function, and assign the results to `fit`.
 
 fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
@@ -555,8 +546,9 @@ fit
 plot(boatManufacturing$length_m, boatManufacturing$time_hr)
 abline(fit)
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
             incorrect_msg = "Make sure that you called the `lm` function correctly. Use `?lm` for help on the function.")
 
@@ -571,19 +563,16 @@ test_function("abline", not_called_msg = "Add the linear regression line to the 
 success_msg("Correct! By using the `lm()` function we now have the least-squared linear regression line for `length_m` and `time_hr` which we can now use to predict the time required to manufacture a yacht, based on its required length. However, before we can use the linear regression line we first need to check certain conditions.")
 ```
 
-
-
-
-
 ---
+
 ## Linear regression conditions
 
 ```yaml
 type: NormalExercise
+key: 4dfe0cdb7c
 lang: r
 xp: 100
 skills: 1
-key: 4dfe0cdb7c
 ```
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
@@ -614,7 +603,7 @@ Please make sure that you understan what a residual represents in linear regress
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
 nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
 length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
@@ -632,8 +621,9 @@ rm(speed_knots)
 rm(price_ZAR)
 rm(time_hr)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # 1. Calculate the residual of the _first_ observation in the dataset by comparing its actual `time_hr` against its predicted `time_hr` based on its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the final residual value to `res_obs1`.
 
 
@@ -648,8 +638,9 @@ rm(time_hr)
 
 # 4. View a histogram of the residuals to see if it's nearly normal.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 # 1. Calculate the residual of the _first_ observation by comparing its actual `time_hr` against its predicted `time_hr` using its `length_m` value. To do so you will first need to fit a linear-regression line using the `lm` function, and then access the intercept (`beta_0`) and slope of the fitted line (`beta_1`) and convert it into the `time_hr_predict <- beta_0 + beta_1*length_m` format. Thereafter you can calculate the residuals. Assign the residual value to `res_obs1`.
 
 fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
@@ -668,8 +659,9 @@ plot(boatManufacturing$length_m, res)
 
 hist(res)
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("res_obs1", undefined_msg = "Make sure to define an object `res_obs1`.",
             incorrect_msg = "Make sure that you called the `lm` function, then assigned its coefficients correctly to use the straight line formula, and then used the formula to calculate the residual of the first observation.")
 
@@ -685,19 +677,16 @@ test_function("hist", args = c("x"), not_called_msg = "Draw a histogram of the r
 success_msg("Correct! We need to analyse the residuals to check if we can use the regression line for predictive purposes. Depending on the data you may notice the residuals may not have constant variability, but it should follow a normal distribution. In cases where all conditions are not met we can still use the regression line. We just have to interpret the results more carefully. We also did not check the independence assumption. Given the uniqueness of yachts and that only one can be manufactured at a time we can assume that each sample is independent.")
 ```
 
-
-
-
-
 ---
+
 ## Making a prediction
 
 ```yaml
 type: NormalExercise
+key: 8f7127b622
 lang: r
 xp: 100
 skills: 1
-key: 8f7127b622
 ```
 
 Data on all the previous productions of the company can be found in the `boatManufacturing` dataframe.
@@ -715,7 +704,7 @@ Similar to the previous questions we will do the following:
 Refer to [this tutorial](http://www.cyclismo.org/tutorial/R/linearLeastSquares.html) for help and look at what we've done in the previous exercises.
 
 `@pre_exercise_code`
-```{undefined}
+```{r}
 nBoats <- floor(runif(1, min = 100, max = 200))
 nComplications <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
 length_m <- round(rnorm(n = nBoats, mean = 150, sd = 50), 0)
@@ -733,8 +722,9 @@ rm(speed_knots)
 rm(price_ZAR)
 rm(time_hr)
 ```
+
 `@sample_code`
-```{undefined}
+```{r}
 # 1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
 
 
@@ -745,8 +735,9 @@ rm(time_hr)
 
 # 3. Test whether the 340m boat falls outside our observed values. Assign your answer, which can either be `TRUE` or `FALSE` to `predictionExtrapolated` and print the result to the console.
 ```
+
 `@solution`
-```{undefined}
+```{r}
 # 1. Fit and visualise the linear regression line, similar to the previous questions. Assign the linear regression model to `fit`.
 
 fit <- lm(boatManufacturing$time_hr~boatManufacturing$length_m)
@@ -764,8 +755,9 @@ y_340m
 if (x < min(boatManufacturing$length_m) | x > max(boatManufacturing$length_m)){predictionExtrapolated <- TRUE}else{predictionExtrapolated <- FALSE}
 predictionExtrapolated
 ```
+
 `@sct`
-```{undefined}
+```{r}
 test_object("fit", undefined_msg = "Make sure to define an object `fit`.",
             incorrect_msg = "Make sure that you fitted the linear-regression line correctly and assigned the result to `fit`")
 
@@ -783,6 +775,3 @@ test_object("predictionExtrapolated", undefined_msg = "Make sure to define an ob
 
 success_msg("Correct! You have successfully developed and used a model that predicts how long a new boat will take to manufacture, based on its required length. To do this, you first identified the variable that correlates the best with the response variable. You then used the variable and the response variable and fitted a linear regression line. Next you used the regression line and analysed the residuals to check if conditions for regression were met. Lastly, you used the regression line to predict how long a 350m boat will take to manufacture.")
 ```
-
-
-
