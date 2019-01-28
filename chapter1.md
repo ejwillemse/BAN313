@@ -1,6 +1,7 @@
 ---
 title: 'Case study 4 - Choosing the best vendor'
 description: 'In this case study we will compare two product suppliers, with the objective to choose the best one to partner with. For the case study, best means cheapest. To compare the vendors we will rely on a sample of products for which both vendors provided unit-price quotes. We will then use inference for numerical data to decide if one vendor is better than the other.'
+free_preview: true
 ---
 
 ## Background
